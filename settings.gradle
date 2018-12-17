@@ -1,0 +1,10 @@
+rootProject.name = 'single-db-poc'
+
+include 'cares-business-rule-engine'
+include 'cares-cics'
+include 'cares-common'
+include 'cares-data-access'
+include 'cares-interface'
+include 'cares-rest-api'
+include 'cares-service'
+include 'cares-ui'
