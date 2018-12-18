@@ -9,6 +9,7 @@
     "lint": "neutrino lint"
   },
   "dependencies": {
+    "@cwds/components": "^0.5.10",
     "@neutrinojs/react": "^8.3.0",
     "neutrino": "^8.3.0",
     "prop-types": "^15.6.2",
