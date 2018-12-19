@@ -484,6 +484,11 @@
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.1.tgz#48fd98c1561fe718b61733daed46ff115b496e18"
 
+"JsonBRE@file:./engine":
+  version "1.0.0"
+  dependencies:
+    json-logic-js "^1.2.2"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -5690,6 +5695,11 @@ jsesc@~0.5.0:
 json-loader@^0.5.4:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/json-loader/-/json-loader-0.5.7.tgz#dca14a70235ff82f0ac9a3abeb60d337a365185d"
+
+json-logic-js@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/json-logic-js/-/json-logic-js-1.2.2.tgz#e5c382aa6df25df485edead339869396c533afe8"
+  integrity sha1-5cOCqm3yXfSF7erTOYaTlsUzr+g=
 
 json-parse-better-errors@^1.0.1:
   version "1.0.2"
