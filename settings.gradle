@@ -1,6 +1,6 @@
 rootProject.name = 'single-db-poc'
 
-include 'cares-business-rule-engine'
+include 'cares-bre'
 include 'cares-cics'
 include 'cares-common'
 include 'cares-data-access'
