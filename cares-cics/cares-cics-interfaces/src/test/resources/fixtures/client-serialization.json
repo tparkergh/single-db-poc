@@ -1,0 +1,23 @@
+{
+  "CLIENT-DATA": {
+    "IDENTIFIER": "Ajjgwny057",
+    "BIRTH_DT": "2009-12-12",
+    "CHLD_CLT_B": "Y",
+    "COM_FST_NM": "Howard CARES        ",
+    "COM_LST_NM": "Gunthorpe CARES          ",
+    "COM_MID_NM": "                    ",
+    "CREATN_DT": "1998-12-14",
+    "DRV_LIC_NO": "                    ",
+    "GENDER_CD": "M",
+    "NAME_TPC": 13130,
+    "SS_NO": "926006255",
+    "SUFX_TLDSC": "    ",
+    "EST_DOB_CD": "N",
+    "CLNT_SOC": 7066,
+    "SO_UD_CD": "D",
+    "CLNT_GIC": -13396,
+    "CLNT_GEC": -12796,
+    "TXN_HDR_STAFF_ID": "00T",
+    "LST_UPD_TS": "2018-12-06-02.08.37.278241"
+  }
+}

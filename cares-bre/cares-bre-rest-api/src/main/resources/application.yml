@@ -1,0 +1,14 @@
+server:
+  port: 8091
+  
+spring.jackson.serialization.INDENT_OUTPUT: true
+logging.level.gov.ca.cwds.drools: DEBUG
+
+management:
+  security:
+    enabled: false 
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        

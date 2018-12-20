@@ -1,0 +1,30 @@
+{
+  "execution_time_millis": -1,
+  "business_rule_name": "ClientBusinessRules",
+  "issues": [],
+  "data": {
+    "CLIENT-DATA": {
+      "IDENTIFIER": "AdVfAzt0Ki",
+      "BIRTH_DT": "2001-03-23",
+      "CHLD_CLT_B": "N",
+      "COM_FST_NM": "Francis",
+      "COM_LST_NM": "Kopf",
+      "COM_MID_NM": "M",
+      "CREATN_DT": "2009-03-23",
+      "DRV_LIC_NO": "ABCD12345678",
+      "GENDER_CD": "M",
+      "NAME_TPC": 1313,
+      "SS_NO": "537009388",
+      "SUFX_TLDSC": "Phd",
+      "EST_DOB_CD": "Y",
+      "EMAIL_ADDR": "test@gmail.com",
+      "CL_INDX_NO": "1234567",
+      "CLNT_SOC": 7066,
+      "SO_UD_CD": "D",
+      "CLNT_GIC": 7075,
+      "CLNT_GEC": 7081,
+      "TXN_HDR_STAFF_ID": "00T",
+      "LST_UPD_TS": "2018-07-24-15.08.37.948188"
+    }
+  }
+}

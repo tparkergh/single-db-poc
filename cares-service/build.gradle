@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-logging:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-jersey:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion    
+   
+    implementation 'org.apache.httpcomponents:httpclient:' + apacheHttpclientVersion
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+    implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
+    
+    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
+
+    implementation 'org.mapstruct:mapstruct-jdk8:' + mapstructVersion
+    compileOnly 'org.mapstruct:mapstruct-processor:' + mapstructVersion
+
+    annotationProcessor 'org.mapstruct:mapstruct-processor:' + mapstructVersion
+
+    testImplementation 'junit:junit:' + junitVersion
+    testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
+    testImplementation 'commons-io:commons-io:' + commonsIoVersion
+}
