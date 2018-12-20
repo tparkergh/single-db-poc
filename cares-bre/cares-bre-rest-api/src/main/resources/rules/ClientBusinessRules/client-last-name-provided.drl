@@ -1,0 +1,24 @@
+import gov.ca.cwds.cpi.cics.model.Client;
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import org.drools.core.util.StringUtils;
+
+global java.util.Set validationDetailsList
+
+rule "client-last-name-provided"
+  @rule_type("VALIDATION")
+  @rule_description("Last name must be provided")
+  
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-validation-agenda"
+  when
+    client: Client(StringUtils.isEmpty(clientData.comLstNm))    
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("rule_description") + ", client: " + client.clientData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.BUSINESS_VALIDATION);
+    details.setProperty("client.clientData.comLstNm");
+    details.setInvalidValue(client.clientData.comLstNm);
+    validationDetailsList.add(details);
+end

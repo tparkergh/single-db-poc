@@ -1,0 +1,24 @@
+import gov.ca.cwds.cpi.cares.model.Participant;
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import org.drools.core.util.StringUtils;
+
+global java.util.Set validationDetailsList
+
+rule "participant-last-name-provided"
+  @rule_type("VALIDATION")
+  @rule_description("Last name must be provided")
+  
+  dialect "mvel"
+  agenda-group "ParticipantBusinessRules-validation-agenda"
+  when
+    participant: Participant(StringUtils.isEmpty(lastName))        
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("rule_description") + ", participant: " + participant.id);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.BUSINESS_VALIDATION);
+    details.setProperty("participant.lastName");
+    details.setInvalidValue(participant.lastName);
+    validationDetailsList.add(details);
+end

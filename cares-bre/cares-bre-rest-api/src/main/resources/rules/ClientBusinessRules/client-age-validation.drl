@@ -1,0 +1,27 @@
+import gov.ca.cwds.cpi.cics.model.Client;
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import java.time.LocalDate;
+
+global java.util.Set validationDetailsList
+
+rule "client-age-validation"
+  @rule_type("VALIDATION")  
+  @rule_description("Age must be less than 18 years")
+  
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-validation-agenda"
+  when
+    client: Client(
+      clientData.birthDt == null ||
+      clientData.birthDt.isBefore(LocalDate.now().minusYears(18))
+    )
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("rule_description") + ", client: " + client.clientData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.BUSINESS_VALIDATION);
+    details.setProperty("client.clientData.birthDt");
+    details.setInvalidValue(client.clientData.birthDt);
+    validationDetailsList.add(details);
+end
