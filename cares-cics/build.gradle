@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+dependencies {
+	
+	implementation project(':cares-common')
+	
+	implementation 'org.springframework.boot:spring-boot:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-logging:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion    
+   
+    implementation 'org.apache.httpcomponents:httpclient:' + apacheHttpclientVersion
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+    implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
+    
+    testImplementation 'junit:junit:' + junitVersion
+    testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
+    testImplementation 'commons-io:commons-io:' + commonsIoVersion
+}
