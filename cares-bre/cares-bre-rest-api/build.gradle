@@ -39,6 +39,7 @@ dependencies {
     implementation project(':cares-bre:cares-bre-interfaces')
     implementation project(':cares-bre:cares-bre-client')
     implementation project(':cares-bre:cares-bre-services')
+    implementation project(':cares-common')
     
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-starter'

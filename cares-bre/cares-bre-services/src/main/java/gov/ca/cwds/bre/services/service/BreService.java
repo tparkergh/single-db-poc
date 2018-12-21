@@ -3,16 +3,15 @@ package gov.ca.cwds.bre.services.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import gov.ca.cwds.bre.interfaces.api.BusinessRuleService;
+import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
-import gov.ca.cwds.bre.services.aop.ExecutionTimer;
-import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.bre.services.api.BusinessRuleProvider;
+import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 
 /**
  * @author CWDS J Team

@@ -4,6 +4,7 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.8
 
 dependencies {   
+    implementation project(':cares-common')
     
     implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
         

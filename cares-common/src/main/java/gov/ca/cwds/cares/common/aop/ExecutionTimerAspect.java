@@ -14,7 +14,7 @@ import gov.ca.cwds.cares.common.model.ExecutionTimeRecorder;
  * @author CWDS Team J
  */
 @Aspect
-@Component
+@Component("ExecutionTimerAspect")
 public class ExecutionTimerAspect {
 
   private final static Logger LOGGER = LoggerFactory.getLogger(ExecutionTimerAspect.class);

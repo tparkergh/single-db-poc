@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import gov.ca.cwds.cares.common.model.ExecutionTimeRecorder;
 import gov.ca.cwds.rest.exception.IssueDetails;
 
 /**
@@ -19,7 +20,7 @@ import gov.ca.cwds.rest.exception.IssueDetails;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class BreResponse {
+public final class BreResponse implements ExecutionTimeRecorder {
   
   private Long executionTimeMillis;
   private String businessRuleName;
@@ -54,10 +55,12 @@ public final class BreResponse {
     this.data = data;
   }
   
+  @Override
   public Long getExecutionTimeMillis() {
     return executionTimeMillis;
   }
 
+  @Override
   public void setExecutionTimeMillis(Long executionTimeMillis) {
     this.executionTimeMillis = executionTimeMillis;
   }
