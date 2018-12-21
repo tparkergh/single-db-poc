@@ -1,5 +1,0 @@
-<kmodule xmlns="http://www.drools.org/xsd/kmodule">
-  <kbase name="ParticipantBusinessRules-kbase">
-    <ksession name="ParticipantBusinessRules-session"/>
-  </kbase>
-</kmodule>

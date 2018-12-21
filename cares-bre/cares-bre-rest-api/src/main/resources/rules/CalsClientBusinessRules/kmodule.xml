@@ -1,5 +1,0 @@
-<kmodule xmlns="http://www.drools.org/xsd/kmodule">
-  <kbase name="CalsClientBusinessRules-kbase">
-    <ksession name="CalsClientBusinessRules-session"/>
-  </kbase>
-</kmodule>
