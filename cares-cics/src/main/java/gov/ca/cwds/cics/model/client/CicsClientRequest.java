@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import gov.ca.cwds.cics.binding.SnakeUpperCaseStrategy;
+import gov.ca.cwds.cares.common.binding.SnakeUpperCaseStrategy;
 import gov.ca.cwds.cics.model.CicsRequest;
 
 /**

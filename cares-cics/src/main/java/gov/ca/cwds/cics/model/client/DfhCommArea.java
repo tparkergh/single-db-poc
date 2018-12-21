@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import gov.ca.cwds.cics.binding.SnakeUpperCaseStrategy;
+import gov.ca.cwds.cares.common.binding.SnakeUpperCaseStrategy;
 
 /**
  * CWDS J Team

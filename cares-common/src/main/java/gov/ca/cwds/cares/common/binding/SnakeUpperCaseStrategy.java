@@ -1,4 +1,4 @@
-package gov.ca.cwds.cics.binding;
+package gov.ca.cwds.cares.common.binding;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
