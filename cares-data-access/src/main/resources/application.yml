@@ -1,0 +1,9 @@
+spring:
+	application:
+		name: singleDbPoc
+	dataSource:
+		driverClassName: com.ibm.db2.jcc.DB2Driver
+		url:jdbc:db2://cms.db.dev.cwds.tabordasolutions.net:50000/DB0TDEV
+	server:
+		port:50000		
+        
