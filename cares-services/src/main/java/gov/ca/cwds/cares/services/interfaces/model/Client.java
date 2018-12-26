@@ -1,79 +1,43 @@
+package gov.ca.cwds.cares.services.interfaces.model;
 
-package gov.ca.cwds.data.model;
-
+import java.io.Serializable;
 import java.time.LocalDate;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
-
-@Entity
-@Table(name = "CLIENT_T")
-@NamedQuery(name = "findClientById", query = "from client_t c where c.identifier = :identifier")
-
-public class ClientEntity {
-  @Id
-  @Column(name = "IDENTIFIER")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Client implements Serializable {
+  
+  private static final long serialVersionUID = 8200582244872085377L;
+  
   private String identifier;
-
-  @Column(name = "BIRTH_DT")
   private LocalDate birthDate;
-
-  @Column(name = "CHLD_CLT_B")
   private String childClientIndicator;
-
-  @Column(name = "CL_INDX_NO")
   private String clientIndexNumber;
-
-  @Column(name = "CLNT_GIC")
   private Integer genderIdentityType;
-
-  @Column(name = "CLNT_GEC")
   private Integer genderExpressionType;
-
-  @Column(name = "CLNT_SOC")
   private Integer sexualOrientationType;
-
-  @Column(name = "COM_FST_NM")
   private String commonFirstName;
-
-  @Column(name = "COM_LST_NM")
   private String commonLastName;
-
-  @Column(name = "COM_MID_NM")
   private String commonMiddleName;
-
-  @Column(name = "CREATN_DT")
   private LocalDate creationDate;
-
-  @Column(name = "DRV_LIC_NO")
   private String driverLicenseNumber;
-
-  @Column(name = "EMAIL_ADDR")
   private String emailAddress;
-
-  @Column(name = "EST_DOB_CD")
   private String estimatedDobCode;
-
-  @Column(name = "GENDER_CD")
   private String genderCode;
-
-  @Column(name = "NAME_TPC")
   private Integer nameType;
-
-  @Column(name = "SS_NO")
   private String socialSeccurityNumber;
-
-  @Column(name = "SUFX_TLDSC")
   private String suffixTitleDescription;
-
-  @Column(name = "SO_UD_CD")
   private String soUnableToDetermineCode;
-
-
+  
   public String getIdentifier() {
     return identifier;
   }
@@ -226,4 +190,18 @@ public class ClientEntity {
     this.soUnableToDetermineCode = soUnableToDetermineCode;
   }
 
+  @Override
+  public int hashCode() {
+    return HashCodeBuilder.reflectionHashCode(this);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return EqualsBuilder.reflectionEquals(this, obj);
+  }
+
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+  }
 }
