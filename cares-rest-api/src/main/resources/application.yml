@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: cares-rest-api
+  datasource:    
+    url: jdbc:db2://localhost:50000/DB0TDEV
+    username: db2inst1
+    password: db2inst1    
+    driverClassName: com.ibm.db2.jcc.DB2Driver
+    type: com.zaxxer.hikari.HikariDataSource
+  server:
+    port: 8090
+
+spring.jackson.serialization.INDENT_OUTPUT: true
+logging.level.gov.ca.cwds.drools: DEBUG
+
+management:
+  security:
+    enabled: false 
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        
