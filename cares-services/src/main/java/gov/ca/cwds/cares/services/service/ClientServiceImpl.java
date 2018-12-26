@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import gov.ca.cwds.cares.persistence.entity.ClientEntity;
 import gov.ca.cwds.cares.persistence.repository.ClientRepository;
@@ -16,6 +17,7 @@ import gov.ca.cwds.cares.services.mapping.ClientEntityMapper;
 public class ClientServiceImpl implements ClientService {
 
   @Autowired
+  @Qualifier(value="ClientRepository")
   ClientRepository clientRepository; 
   
   @Override

@@ -1,14 +1,24 @@
-spring:
+spring: 
+  server:
+    port: 8090
   application:
     name: cares-rest-api
   datasource:    
     url: jdbc:db2://localhost:50000/DB0TDEV
     username: db2inst1
     password: db2inst1    
-    driverClassName: com.ibm.db2.jcc.DB2Driver
-    type: com.zaxxer.hikari.HikariDataSource
-  server:
-    port: 8090
+    driverClassName: com.ibm.db2.jcc.DB2Driver  
+    validationQuery: SELECT 1  
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    database-platform: DB2Platform
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.DB2Dialect  
 
 spring.jackson.serialization.INDENT_OUTPUT: true
 
