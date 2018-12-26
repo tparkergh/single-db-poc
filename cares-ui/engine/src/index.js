@@ -1,7 +1,3 @@
-import jsonLogic from 'json-logic-js'
-
-const JsonBRE = {
-  evaluate: (rule, data) => jsonLogic.apply(rule, data)
-}
+import JsonBRE from './jsonBRE'
 
 export default JsonBRE
