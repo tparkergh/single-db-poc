@@ -28,9 +28,7 @@ public class ClientServiceImpl implements ClientService {
 
   @Override
   public Collection<Client> getAllClients() {
-    Iterator<ClientEntity> clientEntitiesIter = clientRepository.findAll().iterator();
-    List<ClientEntity> clientEntitiesList = new ArrayList<>();
-    clientEntitiesIter.forEachRemaining(clientEntitiesList::add);        
-    return ClientEntityMapper.INSTANCE.mapClientEntities(clientEntitiesList);  
+    Collection<ClientEntity> clientEntities = clientRepository.findAll();
+    return ClientEntityMapper.INSTANCE.mapClientEntities(clientEntities);  
   }
 }
