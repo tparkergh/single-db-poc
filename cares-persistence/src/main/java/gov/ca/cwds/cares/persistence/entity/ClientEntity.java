@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -15,8 +14,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 @Entity
 @Table(name = "CLIENT_T")
-@NamedQuery(name = "findClientById", query = "from client_t c where c.identifier = :identifier")
-
 public class ClientEntity implements Serializable {
   
   private static final long serialVersionUID = 6969398151287232182L;
