@@ -9,7 +9,6 @@ spring:
     driverClassName: com.ibm.db2.jcc.DB2Driver  
     validationQuery: SELECT 1  
   jpa:
-    show-sql: true
     generate-ddl: false
     database-platform: DB2Platform
     hibernate:
@@ -19,6 +18,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.DB2Dialect  
         default_schema: CWSINT
+        show_sql: true
+        format_sql: true
 
 spring.jackson.serialization.INDENT_OUTPUT: true
 
