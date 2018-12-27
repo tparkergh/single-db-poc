@@ -11,6 +11,7 @@
   "dependencies": {
     "@cwds/components": "^0.5.10",
     "@neutrinojs/react": "^8.3.0",
+    "JsonBRE": "file:./engine",
     "neutrino": "^8.3.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
