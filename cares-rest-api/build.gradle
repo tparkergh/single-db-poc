@@ -35,7 +35,7 @@ jar {
 }
 
 dependencies {
-
+	implementation project(':cares-common')
     implementation project(':cares-services')
     
     implementation 'org.springframework.boot:spring-boot'

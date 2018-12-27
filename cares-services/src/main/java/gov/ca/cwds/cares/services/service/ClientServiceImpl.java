@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 import gov.ca.cwds.cares.persistence.entity.ClientEntity;
 import gov.ca.cwds.cares.persistence.repository.ClientRepository;
 import gov.ca.cwds.cares.services.interfaces.api.ClientService;
@@ -17,12 +18,14 @@ public class ClientServiceImpl implements ClientService {
   ClientRepository clientRepository; 
   
   @Override
+  @ExecutionTimer
   public Client getClient(String id) {
     ClientEntity clientEntity = clientRepository.findById(id).get();
     return ClientEntityMapper.INSTANCE.mapClientEntity(clientEntity);
   }
 
   @Override
+  @ExecutionTimer
   public Collection<Client> getAllClients() {
     // White listed client ids
     String[] clientIds = {
