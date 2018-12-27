@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.5.RELEASE'
+        springBootVersion = '2.1.1.RELEASE'
     }
     repositories {
         mavenLocal()
@@ -13,8 +13,8 @@ buildscript {
 }
 
 plugins {
-    id 'net.ltgt.apt' version '0.15'
-    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'net.ltgt.apt' version '0.19'
+    id 'org.springframework.boot' version '2.1.1.RELEASE'
 }
 
 apply plugin: 'java'
