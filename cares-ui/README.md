@@ -48,10 +48,10 @@ yarn start
 
 To run unit tests:
 ```
-MODE=development yarn test
+yarn test
 ```
 
 To run linting:
 ```
-MODE=development yarn lint
+yarn lint
 ```

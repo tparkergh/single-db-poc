@@ -1,0 +1,32 @@
+server:
+  port: 8090
+  
+spring: 
+  datasource:    
+    url: jdbc:db2://localhost:50000/DB0TDEV
+    username: db2inst1
+    password: db2inst1    
+    driverClassName: com.ibm.db2.jcc.DB2Driver  
+    validationQuery: SELECT 1  
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    database-platform: DB2Platform
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.DB2Dialect  
+        default_schema: CWSINT
+
+spring.jackson.serialization.INDENT_OUTPUT: true
+
+management:
+  security:
+    enabled: false 
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        
