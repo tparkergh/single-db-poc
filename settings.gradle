@@ -8,7 +8,7 @@ include 'cares-bre:cares-bre-rest-api'
 
 include 'cares-cics'
 include 'cares-common'
-include 'cares-data-access'
+include 'cares-persistence'
 include 'cares-interfaces'
 include 'cares-rest-api'
 include 'cares-services'
