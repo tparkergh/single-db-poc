@@ -1,0 +1,33 @@
+import gov.ca.cwds.cics.model.client.Client;
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import java.time.LocalDate;
+
+global java.util.Set validationDetailsList
+
+rule "client-restricted-last-updated-id"
+  @rule_type("VALIDATION")  
+  @rule_description("Last updated ID can not be 00T")
+  @rule_source_type("CARES Integration Platform")
+  @rule_source_name("client-restricted-last-updated-id")
+  @rule_source_entity("CLIENT_T")
+  @rule_source_attribute("LST_UPD_ID")
+  @rule_source_data_length("3")
+  @rule_source_nullable("false")
+  @rule_source_mandatory("true")
+  
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-validation-agenda"
+  when
+    client: Client(
+      clientData.txnHdrStaffId.toUpperCase().equals("00T")
+    )
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("rule_description") + ", client: " + client.clientData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.BUSINESS_VALIDATION);
+    details.setProperty("client.clientData.txnHdrStaffId");
+    details.setInvalidValue(client.clientData.txnHdrStaffId);
+    validationDetailsList.add(details);
+end

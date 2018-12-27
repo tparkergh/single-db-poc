@@ -1,0 +1,27 @@
+import gov.ca.cwds.cics.model.client.Client;
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+
+global java.util.Set validationDetailsList
+
+rule "client-assign-last-updated-id"
+  @rule_type("DATA_PROCESSING")  
+  @rule_description("Last updated ID is assigned to 00T")
+  @rule_source_type("CARES Platform Integration")
+  @rule_source_name("client-assign-last-updated-id")
+  @rule_source_entity("CLIENT_T")
+  @rule_source_attribute("LST_UPD_ID")
+  @rule_source_data_length("3")
+  @rule_source_nullable("false")
+  @rule_source_mandatory("true")
+  
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-data-processing-agenda"
+  when
+    client: Client(
+      !clientData.txnHdrStaffId.toUpperCase().equals("00T")
+    )
+  then
+    client.clientData.setTxnHdrStaffId("00T");
+    update(client);
+end
