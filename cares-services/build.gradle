@@ -1,5 +1,11 @@
+plugins {
+    id 'net.ltgt.apt' version '0.15'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'net.ltgt.apt-idea'
+apply plugin: 'net.ltgt.apt-eclipse'
 
 sourceCompatibility = 1.8
 
@@ -18,7 +24,7 @@ dependencies {
     compileOnly 'org.mapstruct:mapstruct-processor:' + mapstructVersion
 
     annotationProcessor 'org.mapstruct:mapstruct-processor:' + mapstructVersion
-
+    
     testImplementation 'junit:junit:' + junitVersion
     testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
     testImplementation 'commons-io:commons-io:' + commonsIoVersion

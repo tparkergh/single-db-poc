@@ -1,4 +1,4 @@
-package gov.cwds.cares.rest.controller;
+package gov.ca.cwds.cares.rest.controller;
 
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class ClientController {
     return clientService.getAllClients();
   }  
   
-  @GetMapping("/client/{id}")
+  @GetMapping("/clients/{id}")
   @ApiOperation(value = "Get client identified by given ID")
   public Client getClient(@ApiParam("Client ID") @PathVariable("id") String id) {
     return clientService.getClient(id);

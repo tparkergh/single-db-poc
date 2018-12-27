@@ -1,8 +1,7 @@
+server:
+  port: 8090
+  
 spring: 
-  server:
-    port: 8090
-  application:
-    name: cares-rest-api
   datasource:    
     url: jdbc:db2://localhost:50000/DB0TDEV
     username: db2inst1
@@ -19,6 +18,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.DB2Dialect  
+        default_schema: CWSINT
 
 spring.jackson.serialization.INDENT_OUTPUT: true
 
