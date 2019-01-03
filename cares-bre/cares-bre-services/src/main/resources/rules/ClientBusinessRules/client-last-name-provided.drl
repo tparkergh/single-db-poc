@@ -6,15 +6,33 @@ import org.drools.core.util.StringUtils;
 global java.util.Set validationDetailsList
 
 rule "client-last-name-provided"
-  @rule_type("VALIDATION")
-  @rule_description("First name must be provided")
-  @rule_source_type("xTools")
-  @rule_source_name("client-last-name")
-  @rule_source_entity("CLIENT_T")
-  @rule_source_attribute("COM_FST_NM")
-  @rule_source_data_length("20")
-  @rule_source_nullable("false")
-  @rule_source_mandatory("true")
+  @rule_type("xTool")  
+  @rule_description("Last name must be provided")
+  @rule_name("xTool - Last name must be provided")
+  @rule_drools_rule("client-last-name-provided.drl")
+  
+  @doc_external_documentation("xTools")
+  @doc_enforcement_location("CARES BRE")
+  
+  @doc_doctool_name("")
+  @doc_doctool_description("")
+  
+  @doc_xtool_entity("CLIENT_T")
+  @doc_xtool_attribute("COM_LST_NM")
+  @doc_xtool_length("25")
+  @doc_xtool_type("char")
+  @doc_xtool_nullable("false")
+  @doc_xtool_mandatory("true")
+
+  @doc_ri_entity("")
+  @doc_ri_attribute("")
+  @doc_ri_cardinality("")
+  @doc_ri_relationship("")
+  @doc_ri_related_entity("")
+  @doc_ri_related_attribute("")
+
+  @doc_cip_name("")
+  @doc_cip_description("")
   
   dialect "mvel"
   agenda-group "ClientBusinessRules-validation-agenda"

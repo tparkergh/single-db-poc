@@ -5,15 +5,32 @@ import gov.ca.cwds.rest.exception.IssueType;
 global java.util.Set validationDetailsList
 
 rule "client-assign-last-updated-id"
-  @rule_type("DATA_PROCESSING")  
+  @rule_type("CARESPlatformIntegration")  
   @rule_description("Last updated ID is assigned to 00T")
-  @rule_source_type("CARES Platform Integration")
-  @rule_source_name("client-assign-last-updated-id")
-  @rule_source_entity("CLIENT_T")
-  @rule_source_attribute("LST_UPD_ID")
-  @rule_source_data_length("3")
-  @rule_source_nullable("false")
-  @rule_source_mandatory("true")
+  @rule_name("CPI-LastUpdateIDAssigned")
+  @rule_drools_rule("client-assign-last-updated-id.drl")
+  
+  @doc_external_documentation("")
+  @doc_enforcement_location("CARES BRE")
+  
+  @doc_doctool_name("")
+  @doc_doctool_description("")
+  @doc_xtool_entity("")
+  @doc_xtool_attribute("")
+  @doc_xtool_length("")
+  @doc_xtool_type("")
+  @doc_xtool_nullable("")
+  @doc_xtool_mandatory("")
+
+  @doc_ri_entity("")
+  @doc_ri_attribute("")
+  @doc_ri_cardinality("")
+  @doc_ri_relationship("")
+  @doc_ri_related_entity("")
+  @doc_ri_related_attribute("")
+
+  @doc_cip_name("CPI-LastUpdateIDAssigned")
+  @doc_cip_description("Last updated ID is assigned to 00T")
   
   dialect "mvel"
   agenda-group "ClientBusinessRules-data-processing-agenda"

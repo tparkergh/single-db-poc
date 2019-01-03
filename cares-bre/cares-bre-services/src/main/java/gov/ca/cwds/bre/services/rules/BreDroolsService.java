@@ -10,6 +10,8 @@ import org.kie.api.runtime.KieContainer;
 import org.springframework.stereotype.Component;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition.Rule.Type;
+import gov.ca.cwds.bre.interfaces.model.RuleDocumentation;
+import gov.ca.cwds.bre.interfaces.model.RuleDocumentationBuilder;
 import gov.ca.cwds.drools.DroolsConfiguration;
 import gov.ca.cwds.drools.DroolsException;
 import gov.ca.cwds.drools.DroolsService;
@@ -37,8 +39,27 @@ public class BreDroolsService extends DroolsService {
         
         ruleDefs.add(new BusinessRuleDefinition.Rule(name, Type.fromName(type), description));
       }      
-    }
-    
+    }    
     return ruleDefs;
+  }
+  
+  @SuppressWarnings("rawtypes")
+  public List<RuleDocumentation> getRuleDocuments(DroolsConfiguration config, String kbase) throws DroolsException {
+    List<RuleDocumentation> ruleDocs = new ArrayList<>();
+    KieContainer container = config.getKieContainer();  
+    Collection<KiePackage> packages = container.getKieBase(kbase).getKiePackages();
+    
+    for (KiePackage pkg : packages) {
+      Collection<Rule> rules = pkg.getRules();
+      
+      for (Rule rule :rules) {
+        Map<String, Object> ruleMeta = rule.getMetaData();
+        
+        RuleDocumentation rd = new RuleDocumentationBuilder().buildFromMetaData(ruleMeta);
+        
+        ruleDocs.add(rd);
+      }
+    }
+    return ruleDocs;    
   }
 }

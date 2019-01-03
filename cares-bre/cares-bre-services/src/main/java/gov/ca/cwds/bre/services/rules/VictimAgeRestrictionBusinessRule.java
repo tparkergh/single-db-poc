@@ -11,6 +11,7 @@ import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition.Rule;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition.Rule.Type;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.rest.exception.IssueDetails;
 import gov.ca.cwds.rest.exception.IssueType;
@@ -69,5 +70,11 @@ public class VictimAgeRestrictionBusinessRule implements BusinessRule {
           t, breRequest, getDefinition());      
     }
     return clientDob;
+  }
+
+  @Override
+  public BusinessRuleDocumentation getDocumentation() {
+    // TODO Auto-generated method stub
+    return null;
   }
 }
