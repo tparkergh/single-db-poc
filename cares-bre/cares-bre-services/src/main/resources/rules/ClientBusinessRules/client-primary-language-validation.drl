@@ -1,0 +1,54 @@
+import gov.ca.cwds.cics.model.client.Client;
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import java.time.LocalDate;
+
+global java.util.Set validationDetailsList
+
+rule "client-primary-language-validation"
+  @rule_type("VALIDATION")  
+  @rule_description("Clients Primary Language must be valid in CWS/CMS code table")
+  @rule_name("Client Primary Language Validation")
+  
+  @doc_external_documentation("xTools")
+  @doc_enforcement_location("CMS")
+  @doc_rule_type("DataIntegrity")
+  @doc_drools_file("client-primary-language-validation.drl")
+  @doc_rule_name("Client Primary Language Validation")
+  
+  @doc_doctool_name("")
+  @doc_doctool_description("")
+
+  @doc_di_entity("CLIENT_T")
+  @doc_di_attribute("P_LANG_TPC")
+  @doc_di_length("4")
+  @doc_di_type("smallint")
+  @doc_di_nullable("no")
+  @doc_di_mandatory("no")
+  @doc_di_default("0")
+  @doc_di_validation_table("SYS_CD_C")
+  @doc_di_validation_category("LANG_TPC")
+  @doc_di_validation_sub_category("0")
+
+  @doc_ri_entity("")
+  @doc_ri_attribute("")
+  @doc_ri_cardinality("")
+  @doc_ri_relationship("")
+  @doc_ri_related_entity("")
+  @doc_ri_related_attribute("")
+  @doc_ri_validation_table("")
+  @doc_ri_validation_category("")
+  @doc_ri_validation_sub_category("")
+
+  @doc_cpi_name("")
+  @doc_cpi_description("")
+  
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end
+  

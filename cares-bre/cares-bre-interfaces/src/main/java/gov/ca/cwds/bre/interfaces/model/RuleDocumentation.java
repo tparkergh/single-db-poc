@@ -15,100 +15,85 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 public class RuleDocumentation {
 
   public enum Type {
-    DocTool, xTool, BusinessRule, Validation, CARESPlatformIntegration;
+    DocTool, DataIntegrity, BusinessRule, ReferentialIntegrity, CARESPlatformIntegration, Hotline, CALS, CaseManagement;
     
     public static Type fromName(String typeName) {
       return EnumUtils.getEnum(Type.class, typeName);
     }
   }
 
-  private String ruleName;
-  private Type ruleType;
-  private String ruleDescription;
-  private String ruleDroolsRule;
+  private String docDroolsFile;
   private String docExternalDocumentation;
   private String docEnforcementLocations;
+  private Type docRuleType;
+  private String docRuleName;
   private String docDoctoolName;
   private String docDoctoolDescription;
-  private String docXtoolEntity;
-  private String docXtoolAttribute;
-  private String docXtoolLength;
-  private String docXtoolType;
-  private String docXtoolNullable;
-  private String docXtoolManadatory;
+  private String docDiEntity;
+  private String docDiAttribute;
+  private String docDiLength;
+  private String docDiType;
+  private String docDiNullable;
+  private String docDiManadatory;
+  private String docDiDefault;
+  private String docDiValidationTable;
+  private String docDiValidationCategory;
+  private String docDiValidationSubCategory;
   private String docRiEntity;
   private String docRiAttribute;
   private String docRiCardinality;
   private String docRiRelationship;
   private String docRiRelatedEntity;
   private String docRiRelatedAttribute;
-  private String docCipName;
-  private String docCipDescription;
+  private String docCpiName;
+  private String docCpiDescription;
   
-  public RuleDocumentation(String ruleName, Type ruleType, String ruleDescription,
-      String ruleDroolsRule,
-      String docExternalDocumentation, String docEnforcementLocations,
-      String docDoctoolName, String docDoctoolDescription, String docXtoolEntity,
-      String docXtoolAttribute, String docXtoolLength, String docXtoolType,
-      String docXtoolNullable, String docXtoolManadatory, String docRiEntity,
+  public RuleDocumentation(String docDroolsFile, String docExternalDocumentation, 
+      String docEnforcementLocations, Type docRuleType, String docRuleName,
+      String docDoctoolName, String docDoctoolDescription, String docDiEntity,
+      String docDiAttribute, String docDiLength, String docDiType,
+      String docDiNullable, String docDiManadatory, String docDiDefault,
+      String docDiValidationTable,
+      String docDiValidationCategory, String docDiValidationSubCategory,
+      String docRiEntity,
       String docRiAttribute, String docRiCardinality, String docRiRelationship,
-      String docRiRelatedEntity, String docRiRelatedAttribute, String docCipName,
-      String docCipDescription) {
+      String docRiRelatedEntity, String docRiRelatedAttribute, String docCpiName,
+      String docCpiDescription) {
     super();
-    this.ruleName = ruleName;
-    this.ruleType = ruleType;
-    this.ruleDescription = ruleDescription;
-    this.ruleDroolsRule = ruleDroolsRule;
+    this.docDroolsFile = docDroolsFile;
     this.docExternalDocumentation = docExternalDocumentation;
     this.docEnforcementLocations = docEnforcementLocations;
+    this.docRuleType = docRuleType;
+    this.docRuleName = docRuleName;
     this.docDoctoolName = docDoctoolName;
     this.docDoctoolDescription = docDoctoolDescription;
-    this.docXtoolEntity = docXtoolEntity;
-    this.docXtoolAttribute = docXtoolAttribute;
-    this.docXtoolLength = docXtoolLength;
-    this.docXtoolType = docXtoolType;
-    this.docXtoolNullable = docXtoolNullable;
-    this.docXtoolManadatory = docXtoolManadatory;
+    this.docDiEntity = docDiEntity;
+    this.docDiAttribute = docDiAttribute;
+    this.docDiLength = docDiLength;
+    this.docDiType = docDiType;
+    this.docDiNullable = docDiNullable;
+    this.docDiManadatory = docDiManadatory;
+    this.docDiDefault = docDiDefault;
+    this.docDiValidationTable = docDiValidationTable;
+    this.docDiValidationCategory = docDiValidationCategory;
+    this.docDiValidationSubCategory = docDiValidationSubCategory;
     this.docRiEntity = docRiEntity;
     this.docRiAttribute = docRiAttribute;
     this.docRiCardinality = docRiCardinality;
     this.docRiRelationship = docRiRelationship;
     this.docRiRelatedEntity = docRiRelatedEntity;
     this.docRiRelatedAttribute = docRiRelatedAttribute;
-    this.docCipName = docCipName;
-    this.docCipDescription = docCipDescription;
+    this.docCpiName = docCpiName;
+    this.docCpiDescription = docCpiDescription;
   }
 
-  public String getRuleName() {
-    return ruleName;
-  }
 
-  public void setRuleName(String ruleName) {
-    this.ruleName = ruleName;
-  }
-
-  public Type getRuleType() {
-    return ruleType;
-  }
-
-  public void setRuleType(Type ruleType) {
-    this.ruleType = ruleType;
-  }
-
-  public String getRuleDescription() {
-    return ruleDescription;
-  }
-
-  public void setRuleDescription(String ruleDescription) {
-    this.ruleDescription = ruleDescription;
-  }
-
-  public String getRuleDroolsRule() {
-    return ruleDroolsRule;
+  public String getDocDroolsFile() {
+    return docDroolsFile;
   }
   
-  public void setRuleDroolsRule(String ruleDroolsRule) {
-    this.ruleDroolsRule = ruleDroolsRule;
+  public void setDocDroolsFile(String docDroolsFile) {
+    this.docDroolsFile = docDroolsFile;
   }
   
   public String getDocExternalDocumentation() {
@@ -127,6 +112,22 @@ public class RuleDocumentation {
     this.docEnforcementLocations = docEnforcementLocations;
   }
   
+  public Type getDocRuleType() {
+    return docRuleType;
+  }
+  
+  public void setDocRuleType(Type docRuleType) {
+    this.docRuleType = docRuleType;
+  }
+  
+  public String getDocRuleName() {
+    return docRuleName;
+  }
+  
+  public void setDocRuleName(String docRuleName) {
+    this.docRuleName = docRuleName;
+  }
+  
   public String getDocDoctoolName() {
     return docDoctoolName;
   }
@@ -143,53 +144,93 @@ public class RuleDocumentation {
     this.docDoctoolDescription = docDoctoolDescription;
   }
 
-  public String getDocXtoolEntity() {
-    return docXtoolEntity;
+  public String getDocDiEntity() {
+    return docDiEntity;
   }
 
-  public void setDocXtoolEntity(String docXtoolEntity) {
-    this.docXtoolEntity = docXtoolEntity;
+  public void setDocDiEntity(String docDiEntity) {
+    this.docDiEntity = docDiEntity;
   }
 
-  public String getDocXtoolAttribute() {
-    return docXtoolAttribute;
+  public String getDocDiAttribute() {
+    return docDiAttribute;
   }
 
-  public void setDocXtoolAttribute(String docXtoolAttribute) {
-    this.docXtoolAttribute = docXtoolAttribute;
+  public void setDocDiAttribute(String docDiAttribute) {
+    this.docDiAttribute = docDiAttribute;
   }
 
-  public String getDocXtoolLength() {
-    return docXtoolLength;
+  public String getDocDiLength() {
+    return docDiLength;
   }
 
-  public void setDocXtoolLength(String docXtoolLength) {
-    this.docXtoolLength = docXtoolLength;
+  public void setDocDiLength(String docDiLength) {
+    this.docDiLength = docDiLength;
   }
 
-  public String getDocXtoolType() {
-    return docXtoolType;
+  public String getDocDiType() {
+    return docDiType;
   }
 
-  public void setDocXtoolType(String docXtoolType) {
-    this.docXtoolType = docXtoolType;
+  public void setDocDiType(String docDiType) {
+    this.docDiType = docDiType;
   }
 
-  public String getDocXtoolNullable() {
-    return docXtoolNullable;
+  public String getDocDiNullable() {
+    return docDiNullable;
   }
 
-  public void setDocXtoolNullable(String docXtoolNullable) {
-    this.docXtoolNullable = docXtoolNullable;
+  public void setDocDiNullable(String docDiNullable) {
+    this.docDiNullable = docDiNullable;
   }
 
-  public String getDocXtoolManadatory() {
-    return docXtoolManadatory;
+  public String getDocDiManadatory() {
+    return docDiManadatory;
   }
 
-  public void setDocXtoolManadatory(String docXtoolManadatory) {
-    this.docXtoolManadatory = docXtoolManadatory;
+  public String getDocDiDefault() {
+    return docDiDefault;
   }
+
+
+  public void setDocDiDefault(String docDiDefault) {
+    this.docDiDefault = docDiDefault;
+  }
+
+
+  public void setDocDiManadatory(String docDiManadatory) {
+    this.docDiManadatory = docDiManadatory;
+  }
+
+  public String getDocDiValidationTable() {
+    return docDiValidationTable;
+  }
+
+
+  public void setDocDiValidationTable(String docDiValidationTable) {
+    this.docDiValidationTable = docDiValidationTable;
+  }
+
+
+  public String getDocDiValidationCategory() {
+    return docDiValidationCategory;
+  }
+
+
+  public void setDocDiValidationCategory(String docDiValidationCategory) {
+    this.docDiValidationCategory = docDiValidationCategory;
+  }
+
+
+  public String getDocDiValidationSubCategory() {
+    return docDiValidationSubCategory;
+  }
+
+
+  public void setDocDiValidationSubCategory(String docDiValidationSubCategory) {
+    this.docDiValidationSubCategory = docDiValidationSubCategory;
+  }
+
 
   public String getDocRiEntity() {
     return docRiEntity;
@@ -239,20 +280,20 @@ public class RuleDocumentation {
     this.docRiRelatedAttribute = docRiRelatedAttribute;
   }
 
-  public String getDocCipName() {
-    return docCipName;
+  public String getDocCpiName() {
+    return docCpiName;
   }
 
-  public void setDocCipName(String docCipName) {
-    this.docCipName = docCipName;
+  public void setDocCpiName(String docCpiName) {
+    this.docCpiName = docCpiName;
   }
 
-  public String getDocCipDescription() {
-    return docCipDescription;
+  public String getDocCpiDescription() {
+    return docCpiDescription;
   }
 
-  public void setDocCipDescription(String docCipDescription) {
-    this.docCipDescription = docCipDescription;
+  public void setDocCpiDescription(String docCpiDescription) {
+    this.docCpiDescription = docCpiDescription;
   }
 
   public int hashCode() {

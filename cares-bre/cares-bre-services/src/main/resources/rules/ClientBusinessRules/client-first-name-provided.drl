@@ -6,22 +6,29 @@ import org.drools.core.util.StringUtils;
 global java.util.Set validationDetailsList
 
 rule "client-first-name-provided"
-  @rule_type("xTool")  
+  @rule_type("VALIDATION")  
   @rule_description("First name must be provided")
-  @rule_name("xTool - First name must be provided")
-  @rule_drools_rule("client-first-name-provided.drl")
+  @rule_name("Client first name provided")
   
   @doc_external_documentation("xTools")
-  @doc_enforcement_location("CARES BRE")
+  @doc_enforcement_location("BRE")
+  @doc_rule_type("DataIntegrity")
+  @doc_drools_file("client-first-name-provided.drl")
+  @doc_rule_name("Client first name provided")
   
   @doc_doctool_name("")
   @doc_doctool_description("")
-  @doc_xtool_entity("CLIENT_T")
-  @doc_xtool_attribute("COM_FST_NM")
-  @doc_xtool_length("20")
-  @doc_xtool_type("char")
-  @doc_xtool_nullable("false")
-  @doc_xtool_mandatory("true")
+  
+  @doc_di_entity("CLIENT_T")
+  @doc_di_attribute("COM_FST_NM")
+  @doc_di_length("20")
+  @doc_di_type("char")
+  @doc_di_nullable("false")
+  @doc_di_mandatory("true")
+  @doc_di_default("")
+  @doc_di_validation_table("")
+  @doc_di_validation_category("")
+  @doc_di_validation_sub_category("")
 
   @doc_ri_entity("")
   @doc_ri_attribute("")
@@ -30,8 +37,8 @@ rule "client-first-name-provided"
   @doc_ri_related_entity("")
   @doc_ri_related_attribute("")
 
-  @doc_cip_name("")
-  @doc_cip_description("")
+  @doc_cpi_name("")
+  @doc_cpi_description("")
   
   dialect "mvel"
   agenda-group "ClientBusinessRules-validation-agenda"
