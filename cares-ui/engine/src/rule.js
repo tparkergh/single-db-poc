@@ -5,7 +5,7 @@ export default class Rule {
   }
 
   applies (selector) {
-    return this.find(this.definition, { "var": selector })
+    return this.find(this.definition, { 'var': selector })
   }
 
   find (object, data) {
