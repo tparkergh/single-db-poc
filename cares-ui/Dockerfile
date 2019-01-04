@@ -3,6 +3,10 @@ ENV APP_HOME /cares-ui
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 COPY . $APP_HOME
+WORKDIR engine
+RUN yarn install
+RUN yarn build
+WORKDIR $APP_HOME
 RUN yarn install
 CMD yarn start
 
