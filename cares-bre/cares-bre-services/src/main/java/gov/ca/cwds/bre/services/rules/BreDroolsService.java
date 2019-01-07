@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition.Rule.Type;
 import gov.ca.cwds.bre.interfaces.model.RuleDocumentation;
-import gov.ca.cwds.bre.interfaces.model.RuleDocumentationBuilder;
 import gov.ca.cwds.drools.DroolsConfiguration;
 import gov.ca.cwds.drools.DroolsException;
 import gov.ca.cwds.drools.DroolsService;
