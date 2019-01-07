@@ -9,7 +9,9 @@ import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
 import gov.ca.cwds.bre.services.api.BusinessRule;
+import gov.ca.cwds.bre.services.api.BusinessRuleDocumentationProvider;
 import gov.ca.cwds.bre.services.api.BusinessRuleProvider;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 
@@ -22,6 +24,10 @@ public class BreService implements BusinessRuleService {
   @Autowired
   @Qualifier(value="ContextAwareBusinessRuleProvider")
   private BusinessRuleProvider businessRuleProvider;
+  
+  @Autowired
+  @Qualifier(value="ContextAwareBusinessRuleDocumentationProvider")
+  private BusinessRuleDocumentationProvider businessDocumentationProvider;
   
   @Override  
   @ExecutionTimer
@@ -40,6 +46,12 @@ public class BreService implements BusinessRuleService {
   @ExecutionTimer
   public BusinessRuleDefinition getBusinessRule(String name) {
     return businessRuleProvider.getBusinessRuleDefinition(name);
+  }
+
+  @Override
+  @ExecutionTimer
+  public BusinessRuleDocumentation getBusinessRuleDocumentation(String name) {
+    return businessDocumentationProvider.getBusinessRuleDocumentation(name);
   }
 
   private BusinessRule findBusinessRule(BreRequest breRequest) {
@@ -71,4 +83,5 @@ public class BreService implements BusinessRuleService {
     
     return breReaposne;
   }
+
 }

@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
+import gov.ca.cwds.bre.interfaces.model.RuleDocumentation;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.drools.DroolsConfiguration;
@@ -29,6 +31,7 @@ public abstract class DroolsBusinessRuleBase<F> implements BusinessRule {
   protected ObjectMapper jacksonObjectMapper;
   
   private BusinessRuleDefinition businessRuleDefinition;
+  private BusinessRuleDocumentation businessRuleDocumentation;
   
   @Override
   public BreResponse execute(BreRequest breRequest) {
@@ -67,6 +70,18 @@ public abstract class DroolsBusinessRuleBase<F> implements BusinessRule {
     }
     
     return this.businessRuleDefinition;
+  }
+  
+  public BusinessRuleDocumentation getDocumentation() {
+    if (this.businessRuleDocumentation == null) {
+      BusinessRuleDocumentation doc = new BusinessRuleDocumentation();
+      doc.setBusinessRuleSetName(getBusinessRuleName());
+      doc.setRulesDocumentation(getRuleDocumentation());
+      doc.setDataClassName(getFactType().getName());
+      this.businessRuleDocumentation = doc;
+    }
+    return this.businessRuleDocumentation;
+    
   }
   
   protected abstract Class<F> getFactType();
@@ -108,6 +123,14 @@ public abstract class DroolsBusinessRuleBase<F> implements BusinessRule {
   private List<BusinessRuleDefinition.Rule> getRules() {
     try {
       return breDroolsService.getRules(getDroolsConfiguration(null), getBusinessRuleName() + "-kbase");
+    } catch (DroolsException e) {
+      throw new BreException(e.getMessage(), e);
+    }
+  }
+  
+  private List<RuleDocumentation> getRuleDocumentation() {
+    try {
+      return breDroolsService.getRuleDocuments(getDroolsConfiguration(null), getBusinessRuleName() + "-kbase");
     } catch (DroolsException e) {
       throw new BreException(e.getMessage(), e);
     }

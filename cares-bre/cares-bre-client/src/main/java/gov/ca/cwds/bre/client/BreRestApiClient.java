@@ -18,6 +18,7 @@ import gov.ca.cwds.bre.interfaces.api.BusinessRuleService;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
 
 /**
  * @author CWDS J Team
@@ -68,6 +69,11 @@ public final class BreRestApiClient implements BusinessRuleService {
   
   @Override
   public BusinessRuleDefinition getBusinessRule(String name) {
+    throw new UnsupportedOperationException("This function is not implemented yet.");
+  }
+
+  @Override
+  public BusinessRuleDocumentation getBusinessRuleDocumentation(String name) {
     throw new UnsupportedOperationException("This function is not implemented yet.");
   }
 

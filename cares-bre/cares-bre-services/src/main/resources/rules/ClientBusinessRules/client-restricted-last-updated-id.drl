@@ -6,15 +6,39 @@ import java.time.LocalDate;
 global java.util.Set validationDetailsList
 
 rule "client-restricted-last-updated-id"
-  @rule_type("VALIDATION")  
+  @rule_type("DATA-PROCESSING")  
   @rule_description("Last updated ID can not be 00T")
-  @rule_source_type("CARES Integration Platform")
-  @rule_source_name("client-restricted-last-updated-id")
-  @rule_source_entity("CLIENT_T")
-  @rule_source_attribute("LST_UPD_ID")
-  @rule_source_data_length("3")
-  @rule_source_nullable("false")
-  @rule_source_mandatory("true")
+  @rule_name("CPI-LastUpdateIDRestriction")
+  
+  @doc_external_documentation("")
+  @doc_enforcement_location("BRE")
+  @doc_rule_type("CARESPlatformIntegration")
+  @doc_drools_file("client-restricted-last-updated-id.drl")
+  @doc_rule_name("CPI-LastUpdateIDRestriction")
+  
+  @doc_doctool_name("")
+  @doc_doctool_description("")
+  
+  @doc_di_entity("")
+  @doc_di_attribute("")
+  @doc_di_length("")
+  @doc_di_type("")
+  @doc_di_nullable("")
+  @doc_di_mandatory("")
+  @doc_di_default("")
+  @doc_di_validation_table("")
+  @doc_di_validation_category("")
+  @doc_di_validation_sub_category("")
+
+  @doc_ri_entity("")
+  @doc_ri_attribute("")
+  @doc_ri_cardinality("")
+  @doc_ri_relationship("")
+  @doc_ri_related_entity("")
+  @doc_ri_related_attribute("")
+
+  @doc_cpi_name("CPI-LastUpdateIDRestricted")
+  @doc_cpi_description("Last updated ID can not be 00T")
   
   dialect "mvel"
   agenda-group "ClientBusinessRules-validation-agenda"
