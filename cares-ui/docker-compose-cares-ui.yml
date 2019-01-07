@@ -1,0 +1,7 @@
+version: '2.0'
+services:
+  cares-ui:
+    image: cwds/cares-ui
+    container_name: cares-ui
+    ports:
+      - '3008:5000'
