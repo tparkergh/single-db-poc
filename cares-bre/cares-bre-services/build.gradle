@@ -6,6 +6,7 @@ sourceCompatibility = 1.8
 dependencies {
     implementation project(':cares-bre:cares-bre-interfaces')
     implementation project(':cares-common')
+    implementation project(':cares-cics')
 
     implementation 'org.springframework.boot:spring-boot:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootVersion
