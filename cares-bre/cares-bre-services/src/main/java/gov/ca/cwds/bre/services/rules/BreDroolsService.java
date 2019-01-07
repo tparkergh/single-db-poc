@@ -55,7 +55,8 @@ public class BreDroolsService extends DroolsService {
       for (Rule rule :rules) {
         Map<String, Object> ruleMeta = rule.getMetaData();
         
-        RuleDocumentation rd = new RuleDocumentationBuilder().buildFromMetaData(ruleMeta);
+        RuleDocumentation rd = new RuleDocumentation();
+        rd.setRuleDocumentationFromRuleMetaData(ruleMeta);
         
         ruleDocs.add(rd);
       }
