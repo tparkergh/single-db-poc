@@ -4,25 +4,42 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import gov.ca.cwds.cares.common.aop.ExecutionTimer;
+import gov.ca.cwds.cares.persistence.entity.ClientAddressEntity;
 import gov.ca.cwds.cares.persistence.entity.ClientEntity;
+import gov.ca.cwds.cares.persistence.repository.ClientAddressRepository;
 import gov.ca.cwds.cares.persistence.repository.ClientRepository;
 import gov.ca.cwds.cares.services.interfaces.api.ClientService;
 import gov.ca.cwds.cares.services.interfaces.model.Client;
+import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
+import gov.ca.cwds.cares.services.mapping.ClientAddressEntityMapper;
 import gov.ca.cwds.cares.services.mapping.ClientEntityMapper;
 
 @Service
 public class ClientServiceImpl implements ClientService {
 
   @Autowired
-  ClientRepository clientRepository; 
+  private ClientRepository clientRepository;
+  
+  @Autowired
+  private ClientAddressRepository clientAddressRepository;
   
   @Override
-  public Client getClient(String id) {
-    ClientEntity clientEntity = clientRepository.findById(id).get();
+  @ExecutionTimer
+  public Client getClient(String clientId) {
+    ClientEntity clientEntity = clientRepository.findById(clientId).get();
     return ClientEntityMapper.INSTANCE.mapClientEntity(clientEntity);
   }
 
   @Override
+  @ExecutionTimer
+  public Collection<ClientAddress> getClientAddresses(String clientId) {
+    Collection<ClientAddressEntity> clientAddressEntities = clientAddressRepository.findByClientId(clientId);
+    return ClientAddressEntityMapper.INSTANCE.mapClientAddressEntities(clientAddressEntities);
+  }
+
+  @Override
+  @ExecutionTimer
   public Collection<Client> getAllClients() {
     // White listed client ids
     String[] clientIds = {

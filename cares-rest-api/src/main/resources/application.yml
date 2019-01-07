@@ -1,23 +1,19 @@
 server:
-  port: 8090
+  port: ${CARES_REST_API_PORT:8090}
   
 spring: 
   datasource:    
-    url: jdbc:db2://localhost:50000/DB0TDEV
-    username: db2inst1
-    password: db2inst1    
+    url: ${DB_CMS_JDBC_URL:jdbc:db2://localhost:50000/DB0TDEV}
+    username: ${DB_CMS_USER:db2inst1}
+    password: ${DB_CMS_PASSWORD:db2inst1}
     driverClassName: com.ibm.db2.jcc.DB2Driver  
     validationQuery: SELECT 1  
   jpa:
-    generate-ddl: false
-    database-platform: DB2Platform
-    hibernate:
-      ddl-auto: none
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    database-platform: DB2Platform    
     properties:
       hibernate:
         dialect: org.hibernate.dialect.DB2Dialect  
-        default_schema: CWSINT
+        default_schema: ${DB_CMS_SCHEMA:CWSINT}
         show_sql: true
         format_sql: true
 
