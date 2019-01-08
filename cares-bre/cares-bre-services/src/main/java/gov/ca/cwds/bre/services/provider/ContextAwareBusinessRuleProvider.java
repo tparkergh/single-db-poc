@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.bre.services.api.BusinessRuleProvider;
 
@@ -17,22 +18,22 @@ import gov.ca.cwds.bre.services.api.BusinessRuleProvider;
 @Component("ContextAwareBusinessRuleProvider")
 public class ContextAwareBusinessRuleProvider implements BusinessRuleProvider, ApplicationContextAware {
 
-  private static ApplicationContext APPLICVATION_CONTEXT;
+  private static ApplicationContext APPLICATION_CONTEXT;
   
   @Override
   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-    APPLICVATION_CONTEXT = applicationContext;
+    APPLICATION_CONTEXT = applicationContext;
   }
   
   @Override
   public BusinessRule getBusinessRule(String name) {
-    return APPLICVATION_CONTEXT.getBean(name, BusinessRule.class);        
+    return APPLICATION_CONTEXT.getBean(name, BusinessRule.class);        
   }
 
   @Override
   public List<BusinessRuleDefinition> getBusinessRuleDefinitions() {
     List<BusinessRuleDefinition> businessRuleDescriptions = new ArrayList<>();
-    Map<String, BusinessRule> businessRules = APPLICVATION_CONTEXT.getBeansOfType(BusinessRule.class);
+    Map<String, BusinessRule> businessRules = APPLICATION_CONTEXT.getBeansOfType(BusinessRule.class);
     
     if (businessRules != null) {
       for (BusinessRule br : businessRules.values()) {
@@ -47,4 +48,5 @@ public class ContextAwareBusinessRuleProvider implements BusinessRuleProvider, A
   public BusinessRuleDefinition getBusinessRuleDefinition(String name) {
     return getBusinessRule(name).getDefinition();
   }
+  
 }

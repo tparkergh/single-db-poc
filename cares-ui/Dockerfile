@@ -8,5 +8,5 @@ RUN yarn install
 RUN yarn build
 WORKDIR $APP_HOME
 RUN yarn install
+EXPOSE 5000
 CMD yarn start
-

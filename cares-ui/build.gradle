@@ -1,0 +1,18 @@
+// ### Docker
+def dockerImageName = targetDockerHubOrganization + '/' + project.name
+
+task dockerCreateImage(type:Exec) {
+    commandLine 'docker',  'build',  '-t',  "$dockerImageName", '.'
+}
+
+task dockerTagImage(type:Exec, dependsOn: dockerCreateImage) {
+    commandLine 'docker',  'tag',  "$dockerImageName",  "$dockerImageName:$dockerTag"
+}
+
+task dockerPushTaggedVersion(type: Exec, dependsOn: dockerTagImage) {
+    commandLine 'docker', 'push', "$dockerImageName:$dockerTag"
+}
+
+task dockerPushLatestVersion(type: Exec, dependsOn: dockerPushTaggedVersion) {
+    commandLine 'docker', 'push', "$dockerImageName:latest"
+}
