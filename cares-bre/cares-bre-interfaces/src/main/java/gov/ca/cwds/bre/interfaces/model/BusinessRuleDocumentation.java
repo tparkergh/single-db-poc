@@ -35,7 +35,7 @@ public class BusinessRuleDocumentation implements Serializable {
     return businessRuleName;
   }
 
-  public void setBusinessRuleSetName(String businessRuleSetName) {
+  public void setBusinessRuleName(String businessRuleSetName) {
     this.businessRuleName = businessRuleSetName;
   }
 
