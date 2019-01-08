@@ -35,8 +35,8 @@ public class BusinessRuleDocumentation implements Serializable {
     return businessRuleName;
   }
 
-  public void setBusinessRuleName(String businessRuleSetName) {
-    this.businessRuleName = businessRuleSetName;
+  public void setBusinessRuleName(String businessRuleName) {
+    this.businessRuleName = businessRuleName;
   }
 
   public void setDataClassName(String dataClassName) {
