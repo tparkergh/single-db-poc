@@ -4,7 +4,7 @@ import java.util.List;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 
 /**
  * @author CWDS Team J
@@ -41,6 +41,6 @@ public interface BusinessRuleService {
    * @return Business rule documentation
    * 
    */
-  public BusinessRuleDocumentation getBusinessRuleDocumentation(String name);
+  public BusinessRuleSetDocumentation getBusinessRuleDocumentation(String name);
   
 }

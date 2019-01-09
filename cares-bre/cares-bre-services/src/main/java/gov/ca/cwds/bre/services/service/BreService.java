@@ -9,7 +9,7 @@ import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.bre.services.api.BusinessRuleDocumentationProvider;
 import gov.ca.cwds.bre.services.api.BusinessRuleProvider;
@@ -50,8 +50,8 @@ public class BreService implements BusinessRuleService {
 
   @Override
   @ExecutionTimer
-  public BusinessRuleDocumentation getBusinessRuleDocumentation(String name) {
-    BusinessRuleDocumentation businessRuleDocumentation;
+  public BusinessRuleSetDocumentation getBusinessRuleDocumentation(String name) {
+    BusinessRuleSetDocumentation businessRuleDocumentation;
     try {
       businessRuleDocumentation = businessDocumentationProvider.getBusinessRuleDocumentation(name);
     } catch (BreException ex) {

@@ -7,5 +7,7 @@ dependencies {
     implementation project(':cares-common')
     
     implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
+ 
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
         
 }
