@@ -51,7 +51,16 @@ public class BreService implements BusinessRuleService {
   @Override
   @ExecutionTimer
   public BusinessRuleDocumentation getBusinessRuleDocumentation(String name) {
-    return businessDocumentationProvider.getBusinessRuleDocumentation(name);
+    BusinessRuleDocumentation businessRuleDocumentation;
+    try {
+      businessRuleDocumentation = businessDocumentationProvider.getBusinessRuleDocumentation(name);
+    } catch (BreException ex) {
+      throw ex;
+    } catch (Throwable t) {
+      BreException breException = new BreException("Error finding business rule: " + name, t);
+      throw breException;
+    }
+    return businessRuleDocumentation;
   }
 
   private BusinessRule findBusinessRule(BreRequest breRequest) {

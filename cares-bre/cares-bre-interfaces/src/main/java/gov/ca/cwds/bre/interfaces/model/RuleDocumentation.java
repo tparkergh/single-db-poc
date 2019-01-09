@@ -1,9 +1,9 @@
 package gov.ca.cwds.bre.interfaces.model;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
-import org.apache.commons.lang3.EnumUtils;
+import java.util.TreeMap;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -17,35 +17,39 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RuleDocumentation {
 
-  private Map <String, String> ruleDocumentation = new HashMap<>();
+  private TreeMap <String, String> ruleDocument = new TreeMap<>();
     
   public RuleDocumentation() {
     super();
   }
   
   public RuleDocumentation(Map<String, String> ruleDocumentation) {
-    this.ruleDocumentation = ruleDocumentation;
+    this.ruleDocument = new TreeMap<>(ruleDocumentation);
   }
   
 
-  public Map<String, String> getRuleDocumentation() {
-    return this.ruleDocumentation;
+  public Map<String, String> getRuleDocument() {
+    return this.ruleDocument;
   }
   
-  public void setRuleDocumentation(Map<String, String> ruleDocumentation) {
-    this.ruleDocumentation = ruleDocumentation;
+  public void setRuleDocument(Map<String, String> ruleDocumentation) {
+    this.ruleDocument = new TreeMap<>(ruleDocumentation);
   }
   
-  public void setRuleDocumentationFromRuleMetaData(Map<String, Object> ruleMeta) {
+  public void setRuleDocumentFromRuleMetaData(Map<String, Object> ruleMeta) {
     
     if (ruleMeta != null) {
       
-      Set<Map.Entry< String, Object > > ruleSet = ruleMeta.entrySet();
+      Set<Entry<String, Object>> ruleSet = ruleMeta.entrySet();
       
       for (Map.Entry<String, Object> me : ruleSet) {
+        // do not return null items or items with empty value
         if (me.getValue() != null && me.getValue().toString().length() > 0) {
     
-        this.ruleDocumentation.put(me.getKey(), (String)me.getValue());
+          if (me.getKey().startsWith("doc_")) {
+            // return items with @doc_ notation
+            this.ruleDocument.put(me.getKey(), (String)me.getValue());
+          }
         }
       }
     }

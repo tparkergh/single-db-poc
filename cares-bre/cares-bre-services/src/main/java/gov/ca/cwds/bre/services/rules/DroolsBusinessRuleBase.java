@@ -75,7 +75,7 @@ public abstract class DroolsBusinessRuleBase<F> implements BusinessRule {
   public BusinessRuleDocumentation getDocumentation() {
     if (this.businessRuleDocumentation == null) {
       BusinessRuleDocumentation doc = new BusinessRuleDocumentation();
-      doc.setBusinessRuleSetName(getBusinessRuleName());
+      doc.setBusinessRuleName(getBusinessRuleName());
       doc.setRulesDocumentation(getRuleDocumentation());
       doc.setDataClassName(getFactType().getName());
       this.businessRuleDocumentation = doc;
