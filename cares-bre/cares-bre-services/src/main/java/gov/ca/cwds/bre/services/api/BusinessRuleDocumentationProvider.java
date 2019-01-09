@@ -1,6 +1,6 @@
 package gov.ca.cwds.bre.services.api;
 
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 
 public interface BusinessRuleDocumentationProvider {
   
@@ -12,5 +12,5 @@ public interface BusinessRuleDocumentationProvider {
    */
   BusinessRule getBusinessRuleDocument(String name);
   
-  BusinessRuleDocumentation getBusinessRuleDocumentation(String name);
+  BusinessRuleSetDocumentation getBusinessRuleDocumentation(String name);
 }

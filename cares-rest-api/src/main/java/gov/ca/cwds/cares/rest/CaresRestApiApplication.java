@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"gov.ca.cwds.cares"})
-@EntityScan(basePackages = {"gov.ca.cwds.cares"})
-@EnableJpaRepositories(basePackages = {"gov.ca.cwds.cares"})
+@EntityScan(basePackages = {"gov.ca.cwds.cares.persistence"})
+@EnableJpaRepositories(basePackages = {"gov.ca.cwds.cares.persistence"})
 public class CaresRestApiApplication {
   
   public static void main(String[] args) {

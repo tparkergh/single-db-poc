@@ -18,25 +18,25 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BusinessRuleDocumentation implements Serializable {
+public class BusinessRuleSetDocumentation implements Serializable {
 
   private static final long serialVersionUID = 8524019465390885796L;
   
-  private String businessRuleName;
+  private String businessRuleSetName;
   private String entity;
   private String dataClassName;
   private List<RuleDocumentation> rulesDocumentation = new ArrayList<>();
 
-  public BusinessRuleDocumentation() {
+  public BusinessRuleSetDocumentation() {
     super();
   }
 
   public String getBusinessRuleSetName() {
-    return businessRuleName;
+    return businessRuleSetName;
   }
 
-  public void setBusinessRuleSetName(String businessRuleSetName) {
-    this.businessRuleName = businessRuleSetName;
+  public void setBusinessRuleSetName(String businessRuleName) {
+    this.businessRuleSetName = businessRuleName;
   }
 
   public void setDataClassName(String dataClassName) {

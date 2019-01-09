@@ -12,7 +12,7 @@ import gov.ca.cwds.bre.interfaces.api.BusinessRuleService;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -51,7 +51,7 @@ public class BreRestController {
   @GetMapping("/bre/documentation/{name}")
   @ExecutionTimer
   @ApiOperation(value = "Get documentation of a business rule identified by given name")
-  public BusinessRuleDocumentation getBusinessRuleDocumentation(@ApiParam("Business rule name") @PathVariable("name") String name) {
+  public BusinessRuleSetDocumentation getBusinessRuleDocumentation(@ApiParam("Business rule name") @PathVariable("name") String name) {
     return businessRuleService.getBusinessRuleDocumentation(name);
   }
 }

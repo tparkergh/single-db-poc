@@ -7,6 +7,9 @@ module.exports = {
         setupTestFrameworkScriptFile: '<rootDir>/test-setup.js'
       }
     ],
-    '@neutrinojs/react'
+    '@neutrinojs/react',
+    [
+      '@neutrinojs/dev-server', { disableHostCheck: true }
+    ]
   ]
 };

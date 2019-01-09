@@ -27,7 +27,7 @@ dependencies {
 
     annotationProcessor 'org.mapstruct:mapstruct-processor:' + mapstructVersion
     
-    testImplementation 'junit:junit:' + junitVersion
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion 
     testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
-    testImplementation 'commons-io:commons-io:' + commonsIoVersion
+    testImplementation 'commons-io:commons-io:' + commonsIoVersion        
 }

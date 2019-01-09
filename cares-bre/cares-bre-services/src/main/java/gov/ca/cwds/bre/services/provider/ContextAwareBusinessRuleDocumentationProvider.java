@@ -4,7 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDocumentation;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.bre.services.api.BusinessRuleDocumentationProvider;
 
@@ -27,7 +27,7 @@ public class ContextAwareBusinessRuleDocumentationProvider implements BusinessRu
   }
 
   @Override
-  public BusinessRuleDocumentation getBusinessRuleDocumentation(String name) {
+  public BusinessRuleSetDocumentation getBusinessRuleDocumentation(String name) {
     return getBusinessRuleDocument(name).getDocumentation();
    }
  
