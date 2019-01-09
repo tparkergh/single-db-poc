@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@cwds/components": "^0.5.10",
+    "@neutrinojs/dev-server": "^8.3.0",
     "@neutrinojs/react": "^8.3.0",
     "JsonBRE": "file:./engine",
     "neutrino": "^8.3.0",
