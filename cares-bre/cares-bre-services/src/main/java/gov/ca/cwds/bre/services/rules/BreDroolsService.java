@@ -54,10 +54,10 @@ public class BreDroolsService extends DroolsService {
       for (Rule rule :rules) {
         Map<String, Object> ruleMeta = rule.getMetaData();
         
-        RuleDocumentation rd = new RuleDocumentation();
-        rd.setRuleDocumentFromRuleMetaData(ruleMeta);
+        RuleDocumentation ruleDocument = new RuleDocumentation();
+        ruleDocument.setRuleDocumentFromRuleMetaData(ruleMeta);
         
-        ruleDocs.add(rd);
+        ruleDocs.add(ruleDocument);
       }
     }
     return ruleDocs;    

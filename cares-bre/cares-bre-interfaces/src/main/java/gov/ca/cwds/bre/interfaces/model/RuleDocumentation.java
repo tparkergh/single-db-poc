@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RuleDocumentation {
 
+  public static final String DOC_NOTATION = "doc_";
+  
   private TreeMap <String, String> ruleDocument = new TreeMap<>();
     
   public RuleDocumentation() {
@@ -27,7 +29,6 @@ public class RuleDocumentation {
   public RuleDocumentation(Map<String, String> ruleDocumentation) {
     this.ruleDocument = new TreeMap<>(ruleDocumentation);
   }
-  
 
   public Map<String, String> getRuleDocument() {
     return this.ruleDocument;
@@ -43,13 +44,13 @@ public class RuleDocumentation {
       
       Set<Entry<String, Object>> ruleSet = ruleMeta.entrySet();
       
-      for (Map.Entry<String, Object> me : ruleSet) {
+      for (Map.Entry<String, Object> mappedRule : ruleSet) {
         // do not return null items or items with empty value
-        if (me.getValue() != null && me.getValue().toString().length() > 0) {
+        if (mappedRule.getValue() != null && mappedRule.getValue().toString().length() > 0) {
     
-          if (me.getKey().startsWith("doc_")) {
+          if (mappedRule.getKey().startsWith(DOC_NOTATION)) {
             // return items with @doc_ notation
-            this.ruleDocument.put(me.getKey(), (String)me.getValue());
+            this.ruleDocument.put(mappedRule.getKey(), (String)mappedRule.getValue());
           }
         }
       }

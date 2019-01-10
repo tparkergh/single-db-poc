@@ -37,8 +37,8 @@ public class BusinessRuleSetDocumentationTest {
   @Test 
   public void shouldSetGetRuleDocumentation() throws Exception {
     Map<String, String> testMap = new HashMap<>();
-    testMap.put("doc_1", "documentation one");
-    testMap.put("doc_2", "documentation two");
+    testMap.put(RuleDocumentation.DOC_NOTATION + "1", "documentation one");
+    testMap.put(RuleDocumentation.DOC_NOTATION + "2", "documentation two");
     RuleDocumentation rd = new RuleDocumentation(testMap);
     List<RuleDocumentation> rdList = new ArrayList<>();
     rdList.add(rd);

@@ -44,14 +44,14 @@ public class BreRestController {
   @GetMapping("/bre/{name}")
   @ExecutionTimer
   @ApiOperation(value = "Get definition of business rule identified by given name")
-  public BusinessRuleDefinition getBusinessRule(@ApiParam("Business rule name") @PathVariable("name") String name) {
+  public BusinessRuleDefinition getBusinessRule(@ApiParam("Business rule name") @PathVariable(required = true) String name) {
     return businessRuleService.getBusinessRule(name);
   }
   
   @GetMapping("/bre/documentation/{name}")
   @ExecutionTimer
   @ApiOperation(value = "Get documentation of a business rule identified by given name")
-  public BusinessRuleSetDocumentation getBusinessRuleDocumentation(@ApiParam("Business rule name") @PathVariable("name") String name) {
+  public BusinessRuleSetDocumentation getBusinessRuleDocumentation(@ApiParam("Business rule name") @PathVariable(required = true) String name) {
     return businessRuleService.getBusinessRuleDocumentation(name);
   }
 }
