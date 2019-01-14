@@ -23,10 +23,9 @@ public class BusinessRuleSetDocumentation implements Serializable {
   private static final long serialVersionUID = 8524019465390885796L;
   
   private String businessRuleSetName;
-  private String entity;
   private String dataClassName;
-  private List<RuleDocumentation> rulesDocumentation = new ArrayList<>();
-
+  private List<RuleDocumentation> rules = new ArrayList<>();
+  
   public BusinessRuleSetDocumentation() {
     super();
   }
@@ -47,22 +46,19 @@ public class BusinessRuleSetDocumentation implements Serializable {
     return dataClassName;
   }
   
-  public List<RuleDocumentation> getRulesDocumentation() {
-    return rulesDocumentation;
+  public List<RuleDocumentation> getRules() {
+    return rules;
   }
 
-  public void setRulesDocumentation(List<RuleDocumentation> rulesDocumentation) {
-    this.rulesDocumentation = rulesDocumentation;
+  public void setRules(List<RuleDocumentation> rules) {
+    this.rules = rules;
   }
   
-  public String getEntity() {
-    return entity;
+  public void addRule(RuleDocumentation rule) {
+    if (rule != null) {
+      this.rules.add(rule);
+    }
   }
-  
-  public void setEntity(String entity) {
-    this.entity = entity;
-  }
-
 
   @Override
   public int hashCode() {

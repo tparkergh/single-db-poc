@@ -6,9 +6,7 @@ import org.drools.core.util.StringUtils;
 global java.util.Set validationDetailsList
 
 rule "client-first-name-provided"
-  @rule_type("VALIDATION")  
-  @rule_description("First name must be provided")
-  @rule_name("Client first name provided")
+  @doc_description("First name must be provided")
   
   @doc_external_documentation("xTools")
   @doc_enforcement_location("BRE")

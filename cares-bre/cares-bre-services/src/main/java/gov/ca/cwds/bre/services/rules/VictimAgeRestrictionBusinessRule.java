@@ -1,5 +1,6 @@
 package gov.ca.cwds.bre.services.rules;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,10 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition.Rule;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition.Rule.Type;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
+import gov.ca.cwds.bre.interfaces.model.RuleDocumentation;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.rest.exception.IssueDetails;
 import gov.ca.cwds.rest.exception.IssueType;
@@ -40,41 +39,39 @@ public class VictimAgeRestrictionBusinessRule implements BusinessRule {
       breResponse.addIssue(issue);
     } 
     
-    breResponse.setBusinessRuleName(breRequest.getBusinessRuleName());
+    breResponse.setBusinessRuleSetName(breRequest.getBusinessRuleSetName());
     breResponse.setData(breRequest.getData());
     return breResponse;
   }
 
-  @Override
-  public BusinessRuleDefinition getDefinition() {
-    BusinessRuleDefinition desc = new BusinessRuleDefinition();
-    desc.setBusinessRuleName("VictimAgeRestrictionBusinessRule");
-    desc.addRule(new Rule("age-validation", Type.VALIDATION, "Age must be less that 18 years. DOB must be provided in this formt: yyyy-MM-dd"));
-    desc.setDataClassName(LocalDate.class.getName());
-    
-    BreRequest breRequest = new BreRequest();
-    breRequest.setBusinessRuleName("VictimAgeRestrictionBusinessRule");
-    breRequest.setData(jacksonObjectMapper.convertValue(LocalDate.now(), JsonNode.class));
-    desc.setRequestSample(breRequest);
-    
-    return desc;
-  }
-  
   private LocalDate getDob(BreRequest breRequest) {
     LocalDate clientDob;
     try {      
       JsonNode data = breRequest.getData();      
       clientDob = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(data), LocalDate.class);      
-    } catch (Throwable t) {
+    } catch (IOException t) {
       throw new BreException("Error reading business rule data for: VictimAgeRestrictionBusinessRule", 
-          t, breRequest, getDefinition());      
+          t, breRequest);      
     }
     return clientDob;
   }
 
   @Override
+  public String getName() {
+    return this.getClass().getSimpleName();
+  }
+
+  @Override
   public BusinessRuleSetDocumentation getDocumentation() {
-    // TODO Auto-generated method stub
-    return null;
+    BusinessRuleSetDocumentation doc = new BusinessRuleSetDocumentation();
+    doc.setBusinessRuleSetName(this.getClass().getSimpleName());
+    doc.setDataClassName(LocalDate.class.getName());
+    
+    RuleDocumentation rd = new RuleDocumentation();
+    rd.setName(this.getClass().getSimpleName());
+    rd.addDocumentation("doc_description", "Victim age must be less than 18 years");
+    
+    doc.addRule(rd);
+    return doc;
   }
 }

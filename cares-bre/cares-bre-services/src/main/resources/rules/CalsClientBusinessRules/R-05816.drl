@@ -6,8 +6,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO;
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-05816"
-  @rule_type("VALIDATION")  
-  @rule_description("The Gender must be either Male or Female (Unknown is not a valid Gender).")
+  @doc_description("The Gender must be either Male or Female (Unknown is not a valid Gender).")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

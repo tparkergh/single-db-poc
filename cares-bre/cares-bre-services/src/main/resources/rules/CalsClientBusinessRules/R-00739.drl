@@ -5,8 +5,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO;
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-00739"
-  @rule_type("VALIDATION")  
-  @rule_description("The client's birth date must be less than or equal to the death date of the client. If the client's death date is entered, then the client's birth date cannot be changed to a date later than that of the client's death date.")
+  @doc_description("The client's birth date must be less than or equal to the death date of the client. If the client's death date is entered, then the client's birth date cannot be changed to a date later than that of the client's death date.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

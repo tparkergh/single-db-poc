@@ -5,9 +5,7 @@ import gov.ca.cwds.rest.exception.IssueType;
 global java.util.Set validationDetailsList
 
 rule "client-assign-last-updated-id"
-  @rule_type("DATA_PROCESSING")  
-  @rule_description("Last updated ID is assigned to 00T")
-  @rule_name("CPI-LastUpdateIDAssigned")
+  @doc_description("Last updated ID is assigned to 00T")
   
   @doc_external_documentation("")
   @doc_enforcement_location("BRE")

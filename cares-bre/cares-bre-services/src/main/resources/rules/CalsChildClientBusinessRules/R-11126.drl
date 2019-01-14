@@ -6,8 +6,7 @@ import gov.ca.cwds.data.legacy.cms.entity.FCEligibility;
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-11126"
-  @rule_type("VALIDATION")  
-  @rule_description("The Eligibility (or Denial) Date must be greater than or equal to the Client's Birth Date (if it exists).")
+  @doc_description("The Eligibility (or Denial) Date must be greater than or equal to the Client's Birth Date (if it exists).")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

@@ -23,16 +23,16 @@ import gov.ca.cwds.rest.exception.IssueDetails;
 public final class BreResponse implements ExecutionTimeRecorder {
   
   private Long executionTimeMillis;
-  private String businessRuleName;
+  private String businessRuleSetName;
   private Set<IssueDetails> issues = new HashSet<>();
   private JsonNode data;  
 
-  public String getBusinessRuleName() {
-    return businessRuleName;
+  public String getBusinessRuleSetName() {
+    return businessRuleSetName;
   }
 
-  public void setBusinessRuleName(String businessRuleName) {
-    this.businessRuleName = businessRuleName;
+  public void setBusinessRuleSetName(String businessRuleSetName) {
+    this.businessRuleSetName = businessRuleSetName;
   }
 
   public Set<IssueDetails> getIssues() {
