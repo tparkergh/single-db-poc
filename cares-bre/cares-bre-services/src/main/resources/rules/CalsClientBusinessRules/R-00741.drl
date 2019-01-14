@@ -5,8 +5,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO;
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-00741"
-  @rule_type("VALIDATION")  
-  @rule_description("The primary and secondary languages of a client may not be the same.")
+  @doc_description("The primary and secondary languages of a client may not be the same.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

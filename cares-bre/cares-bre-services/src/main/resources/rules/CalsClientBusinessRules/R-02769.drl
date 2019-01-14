@@ -8,8 +8,7 @@ import java.util.Objects;
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-02769"
-  @rule_type("VALIDATION")  
-  @rule_description("If the client's common name type is 'Doe' and the common name itself is changed, then the common name type must change.")
+  @doc_description("If the client's common name type is 'Doe' and the common name itself is changed, then the common name type must change.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

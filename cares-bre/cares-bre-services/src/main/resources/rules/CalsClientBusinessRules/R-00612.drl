@@ -7,8 +7,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO;
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-00612"
-  @rule_type("VALIDATION")  
-  @rule_description("The client must be born before the delivered service occurs. If date of birth is not recorded, this does not apply. If the Delivered Service Start Date is entered, then the Birth Date for the Client cannot be changed to a date later than that of the Delivered Service Start Date.")
+  @doc_description("The client must be born before the delivered service occurs. If date of birth is not recorded, this does not apply. If the Delivered Service Start Date is entered, then the Birth Date for the Client cannot be changed to a date later than that of the Delivered Service Start Date.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

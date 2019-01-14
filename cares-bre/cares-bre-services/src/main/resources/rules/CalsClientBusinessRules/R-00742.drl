@@ -6,8 +6,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO;
 global java.util.Set validationDetailsList
 
 rule "R-00742"
-  @rule_type("VALIDATION")  
-  @rule_description("A client must have a 'primary ethnicity' in order to have an 'other ethnicity' Logic If CLIENT.Primary Ethnicity is blank, CLIENT_SCP_ETHNICITY.Ethnicity_Type must be blank.")
+  @doc_description("A client must have a 'primary ethnicity' in order to have an 'other ethnicity' Logic If CLIENT.Primary Ethnicity is blank, CLIENT_SCP_ETHNICITY.Ethnicity_Type must be blank.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

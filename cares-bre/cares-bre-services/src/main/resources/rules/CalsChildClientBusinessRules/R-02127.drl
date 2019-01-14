@@ -7,8 +7,7 @@ import gov.ca.cwds.data.legacy.cms.entity.MedicalEligibilityApplication
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-02127"
-  @rule_type("VALIDATION")  
-  @rule_description("Adoption Agreement Term Date cannot be earlier than birth date. If the Adoption Agreement Term Date is entered, then the Client's birth date cannot be changed to be greater than that of the Adoption Agreement Term Date.")
+  @doc_description("Adoption Agreement Term Date cannot be earlier than birth date. If the Adoption Agreement Term Date is entered, then the Client's birth date cannot be changed to be greater than that of the Adoption Agreement Term Date.")
   
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

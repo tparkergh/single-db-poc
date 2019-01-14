@@ -6,8 +6,7 @@ import gov.ca.cwds.cms.data.access.dto.ChildClientEntityAwareDTO
 global java.util.Set validationDetailsList
 
 rule "R-00769"
-  @rule_type("VALIDATION")  
-  @rule_description("The Parental Rights Termination Date cannot be less than the Birth Date (if it exists) of the Child Client. If the Parental Rights Termination Date is entered, then the client's birth date cannot be changed to a date later than that of the Parental Rights Termination Date.")
+  @doc_description("The Parental Rights Termination Date cannot be less than the Birth Date (if it exists) of the Child Client. If the Parental Rights Termination Date is entered, then the client's birth date cannot be changed to a date later than that of the Parental Rights Termination Date.")
   
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

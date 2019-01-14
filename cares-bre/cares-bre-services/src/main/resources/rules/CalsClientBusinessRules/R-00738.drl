@@ -5,8 +5,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO;
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-00738"
-  @rule_type("VALIDATION")  
-  @rule_description("The client's birth date must be less than or equal to the creation date of the Client record.")
+  @doc_description("The client's birth date must be less than or equal to the creation date of the Client record.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

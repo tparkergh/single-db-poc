@@ -6,8 +6,7 @@ import gov.ca.cwds.cms.data.access.dto.ChildClientEntityAwareDTO;
 global java.util.Set validationDetailsList
 
 rule "R-09865"
-  @rule_type("VALIDATION")  
-  @rule_description("The Special Education Start Date cannot be less than the Birth Date (if it exists) of the Client. If the Special Education Start Date is entered, then the client's birth date cannot be changed to a date later than the Special Education Start Date.")
+  @doc_description("The Special Education Start Date cannot be less than the Birth Date (if it exists) of the Client. If the Special Education Start Date is entered, then the client's birth date cannot be changed to a date later than the Special Education Start Date.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

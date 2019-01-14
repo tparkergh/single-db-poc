@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 import org.kie.api.definition.KiePackage;
 import org.kie.api.definition.rule.Rule;
 import org.kie.api.runtime.KieContainer;
 import org.springframework.stereotype.Component;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition.Rule.Type;
 import gov.ca.cwds.bre.interfaces.model.RuleDocumentation;
 import gov.ca.cwds.drools.DroolsConfiguration;
 import gov.ca.cwds.drools.DroolsException;
@@ -19,31 +18,9 @@ import gov.ca.cwds.drools.DroolsService;
 public class BreDroolsService extends DroolsService {
   
   @SuppressWarnings("rawtypes")
-  public List<BusinessRuleDefinition.Rule> getRules(DroolsConfiguration config, String kbase) throws DroolsException {
-    List<BusinessRuleDefinition.Rule> ruleDefs = new ArrayList<>();    
-    KieContainer container = config.getKieContainer();  
-    Collection<KiePackage> packages = container.getKieBase(kbase).getKiePackages();
-    
-    for (KiePackage pkg : packages) {
-      Collection<Rule> rules = pkg.getRules();
-      
-      for (Rule rule : rules) {
-        Map<String, Object> ruleMeta = rule.getMetaData();
-        Object typeObj = ruleMeta.get("rule_type");        
-        Object descriptionObj = ruleMeta.get("rule_description");
-        String name = rule.getName();
-        
-        String type = typeObj != null ? (String) typeObj : "";        
-        String description = descriptionObj != null ? (String) descriptionObj : "";
-        
-        ruleDefs.add(new BusinessRuleDefinition.Rule(name, Type.fromName(type), description));
-      }      
-    }    
-    return ruleDefs;
-  }
-  
-  @SuppressWarnings("rawtypes")
-  public List<RuleDocumentation> getRuleDocuments(DroolsConfiguration config, String kbase) throws DroolsException {
+  public List<RuleDocumentation> getRuleDocuments(
+      DroolsConfiguration config, 
+      String kbase) throws DroolsException {
     List<RuleDocumentation> ruleDocs = new ArrayList<>();
     KieContainer container = config.getKieContainer();  
     Collection<KiePackage> packages = container.getKieBase(kbase).getKiePackages();
@@ -53,11 +30,24 @@ public class BreDroolsService extends DroolsService {
       
       for (Rule rule :rules) {
         Map<String, Object> ruleMeta = rule.getMetaData();
-        
-        RuleDocumentation rd = new RuleDocumentation();
-        rd.setRuleDocumentFromRuleMetaData(ruleMeta);
-        
-        ruleDocs.add(rd);
+        RuleDocumentation ruleDoc = new RuleDocumentation();
+        ruleDoc.setName(rule.getName());
+                        
+        for (String ruleMetaKey : ruleMeta.keySet()) {
+          Object ruleMetaObj = ruleMeta.get(ruleMetaKey);
+          
+          if (ruleMetaObj != null 
+              && ruleMetaObj instanceof String 
+              && StringUtils.isNotBlank(ruleMetaObj.toString())) {            
+            String ruleMetaValue = (String) ruleMetaObj;
+            
+            if (ruleMetaKey.startsWith("doc_")) {
+              ruleDoc.addDocumentation(ruleMetaKey, ruleMetaValue);
+            }
+          }
+        }
+                  
+        ruleDocs.add(ruleDoc);
       }
     }
     return ruleDocs;    

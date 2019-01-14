@@ -5,8 +5,7 @@ import gov.ca.cwds.cms.data.access.dto.ChildClientEntityAwareDTO;
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-10104"
-  @rule_type("VALIDATION")  
-  @rule_description("The Tribal Customary Adoption Date cannot be less than the Birth Date (if it exists) of the Child Client. If Tribal Customary Adoption Date is entered, then the client's birth date cannot be changed to a date later than that of the Tribal Customary Adoption Date.")
+  @doc_description("The Tribal Customary Adoption Date cannot be less than the Birth Date (if it exists) of the Child Client. If Tribal Customary Adoption Date is entered, then the client's birth date cannot be changed to a date later than that of the Tribal Customary Adoption Date.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

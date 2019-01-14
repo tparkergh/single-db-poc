@@ -1,13 +1,10 @@
 package gov.ca.cwds.bre.services.provider;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Collection;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.bre.services.api.BusinessRuleProvider;
 
@@ -30,22 +27,7 @@ public class ContextAwareBusinessRuleProvider implements BusinessRuleProvider, A
   }
 
   @Override
-  public List<BusinessRuleDefinition> getBusinessRuleDefinitions() {
-    List<BusinessRuleDefinition> businessRuleDescriptions = new ArrayList<>();
-    Map<String, BusinessRule> businessRules = APPLICATION_CONTEXT.getBeansOfType(BusinessRule.class);
-    
-    if (businessRules != null) {
-      for (BusinessRule br : businessRules.values()) {
-        businessRuleDescriptions.add(br.getDefinition());
-      }
-    }
-    
-    return businessRuleDescriptions;
+  public Collection<BusinessRule> getAllBusinessRules() {
+    return APPLICATION_CONTEXT.getBeansOfType(BusinessRule.class).values();    
   }
-
-  @Override
-  public BusinessRuleDefinition getBusinessRuleDefinition(String name) {
-    return getBusinessRule(name).getDefinition();
-  }
-  
 }

@@ -1,11 +1,10 @@
 package gov.ca.cwds.bre.interfaces.model;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.TreeMap;
 import org.junit.Test;
 
 public class BusinessRuleSetDocumentationTest {
@@ -36,24 +35,16 @@ public class BusinessRuleSetDocumentationTest {
   
   @Test 
   public void shouldSetGetRuleDocumentation() throws Exception {
-    Map<String, String> testMap = new HashMap<>();
+    TreeMap<String, String> testMap = new TreeMap<>();
     testMap.put("doc_1", "documentation one");
     testMap.put("doc_2", "documentation two");
-    RuleDocumentation rd = new RuleDocumentation(testMap);
+    RuleDocumentation rd = new RuleDocumentation();
+    rd.setDocumentation(testMap);
     List<RuleDocumentation> rdList = new ArrayList<>();
     rdList.add(rd);
     BusinessRuleSetDocumentation brd = new BusinessRuleSetDocumentation();
-    brd.setRulesDocumentation(rdList);
-    assertEquals(brd.getRulesDocumentation(), rdList);
-    
-  }
-  
-  @Test
-  public void shouldSetGetEntity() throws Exception {
-    String entity = "entity";
-    BusinessRuleSetDocumentation brd = new BusinessRuleSetDocumentation();
-    brd.setEntity(entity);
-    assertEquals(brd.getEntity(), entity);
+    brd.setRules(rdList);    
+    assertEquals(brd.getRules(), rdList);
     
   }
 }
