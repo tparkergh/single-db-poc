@@ -43,7 +43,7 @@ describe('Rule', () => {
       const rule = new Rule({
         identifier: 'nested-rule',
         definition: {
-          "<=": [{"var": "client.dob"}, {">=":[4,{"var": "client.yob"}]}]
+          "<=": [{"var": "client.yob"}, {">=":[4,{"var": "client.yob"}]}]
         }
       })
 

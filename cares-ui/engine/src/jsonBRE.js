@@ -2,11 +2,9 @@ import jsonLogic from 'json-logic-js'
 import Rule from './rule'
 
 // singleton business rules engine
-export default class JsonBRE {
+class JsonBRE {
   constructor () {
-    if (JsonBRE.instance) { return JsonBRE.instance }
     this.rules = {}
-    JsonBRE.instance = this
   }
 
   evaluate (rule, data) {
@@ -30,3 +28,9 @@ export default class JsonBRE {
       .filter(predicate)
   }
 }
+
+const instance = new JsonBRE()
+
+Object.freeze(instance)
+
+export default instance
