@@ -8,8 +8,7 @@ import gov.ca.cwds.cms.data.access.dto.OtherClientNameDTO
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-05786"
-  @rule_type("DATA_PROCESSING")  
-  @rule_description("Once the client has been saved to the database, if the last name changes create an OTHER_CLIENT_NAME row from the exsisting client name with a Name Type of AKA.  The new name that is keyed will stay on the client record.")
+  @doc_description("Once the client has been saved to the database, if the last name changes create an OTHER_CLIENT_NAME row from the exsisting client name with a Name Type of AKA.  The new name that is keyed will stay on the client record.")
 
   dialect "mvel"
   agenda-group "ClientBusinessRules-data-processing-agenda"

@@ -6,8 +6,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO
 global java.util.Set validationDetailsList
 
 rule "R-06751"
-  @rule_type("VALIDATION")  
-  @rule_description("The start date of an association between a client and service provider must be greater than the birth date of the client.")
+  @doc_description("The start date of an association between a client and service provider must be greater than the birth date of the client.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

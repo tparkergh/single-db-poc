@@ -8,10 +8,7 @@ global java.util.Set validationDetailsList
 
 rule "client-referential-integrity"
 
-  @rule_type("VALIDATION")  
-  @rule_description("Client Referential Integrity")
-  @rule_name("Client Referential Integrity")
-  @rule_drools_rule("client-referential-integrity.drl")
+  @doc_description("Client Referential Integrity")
   
   @doc_external_documentation("xTools")
   @doc_enforcement_location("CMS BRE")

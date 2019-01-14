@@ -7,8 +7,7 @@ import java.util.Objects
 global java.util.Set<IssueDetails> validationDetailsList
 
 rule "R-10841"
-  @rule_type("DATA_PROCESSING")  
-  @rule_description("When a Client first, middle or last name field or Other Names first, middle or last name field is added, modified, or deleted, make the appropriate update to the corresponding Client Phonetic rows.")
+  @doc_description("When a Client first, middle or last name field or Other Names first, middle or last name field is added, modified, or deleted, make the appropriate update to the corresponding Client Phonetic rows.")
 
   dialect "mvel"
   agenda-group "ClientBusinessRules-data-processing-agenda"

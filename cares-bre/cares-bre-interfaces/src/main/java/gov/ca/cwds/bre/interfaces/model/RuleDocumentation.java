@@ -1,8 +1,6 @@
 package gov.ca.cwds.bre.interfaces.model;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.io.Serializable;
 import java.util.TreeMap;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -14,60 +12,50 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RuleDocumentation {
+public final class RuleDocumentation implements Serializable {
 
-  private TreeMap <String, String> ruleDocument = new TreeMap<>();
-    
-  public RuleDocumentation() {
-    super();
-  }
-  
-  public RuleDocumentation(Map<String, String> ruleDocumentation) {
-    this.ruleDocument = new TreeMap<>(ruleDocumentation);
-  }
-  
+  private static final long serialVersionUID = 9124183648641028487L;
 
-  public Map<String, String> getRuleDocument() {
-    return this.ruleDocument;
+  private String name;
+  private TreeMap<String, String> documentation = new TreeMap<>();
+
+  public RuleDocumentation() {    
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public TreeMap<String, String> getDocumentation() {
+    return documentation;
+  }
+
+  public void setDocumentation(TreeMap<String, String> documentation) {
+    this.documentation = documentation;
   }
   
-  public void setRuleDocument(Map<String, String> ruleDocumentation) {
-    this.ruleDocument = new TreeMap<>(ruleDocumentation);
+  public void addDocumentation(String key, String value) {
+    this.documentation.put(key, value);
   }
-  
-  public void setRuleDocumentFromRuleMetaData(Map<String, Object> ruleMeta) {
-    
-    if (ruleMeta != null) {
-      
-      Set<Entry<String, Object>> ruleSet = ruleMeta.entrySet();
-      
-      for (Map.Entry<String, Object> me : ruleSet) {
-        // do not return null items or items with empty value
-        if (me.getValue() != null && me.getValue().toString().length() > 0) {
-    
-          if (me.getKey().startsWith("doc_")) {
-            // return items with @doc_ notation
-            this.ruleDocument.put(me.getKey(), (String)me.getValue());
-          }
-        }
-      }
-    }
-  }
-  
+
+  @Override
   public int hashCode() {
     return HashCodeBuilder.reflectionHashCode(this);
   }
-  
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-  }
-  
+
   @Override
   public boolean equals(Object obj) {
     return EqualsBuilder.reflectionEquals(this, obj);
   }
 
-
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+  }
 }

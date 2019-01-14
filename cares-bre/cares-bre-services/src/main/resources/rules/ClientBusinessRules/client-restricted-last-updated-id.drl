@@ -6,9 +6,7 @@ import java.time.LocalDate;
 global java.util.Set validationDetailsList
 
 rule "client-restricted-last-updated-id"
-  @rule_type("DATA-PROCESSING")  
-  @rule_description("Last updated ID can not be 00T")
-  @rule_name("CPI-LastUpdateIDRestriction")
+  @doc_description("Last updated ID can not be 00T")
   
   @doc_external_documentation("")
   @doc_enforcement_location("BRE")

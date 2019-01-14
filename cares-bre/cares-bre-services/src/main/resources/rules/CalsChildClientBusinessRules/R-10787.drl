@@ -6,8 +6,7 @@ import gov.ca.cwds.cms.data.access.dto.ChildClientEntityAwareDTO;
 global java.util.Set validationDetailsList
 
 rule "R-10787"
-  @rule_type("VALIDATION")  
-  @rule_description("The Request/Refusal Date cannot be less than the birth date of the Child Client. If the Request/Refusal Date is entered, then the Client's birth date cannot be changed to a date later than that of the Request/Refusal Date.")
+  @doc_description("The Request/Refusal Date cannot be less than the birth date of the Child Client. If the Request/Refusal Date is entered, then the Client's birth date cannot be changed to a date later than that of the Request/Refusal Date.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

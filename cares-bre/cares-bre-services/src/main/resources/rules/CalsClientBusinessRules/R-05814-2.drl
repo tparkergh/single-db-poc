@@ -6,8 +6,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO
 global java.util.Set validationDetailsList
 
 rule "R-05814-2"
-  @rule_type("VALIDATION")  
-  @rule_description("The Date of Birth must be less than or equal to the earliest of the Petition Date.")
+  @doc_description("The Date of Birth must be less than or equal to the earliest of the Petition Date.")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

@@ -1,5 +1,6 @@
 package gov.ca.cwds.bre.services.rules;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 import gov.ca.cwds.bre.interfaces.model.RuleDocumentation;
-import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.drools.DroolsConfiguration;
 import gov.ca.cwds.drools.DroolsException;
@@ -30,9 +30,6 @@ public abstract class DroolsBusinessRuleBase<F> implements BusinessRule {
   @Autowired
   protected ObjectMapper jacksonObjectMapper;
   
-  private BusinessRuleDefinition businessRuleDefinition;
-  private BusinessRuleSetDocumentation businessRuleDocumentation;
-  
   @Override
   public BreResponse execute(BreRequest breRequest) {
     F fact = getFact(breRequest);
@@ -49,7 +46,7 @@ public abstract class DroolsBusinessRuleBase<F> implements BusinessRule {
     }
     
     BreResponse breResponse = new BreResponse();
-    breResponse.setBusinessRuleName(getBusinessRuleName());
+    breResponse.setBusinessRuleSetName(getName());
     breResponse.setIssues(issues);
     
     // Put the updated fact in response
@@ -59,29 +56,12 @@ public abstract class DroolsBusinessRuleBase<F> implements BusinessRule {
   }
   
   @Override
-  public BusinessRuleDefinition getDefinition() {  
-    if (this.businessRuleDefinition == null) {
-      BusinessRuleDefinition def = new BusinessRuleDefinition();
-      def.setBusinessRuleName(getBusinessRuleName());
-      def.setDataClassName(getFactType().getName());
-      def.setRules(getRules());
-      def.setRequestSample(getSampleBreRequest());
-      this.businessRuleDefinition = def;
-    }
-    
-    return this.businessRuleDefinition;
-  }
-  
   public BusinessRuleSetDocumentation getDocumentation() {
-    if (this.businessRuleDocumentation == null) {
-      BusinessRuleSetDocumentation doc = new BusinessRuleSetDocumentation();
-      doc.setBusinessRuleSetName(getBusinessRuleName());
-      doc.setRulesDocumentation(getRuleDocumentation());
-      doc.setDataClassName(getFactType().getName());
-      this.businessRuleDocumentation = doc;
-    }
-    return this.businessRuleDocumentation;
-    
+    BusinessRuleSetDocumentation doc = new BusinessRuleSetDocumentation();
+    doc.setBusinessRuleSetName(getName());
+    doc.setDataClassName(getFactType().getName());
+    doc.setRules(getRuleDocumentation());    
+    return doc;    
   }
   
   protected abstract Class<F> getFactType();
@@ -93,44 +73,39 @@ public abstract class DroolsBusinessRuleBase<F> implements BusinessRule {
     try {      
       JsonNode data = breRequest.getData();      
       fact = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(data), getFactType());      
-    } catch (Throwable t) {
-      throw new BreException("Error reading business rule data for: " + getBusinessRuleName(), 
-          t, breRequest, getDefinition());      
+    } catch (IOException t) {
+      throw new BreException("Error reading business rule data for: " + getName(), 
+          t, breRequest);      
     }
     return fact;
   }
   
-  private String getBusinessRuleName() {
+  @Override
+  public String getName() {
     return this.getClass().getSimpleName();
   }
   
   private String getDroolsSessionName() {
-    return getBusinessRuleName() + "-session";
+    return getName() + "-session";
   }
   
   private String getDroolsRulesPath() {
-    return "rules/" + getBusinessRuleName();
+    return "rules/" + getName();
   }
   
   private String getDroolsValidationAgenda() {
-    return getBusinessRuleName() + "-validation-agenda";
+    return getName() + "-validation-agenda";
   }
   
   private String getDroolsDataProcessingAgenda() {
-    return getBusinessRuleName() + "-data-processing-agenda";
-  }
-  
-  private List<BusinessRuleDefinition.Rule> getRules() {
-    try {
-      return breDroolsService.getRules(getDroolsConfiguration(null), getBusinessRuleName() + "-kbase");
-    } catch (DroolsException e) {
-      throw new BreException(e.getMessage(), e);
-    }
+    return getName() + "-data-processing-agenda";
   }
   
   private List<RuleDocumentation> getRuleDocumentation() {
     try {
-      return breDroolsService.getRuleDocuments(getDroolsConfiguration(null), getBusinessRuleName() + "-kbase");
+      return breDroolsService.getRuleDocuments(
+          getDroolsConfiguration(null), 
+          getName() + "-kbase");
     } catch (DroolsException e) {
       throw new BreException(e.getMessage(), e);
     }

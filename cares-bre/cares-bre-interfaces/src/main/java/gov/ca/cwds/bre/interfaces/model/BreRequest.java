@@ -18,15 +18,15 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class BreRequest {
   
-  private String businessRuleName;
+  private String businessRuleSetName;
   private JsonNode data;
   
-  public String getBusinessRuleName() {
-    return businessRuleName;
+  public String getBusinessRuleSetName() {
+    return businessRuleSetName;
   }
 
-  public void setBusinessRuleName(String businessRuleName) {
-    this.businessRuleName = businessRuleName;
+  public void setBusinessRuleSetName(String businessRuleSetName) {
+    this.businessRuleSetName = businessRuleSetName;
   }
   
   public JsonNode getData() {

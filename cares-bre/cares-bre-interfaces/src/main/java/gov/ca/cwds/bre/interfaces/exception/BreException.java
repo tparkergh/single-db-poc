@@ -3,7 +3,6 @@ package gov.ca.cwds.bre.interfaces.exception;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
 
 /**
  * Base RuntimeException of BRE exceptions.
@@ -15,7 +14,6 @@ public class BreException extends RuntimeException {
   private static final long serialVersionUID = -7751948785552395397L;
 
   private BreRequest breRequest;
-  private BusinessRuleDefinition businessRuleDescription; 
   
   /**
    * Construct a generic exception.
@@ -52,10 +50,9 @@ public class BreException extends RuntimeException {
     super(message, cause);
   }
   
-  public BreException(String message, Throwable cause, BreRequest breRequest, BusinessRuleDefinition businessRuleDescription) {
+  public BreException(String message, Throwable cause, BreRequest breRequest) {
     super(message, cause);
     this.breRequest = breRequest;
-    this.businessRuleDescription = businessRuleDescription;
   }
 
   public BreRequest getBreRequest() {
@@ -64,14 +61,6 @@ public class BreException extends RuntimeException {
 
   public void setBreRequest(BreRequest breRequest) {
     this.breRequest = breRequest;
-  }
-
-  public BusinessRuleDefinition getBusinessRuleDescription() {
-    return businessRuleDescription;
-  }
-
-  public void setBusinessRuleDescription(BusinessRuleDefinition businessRuleDescription) {
-    this.businessRuleDescription = businessRuleDescription;
   }
 
   /**

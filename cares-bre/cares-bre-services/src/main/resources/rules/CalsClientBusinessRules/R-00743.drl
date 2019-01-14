@@ -6,8 +6,7 @@ import gov.ca.cwds.cms.data.access.dto.ClientEntityAwareDTO;
 global java.util.Set validationDetailsList
 
 rule "R-00743"
-  @rule_type("VALIDATION")  
-  @rule_description("A client must have a primary language in order to have a secondary language")
+  @doc_description("A client must have a primary language in order to have a secondary language")
 
   dialect "mvel"
   agenda-group "CalsClientBusinessRules-validation-agenda"

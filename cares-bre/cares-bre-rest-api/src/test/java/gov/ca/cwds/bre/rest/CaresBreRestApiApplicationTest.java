@@ -209,7 +209,7 @@ public class CaresBreRestApiApplicationTest {
 
   private void doPerformanceTest(BusinessRuleService businessRuleService, Object data, String ruleName, int timesToCall) {
     BreRequest breRequest = new BreRequest();
-    breRequest.setBusinessRuleName(ruleName);
+    breRequest.setBusinessRuleSetName(ruleName);
     breRequest.setData(jacksonObjectMapper.convertValue(data, JsonNode.class));
 
     long begin = System.currentTimeMillis();

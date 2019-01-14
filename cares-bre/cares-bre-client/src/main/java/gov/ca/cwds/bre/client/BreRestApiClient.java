@@ -1,6 +1,6 @@
 package gov.ca.cwds.bre.client;
 
-import java.util.List;
+import java.util.Collection;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 import gov.ca.cwds.bre.interfaces.api.BusinessRuleService;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
-import gov.ca.cwds.bre.interfaces.model.BusinessRuleDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 
 /**
@@ -63,17 +62,12 @@ public final class BreRestApiClient implements BusinessRuleService {
   }
   
   @Override
-  public List<BusinessRuleDefinition> getBusinessRules() {
-    throw new UnsupportedOperationException("This function is not implemented yet.");
-  }
-  
-  @Override
-  public BusinessRuleDefinition getBusinessRule(String name) {
+  public BusinessRuleSetDocumentation getBusinessRuleSetDocumentation(String name) {
     throw new UnsupportedOperationException("This function is not implemented yet.");
   }
 
   @Override
-  public BusinessRuleSetDocumentation getBusinessRuleDocumentation(String name) {
+  public Collection<String> getAllBusinessRuleSetNames() {
     throw new UnsupportedOperationException("This function is not implemented yet.");
   }
 
