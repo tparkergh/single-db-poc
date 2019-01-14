@@ -14,9 +14,8 @@ describe('App', () => {
   })
 
   it('should define all the rules when the component is mounted', () => {
-    const engine = new JsonBRE()
     const app = shallow(<App/>)
-    expect(Object.keys(engine.rules)).toContain('first-name-required-rule')
-    expect(Object.keys(engine.rules)).toContain('last-name-required-rule')
+    expect(Object.keys(JsonBRE.rules)).toContain('first-name-required-rule')
+    expect(Object.keys(JsonBRE.rules)).toContain('last-name-required-rule')
   })
 })

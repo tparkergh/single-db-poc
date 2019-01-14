@@ -1,11 +1,10 @@
 import { shallow } from 'enzyme'
 import { Main } from '../src/Main'
 describe('Main', () => {
-  it('should render a card for Joe Smoe', () => {
+  it('should render a card for the person', () => {
     const main = shallow(<Main/>)
     const card = main.find('Card')
-    const cardHeader = card.find('CardHeader')
-    expect(cardHeader.children().text()).toEqual('Joe Smoe')
+    expect(card.find('CardHeader')).toBeTruthy()
   })
 
   it('should render a form without autocomplete', () => {
@@ -14,16 +13,21 @@ describe('Main', () => {
     expect(form.props().autoComplete).toEqual('off')
   })
 
-  it('should render first name, middle name, and last name for Joe Smoe', () => {
+  it('should render first name, middle name, and last name', () => {
     const main = shallow(<Main/>)
     const cardBody = main.find('CardBody')
     const formGroup = cardBody.find('FormGroup.name')
-    const firstName = formGroup.find('Input[name="first_name"]')
-    const middleName = formGroup.find('Input[name="middle_name"]')
-    const lastName = formGroup.find('Input[name="last_name"]')
-    expect(firstName.props().value).toEqual('Joe')
-    expect(middleName.props().value).toBeUndefined()
-    expect(lastName.props().value).toEqual('Smoe')
+    expect(formGroup.find('Input[name="first_name"]')).toBeTruthy()
+    expect(formGroup.find('Input[name="middle_name"]')).toBeTruthy()
+    expect(formGroup.find('Input[name="last_name"]')).toBeTruthy()
+  })
+
+  it('should render validation for first name and last name', () => {
+    const main = shallow(<Main/>)
+    const cardBody = main.find('CardBody')
+    const formGroup = cardBody.find('FormGroup.name')
+    expect(formGroup.find('.firstName Validation')).toBeTruthy()
+    expect(formGroup.find('.lastName Validation')).toBeTruthy()
   })
 
   it('should render date of birth for joe smoe', () => {
