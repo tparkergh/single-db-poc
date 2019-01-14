@@ -8,10 +8,14 @@ import { Rules } from './rules'
 
 import '@cwds/core/dist/styles.css'
 
+// this is just for debugging purposes during poc
+window.engine = JsonBRE
+console.log('engine:', window.engine)
+
 export class App extends React.Component {
-  componentDidMount () {
-    const engine = new JsonBRE()
-    Rules.map((rule) => engine.define(rule))
+  constructor (props) {
+    super(props)
+    Rules.map((rule) => JsonBRE.define(rule))
   }
 
   render () {
