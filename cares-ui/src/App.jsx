@@ -5,6 +5,8 @@ import { Main } from './Main.jsx'
 import { SideNav } from './SideNav'
 import JsonBRE from 'JsonBRE'
 import { Rules } from './rules'
+import axios from 'axios'
+// import { setClients } from './actions'
 
 import '@cwds/core/dist/styles.css'
 
@@ -16,6 +18,14 @@ export class App extends React.Component {
   constructor (props) {
     super(props)
     Rules.map((rule) => JsonBRE.define(rule))
+  }
+
+  componentDidMount () {
+    axios.get('http://localhost:3007/clients')
+      .then((response) => {
+        console.log(response)
+        // dispatch(setClients(response))
+      })
   }
 
   render () {
