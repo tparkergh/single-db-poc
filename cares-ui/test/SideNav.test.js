@@ -8,27 +8,27 @@ describe('SideNav', () => {
     expect(sideNav.props().pills).toEqual(true)
   })
 
-  it('should render a navigation link for Joe Smoe that is active', () => {
+  it('should render a navigation link for Referral One that is active', () => {
     const sideNav = shallow(<SideNav/>)
-    const navLink = sideNav.find('NavLink.joe-smoe')
+    const navLink = sideNav.find('NavLink.referral-one')
     expect(navLink.props().active).toEqual(true)
   })
 
-  it('should render a navigation link for Joe Smoe with his ID', () => {
+  it('should render a navigation link for Referral One with his ID', () => {
     const sideNav = shallow(<SideNav/>)
-    const navLink = sideNav.find('NavLink.joe-smoe')
+    const navLink = sideNav.find('NavLink.referral-one')
     expect(navLink.find('.id').children().text()).toEqual('ID: XYZ')
   })
 
-  it('should render a navigation link for Sally Jane that is not active', () => {
+  it('should render a navigation link for Referral Two that is not active', () => {
     const sideNav = shallow(<SideNav/>)
-    const navLink = sideNav.find('NavLink.sally-jane')
+    const navLink = sideNav.find('NavLink.referral-two')
     expect(navLink.props().active).toBeFalsy()
   })
 
-  it('should render a navigation link for Sally Jane with his ID', () => {
+  it('should render a navigation link for Referral Two with his ID', () => {
     const sideNav = shallow(<SideNav/>)
-    const navLink = sideNav.find('NavLink.sally-jane')
-    expect(navLink.find('.id').children().text()).toEqual('ID: XYZ')
+    const navLink = sideNav.find('NavLink.referral-two')
+    expect(navLink.find('.id').children().text()).toEqual('ID: ABC')
   })
 })
