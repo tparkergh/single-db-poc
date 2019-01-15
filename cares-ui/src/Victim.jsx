@@ -8,9 +8,10 @@ import {
   FormGroup,
   Input,
   Col,
-  Label,
-  Button
+  Label
 } from '@cwds/reactstrap'
+
+import { Addresses } from './Addresses'
 
 import '@cwds/core/dist/styles.css'
 
@@ -42,10 +43,7 @@ export const Victim = () => {
               <Input type='date' name='date_of_birth' id='date_of_birth' value='2015-09-03' disabled />
             </Col>
           </FormGroup>
-          <FormGroup check row>
-            <Button className='save float-right' color='primary'>Save</Button>
-            <Button className='cancel float-right' color='secondary'>Cancel</Button>
-          </FormGroup>
+          <Addresses />
         </Form>
       </CardBody>
     </Card>
