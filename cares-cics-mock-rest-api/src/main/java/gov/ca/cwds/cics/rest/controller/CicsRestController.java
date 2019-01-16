@@ -1,0 +1,54 @@
+package gov.ca.cwds.cics.rest.controller;
+
+import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import gov.ca.cwds.cics.model.CicsResponse;
+import gov.ca.cwds.cics.model.DfhCommArea;
+
+/**
+ * CWDS J Team
+ */
+@RestController
+public class CicsRestController {
+
+  private final static Logger LOGGER = LoggerFactory.getLogger(CicsRestController.class);
+
+  @PostMapping("/clients")
+  CicsResponse postClient(@RequestBody String request) {    
+    return executeRequest(request);
+  }
+
+  @PutMapping("/clients")
+  CicsResponse putClient(@RequestBody String request) {
+    return executeRequest(request);
+  }
+  
+  @PutMapping("/clients/{clientId}/addresses/{addressId}")
+  CicsResponse putClientAddress(@RequestBody String request) {
+    return executeRequest(request);
+  }
+  
+  @PutMapping("/addresses/{addressId}")
+  CicsResponse putAddress(@RequestBody String request) {
+    return executeRequest(request);
+  }
+
+  private CicsResponse executeRequest(String request) {
+    LOGGER.info("Received: {}", request);
+    DfhCommArea dfhCommArea = new DfhCommArea();
+    dfhCommArea.setAdditionalDesc("Success");
+    dfhCommArea.setApiTimestamp(LocalDateTime.now());
+    dfhCommArea.setErrorMsgType("");
+    dfhCommArea.setProgReturnCode(0);
+    
+    CicsResponse response = new CicsResponse();
+    response.setDfhCommArea(dfhCommArea);
+    LOGGER.info("Sending back... {}", response);
+    return response;        
+  }
+}

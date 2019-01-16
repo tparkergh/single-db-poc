@@ -2,6 +2,7 @@ package gov.ca.cwds.cares.rest.controller;
 
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import io.swagger.annotations.ApiParam;
  * @author CWDS Team J
  */
 @RestController
+@CrossOrigin
 public class ClientController {
 
   @Autowired
