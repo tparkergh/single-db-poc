@@ -1,4 +1,4 @@
-package gov.ca.cwds.cics.model.client;
+package gov.ca.cwds.cics.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;

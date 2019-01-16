@@ -7,6 +7,7 @@ include 'cares-bre:cares-bre-client'
 include 'cares-bre:cares-bre-rest-api'
 
 include 'cares-cics'
+include 'cares-cics-mock-rest-api'
 include 'cares-common'
 include 'cares-persistence'
 include 'cares-interfaces'

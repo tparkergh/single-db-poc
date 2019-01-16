@@ -12,9 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
+import gov.ca.cwds.cics.model.CicsClientRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
-import gov.ca.cwds.cics.model.client.CicsClientRequest;
-import gov.ca.cwds.cics.model.client.CicsClientResponse;
 
 /**
  * CWDS J Team
@@ -40,7 +39,7 @@ public final class CicsClientUpdaterRestApiClient {
   }
 
   @ExecutionTimer
-  public CicsClientResponse updateClient(CicsClientRequest clientRequest) {
+  public CicsResponse updateClient(CicsClientRequest clientRequest) {
     String clientId = clientRequest.getClientData().getIdentifier();
     LocalDateTime lastUpdatedDateTime = clientRequest.getClientData().getLstUpdTs();
     String lastUpdatedDateTimeStr = lastUpdatedDateTime.format(
@@ -59,9 +58,9 @@ public final class CicsClientUpdaterRestApiClient {
         requestUri, 
         HttpMethod.PUT, 
         updatedClientRequest, 
-        CicsClientResponse.class);
+        CicsResponse.class);
 
-    return (CicsClientResponse) response;
+    return (CicsResponse) response;
   }
   
   private CicsClientRequest getClientUpdateRequest(CicsClientRequest client) {
