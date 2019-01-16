@@ -14,7 +14,7 @@ import gov.ca.cwds.cics.model.DfhCommArea;
 
 /**
  * @deprecated Use ClientData
- * 
+ *
  * @author CWDS J Team
  */
 @JsonNaming(SnakeUpperCaseStrategy.class)
