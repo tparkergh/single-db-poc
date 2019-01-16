@@ -20,20 +20,25 @@ public class CicsRestController {
 
   @PostMapping("/clients")
   CicsResponse postClient(@RequestBody String request) {    
-    return doClient(request);
+    return executeRequest(request);
   }
 
   @PutMapping("/clients")
   CicsResponse putClient(@RequestBody String request) {
-    return doClient(request);
+    return executeRequest(request);
   }
   
   @PutMapping("/clients/{clientId}/addresses/{addressId}")
   CicsResponse putClientAddress(@RequestBody String request) {
-    return doClient(request);
+    return executeRequest(request);
+  }
+  
+  @PutMapping("/addresses/{addressId}")
+  CicsResponse putAddress(@RequestBody String request) {
+    return executeRequest(request);
   }
 
-  private CicsResponse doClient(String request) {
+  private CicsResponse executeRequest(String request) {
     LOGGER.info("Received: {}", request);
     DfhCommArea dfhCommArea = new DfhCommArea();
     dfhCommArea.setAdditionalDesc("Success");
