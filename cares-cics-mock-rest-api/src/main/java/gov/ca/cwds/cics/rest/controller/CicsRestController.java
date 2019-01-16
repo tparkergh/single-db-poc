@@ -39,6 +39,7 @@ public class CicsRestController {
     dfhCommArea.setAdditionalDesc("Success");
     dfhCommArea.setApiTimestamp(LocalDateTime.now());
     dfhCommArea.setErrorMsgType("");
+    dfhCommArea.setProgReturnCode(0);
     
     CicsResponse response = new CicsResponse();
     response.setDfhCommArea(dfhCommArea);
