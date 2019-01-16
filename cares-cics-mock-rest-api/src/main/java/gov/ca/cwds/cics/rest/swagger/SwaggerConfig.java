@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
   
   @SuppressWarnings("rawtypes")
-  public static final ApiInfo DEFAULT_API_INFO = new ApiInfo("CARES API Documentation", "", "", "",
+  public static final ApiInfo DEFAULT_API_INFO = new ApiInfo("CICS Mock API Documentation", "", "", "",
       ApiInfo.DEFAULT_CONTACT, "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList<VendorExtension>());
 
   private static final Set<String> DEFAULT_PRODUCES_AND_CONSUMES = 
