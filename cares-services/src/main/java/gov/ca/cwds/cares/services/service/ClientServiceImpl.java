@@ -1,9 +1,19 @@
 package gov.ca.cwds.cares.services.service;
 
+import gov.ca.cwds.cares.common.exception.CicsUpdateException;
+import gov.ca.cwds.cares.geo.api.GeoService;
+import gov.ca.cwds.cares.geo.model.GeoAddress;
+import gov.ca.cwds.cares.services.interfaces.model.Address;
+import gov.ca.cwds.cares.services.mapping.ClientAddressMapper;
+import gov.ca.cwds.cics.address.CicsAddressUpdaterRestApiClient;
+import gov.ca.cwds.cics.model.CicsResponse;
+import gov.ca.cwds.cics.model.DfhCommArea;
+import gov.ca.cwds.cics.model.address.CicsAddressRequest;
 import java.util.Arrays;
 import java.util.Collection;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
@@ -26,6 +36,14 @@ public class ClientServiceImpl implements ClientService {
   @Autowired
   private ClientAddressRepository clientAddressRepository;
 
+  @Autowired
+  @Qualifier("GeoRestClient")
+  private GeoService geoService;
+
+  @Autowired
+  @Qualifier("CicsAddressUpdaterRestApiClient")
+  private CicsAddressUpdaterRestApiClient cicsAddressUpdaterRestApiClient;
+
   @Override
   @ExecutionTimer
   public Client getClient(String clientId) {
@@ -36,9 +54,13 @@ public class ClientServiceImpl implements ClientService {
   @Override
   @ExecutionTimer
   public Collection<ClientAddress> getClientAddresses(String clientId) {
-    Collection<ClientAddressEntity> clientAddressEntities =
-        clientAddressRepository.findByClientId(clientId);
-    return ClientAddressEntityMapper.INSTANCE.mapClientAddressEntities(clientAddressEntities);
+    Collection<ClientAddressEntity> clientAddressEntities = clientAddressRepository.findByClientId(clientId);
+    Collection<ClientAddress> clientAddresses = ClientAddressEntityMapper.INSTANCE.mapClientAddressEntities(clientAddressEntities);
+
+    for (ClientAddress clientAddress : clientAddresses) {
+      enrichLocation(clientAddress);
+    }
+    return clientAddresses;
   }
 
   @Override
@@ -53,4 +75,33 @@ public class ClientServiceImpl implements ClientService {
         clientRepository.findAllById(Arrays.asList(clientIds));
     return ClientEntityMapper.INSTANCE.mapClientEntities(clientEntities);
   }
+
+  @Override
+  public ClientAddress updateClientAddress(ClientAddress clientAddress) {
+    CicsAddressRequest cicsAddressRequest = ClientAddressMapper.INSTANCE.mapToCicsAddressRequest(clientAddress);
+    CicsResponse cicsAddressResponse = cicsAddressUpdaterRestApiClient.updateAddress(cicsAddressRequest);
+    DfhCommArea dfhCommArea = cicsAddressResponse.getDfhCommArea();
+    if (0 != dfhCommArea.getProgReturnCode()) {
+      String message = String.format("Cannot update address. Error code %s. Message: %s%s ",
+          dfhCommArea.getErrorMsgCode(), dfhCommArea.getErrorMsgPart1(), dfhCommArea.getErrorMsgPart2());
+      throw new CicsUpdateException(message);
+    }
+    return clientAddress;
+  }
+
+  private void enrichLocation(ClientAddress clientAddress) {
+    Address address = clientAddress.getAddress();
+    GeoAddress geoAddress = new GeoAddress();
+    geoAddress.setStreetAddress(String.format("%s %s", address.getStreetNumber(), address.getStreetName()));
+    geoAddress.setCity(address.getCity());
+    geoAddress.setState("CA"); //hardcoded for now. system code service is coming
+    geoAddress.setZip(String.valueOf(address.getZipCode()));
+    List<GeoAddress> geoAddresses = geoService.validateAddress(geoAddress);
+    if (geoAddresses.size() != 0) {
+      GeoAddress firstGeoAddress = geoAddresses.get(0);
+      address.setLongitude(firstGeoAddress.getLongitude());
+      address.setLatitude(firstGeoAddress.getLattitude());
+    }
+  }
+
 }

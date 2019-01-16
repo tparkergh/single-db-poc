@@ -1,5 +1,6 @@
 package gov.ca.cwds.cics.client;
 
+import gov.ca.cwds.cics.CicsRestApiHelper;
 import java.io.IOException;
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -21,13 +22,11 @@ import gov.ca.cwds.cics.model.CicsResponse;
 @Component("CicsClientUpdaterRestApiClient")
 @Lazy
 public final class CicsClientUpdaterRestApiClient {
-  
-  @Value("${app.cics.base-url}")
+  public static final String CLIENT_PATH = "/clients";
+
+  @Value("${app.cics-service.base-url}")
   private String baseUrl;
 
-  @Value("${app.cics.client-path}")
-  private String clientPath;
-  
   @Autowired
   private CicsRestApiHelper cicsRestApiHelper;
   
@@ -47,7 +46,7 @@ public final class CicsClientUpdaterRestApiClient {
 
     URI requestUri = UriComponentsBuilder
         .fromHttpUrl(baseUrl)
-        .path(clientPath)
+        .path(CLIENT_PATH)
         .path("/" + clientId)
         .path("/" + lastUpdatedDateTimeStr)
         .build().toUri();
@@ -60,7 +59,7 @@ public final class CicsClientUpdaterRestApiClient {
         updatedClientRequest, 
         CicsResponse.class);
 
-    return (CicsResponse) response;
+    return response;
   }
   
   private CicsClientRequest getClientUpdateRequest(CicsClientRequest client) {

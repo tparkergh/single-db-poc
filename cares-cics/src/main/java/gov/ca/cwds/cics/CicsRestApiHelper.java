@@ -1,4 +1,4 @@
-package gov.ca.cwds.cics.client;
+package gov.ca.cwds.cics;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -36,14 +37,14 @@ import gov.ca.cwds.cics.model.CicsResponse;
  */
 @Component("CicsRestApiHelper")
 @Lazy
-public final class CicsRestApiHelper {
+public class CicsRestApiHelper {
   
   private final static Logger LOGGER = LoggerFactory.getLogger(CicsRestApiHelper.class);
   
-  @Value("${app.cics.username}")
+  @Value("${app.cics-service.username}")
   private String username;
 
-  @Value("${app.cics.password}")
+  @Value("${app.cics-service.password}")
   private String password;
   
   private final RestTemplate restTemplate;

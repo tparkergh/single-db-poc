@@ -37,5 +37,6 @@ subprojects  {
         apiCoreVersion = '1.9.4_873-RC'
         springFoxSwaggerVersion = '2.9.2'      
         junitVersion = '4.12'
+        h2Version =  '1.4.197'
     }
 }

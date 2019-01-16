@@ -3,6 +3,10 @@ package gov.ca.cwds.cares.services.service;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+
+import gov.ca.cwds.cares.geo.api.GeoService;
+import gov.ca.cwds.cares.persistence.entity.AddressEntity;
+import gov.ca.cwds.cares.services.interfaces.model.Address;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -24,10 +28,13 @@ public class ClientServiceImplTest {
 
   @Mock
   private ClientRepository clientRepository;
-  
+
   @Mock
   private ClientAddressRepository clientAddressRepository;
-  
+
+  @Mock
+  private GeoService geoService;
+
   @InjectMocks
   private ClientServiceImpl clientService;
   
@@ -80,18 +87,22 @@ public class ClientServiceImplTest {
     
     ClientAddressEntity clientAddressEntity_1 = new ClientAddressEntity();
     clientAddressEntity_1.setIdentifier(id_1);
+    clientAddressEntity_1.setAddress(new AddressEntity());
     
     ClientAddressEntity clientAddressEntity_2 = new ClientAddressEntity();
     clientAddressEntity_2.setIdentifier(id_2);
+    clientAddressEntity_2.setAddress(new AddressEntity());
     
     List<ClientAddressEntity> clientAddressEntities = Arrays.asList(clientAddressEntity_1, clientAddressEntity_2);
     
     ClientAddress clientAddress_1 = new ClientAddress();
     clientAddress_1.setIdentifier(id_1);
+    clientAddress_1.setAddress(new Address());
     
     ClientAddress clientAddress_2 = new ClientAddress();
     clientAddress_2.setIdentifier(id_2);
-    
+    clientAddress_2.setAddress(new Address());
+
     Collection<ClientAddress> expected = Arrays.asList(clientAddress_1, clientAddress_2);
     
     when(clientAddressRepository.findByClientId(any())).thenReturn(clientAddressEntities);
