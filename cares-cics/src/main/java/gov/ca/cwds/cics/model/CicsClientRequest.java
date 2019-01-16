@@ -1,4 +1,4 @@
-package gov.ca.cwds.cics.model.client;
+package gov.ca.cwds.cics.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import gov.ca.cwds.cares.common.binding.SnakeUpperCaseStrategy;
-import gov.ca.cwds.cics.model.CicsRequest;
 
 /**
  * CWDS J Team

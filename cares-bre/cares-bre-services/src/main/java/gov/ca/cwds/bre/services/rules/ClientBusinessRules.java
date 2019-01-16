@@ -5,9 +5,9 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import gov.ca.cwds.cics.model.client.Client;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
+import gov.ca.cwds.cics.model.Client;
 
 /**
  * @author CWDS J Team
