@@ -36,6 +36,12 @@ public class SystemCodeEntity implements Serializable {
   @Column(name = "INACTV_IND")
   private String inactiveIndicator;
 
+  @Column(name = "LGC_ID")
+  private String userDefinedLogicalId;
+
+  @Column(name = "LONG_DSC")
+  private String longDescription;
+
   @Column(name = "LST_UPD_ID")
   private String lastUpdatedById;
 
@@ -82,6 +88,23 @@ public class SystemCodeEntity implements Serializable {
 
   public void setInactiveIndicator(String inactiveIndicator) {
     this.inactiveIndicator = inactiveIndicator;
+  }
+
+
+  public String getUserDefinedLogicalId() {
+    return userDefinedLogicalId;
+  }
+
+  public void setUserDefinedLogicalId(String userDefinedLogicalId) {
+    this.userDefinedLogicalId = userDefinedLogicalId;
+  }
+
+  public String getLongDescription() {
+    return longDescription;
+  }
+
+  public void setLongDescription(String longDescription) {
+    this.longDescription = longDescription;
   }
 
   public String getLastUpdatedById() {

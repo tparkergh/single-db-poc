@@ -24,6 +24,8 @@ public class SystemCode implements Serializable {
   private Integer categoryId;
   private String fkToSystemMeta;
   private String inactiveIndicator;
+  private String userDefinedLogicalId;
+  private String longDescription;
   private String lastUpdatedById;
   private LocalDateTime lastUpdatedTimeStamp;
   private String otherCode;
@@ -73,6 +75,23 @@ public class SystemCode implements Serializable {
     this.inactiveIndicator = inactiveIndicator;
   }
 
+
+
+  public String getUserDefinedLogicalId() {
+    return userDefinedLogicalId;
+  }
+
+  public void setUserDefinedLogicalId(String userDefinedLogicalId) {
+    this.userDefinedLogicalId = userDefinedLogicalId;
+  }
+
+  public String getLongDescription() {
+    return longDescription;
+  }
+
+  public void setLongDescription(String longDescription) {
+    this.longDescription = longDescription;
+  }
 
   public String getLastUpdatedById() {
     return lastUpdatedById;
