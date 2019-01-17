@@ -30,11 +30,11 @@ public class SystemCodeController {
     return systemCodeService.getAllMetas();
   }
 
-  @GetMapping("/system_codes/{metaName}")
+  @GetMapping("/system_codes/{meta_name}")
   @ApiOperation(value = "Get system codes for a given meta name")
   @ExecutionTimer
   public Collection<SystemCode> getSystemCodes(
-      @ApiParam("Meta Name") @PathVariable("metaName") String metaName) {
+      @ApiParam("Meta Name") @PathVariable("meta_name") String metaName) {
     return systemCodeService.getSystemCodes(metaName);
   }
 

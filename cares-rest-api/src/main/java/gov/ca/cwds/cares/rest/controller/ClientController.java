@@ -34,17 +34,17 @@ public class ClientController {
     return clientService.getAllClients();
   }  
   
-  @GetMapping("/clients/{id}")
+  @GetMapping("/clients/{client_id}")
   @ApiOperation(value = "Get client identified by given ID")
   @ExecutionTimer
-  public Client getClient(@ApiParam("Client ID") @PathVariable("id") String id) {
+  public Client getClient(@ApiParam("Client ID") @PathVariable("client_id") String id) {
     return clientService.getClient(id);
   }  
   
-  @GetMapping("/clients/{id}/addresses")
+  @GetMapping("/clients/{client_id}/addresses")
   @ApiOperation(value = "Get client addresses for client identified by given ID")
   @ExecutionTimer
-  public Collection<ClientAddress> getClientAddresses(@ApiParam("Client ID") @PathVariable("id") String id) {
+  public Collection<ClientAddress> getClientAddresses(@ApiParam("Client ID") @PathVariable("client_id") String id) {
     return clientService.getClientAddresses(id);
   }
 
