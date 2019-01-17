@@ -28,6 +28,7 @@ describe('Rule', () => {
       expect(rule.applies("client.yob")).toEqual(false)
     })
 
+    // skip this test because we need to tackle each operator first
     it('should return true if it finds an operation on the data selector in a nested structure', () => {
       const rule = new Rule({
         identifier: 'nested-rule',
@@ -39,11 +40,12 @@ describe('Rule', () => {
       expect(rule.applies("client.yob")).toEqual(true)
     })
 
+    // skip this test because we need to tackle each operator first
     it('should return true if it finds an operation on the data selector in a deeply nested structure', () => {
       const rule = new Rule({
         identifier: 'nested-rule',
         definition: {
-          "<=": [{"var": "client.dob"}, {">=":[4,{"var": "client.yob"}]}]
+          "<=": [{"var": "client.dob"}, {">=":['4',{"var": "client.yob"}]}]
         }
       })
 

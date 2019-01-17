@@ -22,7 +22,11 @@ export default class JsonBRE {
   destroy (predicate) {
     Object.values(this.rules)
       .filter(predicate)
-      .map((rule) => (this.rules[rule.identifier] = undefined))
+      .map((rule) => delete(this.rules[rule.identifier]))
+  }
+
+  reset () {
+    this.destroy((rule) => true)
   }
 
   find (predicate) {
