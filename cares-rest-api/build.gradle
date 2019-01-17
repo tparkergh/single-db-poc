@@ -36,8 +36,10 @@ jar {
 
 dependencies {
 	implementation project(':cares-common')
+    implementation project(':cares-cics')
+    implementation project(':cares-geo')
     implementation project(':cares-services')
-    
+
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
@@ -53,14 +55,16 @@ dependencies {
     implementation 'io.springfox:springfox-swagger2:' + springFoxSwaggerVersion
     implementation 'io.springfox:springfox-swagger-ui:' + springFoxSwaggerVersion
 
-	implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
+	implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion, {
+        exclude group: 'io.dropwizard'
+    }
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
-    
-    testImplementation 'gov.ca.cwds.api:legacy-data-access-services:' + apiCoreVersion, {
-        exclude group: 'com.ibm'
-        exclude group: 'io.dropwizard'
-    }  
+    testImplementation 'org.springframework.boot:spring-boot-starter-jdbc:' + springBootVersion
+
+    testImplementation 'com.h2database:h2:' + h2Version
+    testImplementation 'commons-io:commons-io:' + commonsIoVersion
+    testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
 }
 
 // ### Docker

@@ -1,0 +1,12 @@
+[
+  {
+    "street_address": "3208 Ardley Dr",
+    "city": "Roseville",
+    "state": "CA",
+    "zip": "95747",
+    "zip_extension": "9017",
+    "longitude": -121.36967,
+    "lattitude": 38.77549,
+    "deliverable": true
+  }
+]

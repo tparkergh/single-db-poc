@@ -11,4 +11,6 @@ public interface ClientService {
   Collection<ClientAddress> getClientAddresses(String clientId);
   
   Collection<Client> getAllClients();
+
+  ClientAddress updateClientAddress(ClientAddress clientAddress);
 }

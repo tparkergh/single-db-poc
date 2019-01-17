@@ -1,0 +1,12 @@
+[
+  {
+    "street_address": "2435 Columbus Terrace",
+    "city": "Sacramento",
+    "state": "CA",
+    "zip": "95833",
+    "zip_extension": "0002",
+    "longitude": 121.36967,
+    "lattitude": -38.77549,
+    "deliverable": true
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "street_address": "6666 Bunker Hill Circle",
+    "city": "San Diego",
+    "state": "CA",
+    "zip": "92117",
+    "zip_extension": "0001",
+    "longitude": -121.36967,
+    "lattitude": 38.77549,
+    "deliverable": true
+  }
+]
