@@ -22,13 +22,19 @@ public class SystemMetaEntity implements Serializable {
 
   @Id
   @Column(name = "TBL_DSD_NM")
-  private String logicalTableDsdName;
+  private String metaName;
+  
+  @Column(name = "USR_TBL_NM")
+  private String userTableName;
+  
+  @Column(name = "SHT_DSC_NM")
+  private String shortDescription;
 
   @Column(name = "DEF_SYSID")
   private Integer defaultSystemId;
 
   @Column(name = "LNG_DSC_NM")
-  private String longDescriptionName;
+  private String longDescription;
 
   @Column(name = "LNG_DSCIND")
   private String longDescriptionIndicator;
@@ -46,42 +52,24 @@ public class SystemMetaEntity implements Serializable {
   private String otherCodeName;
 
   @Column(name = "RLT_CTGIND")
-  private String relationshipToCategoryIndicator;
-
-  @Column(name = "SHT_DSC_NM")
-  private String shortDescriptionName;
+  private String relationshipToCategoryIndicator;  
 
   @Column(name = "USR_ID_IND")
   private String userDefinedLogicalIdIndicator;
 
   @Column(name = "USR_ID_NO")
-  private Integer userDefinedIdLength;
+  private Integer userDefinedIdLength;  
 
-  @Column(name = "USR_TBL_NM")
-  private String userTableName;
-
-  public String getLogicalTableDsdName() {
-    return logicalTableDsdName;
+  public SystemMetaEntity() {
+    // Default no-argument constructor
   }
-
-  public void setLogicalTableDsdName(String logicalTableDsdName) {
-    this.logicalTableDsdName = logicalTableDsdName;
-  }
-
+  
   public Integer getDefaultSystemId() {
     return defaultSystemId;
   }
 
   public void setDefaultSystemId(Integer defaultSystemId) {
     this.defaultSystemId = defaultSystemId;
-  }
-
-  public String getLongDescriptionName() {
-    return longDescriptionName;
-  }
-
-  public void setLongDescriptionName(String longDescriptionName) {
-    this.longDescriptionName = longDescriptionName;
   }
 
   public String getLongDescriptionIndicator() {
@@ -132,14 +120,6 @@ public class SystemMetaEntity implements Serializable {
     this.relationshipToCategoryIndicator = relationshipToCategoryIndicator;
   }
 
-  public String getShortDescriptionName() {
-    return shortDescriptionName;
-  }
-
-  public void setShortDescriptionName(String shortDescriptionName) {
-    this.shortDescriptionName = shortDescriptionName;
-  }
-
   public String getUserDefinedLogicalIdIndicator() {
     return userDefinedLogicalIdIndicator;
   }
@@ -162,6 +142,30 @@ public class SystemMetaEntity implements Serializable {
 
   public void setUserTableName(String userTableName) {
     this.userTableName = userTableName;
+  }
+  
+  public String getMetaName() {
+    return metaName;
+  }
+
+  public void setMetaName(String metaName) {
+    this.metaName = metaName;
+  }
+
+  public String getLongDescription() {
+    return longDescription;
+  }
+
+  public void setLongDescription(String longDescription) {
+    this.longDescription = longDescription;
+  }
+
+  public String getShortDescription() {
+    return shortDescription;
+  }
+
+  public void setShortDescription(String shortDescription) {
+    this.shortDescription = shortDescription;
   }
 
   @Override

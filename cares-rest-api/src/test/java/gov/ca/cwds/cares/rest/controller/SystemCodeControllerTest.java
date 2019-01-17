@@ -47,10 +47,10 @@ public class SystemCodeControllerTest {
     String meta_2 = "testMetaName_2";
 
     SystemMeta systemMeta_1 = new SystemMeta();
-    systemMeta_1.setLogicalTableDsdName(meta_1);
+    systemMeta_1.setMetaName(meta_1);
 
     SystemMeta systemMeta_2 = new SystemMeta();
-    systemMeta_2.setLogicalTableDsdName(meta_2);
+    systemMeta_2.setMetaName(meta_2);
 
     Collection<SystemMeta> systemMetas = Arrays.asList(systemMeta_1, systemMeta_2);
 
