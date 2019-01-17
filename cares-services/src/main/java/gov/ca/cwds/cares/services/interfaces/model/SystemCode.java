@@ -21,15 +21,15 @@ public class SystemCode implements Serializable {
   private static final long serialVersionUID = 5237768756638520258L;
 
   private Integer systemId;
-  private Integer categoryId;
-  private String fkToSystemMeta;
+  private String metaName;
+  private String shortDescription;
+  private Integer categoryId;  
   private String inactiveIndicator;
   private String userDefinedLogicalId;
   private String longDescription;
   private String lastUpdatedById;
   private LocalDateTime lastUpdatedTimeStamp;
-  private String otherCode;
-  private String shortDescription;
+  private String otherCode;  
   private String thirdId;
 
   public SystemCode() {
@@ -40,42 +40,25 @@ public class SystemCode implements Serializable {
     return systemId;
   }
 
-
   public void setSystemId(Integer systemId) {
     this.systemId = systemId;
   }
-
 
   public Integer getCategoryId() {
     return categoryId;
   }
 
-
   public void setCategoryId(Integer categoryId) {
     this.categoryId = categoryId;
   }
-
-
-  public String getFkToSystemMeta() {
-    return fkToSystemMeta;
-  }
-
-
-  public void setFkToSystemMeta(String fkToSystemMeta) {
-    this.fkToSystemMeta = fkToSystemMeta;
-  }
-
 
   public String getInactiveIndicator() {
     return inactiveIndicator;
   }
 
-
   public void setInactiveIndicator(String inactiveIndicator) {
     this.inactiveIndicator = inactiveIndicator;
   }
-
-
 
   public String getUserDefinedLogicalId() {
     return userDefinedLogicalId;
@@ -97,51 +80,49 @@ public class SystemCode implements Serializable {
     return lastUpdatedById;
   }
 
-
   public void setLastUpdatedById(String lastUpdatedById) {
     this.lastUpdatedById = lastUpdatedById;
   }
-
 
   public LocalDateTime getLastUpdatedTimeStamp() {
     return lastUpdatedTimeStamp;
   }
 
-
   public void setLastUpdatedTimeStamp(LocalDateTime lastUpdatedTimeStamp) {
     this.lastUpdatedTimeStamp = lastUpdatedTimeStamp;
   }
-
 
   public String getOtherCode() {
     return otherCode;
   }
 
-
   public void setOtherCode(String otherCode) {
     this.otherCode = otherCode;
   }
-
 
   public String getShortDescription() {
     return shortDescription;
   }
 
-
   public void setShortDescription(String shortDescription) {
     this.shortDescription = shortDescription;
   }
-
 
   public String getThirdId() {
     return thirdId;
   }
 
-
   public void setThirdId(String thirdId) {
     this.thirdId = thirdId;
   }
+  
+  public String getMetaName() {
+    return metaName;
+  }
 
+  public void setMetaName(String metaName) {
+    this.metaName = metaName;
+  }
 
   @Override
   public int hashCode() {

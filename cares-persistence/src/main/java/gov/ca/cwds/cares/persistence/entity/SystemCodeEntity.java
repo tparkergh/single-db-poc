@@ -18,7 +18,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Entity
 @Table(name = "SYS_CD_C")
 @NamedQuery(name = "SystemCodeEntity.findByMetaName",
-    query = "SELECT sc FROM SystemCodeEntity sc WHERE sc.fkToSystemMeta = ?1")
+    query = "SELECT sc FROM SystemCodeEntity sc WHERE sc.metaName = ?1")
 public class SystemCodeEntity implements Serializable {
 
   private static final long serialVersionUID = 6969398151287232182L;
@@ -27,11 +27,14 @@ public class SystemCodeEntity implements Serializable {
   @Column(name = "SYS_ID")
   private Integer systemId;
 
+  @Column(name = "FKS_META_T")
+  private String metaName;
+  
+  @Column(name = "SHORT_DSC")
+  private String shortDescription;
+  
   @Column(name = "CATEGORYID")
   private Integer categoryId;
-
-  @Column(name = "FKS_META_T")
-  private String fkToSystemMeta;
 
   @Column(name = "INACTV_IND")
   private String inactiveIndicator;
@@ -51,9 +54,6 @@ public class SystemCodeEntity implements Serializable {
   @Column(name = "OTHER_CD")
   private String otherCode;
 
-  @Column(name = "SHORT_DSC")
-  private String shortDescription;
-
   @Column(name = "THIRD_ID")
   private String thirdId;
 
@@ -72,14 +72,6 @@ public class SystemCodeEntity implements Serializable {
 
   public void setCategoryId(Integer categoryId) {
     this.categoryId = categoryId;
-  }
-
-  public String getFkToSystemMeta() {
-    return fkToSystemMeta;
-  }
-
-  public void setFkToSystemMeta(String fkToSystemMeta) {
-    this.fkToSystemMeta = fkToSystemMeta;
   }
 
   public String getInactiveIndicator() {
@@ -145,6 +137,14 @@ public class SystemCodeEntity implements Serializable {
 
   public void setThirdId(String thirdId) {
     this.thirdId = thirdId;
+  }
+
+  public String getMetaName() {
+    return metaName;
+  }
+
+  public void setMetaName(String metaName) {
+    this.metaName = metaName;
   }
 
   @Override
