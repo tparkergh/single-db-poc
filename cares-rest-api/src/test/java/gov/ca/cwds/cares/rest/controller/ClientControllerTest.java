@@ -95,7 +95,7 @@ public class ClientControllerTest {
     
     Collection<ClientAddress> clientAddresses = Arrays.asList(clientAddress_1, clientAddress_2);
     
-    when(addressService.getClientAddresses(any())).thenReturn(clientAddresses);
+    when(clientService.getClientAddresses(any())).thenReturn(clientAddresses);
     
     ObjectMapper objMapper = new ObjectMapper();
     String json = objMapper.writeValueAsString(clientAddresses);

@@ -5,12 +5,16 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
+import gov.ca.cwds.cares.persistence.entity.ClientAddressEntity;
 import gov.ca.cwds.cares.persistence.entity.ClientEntity;
+import gov.ca.cwds.cares.persistence.repository.ClientAddressRepository;
 import gov.ca.cwds.cares.persistence.repository.ClientRepository;
 import gov.ca.cwds.cares.services.interfaces.api.AddressService;
 import gov.ca.cwds.cares.services.interfaces.api.ClientService;
+import gov.ca.cwds.cares.services.interfaces.model.Address;
 import gov.ca.cwds.cares.services.interfaces.model.Client;
 import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
+import gov.ca.cwds.cares.services.mapping.ClientAddressMapper;
 import gov.ca.cwds.cares.services.mapping.ClientMapper;
 
 @Service
@@ -18,6 +22,9 @@ public class ClientServiceImpl implements ClientService {
 
   @Autowired
   private ClientRepository clientRepository;
+  
+  @Autowired
+  private ClientAddressRepository clientAddressRepository;
 
   @Autowired
   private AddressService addressService;
@@ -45,12 +52,22 @@ public class ClientServiceImpl implements ClientService {
   @Override
   @ExecutionTimer
   public Collection<ClientAddress> getClientAddresses(String clientId) {
-    return addressService.getClientAddresses(clientId);
+    Collection<ClientAddressEntity> clientAddressEntities = clientAddressRepository.findByClientId(clientId);
+    Collection<ClientAddress> clientAddresses = ClientAddressMapper.INSTANCE.mapToClientAddresses(clientAddressEntities);
+
+    for (ClientAddress clientAddress : clientAddresses) {
+      Address enrichedAddress = addressService.enrichGeoLocation(clientAddress.getAddress());
+      clientAddress.setAddress(enrichedAddress);
+      
+    }
+    return clientAddresses;
   }
 
   @Override
   @ExecutionTimer
   public ClientAddress updateClientAddress(ClientAddress clientAddress) {
-    return addressService.updateClientAddress(clientAddress);
+    Address address = addressService.updateAddress(clientAddress.getAddress());
+    clientAddress.setAddress(address);
+    return clientAddress;
   }
 }
