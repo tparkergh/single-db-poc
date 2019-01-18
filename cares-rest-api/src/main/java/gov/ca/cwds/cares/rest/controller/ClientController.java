@@ -1,5 +1,6 @@
 package gov.ca.cwds.cares.rest.controller;
 
+import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
 import java.util.Collection;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 import gov.ca.cwds.cares.services.interfaces.api.ClientService;
 import gov.ca.cwds.cares.services.interfaces.model.Client;
-import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -39,8 +39,8 @@ public class ClientController {
   @ExecutionTimer
   public Client getClient(@ApiParam("Client ID") @PathVariable("client_id") String id) {
     return clientService.getClient(id);
-  }  
-  
+  }
+
   @GetMapping("/clients/{client_id}/addresses")
   @ApiOperation(value = "Get client addresses for client identified by given ID")
   @ExecutionTimer

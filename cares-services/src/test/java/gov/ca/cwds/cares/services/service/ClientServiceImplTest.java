@@ -38,6 +38,9 @@ public class ClientServiceImplTest {
   @InjectMocks
   private ClientServiceImpl clientService;
   
+  @InjectMocks
+  private AddressServiceImpl addressService;
+
   @Test
   public void testGetClient() {
     String id = "testClientId";
@@ -107,7 +110,7 @@ public class ClientServiceImplTest {
     
     when(clientAddressRepository.findByClientId(any())).thenReturn(clientAddressEntities);
     
-    Collection<ClientAddress> actual = clientService.getClientAddresses("clientId");
+    Collection<ClientAddress> actual = addressService.getClientAddresses("clientId");
     assertEquals(expected, actual);
   }
 }

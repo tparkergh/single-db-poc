@@ -1,0 +1,11 @@
+[
+  {
+    "street_address" : "1234 Miller Terrace",
+    "city" : "Lakeport",
+    "state" : "CA",
+    "zip" : "95453",
+    "longitude" : -2.2,
+    "lattitude" : 1.1,
+    "deliverable" : false
+  }
+]
