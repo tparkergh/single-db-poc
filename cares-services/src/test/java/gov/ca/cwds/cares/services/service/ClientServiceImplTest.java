@@ -12,10 +12,13 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import gov.ca.cwds.cares.persistence.entity.AddressEntity;
 import gov.ca.cwds.cares.persistence.entity.ClientAddressEntity;
 import gov.ca.cwds.cares.persistence.entity.ClientEntity;
 import gov.ca.cwds.cares.persistence.repository.ClientAddressRepository;
 import gov.ca.cwds.cares.persistence.repository.ClientRepository;
+import gov.ca.cwds.cares.services.interfaces.api.AddressService;
+import gov.ca.cwds.cares.services.interfaces.model.Address;
 import gov.ca.cwds.cares.services.interfaces.model.Client;
 import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
 
@@ -24,13 +27,16 @@ public class ClientServiceImplTest {
 
   @Mock
   private ClientRepository clientRepository;
-  
+
   @Mock
   private ClientAddressRepository clientAddressRepository;
   
+  @Mock
+  private AddressService addressService;
+
   @InjectMocks
-  private ClientServiceImpl clientService;
-  
+  private ClientServiceImpl clientService;    
+
   @Test
   public void testGetClient() {
     String id = "testClientId";
@@ -80,21 +86,27 @@ public class ClientServiceImplTest {
     
     ClientAddressEntity clientAddressEntity_1 = new ClientAddressEntity();
     clientAddressEntity_1.setIdentifier(id_1);
+    clientAddressEntity_1.setAddress(new AddressEntity());
     
     ClientAddressEntity clientAddressEntity_2 = new ClientAddressEntity();
     clientAddressEntity_2.setIdentifier(id_2);
+    clientAddressEntity_2.setAddress(new AddressEntity());
     
     List<ClientAddressEntity> clientAddressEntities = Arrays.asList(clientAddressEntity_1, clientAddressEntity_2);
     
     ClientAddress clientAddress_1 = new ClientAddress();
     clientAddress_1.setIdentifier(id_1);
+    clientAddress_1.setAddress(new Address());
     
     ClientAddress clientAddress_2 = new ClientAddress();
     clientAddress_2.setIdentifier(id_2);
-    
+    clientAddress_2.setAddress(new Address());
+
     Collection<ClientAddress> expected = Arrays.asList(clientAddress_1, clientAddress_2);
     
     when(clientAddressRepository.findByClientId(any())).thenReturn(clientAddressEntities);
+    
+    when(addressService.enrichGeoLocation(any())).thenReturn(new Address());
     
     Collection<ClientAddress> actual = clientService.getClientAddresses("clientId");
     assertEquals(expected, actual);

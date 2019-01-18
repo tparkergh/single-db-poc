@@ -1,5 +1,6 @@
 package gov.ca.cwds.cics.client;
 
+import gov.ca.cwds.cics.CicsRestApiHelper;
 import java.io.IOException;
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -12,9 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
+import gov.ca.cwds.cics.model.CicsClientRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
-import gov.ca.cwds.cics.model.client.CicsClientRequest;
-import gov.ca.cwds.cics.model.client.CicsClientResponse;
 
 /**
  * CWDS J Team
@@ -22,13 +22,11 @@ import gov.ca.cwds.cics.model.client.CicsClientResponse;
 @Component("CicsClientUpdaterRestApiClient")
 @Lazy
 public final class CicsClientUpdaterRestApiClient {
-  
-  @Value("${app.cics.base-url}")
+  public static final String CLIENT_PATH = "/clients";
+
+  @Value("${app.cics-service.base-url}")
   private String baseUrl;
 
-  @Value("${app.cics.client-path}")
-  private String clientPath;
-  
   @Autowired
   private CicsRestApiHelper cicsRestApiHelper;
   
@@ -40,7 +38,7 @@ public final class CicsClientUpdaterRestApiClient {
   }
 
   @ExecutionTimer
-  public CicsClientResponse updateClient(CicsClientRequest clientRequest) {
+  public CicsResponse updateClient(CicsClientRequest clientRequest) {
     String clientId = clientRequest.getClientData().getIdentifier();
     LocalDateTime lastUpdatedDateTime = clientRequest.getClientData().getLstUpdTs();
     String lastUpdatedDateTimeStr = lastUpdatedDateTime.format(
@@ -48,7 +46,7 @@ public final class CicsClientUpdaterRestApiClient {
 
     URI requestUri = UriComponentsBuilder
         .fromHttpUrl(baseUrl)
-        .path(clientPath)
+        .path(CLIENT_PATH)
         .path("/" + clientId)
         .path("/" + lastUpdatedDateTimeStr)
         .build().toUri();
@@ -59,9 +57,9 @@ public final class CicsClientUpdaterRestApiClient {
         requestUri, 
         HttpMethod.PUT, 
         updatedClientRequest, 
-        CicsClientResponse.class);
+        CicsResponse.class);
 
-    return (CicsClientResponse) response;
+    return response;
   }
   
   private CicsClientRequest getClientUpdateRequest(CicsClientRequest client) {
