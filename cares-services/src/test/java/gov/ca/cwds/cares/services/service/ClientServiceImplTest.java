@@ -3,10 +3,6 @@ package gov.ca.cwds.cares.services.service;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-
-import gov.ca.cwds.cares.geo.api.GeoService;
-import gov.ca.cwds.cares.persistence.entity.AddressEntity;
-import gov.ca.cwds.cares.services.interfaces.model.Address;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -16,10 +12,13 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import gov.ca.cwds.cares.persistence.entity.AddressEntity;
 import gov.ca.cwds.cares.persistence.entity.ClientAddressEntity;
 import gov.ca.cwds.cares.persistence.entity.ClientEntity;
 import gov.ca.cwds.cares.persistence.repository.ClientAddressRepository;
 import gov.ca.cwds.cares.persistence.repository.ClientRepository;
+import gov.ca.cwds.cares.services.interfaces.api.AddressService;
+import gov.ca.cwds.cares.services.interfaces.model.Address;
 import gov.ca.cwds.cares.services.interfaces.model.Client;
 import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
 
@@ -31,15 +30,12 @@ public class ClientServiceImplTest {
 
   @Mock
   private ClientAddressRepository clientAddressRepository;
-
-  @Mock
-  private GeoService geoService;
-
-  @InjectMocks
-  private ClientServiceImpl clientService;
   
+  @Mock
+  private AddressService addressService;
+
   @InjectMocks
-  private AddressServiceImpl addressService;
+  private ClientServiceImpl clientService;    
 
   @Test
   public void testGetClient() {
@@ -110,7 +106,9 @@ public class ClientServiceImplTest {
     
     when(clientAddressRepository.findByClientId(any())).thenReturn(clientAddressEntities);
     
-    Collection<ClientAddress> actual = addressService.getClientAddresses("clientId");
+    when(addressService.enrichGeoLocation(any())).thenReturn(new Address());
+    
+    Collection<ClientAddress> actual = clientService.getClientAddresses("clientId");
     assertEquals(expected, actual);
   }
 }

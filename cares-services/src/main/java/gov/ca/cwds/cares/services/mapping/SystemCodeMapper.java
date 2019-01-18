@@ -12,11 +12,11 @@ import gov.ca.cwds.cares.services.interfaces.model.SystemCode;
  * CWDS J Team
  */
 @Mapper
-public interface SystemCodeEntityMapper {
+public interface SystemCodeMapper {
 
-  public SystemCodeEntityMapper INSTANCE = Mappers.getMapper(SystemCodeEntityMapper.class);
+  public SystemCodeMapper INSTANCE = Mappers.getMapper(SystemCodeMapper.class);
 
-  SystemCode mapSystemCodeEntity(SystemCodeEntity systemCodeEntity);
+  SystemCode mapToSystemCode(SystemCodeEntity systemCodeEntity);
 
-  Collection<SystemCode> mapSystemCodeEntities(Collection<SystemCodeEntity> systemCodeEntities);
+  Collection<SystemCode> mapToSystemCodes(Collection<SystemCodeEntity> systemCodeEntities);
 }
