@@ -10,11 +10,11 @@ import gov.ca.cwds.cares.services.interfaces.model.Client;
  * CWDS J Team
  */
 @Mapper
-public interface ClientEntityMapper {
+public interface ClientMapper {
   
-  public ClientEntityMapper INSTANCE = Mappers.getMapper(ClientEntityMapper.class);
+  public ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
   
-  Client mapClientEntity(ClientEntity clientEntity);
+  Client mapToClient(ClientEntity clientEntity);
   
-  Collection<Client> mapClientEntities(Collection<ClientEntity> clientEntities);
+  Collection<Client> mapToClients(Collection<ClientEntity> clientEntities);
 }

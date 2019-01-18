@@ -12,11 +12,11 @@ import gov.ca.cwds.cares.services.interfaces.model.SystemMeta;
  * CWDS J Team
  */
 @Mapper
-public interface SystemMetaEntityMapper {
+public interface SystemMetaMapper {
 
-  public SystemMetaEntityMapper INSTANCE = Mappers.getMapper(SystemMetaEntityMapper.class);
+  public SystemMetaMapper INSTANCE = Mappers.getMapper(SystemMetaMapper.class);
 
-  SystemMeta mapSystemMetaEntity(SystemMetaEntity systemMetaEntity);
+  SystemMeta mapToSystemMeta(SystemMetaEntity systemMetaEntity);
 
-  Collection<SystemMeta> mapSystemMetaEntities(Collection<SystemMetaEntity> systemMetaEntities);
+  Collection<SystemMeta> mapToSystemMetas(Collection<SystemMetaEntity> systemMetaEntities);
 }

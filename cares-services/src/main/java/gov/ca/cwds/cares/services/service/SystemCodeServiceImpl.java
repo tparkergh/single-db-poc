@@ -13,8 +13,8 @@ import gov.ca.cwds.cares.persistence.repository.SystemMetaRepository;
 import gov.ca.cwds.cares.services.interfaces.api.SystemCodeService;
 import gov.ca.cwds.cares.services.interfaces.model.SystemCode;
 import gov.ca.cwds.cares.services.interfaces.model.SystemMeta;
-import gov.ca.cwds.cares.services.mapping.SystemCodeEntityMapper;
-import gov.ca.cwds.cares.services.mapping.SystemMetaEntityMapper;
+import gov.ca.cwds.cares.services.mapping.SystemCodeMapper;
+import gov.ca.cwds.cares.services.mapping.SystemMetaMapper;
 
 @Service
 public class SystemCodeServiceImpl implements SystemCodeService {
@@ -29,13 +29,13 @@ public class SystemCodeServiceImpl implements SystemCodeService {
   @ExecutionTimer
   public Collection<SystemCode> getSystemCodes(String metaName) {
     Collection<SystemCodeEntity> systemCodeEntities = systemCodeRepository.findByMetaName(metaName);
-    return SystemCodeEntityMapper.INSTANCE.mapSystemCodeEntities(systemCodeEntities);
+    return SystemCodeMapper.INSTANCE.mapToSystemCodes(systemCodeEntities);
   }
 
   @Override
   @ExecutionTimer
   public Collection<SystemMeta> getAllMetas() {
     Collection<SystemMetaEntity> systemMetaEntities = systemMetaRepository.findAll();
-    return SystemMetaEntityMapper.INSTANCE.mapSystemMetaEntities(systemMetaEntities);
+    return SystemMetaMapper.INSTANCE.mapToSystemMetas(systemMetaEntities);
   }
 }

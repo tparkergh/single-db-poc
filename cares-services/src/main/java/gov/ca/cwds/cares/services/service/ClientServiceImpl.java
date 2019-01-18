@@ -1,31 +1,29 @@
 package gov.ca.cwds.cares.services.service;
 
-import gov.ca.cwds.cares.common.exception.CicsUpdateException;
-import gov.ca.cwds.cares.geo.api.GeoService;
-import gov.ca.cwds.cares.geo.model.GeoAddress;
-import gov.ca.cwds.cares.services.interfaces.model.Address;
-import gov.ca.cwds.cares.services.mapping.ClientAddressMapper;
-import gov.ca.cwds.cics.address.CicsAddressUpdaterRestApiClient;
-import gov.ca.cwds.cics.model.CicsResponse;
-import gov.ca.cwds.cics.model.DfhCommArea;
-import gov.ca.cwds.cics.model.address.CicsAddressRequest;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
+import gov.ca.cwds.cares.common.exception.CicsUpdateException;
+import gov.ca.cwds.cares.geo.api.GeoService;
+import gov.ca.cwds.cares.geo.model.GeoAddress;
 import gov.ca.cwds.cares.persistence.entity.ClientAddressEntity;
 import gov.ca.cwds.cares.persistence.entity.ClientEntity;
 import gov.ca.cwds.cares.persistence.repository.ClientAddressRepository;
 import gov.ca.cwds.cares.persistence.repository.ClientRepository;
 import gov.ca.cwds.cares.services.interfaces.api.ClientService;
+import gov.ca.cwds.cares.services.interfaces.model.Address;
 import gov.ca.cwds.cares.services.interfaces.model.Client;
 import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
-import gov.ca.cwds.cares.services.mapping.ClientAddressEntityMapper;
-import gov.ca.cwds.cares.services.mapping.ClientEntityMapper;
+import gov.ca.cwds.cares.services.mapping.ClientAddressMapper;
+import gov.ca.cwds.cares.services.mapping.ClientMapper;
+import gov.ca.cwds.cics.address.CicsAddressUpdaterRestApiClient;
+import gov.ca.cwds.cics.model.CicsResponse;
+import gov.ca.cwds.cics.model.DfhCommArea;
+import gov.ca.cwds.cics.model.address.CicsAddressRequest;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -48,14 +46,14 @@ public class ClientServiceImpl implements ClientService {
   @ExecutionTimer
   public Client getClient(String clientId) {
     ClientEntity clientEntity = clientRepository.findById(clientId).get();
-    return ClientEntityMapper.INSTANCE.mapClientEntity(clientEntity);
+    return ClientMapper.INSTANCE.mapToClient(clientEntity);
   }
 
   @Override
   @ExecutionTimer
   public Collection<ClientAddress> getClientAddresses(String clientId) {
     Collection<ClientAddressEntity> clientAddressEntities = clientAddressRepository.findByClientId(clientId);
-    Collection<ClientAddress> clientAddresses = ClientAddressEntityMapper.INSTANCE.mapClientAddressEntities(clientAddressEntities);
+    Collection<ClientAddress> clientAddresses = ClientAddressMapper.INSTANCE.mapToClientAddresses(clientAddressEntities);
 
     for (ClientAddress clientAddress : clientAddresses) {
       enrichLocation(clientAddress);
@@ -73,7 +71,7 @@ public class ClientServiceImpl implements ClientService {
         "43RKPsw057", "82tFIkz00T", "9d54R1e05u", "9RcYKrB00T", "Ajjgwny057"};
     Collection<ClientEntity> clientEntities =
         clientRepository.findAllById(Arrays.asList(clientIds));
-    return ClientEntityMapper.INSTANCE.mapClientEntities(clientEntities);
+    return ClientMapper.INSTANCE.mapToClients(clientEntities);
   }
 
   @Override
