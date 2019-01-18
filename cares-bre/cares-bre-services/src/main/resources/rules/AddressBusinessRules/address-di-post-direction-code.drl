@@ -8,7 +8,7 @@ rule "address-di-post-direction-code"
   @doc_enforcement_location("BRE, ZOS")
   @doc_rule_type("DataIntegrity")
   @doc_drools_file("address-di-post-direction-code.drl")
-  @doc_rule_name("ADDRESS-DI-POST-DIRECTION-CODE
+  @doc_rule_name("ADDRESS-DI-POST-DIRECTION-CODE")
   
   @doc_doctool_name("")
   @doc_doctool_description("")
@@ -23,6 +23,7 @@ rule "address-di-post-direction-code"
   @doc_di_validation_table("")
   @doc_di_validation_category("")
   @doc_di_validation_sub_category("")
+  @doc_di_validation_values("")
 
   @doc_ri_entity("")
   @doc_ri_attribute("")
@@ -35,7 +36,7 @@ rule "address-di-post-direction-code"
   @doc_cpi_description("")
 
   dialect "mvel"
-  agenda-group "BusinessRules-validation-agenda"
+  agenda-group "AddressBusinessRules-validation-agenda"
     when
         //conditions
     then

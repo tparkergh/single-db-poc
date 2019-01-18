@@ -8,7 +8,7 @@ rule "address-di-pre-direction-code"
   @doc_enforcement_location("BRE, ZOS")
   @doc_rule_type("DataIntegrity")
   @doc_drools_file("address-di-pre-direction-code.drl")
-  @doc_rule_name("ADDRESS-DI-PRE-DIRECTION-CODE
+  @doc_rule_name("ADDRESS-DI-PRE-DIRECTION-CODE")
   
   @doc_doctool_name("")
   @doc_doctool_description("")
@@ -35,7 +35,7 @@ rule "address-di-pre-direction-code"
   @doc_cpi_description("")
 
   dialect "mvel"
-  agenda-group "BusinessRules-validation-agenda"
+  agenda-group "AddressBusinessRules-validation-agenda"
     when
         //conditions
     then
