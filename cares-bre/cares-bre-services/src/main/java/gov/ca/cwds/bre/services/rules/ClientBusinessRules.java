@@ -8,19 +8,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.cics.model.Client;
+import gov.ca.cwds.cics.model.ClientData;
 
 /**
  * @author CWDS J Team
  */
 @Component("ClientBusinessRules")
-public class ClientBusinessRules extends DroolsBusinessRuleBase<Client> {
+public class ClientBusinessRules extends DroolsBusinessRuleBase<ClientData> {
 
   @Autowired
   private ObjectMapper jacksonObjectMapper;
 
   @Override
-  protected Class<Client> getFactType() {
-    return Client.class;
+  protected Class<ClientData> getFactType() {
+    System.out.println(ClientData.class.toString());
+    return ClientData.class;
   }
 
   @Override
