@@ -2,8 +2,10 @@ package gov.ca.cwds.cares.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.cares.geo.client.GeoRestClient;
+import gov.ca.cwds.cares.services.interfaces.model.Address;
 import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
 import gov.ca.cwds.cics.address.CicsAddressUpdaterRestApiClient;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
@@ -66,27 +68,12 @@ public class CaresRestApiApplicationTest {
 
   @Test
   public void whenCallGetClientAddress_thenSuccessResponse() throws Exception {
-    MockRestServiceServer geoMockServer = MockRestServiceServer.bindTo(geoRestClient.getRestTemplate()).build();
+    MockRestServiceServer mockServer = MockRestServiceServer.bindTo(geoRestClient.getRestTemplate()).build();
 
-    String geoExpectedRequest1 = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/geo-address-1-expected-request.json"), StandardCharsets.UTF_8);
-    String geoMockResponse1 = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/geo-address-1-mock-response.json"), StandardCharsets.UTF_8);
-    geoMockServer.expect(
-        content().json(geoExpectedRequest1))
-        .andExpect(requestTo(geoServiceBaseUrl + GeoRestClient.ADDRESS_VALIDATION_PATH))
-        .andExpect(method(HttpMethod.POST))
-        .andRespond(withSuccess(geoMockResponse1, MediaType.APPLICATION_JSON));
-
-    String geoExpectedRequest2 = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/geo-address-2-expected-request.json"), StandardCharsets.UTF_8);
-    String geoMockResponse2 = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/geo-address-2-mock-response.json"), StandardCharsets.UTF_8);
-    geoMockServer.expect(
-        content().json(geoExpectedRequest2))
-        .andExpect(requestTo(geoServiceBaseUrl + GeoRestClient.ADDRESS_VALIDATION_PATH))
-        .andExpect(method(HttpMethod.POST))
-        .andRespond(withSuccess(geoMockResponse2, MediaType.APPLICATION_JSON));
+    verifyGeoServiceCall(mockServer,
+        "/fixtures/address/geo-address-1-expected-request.json", "/fixtures/address/geo-address-1-mock-response.json");
+    verifyGeoServiceCall(mockServer,
+        "/fixtures/address/geo-address-2-expected-request.json", "/fixtures/address/geo-address-2-mock-response.json");
 
     RestTemplate clientRestTemplate = restTemplateBuilder.build();
     ResponseEntity<List<ClientAddress>> response =
@@ -94,28 +81,33 @@ public class CaresRestApiApplicationTest {
             new ParameterizedTypeReference<List<ClientAddress>>(){});
     List<ClientAddress> clientAddressResponse = response.getBody();
     String expectedClientAddressResponse = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(
-        "fixtures/client-address-expected-get-response.json"), StandardCharsets.UTF_8);
+        "fixtures/address/client-address-expected-get-response.json"), StandardCharsets.UTF_8);
     JSONAssert.assertEquals(expectedClientAddressResponse,
         jacksonObjectMapper.writeValueAsString(clientAddressResponse), JSONCompareMode.NON_EXTENSIBLE);
   }
 
   @Test
   public void whenCallUpdateClientAddress_thenSuccessResponse() throws Exception {
-    MockRestServiceServer geoMockServer = MockRestServiceServer.bindTo(cicsAddressUpdaterRestApiClient.getRestTemplate()).build();
+    MockRestServiceServer geoMockServer = MockRestServiceServer.bindTo(geoRestClient.getRestTemplate()).build();
+
+    verifyGeoServiceCall(geoMockServer,
+        "/fixtures/address/geo-address-expected-request.json", "/fixtures/address/geo-address-mock-response.json");
+
+    MockRestServiceServer cicsMockServer = MockRestServiceServer.bindTo(cicsAddressUpdaterRestApiClient.getRestTemplate()).build();
 
     String cicsExpectedRequest = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/cics-address-update-expected-request.json"), StandardCharsets.UTF_8);
-    String geoMockResponse1 = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/cics-address-update-mock-response.json"), StandardCharsets.UTF_8);
-    geoMockServer.expect(
+        "/fixtures/address/cics-address-update-expected-request.json"), StandardCharsets.UTF_8);
+    String cicsMockResponse = IOUtils.toString(getClass().getResourceAsStream(
+        "/fixtures/address/cics-address-update-mock-response.json"), StandardCharsets.UTF_8);
+    cicsMockServer.expect(
         content().json(cicsExpectedRequest))
         .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH))
         .andExpect(method(HttpMethod.PUT))
-        .andRespond(withSuccess(geoMockResponse1, MediaType.APPLICATION_JSON));
+        .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));
 
     RestTemplate addressRestTemplate = restTemplateBuilder.build();
     String request = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(
-        "fixtures/client-address-update-request.json"), StandardCharsets.UTF_8);
+        "fixtures/address/client-address-update-request.json"), StandardCharsets.UTF_8);
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> httpEntity = new HttpEntity<>(request, headers);
@@ -125,9 +117,57 @@ public class CaresRestApiApplicationTest {
 
     ClientAddress clientAddressResponse = response.getBody();
     String expectedClientAddressResponse = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(
-        "fixtures/client-address-update-expected-response.json"), StandardCharsets.UTF_8);
+        "fixtures/address/client-address-update-expected-response.json"), StandardCharsets.UTF_8);
     JSONAssert.assertEquals(expectedClientAddressResponse,
         jacksonObjectMapper.writeValueAsString(clientAddressResponse), JSONCompareMode.NON_EXTENSIBLE);
+  }
 
+  @Test
+  public void whenCallUpdateAddress_thenSuccessResponse() throws Exception {
+    MockRestServiceServer geoMockServer = MockRestServiceServer.bindTo(geoRestClient.getRestTemplate()).build();
+
+    verifyGeoServiceCall(geoMockServer,
+        "/fixtures/address/geo-address-expected-request.json", "/fixtures/address/geo-address-mock-response.json");
+
+    MockRestServiceServer cicsMockServer = MockRestServiceServer.bindTo(cicsAddressUpdaterRestApiClient.getRestTemplate()).build();
+
+    String cicsExpectedRequest = IOUtils.toString(getClass().getResourceAsStream(
+        "/fixtures/address/cics-address-update-expected-request.json"), StandardCharsets.UTF_8);
+    String cicsMockResponse = IOUtils.toString(getClass().getResourceAsStream(
+        "/fixtures/address/cics-address-update-mock-response.json"), StandardCharsets.UTF_8);
+    cicsMockServer.expect(
+        content().json(cicsExpectedRequest))
+        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH))
+        .andExpect(method(HttpMethod.PUT))
+        .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));
+
+    RestTemplate addressRestTemplate = restTemplateBuilder.build();
+    String request = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(
+        "fixtures/address/address-update-request.json"), StandardCharsets.UTF_8);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> httpEntity = new HttpEntity<>(request, headers);
+    ResponseEntity<Address> response =
+        addressRestTemplate.exchange("http://localhost:18090/addresses/test-ad-10",
+            HttpMethod.PUT, httpEntity, Address.class);
+
+    Address addressResponse = response.getBody();
+    String expectedAddressResponse = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(
+        "fixtures/address/address-update-expected-response.json"), StandardCharsets.UTF_8);
+    JSONAssert.assertEquals(expectedAddressResponse,
+        jacksonObjectMapper.writeValueAsString(addressResponse), JSONCompareMode.NON_EXTENSIBLE);
+  }
+
+  private void verifyGeoServiceCall(MockRestServiceServer mockServer, String expectedRequestPath, String mockResponsePath) throws IOException {
+    String expectedRequest = IOUtils.toString(getClass().getResourceAsStream(
+        expectedRequestPath), StandardCharsets.UTF_8);
+    String mockResponse = IOUtils.toString(getClass().getResourceAsStream(
+        mockResponsePath), StandardCharsets.UTF_8);
+
+    mockServer.expect(
+        content().json(expectedRequest))
+        .andExpect(requestTo(geoServiceBaseUrl + GeoRestClient.ADDRESS_VALIDATION_PATH))
+        .andExpect(method(HttpMethod.POST))
+        .andRespond(withSuccess(mockResponse, MediaType.APPLICATION_JSON));
   }
 }
