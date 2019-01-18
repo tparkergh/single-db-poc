@@ -1,5 +1,7 @@
 package gov.ca.cwds.cares.services.service;
 
+import gov.ca.cwds.cares.services.interfaces.api.AddressService;
+import gov.ca.cwds.cares.services.interfaces.model.ClientAddress;
 import java.util.Arrays;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class ClientServiceImpl implements ClientService {
 
   @Autowired
   private ClientRepository clientRepository;
+
+  @Autowired
+  private AddressService addressService;
 
   @Override
   @ExecutionTimer
@@ -36,5 +41,15 @@ public class ClientServiceImpl implements ClientService {
     Collection<ClientEntity> clientEntities =
         clientRepository.findAllById(Arrays.asList(clientIds));
     return ClientEntityMapper.INSTANCE.mapClientEntities(clientEntities);
+  }
+
+  @Override
+  public Collection<ClientAddress> getClientAddresses(String clientId) {
+    return addressService.getClientAddresses(clientId);
+  }
+
+  @Override
+  public ClientAddress updateClientAddress(ClientAddress clientAddress) {
+    return addressService.updateClientAddress(clientAddress);
   }
 }
