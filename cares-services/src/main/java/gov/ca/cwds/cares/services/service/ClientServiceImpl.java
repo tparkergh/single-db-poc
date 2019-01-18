@@ -43,11 +43,13 @@ public class ClientServiceImpl implements ClientService {
   }
 
   @Override
+  @ExecutionTimer
   public Collection<ClientAddress> getClientAddresses(String clientId) {
     return addressService.getClientAddresses(clientId);
   }
 
   @Override
+  @ExecutionTimer
   public ClientAddress updateClientAddress(ClientAddress clientAddress) {
     return addressService.updateClientAddress(clientAddress);
   }

@@ -52,6 +52,7 @@ public class AddressServiceImpl implements AddressService {
   }
 
   @Override
+  @ExecutionTimer
   public ClientAddress updateClientAddress(ClientAddress clientAddress) {
     enrichLocation(clientAddress.getAddress());
 
@@ -61,6 +62,7 @@ public class AddressServiceImpl implements AddressService {
   }
 
   @Override
+  @ExecutionTimer
   public Address updateAddress(Address address) {
     enrichLocation(address);
 
