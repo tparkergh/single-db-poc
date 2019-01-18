@@ -1,0 +1,549 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API to Insert/Update/Delete Client Data.",
+    "version": "1.0.0",
+    "title": "clientapi"
+  },
+  "basePath": "/clients",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "operationId": "postClient",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "postClient_request",
+            "description": "request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postClient_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "normal response",
+            "schema": {
+              "$ref": "#/definitions/postClient_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/{clientID}/{lastUpdateTimestamp}": {
+      "put": {
+        "operationId": "putClient",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lastUpdateTimestamp",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 26
+          },
+          {
+            "name": "clientID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 10
+          },
+          {
+            "in": "body",
+            "name": "putClient_request",
+            "description": "request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/putClient_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "normal response",
+            "schema": {
+              "$ref": "#/definitions/putClient_response_200"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteClient",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lastUpdateTimestamp",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 26
+          },
+          {
+            "name": "clientID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 10
+          },
+          {
+            "in": "body",
+            "name": "deleteClient_request",
+            "description": "request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/deleteClient_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "normal response",
+            "schema": {
+              "$ref": "#/definitions/deleteClient_response_200"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "postClient_request": {
+      "type": "object",
+      "properties": {
+        "CLIENT-DATA": {
+          "type": "object",
+          "properties": {
+            "TXN_HDR_STAFF_ID": {
+              "type": "string",
+              "description": "ID - A system generated sequential 3 digit base 62  number used to uniquely identify each STAFF  PERSON.This is the ID which is triggering the Transaction.",
+              "maxLength": 3
+            },
+            "IDENTIFIER": {
+              "type": "string",
+              "description": "ID - A system generated number used to uniquely  identify each CLIENT.    This ID has an internal 10 digit alpha-numeric representation[sic] and an external 19 digit numeric representation.  The external representation is displayed at the User Interface or on Reports and Documents in the following format: 1234-1234-1234-1234567. ",
+              "maxLength": 10
+            },
+            "BIRTH_DT": {
+              "type": "string",
+              "description": "BIRTH_DATE - Date of birth of the CLIENT.",
+              "maxLength": 10,
+              "default": "2018-12-02"
+            },
+            "CHLD_CLT_B": {
+              "type": "string",
+              "description": "CHILD_CLIENT_IND_VAR - This indicator variable is used to indicate if there are any occurrences of CHILD CLIENTs related to this CLIENT.    This will save unnecessary processing time from  searching for information that does not exist in the data base.",
+              "maxLength": 1,
+              "default": "N"
+            },
+            "COM_FST_NM": {
+              "type": "string",
+              "description": "COMMON_FIRST_NAME - The first name commonly used to refer to a CLIENT. This is not necessarily the CLIENT's legal name, it is simply the name by which the CLIENT is referred to by family members, friends, and CWS staff.",
+              "maxLength": 20
+            },
+            "COM_LST_NM": {
+              "type": "string",
+              "description": "COMMON_LAST_NAME - The last name commonly used to refer to a CLIENT.  This is not necessarily the CLIENT's legal name, it is simply the name by which the CLIENT is referred to by family members, friends, and CWS staff.",
+              "maxLength": 25
+            },
+            "COM_MID_NM": {
+              "type": "string",
+              "description": "COMMON_MIDDLE_NAME - The middle name commonly used to refer to a CLIENT.  This is not necessarily the CLIENT's legal name, it is simply the name by which the CLIENT is referred to by family members, friends, and CWS staff.",
+              "maxLength": 20
+            },
+            "CREATN_DT": {
+              "type": "string",
+              "description": "CREATION_DATE - The date when a new client entry is entered into the CWS system.  This should be defaulted to the system date.",
+              "maxLength": 10,
+              "default": "2018-12-06"
+            },
+            "DRV_LIC_NO": {
+              "type": "string",
+              "description": "DRIVER_LICENSE_NUMBER - The driver license number of the CLIENT.",
+              "maxLength": 20
+            },
+            "GENDER_CD": {
+              "type": "string",
+              "description": "GENDER_CODE - Indicates the sex at birth of a CLIENT (e.g., F = female, M = male, I = intersex, U = unknown etc).",
+              "maxLength": 1,
+              "default": "M"
+            },
+            "NAME_TPC": {
+              "type": "integer",
+              "description": "NAME_TYPE - The system generated number which identifies the type of NAME for a CLIENT (e.g., legal, AKA, etc.).",
+              "minimum": -99999,
+              "maximum": 99999
+            },
+            "SS_NO": {
+              "type": "string",
+              "description": "SOCIAL_SECURITY_NUMBER - The Social Security Number for the CLIENT.",
+              "maxLength": 9
+            },
+            "SUFX_TLDSC": {
+              "type": "string",
+              "description": "SUFFIX_TITLE_DESCRIPTION - The suffix name of a CLIENT (e.g., Esq., M.D., Ph.D., D.D.S., etc.).",
+              "maxLength": 4
+            },
+            "EST_DOB_CD": {
+              "type": "string",
+              "description": "ESTIMATED_DOB_CODE - Indicates if the date of birth in the CLIENT entity is estimated (Y) or if a birth date was actually entered (N) or has not been provided (U).",
+              "maxLength": 1,
+              "default": "N"
+            },
+            "EMAIL_ADDR": {
+              "type": "string",
+              "description": "EMAIL_ADDRESS - The e-mail address for the CLIENT.",
+              "maxLength": 50
+            },
+            "CL_INDX_NO": {
+              "type": "string",
+              "description": "CLIENT_INDEX_NUMBER - This number is assigned by the Statewide Client Index (SCI).",
+              "maxLength": 12
+            },
+            "CLNT_SOC": {
+              "type": "integer",
+              "description": "SEXUAL_ORIENTATION_TYPE - The system generated number which identifies the CLIENT's Sexual Orientation  (e.g., asexual, bisexual, gay, etc.).",
+              "minimum": -99999,
+              "maximum": 99999
+            },
+            "SO_UD_CD": {
+              "type": "string",
+              "description": "SO_UNABLE_TO_DETERMINE_CODE - Indicates the reason the CLIENT?s Sexual Orientation could not be captured (e.g., D = did not ask, C = client does not know).",
+              "maxLength": 1,
+              "default": "D"
+            },
+            "CLNT_GIC": {
+              "type": "integer",
+              "description": "GENDER_IDENTITY_TYPE - The system generated number which identifies the CLIENT's Gender Identity  (e.g., female, male, unsure, etc.).",
+              "minimum": -99999,
+              "maximum": 99999
+            },
+            "CLNT_GEC": {
+              "type": "integer",
+              "description": "GENDER_EXPRESSION_TYPE - The system generated number which identifies the CLIENT's Gender Expression  (e.g., feminine, masculine, declines to state, etc.).",
+              "minimum": -99999,
+              "maximum": 99999
+            }
+          }
+        }
+      }
+    },
+    "postClient_response_200": {
+      "type": "object",
+      "properties": {
+        "DFHCOMMAREA": {
+          "type": "object",
+          "properties": {
+            "PROG_RETURN_CODE": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 99999999
+            },
+            "API_TIMESTAMP": {
+              "type": "string",
+              "maxLength": 26
+            },
+            "ERROR_MSG_TYPE": {
+              "type": "string",
+              "description": "Message Type can be E- Error, W-Warning, I- Informative,\r\nK-Fatal Error.",
+              "maxLength": 1
+            },
+            "ERROR_MSG_CODE": {
+              "type": "string",
+              "description": "Error Message Code returned from the Mainframe.\r\nFor eg 9000 ( Host 9000 Error).",
+              "maxLength": 4
+            },
+            "ERROR_MSG_RSN_CODE": {
+              "type": "string",
+              "description": "Error Message Reason Code can point to either a DB2 SQL Error Code or it can hold a Business Rule #. The Business Rule number helps the front end code to decode the reason behind the Error.",
+              "maxLength": 6
+            },
+            "ERROR_MSG_PART1": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ERROR_MSG_PART2": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ERROR_FOCUS_TABLE_NAME": {
+              "type": "string",
+              "maxLength": 8
+            },
+            "ERROR_FIELD_TEXT": {
+              "type": "string",
+              "maxLength": 254
+            },
+            "ADDITIONAL_DESC": {
+              "type": "string",
+              "maxLength": 31427
+            }
+          }
+        }
+      }
+    },
+    "putClient_request": {
+      "type": "object",
+      "properties": {
+        "CLIENT-DATA": {
+          "type": "object",
+          "properties": {
+            "TXN_HDR_STAFF_ID": {
+              "type": "string",
+              "description": "ID - A system generated sequential 3 digit base 62  number used to uniquely identify each STAFF  PERSON.This is the ID which is triggering the Transaction.",
+              "maxLength": 3
+            },
+            "BIRTH_DT": {
+              "type": "string",
+              "description": "BIRTH_DATE - Date of birth of the CLIENT.",
+              "maxLength": 10
+            },
+            "CHLD_CLT_B": {
+              "type": "string",
+              "description": "CHILD_CLIENT_IND_VAR - This indicator variable is used to indicate if there are any occurrences of CHILD CLIENTs related to this CLIENT.    This will save unnecessary processing time from  searching for information that does not exist in the data base.",
+              "maxLength": 1,
+              "default": "N"
+            },
+            "COM_FST_NM": {
+              "type": "string",
+              "description": "COMMON_FIRST_NAME - The first name commonly used to refer to a CLIENT. This is not necessarily the CLIENT's legal name, it is simply the name by which the CLIENT is referred to by family members, friends, and CWS staff.",
+              "maxLength": 20
+            },
+            "COM_LST_NM": {
+              "type": "string",
+              "description": "COMMON_LAST_NAME - The last name commonly used to refer to a CLIENT.  This is not necessarily the CLIENT's legal name, it is simply the name by which the CLIENT is referred to by family members, friends, and CWS staff.",
+              "maxLength": 25
+            },
+            "COM_MID_NM": {
+              "type": "string",
+              "description": "COMMON_MIDDLE_NAME - The middle name commonly used to refer to a CLIENT.  This is not necessarily the CLIENT's legal name, it is simply the name by which the CLIENT is referred to by family members, friends, and CWS staff.",
+              "maxLength": 20
+            },
+            "CREATN_DT": {
+              "type": "string",
+              "description": "CREATION_DATE - The date when a new client entry is entered into the CWS system.  This should be defaulted to the system date.",
+              "maxLength": 10,
+              "default": "2018-12-06"
+            },
+            "DRV_LIC_NO": {
+              "type": "string",
+              "description": "DRIVER_LICENSE_NUMBER - The driver license number of the CLIENT.",
+              "maxLength": 20
+            },
+            "GENDER_CD": {
+              "type": "string",
+              "description": "GENDER_CODE - Indicates the sex at birth of a CLIENT (e.g., F = female, M = male, I = intersex, U = unknown etc).",
+              "maxLength": 1
+            },
+            "NAME_TPC": {
+              "type": "integer",
+              "description": "NAME_TYPE - The system generated number which identifies the type of NAME for a CLIENT (e.g., legal, AKA, etc.).",
+              "minimum": -99999,
+              "maximum": 99999
+            },
+            "SS_NO": {
+              "type": "string",
+              "description": "SOCIAL_SECURITY_NUMBER - The Social Security Number for the CLIENT.",
+              "maxLength": 9
+            },
+            "SUFX_TLDSC": {
+              "type": "string",
+              "description": "SUFFIX_TITLE_DESCRIPTION - The suffix name of a CLIENT (e.g., Esq., M.D., Ph.D., D.D.S., etc.).",
+              "maxLength": 4
+            },
+            "EST_DOB_CD": {
+              "type": "string",
+              "description": "ESTIMATED_DOB_CODE - Indicates if the date of birth in the CLIENT entity is estimated (Y) or if a birth date was actually entered (N) or has not been provided (U).",
+              "maxLength": 1,
+              "default": "N"
+            },
+            "EMAIL_ADDR": {
+              "type": "string",
+              "description": "EMAIL_ADDRESS - The e-mail address for the CLIENT.",
+              "maxLength": 50
+            },
+            "CL_INDX_NO": {
+              "type": "string",
+              "description": "CLIENT_INDEX_NUMBER - This number is assigned by the Statewide Client Index (SCI).",
+              "maxLength": 12
+            },
+            "CLNT_SOC": {
+              "type": "integer",
+              "description": "SEXUAL_ORIENTATION_TYPE - The system generated number which identifies the CLIENT's Sexual Orientation  (e.g., asexual, bisexual, gay, etc.).",
+              "minimum": -99999,
+              "maximum": 99999
+            },
+            "SO_UD_CD": {
+              "type": "string",
+              "description": "SO_UNABLE_TO_DETERMINE_CODE - Indicates the reason the CLIENT?s Sexual Orientation could not be captured (e.g., D = did not ask, C = client does not know).",
+              "maxLength": 1,
+              "default": "D"
+            },
+            "CLNT_GIC": {
+              "type": "integer",
+              "description": "GENDER_IDENTITY_TYPE - The system generated number which identifies the CLIENT's Gender Identity  (e.g., female, male, unsure, etc.).",
+              "minimum": -99999,
+              "maximum": 99999
+            },
+            "CLNT_GEC": {
+              "type": "integer",
+              "description": "GENDER_EXPRESSION_TYPE - The system generated number which identifies the CLIENT's Gender Expression  (e.g., feminine, masculine, declines to state, etc.).",
+              "minimum": -99999,
+              "maximum": 99999
+            }
+          }
+        }
+      }
+    },
+    "putClient_response_200": {
+      "type": "object",
+      "properties": {
+        "DFHCOMMAREA": {
+          "type": "object",
+          "properties": {
+            "PROG_RETURN_CODE": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 99999999
+            },
+            "API_TIMESTAMP": {
+              "type": "string",
+              "maxLength": 26
+            },
+            "ERROR_MSG_TYPE": {
+              "type": "string",
+              "description": "Message Type can be E- Error, W-Warning, I- Informative,\r\nK-Fatal Error.",
+              "maxLength": 1
+            },
+            "ERROR_MSG_CODE": {
+              "type": "string",
+              "description": "Error Message Code returned from the Mainframe.\r\nFor eg 9000 ( Host 9000 Error).",
+              "maxLength": 4
+            },
+            "ERROR_MSG_RSN_CODE": {
+              "type": "string",
+              "description": "Error Message Reason Code can point to either a DB2 SQL Error Code or it can hold a Business Rule #. The Business Rule number helps the front end code to decode the reason behind the Error.",
+              "maxLength": 6
+            },
+            "ERROR_MSG_PART1": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ERROR_MSG_PART2": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ERROR_FOCUS_TABLE_NAME": {
+              "type": "string",
+              "maxLength": 8
+            },
+            "ERROR_FIELD_TEXT": {
+              "type": "string",
+              "maxLength": 254
+            },
+            "ADDITIONAL_DESC": {
+              "type": "string",
+              "maxLength": 31427
+            }
+          }
+        }
+      }
+    },
+    "deleteClient_request": {
+      "type": "object",
+      "properties": {
+        "CLIENT-DATA": {
+          "type": "object",
+          "properties": {
+            "TXN_HDR_STAFF_ID": {
+              "type": "string",
+              "description": "ID - A system generated sequential 3 digit base 62  number used to uniquely identify each STAFF  PERSON.This is the ID which is triggering the Transaction.",
+              "maxLength": 3
+            }
+          }
+        }
+      }
+    },
+    "deleteClient_response_200": {
+      "type": "object",
+      "properties": {
+        "DFHCOMMAREA": {
+          "type": "object",
+          "properties": {
+            "PROG_RETURN_CODE": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 99999999
+            },
+            "API_TIMESTAMP": {
+              "type": "string",
+              "maxLength": 26
+            },
+            "ERROR_MSG_TYPE": {
+              "type": "string",
+              "description": "Message Type can be E- Error, W-Warning, I- Informative,\r\nK-Fatal Error.",
+              "maxLength": 1
+            },
+            "ERROR_MSG_CODE": {
+              "type": "string",
+              "description": "Error Message Code returned from the Mainframe.\r\nFor eg 9000 ( Host 9000 Error).",
+              "maxLength": 4
+            },
+            "ERROR_MSG_RSN_CODE": {
+              "type": "string",
+              "description": "Error Message Reason Code can point to either a DB2 SQL Error Code or it can hold a Business Rule #. The Business Rule number helps the front end code to decode the reason behind the Error.",
+              "maxLength": 6
+            },
+            "ERROR_MSG_PART1": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ERROR_MSG_PART2": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "ERROR_FOCUS_TABLE_NAME": {
+              "type": "string",
+              "maxLength": 8
+            },
+            "ERROR_FIELD_TEXT": {
+              "type": "string",
+              "maxLength": 254
+            },
+            "ADDITIONAL_DESC": {
+              "type": "string",
+              "maxLength": 31427
+            }
+          }
+        }
+      }
+    }
+  }
+}
