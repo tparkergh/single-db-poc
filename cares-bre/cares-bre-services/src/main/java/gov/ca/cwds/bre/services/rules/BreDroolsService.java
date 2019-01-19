@@ -21,7 +21,6 @@ public class BreDroolsService extends DroolsService {
   public List<RuleDocumentation> getRuleDocuments(
       DroolsConfiguration config, 
       String kbase) throws DroolsException {
-    System.out.println("kbase = " + kbase);
     List<RuleDocumentation> ruleDocs = new ArrayList<>();
     KieContainer container = config.getKieContainer();  
     Collection<KiePackage> packages = container.getKieBase(kbase).getKiePackages();
