@@ -2,6 +2,8 @@ package gov.ca.cwds.cics.model.address;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import gov.ca.cwds.cics.binding.GeoLocationSerializer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -57,8 +59,10 @@ public class AddressData {
   @JsonProperty("UNIT_NO")
   private String unitNumber;
   @JsonProperty("LAT")
+  @JsonSerialize(using = GeoLocationSerializer.class)
   private Double latitude;
   @JsonProperty("LNG")
+  @JsonSerialize(using = GeoLocationSerializer.class)
   private Double longitude;
 
   public AddressData() {
