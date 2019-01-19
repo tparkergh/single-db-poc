@@ -27,6 +27,13 @@ public class SystemCodeServiceImpl implements SystemCodeService {
 
   @Override
   @ExecutionTimer
+  public SystemCode getSystemCodeById(Integer id) {
+    SystemCodeEntity entity = systemCodeRepository.findById(id).get();
+    return SystemCodeMapper.INSTANCE.mapToSystemCode(entity);
+  }
+
+  @Override
+  @ExecutionTimer
   public Collection<SystemCode> getSystemCodes(String metaName) {
     Collection<SystemCodeEntity> systemCodeEntities = systemCodeRepository.findByMetaName(metaName);
     return SystemCodeMapper.INSTANCE.mapToSystemCodes(systemCodeEntities);

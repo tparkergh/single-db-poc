@@ -7,6 +7,8 @@ import gov.ca.cwds.cares.services.interfaces.model.SystemMeta;
 
 public interface SystemCodeService {
 
+  SystemCode getSystemCodeById(Integer id);
+
   Collection<SystemMeta> getAllMetas();
 
   Collection<SystemCode> getSystemCodes(String metaName);

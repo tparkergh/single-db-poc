@@ -1,6 +1,8 @@
 package gov.ca.cwds.cares.services.service;
 
+import gov.ca.cwds.cares.services.interfaces.api.SystemCodeService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,9 @@ public class AddressServiceImpl implements AddressService {
   @Qualifier("CicsAddressUpdaterRestApiClient")
   private CicsAddressUpdaterRestApiClient cicsAddressUpdaterRestApiClient;
 
+  @Autowired
+  SystemCodeService systemCodeService;
+
   @Override
   @ExecutionTimer
   public Address updateAddress(Address address) {
@@ -51,7 +56,9 @@ public class AddressServiceImpl implements AddressService {
       GeoAddress geoAddress = new GeoAddress();
       geoAddress.setStreetAddress(String.format("%s %s", address.getStreetNumber(), address.getStreetName()));
       geoAddress.setCity(address.getCity());
-      geoAddress.setState("CA"); //hardcoded for now. system code service is coming
+      Optional.ofNullable(systemCodeService.getSystemCodeById(address.getStateCode())).ifPresent(
+          s -> geoAddress.setState(s.getUserDefinedLogicalId())
+      );
       geoAddress.setZip(String.valueOf(address.getZipCode()));
       List<GeoAddress> geoAddresses = geoService.validateAddress(geoAddress);
       if (geoAddresses.size() != 0) {
