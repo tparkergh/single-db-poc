@@ -13,3 +13,6 @@ INSERT INTO CWSINT.CL_ADDRT (IDENTIFIER,ADDR_TPC,BK_INMT_ID,EFF_END_DT,EFF_STRTD
 
 INSERT INTO CWSINT.CL_ADDRT (IDENTIFIER,ADDR_TPC,BK_INMT_ID,EFF_END_DT,EFF_STRTDT,LST_UPD_ID,LST_UPD_TS,FKADDRS_T,FKCLIENT_T,HOMLES_IND,FKREFERL_T) VALUES (
 'AaV9KlC04O',32,'          ',NULL,'2002-09-01','q48','2005-12-09 16:20:43.320','test-ad-10','test-cl-10','N','1arsht804O');
+
+INSERT INTO CWSINT.SYS_CD_C (SYS_ID,CATEGORYID,INACTV_IND,OTHER_CD,SHORT_DSC,LGC_ID,LST_UPD_ID,LST_UPD_TS,THIRD_ID,FKS_META_T,LONG_DSC) VALUES (
+1828,0,'N','  ','California                              ','CA  ','q25','1996-02-13 12:57:24.769','0000000000','STATE_C ','California                                                                                                                                                      ');

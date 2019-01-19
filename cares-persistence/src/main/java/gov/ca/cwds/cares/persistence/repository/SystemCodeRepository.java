@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import gov.ca.cwds.cares.persistence.entity.SystemCodeEntity;
 
 @Repository
-public interface SystemCodeRepository extends JpaRepository<SystemCodeEntity, String> {
+public interface SystemCodeRepository extends JpaRepository<SystemCodeEntity, Integer> {
 
   Collection<SystemCodeEntity> findByMetaName(String metaName);
 }
