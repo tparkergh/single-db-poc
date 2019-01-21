@@ -1,0 +1,24 @@
+global java.util.Set validationDetailsList
+
+rule "address-R-03232"
+
+  @doc_description("R - 03232 Zip codes are five digits")
+  
+  @doc_external_documentation("docTool")
+  @doc_enforcement_location("FE, BRE, ZOS")
+  @doc_rule_type("DocTool")
+  @doc_drools_file("address-R-03232.drl")
+  @doc_rule_name("ADDRESS-R-03232")
+  
+  @doc_doctool_name("R - 03232 Zip codes are five digits")
+  @doc_doctool_description("All zip codes entered must be 5 digits")
+  @doc_doctool_access_logic("")
+
+  dialect "mvel"
+  agenda-group "AddressBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end

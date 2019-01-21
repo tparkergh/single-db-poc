@@ -1,0 +1,24 @@
+global java.util.Set validationDetailsList
+
+rule "address-R-00725"
+
+  @doc_description("R - 00725 Street Name exigency")
+  
+  @doc_external_documentation("docTool")
+  @doc_enforcement_location("FE, BFE, ZOS")
+  @doc_rule_type("DocTool")
+  @doc_drools_file("address-R-00725.drl")
+  @doc_rule_name("ADDRESS-R-00725")
+  
+  @doc_doctool_name("R - 00725 Street Name exigency")
+  @doc_doctool_description("If Street Number is entered, then Street Name is mandatory")
+  @doc_doctool_access_logic("If ADDRESS.Street Number not = null, then ADDRESS.Street Name must not be blank")
+
+  dialect "mvel"
+  agenda-group "AddressBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end

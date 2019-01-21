@@ -1,4 +1,5 @@
 package gov.ca.cwds.bre.services.rules;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
@@ -7,22 +8,20 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
-import gov.ca.cwds.cics.model.Client;
-import gov.ca.cwds.cics.model.ClientData;
+import gov.ca.cwds.cics.model.address.AddressData;
 
 /**
  * @author CWDS J Team
  */
-@Component("ClientBusinessRules")
-public class ClientBusinessRules extends DroolsBusinessRuleBase<ClientData> {
+@Component("AddressBusinessRules")
+public class AddressBusinessRules extends DroolsBusinessRuleBase<AddressData>{
 
   @Autowired
   private ObjectMapper jacksonObjectMapper;
 
   @Override
-  protected Class<ClientData> getFactType() {
-    System.out.println(ClientData.class.toString());
-    return ClientData.class;
+  protected Class<AddressData> getFactType() {
+    return AddressData.class;
   }
 
   @Override

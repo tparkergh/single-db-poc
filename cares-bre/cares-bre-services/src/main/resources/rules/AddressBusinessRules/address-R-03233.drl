@@ -1,0 +1,24 @@
+global java.util.Set validationDetailsList
+
+rule "address-R-03233"
+
+  @doc_description("R - 03233 Zip+4 codes are four digits")
+  
+  @doc_external_documentation("docTool")
+  @doc_enforcement_location("FE, BRE, ZOS")
+  @doc_rule_type("DocTool")
+  @doc_drools_file("address-R-03233.drl")
+  @doc_rule_name("ADDRESS-R-03232")
+  
+  @doc_doctool_name("R - 03233 Zip+4 codes are four digits")
+  @doc_doctool_description("The Zip+4 field must always be blank or contain 4 digits")
+  @doc_doctool_access_logic("")
+
+  dialect "mvel"
+  agenda-group "AddressBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end
