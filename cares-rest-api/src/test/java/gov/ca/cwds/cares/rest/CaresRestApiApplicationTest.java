@@ -100,7 +100,7 @@ public class CaresRestApiApplicationTest {
         "/fixtures/address/cics-address-update-mock-response.json"), StandardCharsets.UTF_8);
     cicsMockServer.expect(
         content().json(cicsExpectedRequest))
-        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH))
+        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH + "/test-ad-10/2018-07-24-15.06.50.945749"))
         .andExpect(method(HttpMethod.PUT))
         .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));
 
@@ -136,7 +136,7 @@ public class CaresRestApiApplicationTest {
         "/fixtures/address/cics-address-update-mock-response.json"), StandardCharsets.UTF_8);
     cicsMockServer.expect(
         content().json(cicsExpectedRequest))
-        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH))
+        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH + "/test-ad-10/2018-07-24-15.06.50.945749"))
         .andExpect(method(HttpMethod.PUT))
         .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));
 
