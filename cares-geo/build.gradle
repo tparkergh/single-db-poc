@@ -3,6 +3,8 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 dependencies {
+    implementation project(':cares-common')
+
     implementation 'org.springframework.boot:spring-boot:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion
     implementation 'org.apache.httpcomponents:httpclient:' + apacheHttpclientVersion
