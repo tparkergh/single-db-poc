@@ -1,12 +1,15 @@
 package gov.ca.cwds.cares.geo.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.cares.geo.api.GeoService;
 import gov.ca.cwds.cares.geo.model.GeoAddress;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -22,9 +25,12 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component("GeoRestClient")
 public class GeoRestClient implements GeoService {
+  private static final Logger LOGGER = LoggerFactory.getLogger(GeoRestClient.class);
+
   public static final String ADDRESS_VALIDATION_PATH = "/address/validate";
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(GeoRestClient.class);
+  @Autowired
+  private ObjectMapper jacksonObjectMapper;
 
   @Value("${app.geo-service.base-url}")
   private String baseUrl;
@@ -46,11 +52,18 @@ public class GeoRestClient implements GeoService {
     LOGGER.info("Geo address request: {}", request);
     HttpEntity<GeoAddress> httpEntity = new HttpEntity<>(request);
 
-    ResponseEntity<List<GeoAddress>> exchange =
-        restTemplate.exchange(baseUrl + ADDRESS_VALIDATION_PATH, HttpMethod.POST, httpEntity,
-            new ParameterizedTypeReference<List<GeoAddress>>(){});
+    List<GeoAddress> response = new ArrayList<>();
+    try {
+      ResponseEntity<List<GeoAddress>> exchange =
+          restTemplate.exchange(baseUrl + ADDRESS_VALIDATION_PATH, HttpMethod.POST, httpEntity,
+              new ParameterizedTypeReference<List<GeoAddress>>() {
+              });
 
-    List<GeoAddress> response = exchange.getBody();
+      response = exchange.getBody();
+    } catch (Exception e) {
+      LOGGER.warn("Address is not deliverable");
+      response.add(request);
+    }
     LOGGER.info("Geo address response: {}", response);
     return response;
   }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import gov.ca.cwds.cares.common.binding.TrimmingSerializer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -16,10 +18,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GeoAddress {
+  @JsonSerialize(using = TrimmingSerializer.class)
   private String streetAddress;
+  @JsonSerialize(using = TrimmingSerializer.class)
   private String city;
+  @JsonSerialize(using = TrimmingSerializer.class)
   private String state;
+  @JsonSerialize(using = TrimmingSerializer.class)
   private String zip;
+  @JsonSerialize(using = TrimmingSerializer.class)
   private String zipExtension;
   private double longitude;
   private double lattitude;
