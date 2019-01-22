@@ -182,6 +182,10 @@ public class ReferralEntity implements Serializable {
   public void setAllegations(Collection<AllegationEntity> allegations) {
     this.allegations = allegations;
   }
+  
+  public void addAllegation(AllegationEntity allegation) {
+    this.allegations.add(allegation);
+  }
 
   @Override
   public int hashCode() {

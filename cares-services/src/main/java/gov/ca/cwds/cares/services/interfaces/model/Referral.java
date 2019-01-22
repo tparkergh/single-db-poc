@@ -152,6 +152,10 @@ public class Referral implements Serializable {
   public void setAllegations(Collection<Allegation> allegations) {
     this.allegations = allegations;
   }
+  
+  public void addAllegation(Allegation allegation) {
+    this.allegations.add(allegation);
+  }
 
   @Override
   public int hashCode() {
