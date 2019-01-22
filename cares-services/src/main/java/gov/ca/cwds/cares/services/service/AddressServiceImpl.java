@@ -1,6 +1,7 @@
 package gov.ca.cwds.cares.services.service;
 
 import gov.ca.cwds.cares.services.interfaces.api.SystemCodeService;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class AddressServiceImpl implements AddressService {
     AddressData addressData = AddressMapper.INSTANCE.mapToAddressData(address);
     CicsAddressRequest cicsAddressRequest = new CicsAddressRequest();
     cicsAddressRequest.setAddressData(addressData);
-    doCicsUpdateClientAddress(cicsAddressRequest);
+    doCicsUpdateClientAddress(cicsAddressRequest, address.getLastUpdateTimestamp());
     return address;
   }
   
@@ -70,8 +71,8 @@ public class AddressServiceImpl implements AddressService {
     return enrichedAddress;
   }
 
-  private CicsResponse doCicsUpdateClientAddress(CicsAddressRequest cicsAddressRequest) {
-    CicsResponse cicsAddressResponse = cicsAddressUpdaterRestApiClient.updateAddress(cicsAddressRequest);
+  private CicsResponse doCicsUpdateClientAddress(CicsAddressRequest cicsAddressRequest, LocalDateTime lastUpdateTimestamp) {
+    CicsResponse cicsAddressResponse = cicsAddressUpdaterRestApiClient.updateAddress(cicsAddressRequest, lastUpdateTimestamp);
     DfhCommArea dfhCommArea = cicsAddressResponse.getDfhCommArea();
     if (0 != dfhCommArea.getProgReturnCode()) {
       String message = String.format("Cannot update address. Error code %s. Message: %s%s ",

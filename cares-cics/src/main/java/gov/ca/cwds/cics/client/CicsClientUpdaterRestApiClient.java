@@ -1,6 +1,7 @@
 package gov.ca.cwds.cics.client;
 
 import gov.ca.cwds.cics.CicsRestApiHelper;
+import gov.ca.cwds.cics.Constants;
 import java.io.IOException;
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -41,14 +42,12 @@ public final class CicsClientUpdaterRestApiClient {
   public CicsResponse updateClient(CicsClientRequest clientRequest) {
     String clientId = clientRequest.getClientData().getIdentifier();
     LocalDateTime lastUpdatedDateTime = clientRequest.getClientData().getLstUpdTs();
-    String lastUpdatedDateTimeStr = lastUpdatedDateTime.format(
-        DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss.SSSSSS"));
 
     URI requestUri = UriComponentsBuilder
         .fromHttpUrl(baseUrl)
         .path(CLIENT_PATH)
         .path("/" + clientId)
-        .path("/" + lastUpdatedDateTimeStr)
+        .path("/" + lastUpdatedDateTime.format(Constants.CICS_TIMESTAMP_FORMATTER))
         .build().toUri();
     
     CicsClientRequest updatedClientRequest = getClientUpdateRequest(clientRequest);

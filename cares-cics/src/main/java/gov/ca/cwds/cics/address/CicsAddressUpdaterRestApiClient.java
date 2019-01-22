@@ -2,9 +2,11 @@ package gov.ca.cwds.cics.address;
 
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 import gov.ca.cwds.cics.CicsRestApiHelper;
+import gov.ca.cwds.cics.Constants;
 import gov.ca.cwds.cics.model.CicsResponse;
 import gov.ca.cwds.cics.model.address.CicsAddressRequest;
 import java.net.URI;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,11 +34,15 @@ public class CicsAddressUpdaterRestApiClient {
   }
 
   @ExecutionTimer
-  public CicsResponse updateAddress(CicsAddressRequest request) {
+  public CicsResponse updateAddress(CicsAddressRequest request, LocalDateTime lastUpdateTimestamp) {
     URI requestUri = UriComponentsBuilder
         .fromHttpUrl(baseUrl)
         .path(ADDRESS_PATH)
+        .path("/" + request.getAddressData().getIdentifier())
+        .path("/" + lastUpdateTimestamp.format(Constants.CICS_TIMESTAMP_FORMATTER))
         .build().toUri();
+
+    request.getAddressData().setIdentifier(null);
 
     CicsResponse response = cicsRestApiHelper.exchange(
         requestUri,
