@@ -14,7 +14,7 @@ import gov.ca.cwds.cares.services.mapping.ReferralMapper;
 public class ReferralServiceImpl implements ReferralService {
 
   @Autowired 
-  ReferralRepository referralRepository;
+  private ReferralRepository referralRepository;
   
   @Override
   public Collection<Referral> getAllReferrals() {
