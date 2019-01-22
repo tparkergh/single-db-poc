@@ -30,6 +30,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -94,15 +95,8 @@ public class CaresRestApiApplicationTest {
 
     MockRestServiceServer cicsMockServer = MockRestServiceServer.bindTo(cicsAddressUpdaterRestApiClient.getRestTemplate()).build();
 
-    String cicsExpectedRequest = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/address/cics-address-update-expected-request.json"), StandardCharsets.UTF_8);
-    String cicsMockResponse = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/address/cics-address-update-mock-response.json"), StandardCharsets.UTF_8);
-    cicsMockServer.expect(
-        content().json(cicsExpectedRequest))
-        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH + "/test-ad-10/2018-07-24-15.06.50.945749"))
-        .andExpect(method(HttpMethod.PUT))
-        .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));
+    verifyCicsUpdateAddressServiceCall(cicsMockServer,
+        "/fixtures/address/cics-address-update-expected-request.json", "/fixtures/address/cics-address-update-mock-response.json");
 
     RestTemplate addressRestTemplate = restTemplateBuilder.build();
     String request = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(
@@ -130,15 +124,8 @@ public class CaresRestApiApplicationTest {
 
     MockRestServiceServer cicsMockServer = MockRestServiceServer.bindTo(cicsAddressUpdaterRestApiClient.getRestTemplate()).build();
 
-    String cicsExpectedRequest = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/address/cics-address-update-expected-request.json"), StandardCharsets.UTF_8);
-    String cicsMockResponse = IOUtils.toString(getClass().getResourceAsStream(
-        "/fixtures/address/cics-address-update-mock-response.json"), StandardCharsets.UTF_8);
-    cicsMockServer.expect(
-        content().json(cicsExpectedRequest))
-        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH + "/test-ad-10/2018-07-24-15.06.50.945749"))
-        .andExpect(method(HttpMethod.PUT))
-        .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));
+    verifyCicsUpdateAddressServiceCall(cicsMockServer,
+        "/fixtures/address/cics-address-update-expected-request.json", "/fixtures/address/cics-address-update-mock-response.json");
 
     RestTemplate addressRestTemplate = restTemplateBuilder.build();
     String request = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(
@@ -168,5 +155,18 @@ public class CaresRestApiApplicationTest {
         .andExpect(requestTo(geoServiceBaseUrl + GeoRestClient.ADDRESS_VALIDATION_PATH))
         .andExpect(method(HttpMethod.POST))
         .andRespond(withSuccess(mockResponse, MediaType.APPLICATION_JSON));
+  }
+
+  private void verifyCicsUpdateAddressServiceCall(MockRestServiceServer mockServer, String expectedRequestPath, String mockResponsePath) throws IOException {
+    String cicsExpectedRequest = IOUtils.toString(getClass().getResourceAsStream(
+        expectedRequestPath), StandardCharsets.UTF_8);
+    String cicsMockResponse = IOUtils.toString(getClass().getResourceAsStream(
+        mockResponsePath), StandardCharsets.UTF_8);
+    mockServer.expect(
+        content().json(cicsExpectedRequest))
+        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH + "/test-ad-10/2018-07-24-15.06.50.945749"))
+        .andExpect(method(HttpMethod.PUT))
+        .andExpect(header("Authorization", "Basic dGVzdC1jaWNzLXNlcnZpY2UtdXNlcm5hbWU6dGVzdC1jaWNzLXNlcnZpY2UtcGFzc3dvcmQ="))
+        .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));
   }
 }

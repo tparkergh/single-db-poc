@@ -6,6 +6,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
+import javax.annotation.PostConstruct;
 import javax.net.ssl.SSLContext;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -48,7 +48,7 @@ public class CicsRestApiHelper {
   private String password;
   
   private final RestTemplate restTemplate;
-  private final HttpHeaders httpHeaders;
+  private HttpHeaders httpHeaders;
 
   public CicsRestApiHelper(RestTemplateBuilder restTemplateBuilder) {
     restTemplate = restTemplateBuilder.basicAuthorization(username, password).build();
@@ -58,7 +58,10 @@ public class CicsRestApiHelper {
 
     requestFactory.setHttpClient(httpClient);
     restTemplate.setRequestFactory(requestFactory);
-    
+  }
+
+  @PostConstruct
+  private void initHeaders() {
     httpHeaders = new HttpHeaders();
     httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
