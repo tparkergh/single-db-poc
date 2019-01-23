@@ -42,7 +42,7 @@ Cares BRE Rest API
 - http://api-a.sblegacy.cwds.io:3006/swagger-ui.html#/bre-rest-controller
 
 Cares Rest API
-- http://api-a.sblegacy.cwds.io:3007/swagger-ui.html#/client-controller
+- http://api-a.sblegacy.cwds.io:3007/swagger-ui.html#
 
 Cares UI
 - http://api-a.sblegacy.cwds.io:3008/
@@ -57,7 +57,7 @@ Cares BRE Rest API
 - http://localhost:3006/swagger-ui.html#/bre-rest-controller
 
 Cares Rest API
-- http://localhost:3007/swagger-ui.html#/client-controller
+- http://localhost:3007/swagger-ui.html#
 
 Cares UI
 - http://localhost:3008/
