@@ -1,4 +1,4 @@
-version: '2.0'
+version: '2.1'
 services:
   cares-ui:
     image: cwds/cares-ui
