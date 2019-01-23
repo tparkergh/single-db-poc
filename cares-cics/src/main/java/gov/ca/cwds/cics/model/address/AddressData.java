@@ -14,6 +14,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddressData {
+  @JsonProperty("TXN_HDR_STAFF_ID")
+  private String txnHeaderStaffId;
   @JsonProperty("IDENTIFIER")
   private String identifier;
   @JsonProperty("CITY_NM")
@@ -66,6 +68,14 @@ public class AddressData {
   private Double longitude;
 
   public AddressData() {
+  }
+
+  public String getTxnHeaderStaffId() {
+    return txnHeaderStaffId;
+  }
+
+  public void setTxnHeaderStaffId(String txnHeaderStaffId) {
+    this.txnHeaderStaffId = txnHeaderStaffId;
   }
 
   public String getIdentifier() {
