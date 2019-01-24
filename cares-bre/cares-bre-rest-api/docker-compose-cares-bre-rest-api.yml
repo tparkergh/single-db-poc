@@ -1,4 +1,4 @@
-version: '2.0'
+version: '2.1'
 services:
   cares-bre-rest-api:
     image: cwds/cares-bre-rest-api
