@@ -37,7 +37,7 @@ jar {
 dependencies {
 	implementation project(':cares-common')
     implementation project(':cares-cics:cares-cics-interfaces')
-    implementation project(':cares-geo:cares-geo-rest-client')
+    implementation project(':cares-geo:cares-geo-interfaces')
     implementation project(':cares:cares-interfaces')
     implementation project(':cares:cares-services')
 
@@ -60,6 +60,8 @@ dependencies {
         exclude group: 'io.dropwizard'
     }
 
+    testImplementation project(':cares-geo:cares-geo-rest-client')
+    testImplementation project(':cares-cics:cares-cics-rest-client')
     testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
     testImplementation 'org.springframework.boot:spring-boot-starter-jdbc:' + springBootVersion
 
