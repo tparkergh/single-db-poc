@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
-import gov.ca.cwds.cics.model.address.AddressData;
+import gov.ca.cwds.cics.model.AddressData;
 
 /**
  * @author CWDS J Team
