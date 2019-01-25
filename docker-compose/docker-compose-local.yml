@@ -19,7 +19,7 @@ services:
 
   cares-rest-api:
     extends:
-      file: ./../cares-rest-api/docker-compose-cares-rest-api.yml
+      file: ./../cares/cares-rest-api/docker-compose-cares-rest-api.yml
       service: cares-rest-api
     container_name: cares-rest-api
     ports:
