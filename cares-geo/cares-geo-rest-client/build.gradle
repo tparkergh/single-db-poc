@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    implementation project(':cares-geo:cares-geo-interfaces')
+
+    implementation 'org.springframework.boot:spring-boot:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion
+    implementation 'org.apache.httpcomponents:httpclient:' + apacheHttpclientVersion
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+}

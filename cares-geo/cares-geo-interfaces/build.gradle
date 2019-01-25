@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    implementation project(':cares-common')
+
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+}

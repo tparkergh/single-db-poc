@@ -1,17 +1,21 @@
 rootProject.name = 'single-db-poc'
 
-include 'cares-bre'
 include 'cares-bre:cares-bre-interfaces'
 include 'cares-bre:cares-bre-services'
-include 'cares-bre:cares-bre-client'
+include 'cares-bre:cares-bre-rest-client'
 include 'cares-bre:cares-bre-rest-api'
 
-include 'cares-geo'
-include 'cares-cics'
+include 'cares:cares-persistence'
+include 'cares:cares-interfaces'
+include 'cares:cares-rest-api'
+include 'cares:cares-services'
+
+include 'cares-geo:cares-geo-interfaces'
+include 'cares-geo:cares-geo-rest-client'
+
+include 'cares-cics:cares-cics-interfaces'
+include 'cares-cics:cares-cics-rest-client'
+
 include 'cares-cics-mock-rest-api'
 include 'cares-common'
-include 'cares-persistence'
-include 'cares-interfaces'
-include 'cares-rest-api'
-include 'cares-services'
 include 'cares-ui'

@@ -1,0 +1,17 @@
+plugins {
+    id 'net.ltgt.apt' version '0.15'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'net.ltgt.apt-idea'
+apply plugin: 'net.ltgt.apt-eclipse'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    implementation project(':cares-common')
+
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+}
