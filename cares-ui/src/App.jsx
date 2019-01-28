@@ -2,16 +2,24 @@ import './App.css'
 import React from 'react'
 import { Page } from '@cwds/components'
 import { Main } from './Main.jsx'
-import { SideNav } from './SideNav'
+import SideNav from './SideNav'
 import JsonBRE from 'JsonBRE'
 import { Rules } from './rules'
+import axios from 'axios'
+import { getAllSystemCodesRoute } from './routes'
+import { setSystemCodes } from './actions'
+import { connect } from 'react-redux'
 
 import '@cwds/core/dist/styles.css'
 
-export class App extends React.Component {
+class App extends React.Component {
   componentDidMount () {
     const engine = new JsonBRE()
     Rules.map((rule) => engine.define(rule))
+    axios({
+      url: getAllSystemCodesRoute(),
+      method: 'get'
+    }).then((response) => this.props.setSystemCodes(response.data))
   }
 
   render () {
@@ -28,3 +36,7 @@ export class App extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = { setSystemCodes }
+
+export default connect(undefined, mapDispatchToProps)(App)

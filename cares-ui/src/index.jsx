@@ -1,6 +1,6 @@
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import { App } from './App'
+import App from './App'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from './reducers'
