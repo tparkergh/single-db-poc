@@ -2,8 +2,7 @@ global java.util.Set validationDetailsList
 
 rule "address-R-00725"
 
-  @doc_description("R - 00725 Street Name exigency")
-  
+  @doc_description("R - 00725 Street Name exigency") 
   @doc_external_documentation("docTool")
   @doc_enforcement_location("FE, BFE, ZOS")
   @doc_rule_type("DocTool")

@@ -20,8 +20,8 @@ rule "address-di-government-entity-type"
   @doc_di_nullable("false")
   @doc_di_mandatory("false")
   @doc_di_default("")
-  @doc_di_validation_table("")
-  @doc_di_validation_category("")
+  @doc_di_validation_table("SYS_CD_C")
+  @doc_di_validation_category("GVR_ENTC")
   @doc_di_validation_sub_category("")
   @doc_di_validation_values("")
 

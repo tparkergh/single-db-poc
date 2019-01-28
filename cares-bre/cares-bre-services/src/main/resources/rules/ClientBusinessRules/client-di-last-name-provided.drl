@@ -5,14 +5,14 @@ import org.drools.core.util.StringUtils;
 
 global java.util.Set validationDetailsList
 
-rule "client-last-name-provided"
+rule "client-ri-last-name-provided"
   @doc_description("Last name must be provided")
   
   @doc_external_documentation("xTools")
   @doc_enforcement_location("CARES BRE")
   @doc_rule_type("DataIntegrity")
-  @doc_drools_file("client-last-name-provided.drl")
-  @doc_rule_name("Client last name provided")
+  @doc_drools_file("client-di-last-name-provided.drl")
+  @doc_rule_name("CLIENT-DI-LAST-NAME-PROVIDED")
   
   @doc_doctool_name("")
   @doc_doctool_description("")
@@ -34,9 +34,6 @@ rule "client-last-name-provided"
   @doc_ri_relationship("")
   @doc_ri_related_entity("")
   @doc_ri_related_attribute("")
-
-  @doc_cpi_name("")
-  @doc_cpi_description("")
   
   dialect "mvel"
   agenda-group "ClientBusinessRules-validation-agenda"

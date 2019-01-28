@@ -6,7 +6,7 @@ rule "address-ri-client-address"
   
   @doc_external_documentation("xTools")
   @doc_enforcement_location("BRE, ZOS")
-  @doc_rule_type("DataIntegrity")
+  @doc_rule_type("ReferentialIntegrity")
   @doc_drools_file("address-ri-client-address.drl")
   @doc_rule_name("ADDRESS-RI-CLIENT-ADDRESS")
   
@@ -30,9 +30,6 @@ rule "address-ri-client-address"
   @doc_ri_relationship("locates")
   @doc_ri_related_entity("CLIENT_ADDRESS")
   @doc_ri_related_attribute("FKADDRS_T")
-
-  @doc_cpi_name("")
-  @doc_cpi_description("")
 
   dialect "mvel"
   agenda-group "AddressBusinessRules-validation-agenda"
