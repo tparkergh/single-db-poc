@@ -298,6 +298,7 @@
 "@neutrinojs/env@^8.3.0":
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/@neutrinojs/env/-/env-8.3.0.tgz#265722162dd94a02ac5e108c9aefbcbe52435358"
+  integrity sha1-JlciFi3ZSgKsXhCMmu+8vlJDU1g=
   dependencies:
     webpack "^3.12.0"
     webpack-sources "1.0.1"
@@ -305,6 +306,7 @@
 "@neutrinojs/eslint@^8.3.0":
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/@neutrinojs/eslint/-/eslint-8.3.0.tgz#98e86c9cddcf9a735df014bafd9d0df56bb04efb"
+  integrity sha1-mOhsnN3PmnNd8BS6/Z0N9WuwTvs=
   dependencies:
     babel-eslint "^8.2.3"
     debug "^3.1.0"
@@ -4886,6 +4888,11 @@ immutable@^3.8.2:
   version "3.8.2"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
+immutable@^4.0.0-rc.12:
+  version "4.0.0-rc.12"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.0.0-rc.12.tgz#ca59a7e4c19ae8d9bf74a97bdf0f6e2f2a5d0217"
+  integrity sha512-0M2XxkZLx/mi3t8NVwIm1g8nHoEmM9p9UBl/G9k4+hm0kBgOVdMV/B3CY5dQ8qG8qc80NN4gDV4HQv6FTJ5q7A==
+
 import-fresh@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546"
@@ -6651,6 +6658,11 @@ normalize-url@^1.4.0, normalize-url@^1.9.1:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
+
+normalizr@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/normalizr/-/normalizr-3.3.0.tgz#6f44b95e8bf2201845a9e551920c4e5861166d27"
+  integrity sha512-u8Us8Ms5KpY0mmNwML4OBxNKvlmSKeXfPBIXU9XmcejrZUjhIvUOd8RYBq62UL4JHxrcO4wqo2sL4s8B74Hadw==
 
 npm-bundled@^1.0.1:
   version "1.0.5"
