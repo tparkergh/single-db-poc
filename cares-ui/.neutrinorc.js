@@ -10,6 +10,15 @@ module.exports = {
     '@neutrinojs/react',
     [
       '@neutrinojs/dev-server', { disableHostCheck: true }
+    ],
+    ['@neutrinojs/env', ['CARES_API_URL']],
+    ['@neutrinojs/eslint', {
+      eslint: {
+        rules: {
+          'new-cap': ["error", { "capIsNew": false }]
+        }
+      }
+    }
     ]
   ]
 };
