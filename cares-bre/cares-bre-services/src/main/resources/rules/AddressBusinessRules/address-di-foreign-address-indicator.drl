@@ -19,7 +19,7 @@ rule "address-di-foreign-address-indicator"
   @doc_di_type("string")
   @doc_di_nullable("false")
   @doc_di_mandatory("true")
-  @doc_di_default("")
+  @doc_di_default("N")
   @doc_di_validation_table("")
   @doc_di_validation_category("")
   @doc_di_validation_sub_category("")
@@ -31,9 +31,6 @@ rule "address-di-foreign-address-indicator"
   @doc_ri_relationship("")
   @doc_ri_related_entity("")
   @doc_ri_related_attribute("")
-
-  @doc_cpi_name("")
-  @doc_cpi_description("")
 
   dialect "mvel"
   agenda-group "AddressBusinessRules-validation-agenda"

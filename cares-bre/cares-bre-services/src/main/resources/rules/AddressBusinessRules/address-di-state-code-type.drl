@@ -31,9 +31,6 @@ rule "address-di-state-code-type"
   @doc_ri_related_entity("")
   @doc_ri_related_attribute("")
 
-  @doc_cpi_name("")
-  @doc_cpi_description("")
-
   dialect "mvel"
   agenda-group "AddressBusinessRules-validation-agenda"
     when

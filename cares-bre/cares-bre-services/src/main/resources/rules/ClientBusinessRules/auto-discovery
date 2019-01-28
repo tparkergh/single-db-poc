@@ -1,7 +1,5 @@
-client-restricted-last-updated-id.drl
-client-first-name-provided.drl
-client-last-name-provided.drl
-client-age-validation.drl
-client-assign-last-updated-id.drl
-client-referential-integrity.drl
-client-primary-language-validation.drl
+client-di-first-name-provided.drl
+client-di-last-name-provided.drl
+client-R-05609.drl
+client-ri-child-client.drl
+client-di-primary-language-validation.drl
