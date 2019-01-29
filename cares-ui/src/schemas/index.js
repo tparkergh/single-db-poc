@@ -12,8 +12,14 @@ export const referral = new schema.Entity('referral', {
 
 export const referrals = new schema.Array(referral)
 
-export const systemCode = new schema.Entity('systemCode', {}, {
+export const systemMeta = new schema.Entity('systemMeta', {}, {
   idAttribute: 'meta_name'
+})
+
+export const systemMetas = new schema.Array(systemMeta)
+
+export const systemCode = new schema.Entity('systemCode', {}, {
+  idAttribute: 'system_id'
 })
 
 export const systemCodes = new schema.Array(systemCode)
