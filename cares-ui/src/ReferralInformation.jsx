@@ -10,7 +10,7 @@ import {
 import React from 'react'
 import axios from 'axios'
 import { getSystemCodesRoute } from './routes'
-import { setSystemCodes } from './actions'
+import { addSystemCodes } from './actions'
 import {
   Card,
   CardHeader,
@@ -41,7 +41,7 @@ class ReferralInformation extends React.Component {
       axios({
         url: getSystemCodesRoute(meta),
         method: 'get'
-      }).then((response) => this.props.setSystemCodes(response.data))
+      }).then((response) => this.props.addSystemCodes(response.data))
     )
   }
 
@@ -160,7 +160,7 @@ class ReferralInformation extends React.Component {
   }
 }
 
-const mapDispatchToProps = { setSystemCodes }
+const mapDispatchToProps = { addSystemCodes }
 
 const mapStateToProps = (state, ownProps) => {
   return ({
