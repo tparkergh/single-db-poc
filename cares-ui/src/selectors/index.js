@@ -1,7 +1,13 @@
 import { fromJS, Map, isImmutable } from 'immutable'
 
 const createSelector = (f, state) => {
-  const result = f(fromJS(state))
+  if (isImmutable(state)) {
+    return maybeToJS(f(state))
+  }
+  return maybeToJS(f(fromJS(state)))
+}
+
+const maybeToJS = (result) => {
   if (result && result.toJS) {
     return result.toJS()
   }
@@ -21,21 +27,21 @@ export const selectReferrals = (rawState) => createSelector(
 )
 
 export const selectCurrentReferral = (rawState) => createSelector(
-  (state) => state.getIn(['entities', 'referral', selectCurrentReferralId(rawState)]) || Map(),
+  (state) => state.getIn(['entities', 'referral', selectCurrentReferralId(state)]) || Map(),
   rawState
 )
 
 export const selectOpenClient = (rawState) => createSelector(
-  (state) => state.getIn(['entities', 'client', selectOpenClientId(rawState)]) || Map(),
+  (state) => state.getIn(['entities', 'client', selectOpenClientId(state)]) || Map(),
   rawState
 )
 
 export const selectOpenClientId = (rawState) => createSelector(
-  (state) => state.getIn(['entities', 'allegation', selectOpenAllegationId(rawState), 'victim_client_id']),
+  (state) => state.getIn(['entities', 'allegation', selectOpenAllegationId(state), 'victim_client_id']),
   rawState
 )
 
 export const selectOpenAllegationId = (rawState) => createSelector(
-  (state) => state.getIn(['entities', 'referral', selectCurrentReferralId(rawState), 'allegations', 0]),
+  (state) => state.getIn(['entities', 'referral', selectCurrentReferralId(state), 'allegations', 0]),
   rawState
 )
