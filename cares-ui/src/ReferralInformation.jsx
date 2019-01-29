@@ -11,6 +11,7 @@ import React from 'react'
 import axios from 'axios'
 import { getSystemCodesRoute } from './routes'
 import { addSystemCodes } from './actions'
+import { ReferralInformationOptions } from './ReferralInformationOptions'
 import {
   Card,
   CardHeader,
@@ -63,7 +64,7 @@ class ReferralInformation extends React.Component {
       approvalStatusOptions,
       communicationMethodOptions,
       governmentEntityOptions,
-      responsibileAgencyOptions,
+      responsibleAgencyOptions,
       referralResponseOptions
     } = this.props
     return (
@@ -76,39 +77,27 @@ class ReferralInformation extends React.Component {
               <FormGroup row>
                 <Col>
                   <Label>Approval Status</Label>
-                  <Input type='select' name='approval_status' id='approval_status'>
-                    { approvalStatusOptions.map(({key, option}) =>
-                      <option
-                        key={key}
-                        selected={ key === approvalStatusCode }
-                        disabled={ key !== approvalStatusCode }
-                      >{option}</option>) 
-                    }
-                  </Input>
+                  <ReferralInformationOptions
+                    name='approval_status'
+                    options={approvalStatusOptions}
+                    code={approvalStatusCode}
+                  />
                 </Col>
                 <Col>
                   <Label>Communication Method</Label>
-                  <Input type='select' name='communication_entity' id='communication_entity'>
-                    { communicationMethodOptions.map(({key, option}) =>
-                      <option
-                        key={key}
-                        selected={ key === communicationMethodCode }
-                        disabled={ key !== communicationMethodCode  }
-                      >{option}</option>) 
-                    }
-                  </Input>
+                  <ReferralInformationOptions
+                    name='communication_method'
+                    options={communicationMethodOptions}
+                    code={communicationMethodCode}
+                  />
                 </Col>
                 <Col>
                   <Label>Government Entity</Label>
-                  <Input type='select' name='government_entity' id='government_entity'>
-                    { governmentEntityOptions.map(({key, option}) =>
-                      <option
-                        key={key}
-                        selected={ key === governmentEntityCode }
-                        disabled={ key !== governmentEntityCode }
-                      >{option}</option>) 
-                    }
-                  </Input>
+                  <ReferralInformationOptions
+                    name='government_entity'
+                    options={governmentEntityOptions}
+                    code={governmentEntityCode}
+                  />
                 </Col>
               </FormGroup>
               <FormGroup row>
@@ -134,26 +123,19 @@ class ReferralInformation extends React.Component {
               <FormGroup row>
                 <Col>
                   <Label>Responsible Agency</Label>
-                  <Input type='select' name='responsible_agency' id='responsible_agency'>
-                    { responsibileAgencyOptions.map(({key, option}) =>
-                      <option
-                        key={key}
-                        selected={ key === responsibleAgencyCode }
-                      >{option}</option>) 
-                    }
-                  </Input>
+                  <ReferralInformationOptions
+                    name='responsible_agency'
+                    options={responsibleAgencyOptions}
+                    code={responsibleAgencyOptions}
+                  />
                 </Col>
                 <Col>
                   <Label>Referral Response</Label>
-                  <Input type='select' name='referral_response' id='referral_response'>
-                    { referralResponseOptions.map(({key, option}) =>
-                      <option
-                        key={key}
-                        selected={ key === responseTypeCode }
-                        disabled={ key !== responseTypeCode }
-                      >{option}</option>) 
-                    }
-                  </Input>
+                  <ReferralInformationOptions
+                    name='referral_response'
+                    options={referralResponseOptions}
+                    code={responseTypeCode}
+                  />
                 </Col>
               </FormGroup>
             </Form>
@@ -172,7 +154,7 @@ const mapStateToProps = (state, ownProps) => {
     approvalStatusOptions: selectApprovalStatusOptions(state),
     communicationMethodOptions: selectCommunicationMethodOptions(state),
     governmentEntityOptions: selectGovernmentEntityOptions(state),
-    responsibileAgencyOptions: selectResponsibleAgencyOptions(state),
+    responsibleAgencyOptions: selectResponsibleAgencyOptions(state),
     referralResponseOptions: selectReferralResponseOptions(state)
   })
 }
