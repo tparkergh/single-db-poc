@@ -8,7 +8,7 @@ import {
   SET_REFERRALS,
   SET_CLIENT,
   SET_SYSTEM_METAS,
-  SET_SYSTEM_CODES,
+  ADD_SYSTEM_CODES,
   OPEN_REFERRAL
 } from '../actions'
 import { normalize } from 'normalizr'
@@ -40,7 +40,7 @@ export default (state = {}, action) => {
           ...normalize(action.payload, systemMetas).entities
         }
       }
-    case SET_SYSTEM_CODES:
+    case ADD_SYSTEM_CODES:
       const sysCodes = state.entities && state.entities.systemCode || {}
       return {
         ...state,

@@ -14,7 +14,7 @@ const maybeToJS = (result) => {
   return result
 }
 
-const selectCurrentReferralId = (rawState) => createSelector(
+export const selectCurrentReferralId = (rawState) => createSelector(
   (state) => state.get('openReferralId'),
   rawState
 )

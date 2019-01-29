@@ -2,7 +2,7 @@ export const SET_REFERRALS = 'SET_REFERRALS'
 export const SET_CLIENT = 'SET_CLIENTS'
 export const OPEN_REFERRAL = 'OPEN_REFERRAL'
 export const SET_SYSTEM_METAS = 'SET_SYSTEM_METAS'
-export const SET_SYSTEM_CODES = 'SET_SYSTEM_CODES'
+export const ADD_SYSTEM_CODES = 'ADD_SYSTEM_CODES'
 
 export const setReferrals = payload => ({
   type: SET_REFERRALS,
@@ -19,8 +19,8 @@ export const setSystemMetas = payload => ({
   payload
 })
 
-export const setSystemCodes = payload => ({
-  type: SET_SYSTEM_CODES,
+export const addSystemCodes = payload => ({
+  type: ADD_SYSTEM_CODES,
   payload
 })
 
