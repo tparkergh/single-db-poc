@@ -81,6 +81,7 @@ class ReferralInformation extends React.Component {
                       <option
                         key={key}
                         selected={ key === approvalStatusCode }
+                        disabled={ key !== approvalStatusCode }
                       >{option}</option>) 
                     }
                   </Input>
@@ -92,6 +93,7 @@ class ReferralInformation extends React.Component {
                       <option
                         key={key}
                         selected={ key === communicationMethodCode }
+                        disabled={ key !== communicationMethodCode  }
                       >{option}</option>) 
                     }
                   </Input>
@@ -103,6 +105,7 @@ class ReferralInformation extends React.Component {
                       <option
                         key={key}
                         selected={ key === governmentEntityCode }
+                        disabled={ key !== governmentEntityCode }
                       >{option}</option>) 
                     }
                   </Input>
@@ -147,6 +150,7 @@ class ReferralInformation extends React.Component {
                       <option
                         key={key}
                         selected={ key === responseTypeCode }
+                        disabled={ key !== responseTypeCode }
                       >{option}</option>) 
                     }
                   </Input>
