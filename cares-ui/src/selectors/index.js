@@ -45,3 +45,40 @@ export const selectOpenAllegationId = (rawState) => createSelector(
   (state) => state.getIn(['entities', 'referral', selectCurrentReferralId(state), 'allegations', 0]),
   rawState
 )
+
+export const selectApprovalStatusOptions = (rawState) => createSelector(
+  selectOptionsByMetaName('APV_STC'),
+  rawState
+)
+
+export const selectCommunicationMethodOptions = (rawState) => createSelector(
+  selectOptionsByMetaName('CMM_MTHC'),
+  rawState
+)
+
+export const selectGovernmentEntityOptions = (rawState) => createSelector(
+  selectOptionsByMetaName('GVR_ENTC'),
+  rawState
+)
+
+export const selectResponsibleAgencyOptions = (rawState) => createSelector(
+  selectOptionsByMetaName('AGN_RSPC'),
+  rawState
+)
+
+export const selectReferralResponseOptions = (rawState) => createSelector(
+  selectOptionsByMetaName('RFR_RSPC'),
+  rawState
+)
+
+const selectOptionsByMetaName = (metaName) => (rawState) => createSelector(
+  (state) => state.getIn(['entities', 'systemCode'], Map())
+  .filter((systemCode) => systemCode.get('meta_name').includes(metaName))
+  .toList()
+  .map((systemCode) => Map({
+    key: systemCode.get('system_id'),
+    option: systemCode.get('short_description', '').trim()
+  }))
+  .sortBy((systemCode) => systemCode.get('key')) ,
+  rawState
+)
