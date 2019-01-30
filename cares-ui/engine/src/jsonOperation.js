@@ -1,11 +1,8 @@
 import ArrayOperation from './arrayOperation'
-import StringOperation from './stringOperation'
-export default class Operation {
+import JsonEntity from './jsonEntity'
+
+export default class JsonOperation {
   constructor (definition) {
-    if ((typeof definition) === 'string') {
-      return new StringOperation(definition)
-    }
-    // otherwise this is a true operation
     const operator = Object.keys(definition)[0]
     this.value = definition[operator]
 
@@ -22,7 +19,7 @@ export default class Operation {
   }
 
   applies (selector) {
-    const operation = new Operation(this.value)
+    const operation = new JsonEntity(this.value)
     return operation.applies(selector)
   }
 }

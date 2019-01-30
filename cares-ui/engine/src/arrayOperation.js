@@ -1,11 +1,11 @@
-import Operation from './operation'
+import JsonEntity from './jsonEntity'
 
 export default class ArrayOperation {
   constructor (values) {
-    this.operations = values.map((value) => new Operation(value))
+    this.entities = values.map((value) => new JsonEntity(value))
   }
 
   applies (selector) {
-    return this.operations.some((operation) => operation.applies(selector))
+    return this.entities.some((entity) => entity.applies(selector))
   }
 }

@@ -1,9 +1,9 @@
-import Operation from './operation'
+import JsonOperation from './jsonOperation'
 export default class Rule {
   constructor ({ identifier, definition }) {
     this.identifier = identifier
     this.definition = definition
-    this.operation = new Operation(definition)
+    this.operation = new JsonOperation(definition)
   }
 
   applies (selector) {
