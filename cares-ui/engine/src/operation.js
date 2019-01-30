@@ -1,9 +1,8 @@
 import ArrayOperation from './arrayOperation'
 import StringOperation from './stringOperation'
-import { tokenize } from './tokenizer'
 export default class Operation {
   constructor (definition) {
-    if (typeof(definition) === 'string') {
+    if ((typeof definition) === 'string') {
       return new StringOperation(definition)
     }
     // otherwise this is a true operation

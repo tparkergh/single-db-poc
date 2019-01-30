@@ -22,7 +22,7 @@ export default class JsonBRE {
   destroy (predicate) {
     Object.values(this.rules)
       .filter(predicate)
-      .map((rule) => delete(this.rules[rule.identifier]))
+      .map((rule) => (delete this.rules[rule.identifier]))
   }
 
   reset () {

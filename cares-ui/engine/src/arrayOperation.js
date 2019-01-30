@@ -1,5 +1,4 @@
 import Operation from './operation'
-import { tokenize } from './tokenizer'
 
 export default class ArrayOperation {
   constructor (values) {

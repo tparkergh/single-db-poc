@@ -5,7 +5,7 @@ export default class StringOperation {
     this.value = definition
   }
 
-  applies(selector) {
+  applies (selector) {
     return this.value === selector || tokenize(this.value).includes(selector)
   }
 }
