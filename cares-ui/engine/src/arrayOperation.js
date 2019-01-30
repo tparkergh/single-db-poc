@@ -1,9 +1,9 @@
-import Operator from './operator'
+import Operation from './operation'
 import { tokenize } from './tokenizer'
 
-export default class ArrayOperator {
+export default class ArrayOperation {
   constructor (values) {
-    this.values = values.map((value) => new Operator(value))
+    this.values = values.map((value) => new Operation(value))
   }
 
   applies (selector) {

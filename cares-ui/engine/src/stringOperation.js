@@ -1,6 +1,6 @@
 import { tokenize } from './tokenizer'
 
-export default class StringOperator {
+export default class StringOperation {
   constructor (definition) {
     this.value = definition
   }

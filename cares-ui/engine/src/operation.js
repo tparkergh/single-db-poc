@@ -1,10 +1,10 @@
-import ArrayOperator from './arrayOperator'
-import StringOperator from './stringOperator'
+import ArrayOperation from './arrayOperation'
+import StringOperation from './stringOperation'
 import { tokenize } from './tokenizer'
-export default class Operator {
+export default class Operation {
   constructor (definition) {
     if (typeof(definition) === 'string') {
-      return new StringOperator(definition)
+      return new StringOperation(definition)
     }
     // otherwise this is a true operation
     const operator = Object.keys(definition)[0]
@@ -12,18 +12,18 @@ export default class Operator {
 
     switch (operator) {
       case '<=':
-        return new ArrayOperator(this.value)
+        return new ArrayOperation(this.value)
       case '>=':
-        return new ArrayOperator(this.value)
+        return new ArrayOperation(this.value)
       case 'missing':
-        return new ArrayOperator(this.value)
+        return new ArrayOperation(this.value)
       default:
         return this
     }
   }
 
   applies (selector) {
-    const operation = new Operator(this.value)
+    const operation = new Operation(this.value)
     return operation.applies(selector)
   }
 }
