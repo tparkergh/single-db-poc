@@ -1,19 +1,13 @@
+import JsonOperation from './jsonOperation'
 export default class Rule {
   constructor ({ identifier, definition }) {
     this.identifier = identifier
     this.definition = definition
+    this.operation = new JsonOperation(definition)
   }
 
   applies (selector) {
-    return this.find(this.definition, { 'var': selector })
-  }
-
-  find (object, data) {
-    const callback = (accumulator, current) => (accumulator || this.find(current, data))
-    const values = Object.values(object).flat()
-    if (JSON.stringify(object) === JSON.stringify(data)) { return true }
-    if (values && values.length <= 1) { return false }
-    if (values) { return values.reduce(callback.bind(this), false) }
+    return this.operation.applies(selector)
   }
 
   render () {
