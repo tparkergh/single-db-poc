@@ -6,4 +6,6 @@ export const getReferralByIdRoute = (id) => caresApiRoute(`/referrals/${id}`)
 
 export const getClientByIdRoute = (id) => caresApiRoute(`/clients/${id}`)
 
-export const getAllSystemCodesRoute = (id) => caresApiRoute('/system_metas')
+export const getAllSystemMetasRoute = () => caresApiRoute('/system_metas')
+
+export const getSystemCodesRoute = (meta) => caresApiRoute(`/system_codes/${meta}`)

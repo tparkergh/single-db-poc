@@ -1,12 +1,14 @@
 import {
   referrals,
+  systemMetas,
   systemCodes,
   client
 } from '../schemas'
 import {
   SET_REFERRALS,
   SET_CLIENT,
-  SET_SYSTEM_CODES,
+  SET_SYSTEM_METAS,
+  ADD_SYSTEM_CODES,
   OPEN_REFERRAL
 } from '../actions'
 import { normalize } from 'normalizr'
@@ -30,12 +32,24 @@ export default (state = {}, action) => {
           ...normalize(action.payload, client).entities
         }
       }
-    case SET_SYSTEM_CODES:
+    case SET_SYSTEM_METAS:
       return {
         ...state,
         entities: {
           ...state.entities,
-          ...normalize(action.payload, systemCodes).entities
+          ...normalize(action.payload, systemMetas).entities
+        }
+      }
+    case ADD_SYSTEM_CODES:
+      const sysCodes = state.entities && state.entities.systemCode || {}
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          systemCode: {
+            ...sysCodes,
+            ...normalize(action.payload, systemCodes).entities.systemCode
+          }
         }
       }
     case OPEN_REFERRAL:
