@@ -1,4 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import axios from 'axios'
+
 import {
   FormGroup,
   Input,
@@ -10,23 +13,71 @@ import {
   Button
 } from '@cwds/reactstrap'
 
+import { selectStateOptions, selectAddressTypeOptions, selectAddresses} from './selectors'
+import { getSystemCodesRoute, getClientAddressesByClientIdRoute } from './routes'
+import { addSystemCodes, setAddresses, saveAddress } from './actions'
+import { ReferralInformationOptions } from './ReferralInformationOptions'
+
 import '@cwds/core/dist/styles.css'
+
+const METAS = [
+  'STATE_C',
+  'ADDR_TPC'
+]
+
+const getFullAddress = (address, stateOptions) => {
+  return address.street_number + ' '
+      + address.street_name + ', '
+      + address.city + ", "
+      + (stateOptions && stateOptions.find((o) => {return o.key == address.state_code}).option) + ' '
+      + address.zip_code;
+}
 
 export class Addresses extends React.Component {
   state = {
-    currentIndex: -1
+    currentIndex: -1,
   }
+
+  componentDidMount () {
+    METAS.map((meta) =>
+      axios({
+        url: getSystemCodesRoute(meta),
+        method: 'get'
+      }).then((response) => this.props.addSystemCodes(response.data))
+    )
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.clientId !== prevProps.clientId) {
+      axios({
+        url: getClientAddressesByClientIdRoute(this.props.clientId),
+        method: 'get'
+      }).then((response) => this.props.setAddresses(response.data))
+    }
+/*
+    this.setState({
+      addresses: this.props.addresses
+    })
+*/
+  }
+
   render () {
-    const addresses = [1, 2]
+    //<!--Input type='text' name='street' value={address.city.trim()} onChange={(event) => this.setState({city: event.target.value})}/-->
+
+    const addresses = this.props.addresses
+    //const addresses = this.state.addresses
+    const stateOptions = this.props.stateOptions
+    const addressTypeOptions = this.props.addressTypeOptions
+
     return (
       <div>
         <Label>Addresses</Label>
         <ListGroup>
           {
-            addresses.map((address, index) =>
+            addresses && addresses.map((address, index) =>
               <ListGroupItem>
                 <div>
-                  First St First City, CA 94716
+                  {getFullAddress(address, stateOptions)}
                   <Button
                     color='link'
                     className='float-right'
@@ -40,29 +91,37 @@ export class Addresses extends React.Component {
                   <FormGroup row>
                     <Col>
                       <Label>Address</Label>
-                      <Input type='text' name='street' value='First St' />
+                      <Input type='text' name='street' defaultValue={ address.street_number + ' ' + address.street_name } />
                     </Col>
                     <Col>
                       <Label>City</Label>
-                      <Input type='text' name='street' value='First City' />
+                      <Input type='text' name='city' defaultValue={ address.city }/>
                     </Col>
                   </FormGroup>
                   <FormGroup row>
                     <Col>
                       <Label>State</Label>
-                      <Input type='text' name='street' value='CA' />
+                      <ReferralInformationOptions
+                          name='state_code'
+                          options={ stateOptions }
+                          code={ address.state_code }
+                      />
                     </Col>
                     <Col>
                       <Label>Zip</Label>
-                      <Input type='text' name='street' value='94716' />
+                      <Input type='text' name='zip' defaultValue={ address.zip_code } />
                     </Col>
                     <Col>
                       <Label>Address Type</Label>
-                      <Input type='text' name='street' value='Home' />
+                      <ReferralInformationOptions
+                          name='address_type'
+                          options={ addressTypeOptions }
+                          code={ address.address_type }
+                      />
                     </Col>
                     <Col>
                       <Label>Latitude/Longitude</Label>
-                      <Input type='text' name='latitudelongitude' value='102.756,110.295' />
+                      <Input type='text' name='latitudelongitude' value={ address.latitude + ', ' + address.longitude } />
                     </Col>
                   </FormGroup>
                   <FormGroup check row>
@@ -82,3 +141,14 @@ export class Addresses extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+    addresses: selectAddresses(state),
+    stateOptions: selectStateOptions(state),
+    addressTypeOptions: selectAddressTypeOptions(state)
+})
+
+const mapDispatchToProps = { addSystemCodes, setAddresses, saveAddress }
+
+export default connect(mapStateToProps, mapDispatchToProps) (Addresses)
+

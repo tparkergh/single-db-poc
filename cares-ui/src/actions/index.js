@@ -3,6 +3,7 @@ export const SET_CLIENT = 'SET_CLIENTS'
 export const OPEN_REFERRAL = 'OPEN_REFERRAL'
 export const SET_SYSTEM_METAS = 'SET_SYSTEM_METAS'
 export const ADD_SYSTEM_CODES = 'ADD_SYSTEM_CODES'
+export const SET_ADDRESSES = 'SET_ADDRESSES'
 
 export const setReferrals = payload => ({
   type: SET_REFERRALS,
@@ -27,4 +28,9 @@ export const addSystemCodes = payload => ({
 export const openReferral = (id) => ({
   type: OPEN_REFERRAL,
   id
+})
+
+export const setAddresses = payload => ({
+  type: SET_ADDRESSES,
+  payload
 })

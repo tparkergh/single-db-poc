@@ -27,3 +27,9 @@ export const systemCodes = new schema.Array(systemCode)
 export const client = new schema.Entity('client', {}, {
   idAttribute: 'identifier'
 })
+
+export const clientAddress = new schema.Entity('clientAddress', {}, {
+  idAttribute: 'identifier'
+})
+
+export const clientAddresses = new schema.Array(clientAddress)
