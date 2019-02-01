@@ -35,7 +35,7 @@ rule "client-ri-first-name-provided"
     client: Client(StringUtils.isEmpty(clientData.comFstNm))    
   then
     IssueDetails details = new IssueDetails();
-    details.setUserMessage(rule.getMetaData().get("rule_description") + ", client: " + client.clientData.identifier);
+    details.setUserMessage(rule.getMetaData().get("doc_description") + ", client: " + client.clientData.identifier);
     details.setCode(drools.getRule().getName());
     details.setType(IssueType.BUSINESS_VALIDATION);
     details.setProperty("client.clientData.comFstNm");

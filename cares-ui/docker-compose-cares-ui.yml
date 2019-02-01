@@ -5,3 +5,5 @@ services:
     container_name: cares-ui
     ports:
       - '3008:5000'
+    environment:
+      CARES_API_URL: http://api-a.sblegacy.cwds.io:3007

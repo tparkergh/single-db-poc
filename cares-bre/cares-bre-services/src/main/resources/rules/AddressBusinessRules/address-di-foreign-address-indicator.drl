@@ -1,3 +1,8 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.AddressData;
+import org.drools.core.util.StringUtils;
+
 global java.util.Set validationDetailsList
 
 rule "address-di-foreign-address-indicator"
@@ -28,9 +33,19 @@ rule "address-di-foreign-address-indicator"
 
   dialect "mvel"
   agenda-group "AddressBusinessRules-validation-agenda"
-    when
-        //conditions
-    then
-        //actions
-
+  
+  when
+    addressData: AddressData(
+      StringUtils.isEmpty(foreignAddressIndicator) || 
+      foreignAddressIndicator.length() != 1 ||
+      !foreignAddressIndicator.matches("Y|N")      
+    )
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + ", address: " + addressData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.BUSINESS_VALIDATION);
+    details.setProperty("addressData.foreignAddressIndicator");
+    details.setInvalidValue(addressData.foreignAddressIndicator);
+    validationDetailsList.add(details);
 end
