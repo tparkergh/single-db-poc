@@ -15,9 +15,6 @@ rule "address-di-foreign-address-indicator"
   @doc_rule_type("xTool")
   @doc_drools_file("address-di-foreign-address-indicator.drl")
   @doc_rule_name("ADDRESS-DI-FOREIGN-ADDRESS-INDICATOR")
-  
-  @doc_doctool_name("")
-  @doc_doctool_description("")
 
   @doc_di_entity("ADDRESS")
   @doc_di_attribute("FOREIGN_ADDRESS_IND_VAR")

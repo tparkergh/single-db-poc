@@ -5,11 +5,11 @@ rule "address-R-05923"
   @doc_description("R - 05923 Update Uppercase Entity")
   
   @doc_external_documentation("docTool")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("ZOS")
   @doc_rule_type("DataProcessing")
   @doc_drools_file("address-R-05923.drl")
   @doc_rule_name("ADDRESS-R-05923")
-  @doc_rule_category("DataIntegrity")
+  @doc_rule_category("DataProcessing")
   
   @doc_doctool_name("R - 05923 Update Uppercase Entity")
   @doc_doctool_description("When user adds, updates, or deletes an entity for which an uppercase entity exists, translate the source entity to uppercase then add, update, or delete the corresponding uppercase entity. The only exception to this is when archiving an ADDRESS, CLIENT, or OTHER_CLIENT_NAME, do not delete the corresponding uppercase row.")

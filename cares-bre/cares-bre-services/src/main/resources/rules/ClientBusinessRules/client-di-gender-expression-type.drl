@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-gender-expression-type"
 
   @doc_description("Gender Expression Type must valid")
   

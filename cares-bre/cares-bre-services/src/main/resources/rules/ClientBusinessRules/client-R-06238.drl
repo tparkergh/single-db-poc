@@ -7,7 +7,7 @@ rule "client-R-06238"
   @doc_rule_name("CLIENT-R-06238")
   
   @doc_doctool_name("R - 06238 Social Security Number Must Be Numeric")
-  @doc_doctool_description("Any alleged victim(s) must be known or assumed to be under 19 years of age at the time the referral was received")
+  @doc_doctool_description("Do not allow user entry of non-numeric characters in the social security number.")
   @doc_doctool_access_logic("")
   
   dialect "mvel"

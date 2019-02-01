@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-estimated-dob-code"
 
   @doc_description("Estimated DOB Code must be valid")
   

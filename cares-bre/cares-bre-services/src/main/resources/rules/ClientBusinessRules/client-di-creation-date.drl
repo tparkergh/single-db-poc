@@ -1,12 +1,12 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-creation-date"
 
   @doc_description("Creation Date must be a valid date")
   
   @doc_drools_file("client-ri-creation-date.drl")
   @doc_external_documentation("xTools Application")
-  @doc_enforcement_location("FE, BRE, ZOS")
+  @doc_enforcement_location("BRE, ZOS")
   @doc_rule_category(dataIntegrity)
   @doc_rule_name("CLIENT-DI-CREATION-DATE")
   @doc_rule_type(xTool)

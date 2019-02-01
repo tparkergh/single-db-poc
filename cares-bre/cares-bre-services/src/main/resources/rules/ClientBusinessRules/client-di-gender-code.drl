@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-gender-code"
 
   @doc_description("Gender Code must be valid")
   

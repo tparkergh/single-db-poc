@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-suffix-title-description"
 
   @doc_description("Suffix Title Description")
   

@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-gender-identity"
 
   @doc_description("Gender Identity must be valid")
   

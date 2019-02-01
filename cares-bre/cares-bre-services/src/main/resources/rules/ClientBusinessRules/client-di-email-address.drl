@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-ri-email-address"
 
   @doc_description("Email Address")
   

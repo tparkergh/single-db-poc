@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-social-security-number"
 
   @doc_description("Social Security Number")
   

@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "client-ri-client-idex-number"
+rule "client-ri-client-index-number"
 
   @doc_description("Client Index Number")
   

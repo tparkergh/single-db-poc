@@ -1,13 +1,13 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-sexual-orientation-type"
 
   @doc_description("Sexual Orientation Type must be valid")
   
   @doc_drools_file("client-di-sexual-orientation-type.drl")
   @doc_external_documentation("xTools Application")
   @doc_enforcement_location("FE, BRE, ZOS")
-  @doc_rule_category(dataIntegrity)
+  @doc_rule_category("DataIntegrity, Validation")
   @doc_rule_name("CLIENT-DI-SEXUAL-ORIENTATION-TYPE")
   @doc_rule_type(xTool)
   

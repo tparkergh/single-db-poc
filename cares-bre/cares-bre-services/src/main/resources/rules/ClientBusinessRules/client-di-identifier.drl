@@ -1,6 +1,6 @@
 global java.util.Set validationDetailsList
 
-rule "template"
+rule "client-di-identifier"
 
   @doc_description("Client Identifier must be 10 characters")
   
