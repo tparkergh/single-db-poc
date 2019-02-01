@@ -28,7 +28,7 @@ public class AddressBusinessRules extends DroolsBusinessRuleBase<AddressData>{
   protected BreRequest getSampleBreRequest() {
     BreRequest breRequest = null;
     try {
-      String sampleRequest = IOUtils.toString(getClass().getResourceAsStream("/fixtures/rules/ClientBusinessRules-sample-request.json"), StandardCharsets.UTF_8);    
+      String sampleRequest = IOUtils.toString(getClass().getResourceAsStream("/fixtures/rules/AddressBusinessRules-sample-request.json"), StandardCharsets.UTF_8);    
       breRequest = jacksonObjectMapper.readValue(sampleRequest, BreRequest.class);
     } catch (IOException e) {
       throw new BreException(e.getMessage(), e);

@@ -1,3 +1,8 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.AddressData;
+import org.drools.core.util.StringUtils;
+
 global java.util.Set validationDetailsList
 
 rule "address-R-00725"
@@ -15,9 +20,15 @@ rule "address-R-00725"
 
   dialect "mvel"
   agenda-group "AddressBusinessRules-validation-agenda"
-    when
-        //conditions
-    then
-        //actions
-
+  
+  when
+    addressData: AddressData(!StringUtils.isEmpty(streetNumber) && StringUtils.isEmpty(streetName))
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + ", address: " + addressData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.BUSINESS_VALIDATION);
+    details.setProperty("addressData.streetName");
+    details.setInvalidValue(addressData.streetName);
+    validationDetailsList.add(details);
 end
