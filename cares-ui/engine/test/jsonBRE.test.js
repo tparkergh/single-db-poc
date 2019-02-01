@@ -26,18 +26,18 @@ describe('JsonBRE', () => {
   describe('define', () => {
     it('should define a rule that is passed in', () => {
       const engine = new JsonBRE()
-      expect(engine.define(simpleRule)).toEqual(simpleRule)
+      expect(engine.define(simpleRule)).toEqual(new Rule(simpleRule))
       expect(engine.rules['simple-rule']).toEqual(new Rule(simpleRule))
     })
 
     it('should re-define a rule that already exists', () => {
       const newRule = new Rule({
         identifier: 'simple-rule',
-        definition: {}
+        definition: { "==": [1,2] }
       })
       const engine = new JsonBRE()
       expect(engine.define(simpleRule)).toEqual(new Rule(simpleRule))
-      expect(engine.rules['simple-rule']).toEqual(simpleRule)
+      expect(engine.rules['simple-rule']).toEqual(new Rule(simpleRule))
       expect(engine.define(newRule)).toEqual(newRule)
       expect(engine.rules['simple-rule']).toEqual(newRule)
     })
@@ -63,7 +63,7 @@ describe('JsonBRE', () => {
     it('should find rules based on their identifiers', () => {
       const engine = new JsonBRE()
       engine.define(simpleRule)
-      expect(engine.find((rule) => ( rule.identifier === 'simple-rule' ))).toEqual([simpleRule])
+      expect(engine.find((rule) => ( rule.identifier === 'simple-rule' ))).toEqual([new Rule(simpleRule)])
     })
 
     it('should return empty array when it does not find a rule based on its identifier', () => {
