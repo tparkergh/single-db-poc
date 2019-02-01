@@ -28,13 +28,6 @@ rule "client-ri-last-name-provided"
   @doc_di_validation_category("")
   @doc_di_validation_sub_category("")
 
-  @doc_ri_entity("")
-  @doc_ri_attribute("")
-  @doc_ri_cardinality("")
-  @doc_ri_relationship("")
-  @doc_ri_related_entity("")
-  @doc_ri_related_attribute("")
-  
   dialect "mvel"
   agenda-group "ClientBusinessRules-validation-agenda"
   when

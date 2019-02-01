@@ -1,0 +1,42 @@
+global java.util.Set validationDetailsList
+
+rule "referral-ri-staff-person"
+
+  @doc_description("Referral has one primary contact")
+  
+  @doc_external_documentation("xTools")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_drools_file("referral-ri-staff-person.drl")
+  @doc_rule_category("ReferentialIntegrity")
+  @doc_rule_name("REFERRAL-RI-STAFF-PERSON")
+  @doc_rule_type(xTool)
+  
+  @doc_doctool_name("")
+  @doc_doctool_description("")
+
+  @doc_di_entity("")
+  @doc_di_attribute("")
+  @doc_di_length("")
+  @doc_di_type("")
+  @doc_di_nullable("")
+  @doc_di_mandatory("")
+  @doc_di_default("")
+  @doc_di_validation_table("")
+  @doc_di_validation_category("")
+  @doc_di_validation_sub_category("")
+	
+  @doc_ri_entity("REFERRAL")
+  @doc_ri_attribute("FKSTFPERST")
+  @doc_ri_cardinality("one to one")
+  @doc_ri_relationship("has as the primary contact")
+  @doc_ri_related_entity("STAFF_PERSON")
+  @doc_ri_related_attribute("ID")
+
+  dialect "mvel"
+  agenda-group "ReferralBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end

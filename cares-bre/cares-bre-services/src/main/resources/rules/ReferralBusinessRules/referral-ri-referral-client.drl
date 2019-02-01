@@ -1,15 +1,16 @@
 global java.util.Set validationDetailsList
 
-rule "address-ri-client-address"
+rule "referral-ri-referral-client"
 
-  @doc_description("Address is associated to one or more Client Address")
+  @doc_description("Referral has one to many Referral Clients")
   
   @doc_external_documentation("xTools Application")
   @doc_enforcement_location("BRE, ZOS")
-  @doc_rule_type("xTool")
-  @doc_drools_file("address-ri-client-address.drl")
-  @doc_rule_name("ADDRESS-RI-CLIENT-ADDRESS")
+  @doc_rule_type("ReferentialIntegrity")
+  @doc_drools_file("referral-ri-referral-client.drl")
   @doc_rule_category("ReferentialIntegrity")
+  @doc_rule_name("REFERRAL-RI-REFERRAL-CLIENT")
+  @doc_rule_type(xTool)
   
   @doc_doctool_name("")
   @doc_doctool_description("")
@@ -25,15 +26,15 @@ rule "address-ri-client-address"
   @doc_di_validation_category("")
   @doc_di_validation_sub_category("")
 	
-  @doc_ri_entity("ADDRESS")
+  @doc_ri_entity("REFERRAL")
   @doc_ri_attribute("ID")
   @doc_ri_cardinality("one to many")
-  @doc_ri_relationship("locates")
-  @doc_ri_related_entity("CLIENT_ADDRESS")
-  @doc_ri_related_attribute("FKADDRS_T")
+  @doc_ri_relationship("names")
+  @doc_ri_related_entity("REFERRAL_CLIENT")
+  @doc_ri_related_attribute("FKREFERL_T")
 
   dialect "mvel"
-  agenda-group "AddressBusinessRules-validation-agenda"
+  agenda-group "ReferralBusinessRules-validation-agenda"
     when
         //conditions
     then

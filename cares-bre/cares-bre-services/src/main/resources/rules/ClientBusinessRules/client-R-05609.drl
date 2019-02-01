@@ -10,7 +10,7 @@ rule "client-R-05609"
   @doc_external_documentation("docTools")
   @doc_enforcement_location("BRE, ZOS")
   @doc_rule_type("DocTool")
-  @doc_drools_file("client-age-validation.drl")
+  @doc_drools_file("client-R-05609.drl")
   @doc_rule_name("CLIENT-R-05609")
   
   @doc_doctool_name("R - 05609 Victim must be <19")

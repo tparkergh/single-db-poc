@@ -1,0 +1,20 @@
+rule "client-R-06238"
+  @doc_description("R - 06238 Social Security Number Must Be Numeric")
+  @doc_external_documentation("docTools")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_rule_type("DocTool")
+  @doc_drools_file("client-R-06238.drl")
+  @doc_rule_name("CLIENT-R-06238")
+  
+  @doc_doctool_name("R - 06238 Social Security Number Must Be Numeric")
+  @doc_doctool_description("Any alleged victim(s) must be known or assumed to be under 19 years of age at the time the referral was received")
+  @doc_doctool_access_logic("")
+  
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end

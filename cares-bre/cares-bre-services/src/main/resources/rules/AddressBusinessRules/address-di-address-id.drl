@@ -4,11 +4,12 @@ rule "address-di-address-id"
 
   @doc_description("Address Id must be 10 characters")
   
-  @doc_external_documentation("xTools")
+  @doc_external_documentation("xTools Application")
   @doc_enforcement_location("BRE, ZOS")
-  @doc_rule_type("DataIntegrity")
   @doc_drools_file("address-di-address-id.drl")
-  @doc_rule_name("ADDRESS-DI-ADDRESS-ID")
+  @doc_rule_category("DataIntegrity")
+  @doc_rule_name("ADDRESS-DI-ADDRESS-ID"
+  @doc_rule_type(xTool)
   
   @doc_doctool_name("")
   @doc_doctool_description("")

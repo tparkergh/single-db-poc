@@ -9,6 +9,7 @@ rule "address-R-04925"
   @doc_rule_type("DocTool")
   @doc_drools_file("address-R-04925.drl")
   @doc_rule_name("ADDRESS-R-04925")
+ @doc_rule_category("DataIntegrity")
   
   @doc_doctool_name("R - 04925 City Name Mandatory with Domestic Addres")
   @doc_doctool_description("When entering a domestic address, a City Name is required.")

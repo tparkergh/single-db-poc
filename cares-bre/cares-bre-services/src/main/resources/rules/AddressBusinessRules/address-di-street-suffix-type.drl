@@ -4,11 +4,12 @@ rule "address-di-street-suffix-type"
 
   @doc_description("Street Suffix must be valid in SYS_CD_C/ST_SFX_C else 0")
   
-  @doc_external_documentation("xTools")
-  @doc_enforcement_location("BRE, ZOS")
-  @doc_rule_type("DataIntegrity")
+  @doc_external_documentation("xTools Application")
+  @doc_enforcement_location("FE, BRE")
+  @doc_rule_category("DataIntegrity, Validation")
   @doc_drools_file("address-di-street-suffix-type.drl")
   @doc_rule_name("ADDRESS-DI-STREET-SUFFIX-TYPE")
+  @doc_rule_type("xTool")
   
   @doc_doctool_name("")
   @doc_doctool_description("")

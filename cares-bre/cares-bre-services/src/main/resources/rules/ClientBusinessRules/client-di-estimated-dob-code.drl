@@ -1,0 +1,33 @@
+global java.util.Set validationDetailsList
+
+rule "template"
+
+  @doc_description("Estimated DOB Code must be valid")
+  
+  @doc_drools_file("client-di-estimated-dob-code.drl")
+  @doc_external_documentation("xTools Application")
+  @doc_enforcement_location("FE, BRE, ZOS")
+  @doc_rule_category(dataIntegrity)
+  @doc_rule_name("CLIENT-DI-ESTIMATED-DOB-CODE")
+  @doc_rule_type(xTool)
+  
+  @doc_di_entity(CLIENT)
+  @doc_di_attribute(ESTIMATED_DOB_CODE)
+  @doc_di_length(1)
+  @doc_di_type(char)
+  @doc_di_nullable(false)
+  @doc_di_mandatory(true)
+  @doc_di_default(N)
+  @doc_di_validation_table()
+  @doc_di_validation_category()
+  @doc_di_validation_sub_category()
+  @doc_di_validation_values("Y = Yes, N = No, U = Unkown")
+  
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end

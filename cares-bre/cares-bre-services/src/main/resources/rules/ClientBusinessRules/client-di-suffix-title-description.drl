@@ -1,0 +1,33 @@
+global java.util.Set validationDetailsList
+
+rule "template"
+
+  @doc_description("Suffix Title Description")
+  
+  @doc_drools_file("client-di-suffix-title-description.drl")
+  @doc_external_documentation("xTools Application")
+  @doc_enforcement_location("FE, BRE, ZOS")
+  @doc_rule_category(dataIntegrity)
+  @doc_rule_name("CLIENT-DI-SUFFIX-TITLE-DESCRIPTION")
+  @doc_rule_type(xTool)
+  
+  @doc_di_entity(CLIENT)
+  @doc_di_attribute(SUFFIX_TITLE_DESCRIPTION)
+  @doc_di_length(4)
+  @doc_di_type(char)
+  @doc_di_nullable(false)
+  @doc_di_mandatory(false)
+  @doc_di_default(" ")
+  @doc_di_validation_table()
+  @doc_di_validation_category()
+  @doc_di_validation_sub_category()
+  @doc_di_validation_values()
+  
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end

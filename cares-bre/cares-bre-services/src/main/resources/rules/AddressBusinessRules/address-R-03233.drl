@@ -9,6 +9,7 @@ rule "address-R-03233"
   @doc_rule_type("DocTool")
   @doc_drools_file("address-R-03233.drl")
   @doc_rule_name("ADDRESS-R-03232")
+ @doc_rule_category("DataIntegrity")
   
   @doc_doctool_name("R - 03233 Zip+4 codes are four digits")
   @doc_doctool_description("The Zip+4 field must always be blank or contain 4 digits")
