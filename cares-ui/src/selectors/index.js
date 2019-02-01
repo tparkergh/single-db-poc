@@ -47,27 +47,21 @@ export const selectOpenAllegationId = (rawState) => createSelector(
 )
 
 export const selectAddresses = (rawState) => createSelector(
-  (state) => {
-    let addresses = [];
-    let clientAddresses = state.getIn(['entities', 'clientAddress'], Map());
-      clientAddresses.forEach(function(clientAddress) {
-        let address = clientAddress.get('address', Map());
-        addresses.push({
-            street_number: address.get('street_number', '').trim(),
-            street_name: address.get('street_name', '').trim(),
-            city: address.get('city', '').trim(),
-            state_code: address.get('state_code', ''),
-            zip_code: address.get('zip_code', ''),
-            latitude: address.get('latitude', ''),
-            longitude: address.get('longitude', ''),
-            address_type: clientAddress.get('address_tytpe_code', '')
-          });
-      });
-    return addresses;
-  },
+  (state) => state.getIn(['entities', 'clientAddress'], Map())
+    .toList()
+    .map((clientAddress) => ({
+      streetNumber: clientAddress.getIn(['address', 'street_number'], '').trim(),
+      streetName:  clientAddress.getIn(['address', 'street_name'], '').trim(),
+      city:  clientAddress.getIn(['address', 'city'], '').trim(),
+      stateCode:  clientAddress.getIn(['address', 'state_code'], ''),
+      zipCode:  clientAddress.getIn(['address', 'zip_code'], ''),
+      latitude:  clientAddress.getIn(['address', 'latitude'], ''),
+      longitude:  clientAddress.getIn(['address', 'longitude'], ''),
+      addressType:  clientAddress.get('address_tytpe_code', '')
+    })
+  ),
   rawState
 )
-
 
 export const selectApprovalStatusOptions = (rawState) => createSelector(
   selectOptionsByMetaName('APV_STC'),
@@ -100,15 +94,8 @@ export const selectAddressTypeOptions = (rawState) => createSelector(
 )
 
 export const selectStateOptions = (rawState) => createSelector(
-  (state) => state.getIn(['entities', 'systemCode'], Map())
-  .filter((systemCode) => systemCode.get('meta_name').includes('STATE_C'))
-  .toList()
-  .map((systemCode) => Map({
-    key: systemCode.get('system_id'),
-    option: systemCode.get('user_defined_logical_id', '').trim()
-  }))
-  .sortBy((systemCode) => systemCode.get('key')) ,
-  rawState
+    selectOptionsByMetaName('STATE_C', 'user_defined_logical_id'),
+    rawState
 )
 
 const selectOptionsByMetaName = (metaName, filedName = 'short_description') => (rawState) => createSelector(
@@ -117,7 +104,7 @@ const selectOptionsByMetaName = (metaName, filedName = 'short_description') => (
   .toList()
   .map((systemCode) => Map({
     key: systemCode.get('system_id'),
-    option: systemCode.get('short_description', '').trim()
+    option: systemCode.get(filedName, '').trim()
   }))
   .sortBy((systemCode) => systemCode.get('key')) ,
   rawState

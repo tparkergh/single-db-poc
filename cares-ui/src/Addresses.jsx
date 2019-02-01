@@ -26,11 +26,11 @@ const METAS = [
 ]
 
 const getFullAddress = (address, stateOptions) => {
-  return address.street_number + ' '
-      + address.street_name + ', '
+  return address.streetNumber + ' '
+      + address.streetName + ', '
       + address.city + ", "
-      + (stateOptions && stateOptions.find((o) => {return o.key == address.state_code}).option) + ' '
-      + address.zip_code;
+      + (stateOptions && stateOptions.find((o) => {return o.key == address.stateCode}).option) + ' '
+      + address.zipCode;
 }
 
 export class Addresses extends React.Component {
@@ -91,7 +91,7 @@ export class Addresses extends React.Component {
                   <FormGroup row>
                     <Col>
                       <Label>Address</Label>
-                      <Input type='text' name='street' defaultValue={ address.street_number + ' ' + address.street_name } />
+                      <Input type='text' name='street' defaultValue={ address.streetNumber + ' ' + address.streetName } />
                     </Col>
                     <Col>
                       <Label>City</Label>
@@ -104,19 +104,19 @@ export class Addresses extends React.Component {
                       <ReferralInformationOptions
                           name='state_code'
                           options={ stateOptions }
-                          code={ address.state_code }
+                          code={ address.stateCode }
                       />
                     </Col>
                     <Col>
                       <Label>Zip</Label>
-                      <Input type='text' name='zip' defaultValue={ address.zip_code } />
+                      <Input type='text' name='zip' defaultValue={ address.zipCode } />
                     </Col>
                     <Col>
                       <Label>Address Type</Label>
                       <ReferralInformationOptions
                           name='address_type'
                           options={ addressTypeOptions }
-                          code={ address.address_type }
+                          code={ address.addressType }
                       />
                     </Col>
                     <Col>
