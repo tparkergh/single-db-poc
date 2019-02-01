@@ -1,13 +1,13 @@
 import JsonBRE from '../../src/jsonBRE'
 import Rule from '../../src/rule'
-import { DATA_OPERATIONS } from '../../src/operations.js'
+import { STRING_OPERATIONS } from '../../src/operations.js'
 
-describe('Data Accessor Operators', () => {
-  DATA_OPERATIONS.map((operation) =>
+describe('String Operators', () => {
+  STRING_OPERATIONS.map((operation) =>
     describe(`"${operation}"`, () => {
       it('must be supported', () => {
-        const definition = {}
-        definition[operation] = "client"
+          const definition = {}
+          definition[operation] = [{"var": "client"}, 2]
         const rule = new Rule({
           identifier: `${operation}`,
           definition
@@ -19,8 +19,8 @@ describe('Data Accessor Operators', () => {
       })
 
       it('must support dot notation', () => {
-        const definition = {}
-        definition[operation] = "client.name"
+          const definition = {}
+          definition[operation] = [{"var": "client.name"}]
         const rule = new Rule({
           identifier: `${operation}`,
           definition

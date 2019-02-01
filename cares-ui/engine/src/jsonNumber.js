@@ -3,6 +3,10 @@ export default class JsonNumber {
     this.value = definition
   }
 
+  directlyApplies (selector) {
+    return selector === this.value
+  }
+
   applies (selector) {
     return selector === this.value
   }
