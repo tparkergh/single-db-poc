@@ -1,3 +1,8 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.AddressData;
+import org.drools.core.util.StringUtils;
+
 global java.util.Set validationDetailsList
 
 rule "address-di-address-id"
@@ -33,9 +38,15 @@ rule "address-di-address-id"
 
   dialect "mvel"
   agenda-group "AddressBusinessRules-validation-agenda"
-    when
-        //conditions
-    then
-        //actions
-
+  
+  when
+    addressData: AddressData(StringUtils.isEmpty(identifier) || identifier.length() < 10)
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + ", address: " + addressData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.BUSINESS_VALIDATION);
+    details.setProperty("addressData.identifier");
+    details.setInvalidValue(addressData.identifier);
+    validationDetailsList.add(details);
 end
