@@ -46,6 +46,23 @@ export const selectOpenAllegationId = (rawState) => createSelector(
   rawState
 )
 
+export const selectAddresses = (rawState) => createSelector(
+  (state) => state.getIn(['entities', 'clientAddress'], Map())
+    .toList()
+    .map((clientAddress) => ({
+      streetNumber: clientAddress.getIn(['address', 'street_number'], '').trim(),
+      streetName:  clientAddress.getIn(['address', 'street_name'], '').trim(),
+      city:  clientAddress.getIn(['address', 'city'], '').trim(),
+      stateCode:  clientAddress.getIn(['address', 'state_code'], ''),
+      zipCode:  clientAddress.getIn(['address', 'zip_code'], ''),
+      latitude:  clientAddress.getIn(['address', 'latitude'], ''),
+      longitude:  clientAddress.getIn(['address', 'longitude'], ''),
+      addressType:  clientAddress.get('address_tytpe_code', '')
+    })
+  ),
+  rawState
+)
+
 export const selectApprovalStatusOptions = (rawState) => createSelector(
   selectOptionsByMetaName('APV_STC'),
   rawState
@@ -71,13 +88,23 @@ export const selectReferralResponseOptions = (rawState) => createSelector(
   rawState
 )
 
-const selectOptionsByMetaName = (metaName) => (rawState) => createSelector(
+export const selectAddressTypeOptions = (rawState) => createSelector(
+  selectOptionsByMetaName('ADDR_TPC'),
+  rawState
+)
+
+export const selectStateOptions = (rawState) => createSelector(
+    selectOptionsByMetaName('STATE_C', 'user_defined_logical_id'),
+    rawState
+)
+
+const selectOptionsByMetaName = (metaName, filedName = 'short_description') => (rawState) => createSelector(
   (state) => state.getIn(['entities', 'systemCode'], Map())
   .filter((systemCode) => systemCode.get('meta_name').includes(metaName))
   .toList()
   .map((systemCode) => Map({
     key: systemCode.get('system_id'),
-    option: systemCode.get('short_description', '').trim()
+    option: systemCode.get(filedName, '').trim()
   }))
   .sortBy((systemCode) => systemCode.get('key')) ,
   rawState

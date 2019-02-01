@@ -11,7 +11,7 @@ import {
   Label
 } from '@cwds/reactstrap'
 
-import { Addresses } from './Addresses'
+import Addresses from './Addresses'
 import { connect } from 'react-redux'
 import React from 'react'
 import axios from 'axios'
@@ -44,6 +44,8 @@ class Victim extends React.Component {
       }
     } = this.props
 
+    const openClientId = this.props.openClientId
+
     return (
       <Card>
         <CardHeader>
@@ -71,7 +73,7 @@ class Victim extends React.Component {
                 <Input type='date' name='date_of_birth' id='date_of_birth' value={birthDate} disabled />
               </Col>
             </FormGroup>
-            <Addresses />
+            <Addresses clientId={openClientId}/>
           </Form>
         </CardBody>
       </Card>
