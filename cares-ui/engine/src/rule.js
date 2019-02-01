@@ -1,13 +1,13 @@
-import JsonOperation from './jsonOperation'
+import JsonEntity from './jsonEntity'
 export default class Rule {
   constructor ({ identifier, definition }) {
     this.identifier = identifier
     this.definition = definition
-    this.operation = new JsonOperation(definition)
+    this.entity = new JsonEntity(definition)
   }
 
   applies (selector) {
-    return this.operation.applies(selector)
+    return this.entity.applies(selector)
   }
 
   render () {
