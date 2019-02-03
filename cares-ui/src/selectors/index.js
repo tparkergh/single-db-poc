@@ -46,20 +46,29 @@ export const selectOpenAllegationId = (rawState) => createSelector(
   rawState
 )
 
+const selectAddressById = (state, addressId) => {
+  return state.getIn(['entities', 'address', addressId], {})
+}
+
 export const selectAddresses = (rawState) => createSelector(
-  (state) => state.getIn(['entities', 'clientAddress'], Map())
-    .toList()
-    .map((clientAddress) => ({
-      streetNumber: clientAddress.getIn(['address', 'street_number'], '').trim(),
-      streetName:  clientAddress.getIn(['address', 'street_name'], '').trim(),
-      city:  clientAddress.getIn(['address', 'city'], '').trim(),
-      stateCode:  clientAddress.getIn(['address', 'state_code'], ''),
-      zipCode:  clientAddress.getIn(['address', 'zip_code'], ''),
-      latitude:  clientAddress.getIn(['address', 'latitude'], ''),
-      longitude:  clientAddress.getIn(['address', 'longitude'], ''),
-      addressType:  clientAddress.get('address_tytpe_code', '')
-    })
-  ),
+  (state) => {
+      let addresses = [];
+      state.getIn(['entities', 'clientAddress'], Map())
+        .toList().forEach((clientAddress) => {
+          let address = selectAddressById(state, clientAddress.get('address'));
+          addresses.push({
+            streetNumber: address.get('street_number', '').trim(),
+            streetName:  address.get('street_name', '').trim(),
+            city:  address.get('city', '').trim(),
+            stateCode:  address.get('state_code', ''),
+            zipCode:  address.get('zip_code', ''),
+            latitude:  address.get('latitude', ''),
+            longitude:  address.get('longitude', ''),
+            addressType:  clientAddress.get('address_tytpe_code', ''),
+          });
+        })
+      return addresses;
+    },
   rawState
 )
 
