@@ -33,7 +33,9 @@ const METAS = [
   'CMM_MTHC',
   'GVR_ENTC',
   'AGN_RSPC',
-  'RFR_RSPC'
+  'RFR_RSPC',
+  'STATE_C',
+  'ADDR_TPC'
 ]
 
 class ReferralInformation extends React.Component {

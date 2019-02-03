@@ -46,29 +46,29 @@ export const selectOpenAllegationId = (rawState) => createSelector(
   rawState
 )
 
-const selectAddressById = (state, addressId) => {
-  return state.getIn(['entities', 'address', addressId], {})
-}
-
-export const selectAddresses = (rawState) => createSelector(
+export const selectAddress = (rawState, addressId) => createSelector(
   (state) => {
-      let addresses = [];
-      state.getIn(['entities', 'clientAddress'], Map())
-        .toList().forEach((clientAddress) => {
-          let address = selectAddressById(state, clientAddress.get('address'));
-          addresses.push({
-            streetNumber: address.get('street_number', '').trim(),
-            streetName:  address.get('street_name', '').trim(),
-            city:  address.get('city', '').trim(),
-            stateCode:  address.get('state_code', ''),
-            zipCode:  address.get('zip_code', ''),
-            latitude:  address.get('latitude', ''),
-            longitude:  address.get('longitude', ''),
-            addressType:  clientAddress.get('address_tytpe_code', ''),
-          });
-        })
-      return addresses;
+      let clientAddress = state.getIn(['entities', 'clientAddress'], Map())
+        .first((clientAddress) => clientAddress.get('address') == addressId)
+      let address = state.getIn(['entities', 'address', addressId], Map())
+      return {
+         streetNumber: address.get('street_number', '').trim(),
+         streetName:  address.get('street_name', '').trim(),
+         city:  address.get('city', '').trim(),
+         stateCode:  address.get('state_code', ''),
+         zipCode:  address.get('zip_code', ''),
+         latitude:  address.get('latitude', ''),
+         longitude:  address.get('longitude', ''),
+         addressType:  clientAddress.get('address_tytpe_code', ''),
+      }
     },
+  rawState
+)
+
+export const selectAddressIds = (rawState) => createSelector(
+  (state) => state.getIn(['entities', 'address'], Map())
+    .toList()
+    .map((address) => (address.get('identifier'))),
   rawState
 )
 
