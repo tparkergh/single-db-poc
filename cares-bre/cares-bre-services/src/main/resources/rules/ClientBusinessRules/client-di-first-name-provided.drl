@@ -5,21 +5,19 @@ import org.drools.core.util.StringUtils;
 
 global java.util.Set validationDetailsList
 
-rule "client-ri-first-name-provided"
+rule "client-di-first-name-provided"
 
   @doc_description("First name must be provided")
   
   @doc_external_documentation("xTools")
   @doc_enforcement_location("BRE, ZOS")
   @doc_rule_type("DataIntegrity")
-  @doc_drools_file("client-ri-first-name-provided.drl")
-  @doc_rule_name("CLIENT-RI-FIRST-NAME-PROVIDED")
-  
-  @doc_doctool_name("")
-  @doc_doctool_description("")
+  @doc_drools_file("client-di-first-name-provided.drl")
+  @doc_rule_name("CLIENT-DI-FIRST-NAME-PROVIDED")
+  @doc_rule_category("DataIntegrity")
   
   @doc_di_entity("CLIENT_T")
-  @doc_di_attribute("COM_FST_NM")
+  @doc_di_attribute("COMMON_FIRST_NAME")
   @doc_di_length("20")
   @doc_di_type("char")
   @doc_di_nullable("false")

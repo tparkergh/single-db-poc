@@ -5,36 +5,27 @@ import org.drools.core.util.StringUtils;
 
 global java.util.Set validationDetailsList
 
-rule "client-ri-last-name-provided"
+rule "client-di-last-name-provided"
   @doc_description("Last name must be provided")
   
-  @doc_external_documentation("xTools")
-  @doc_enforcement_location("CARES BRE")
-  @doc_rule_type("DataIntegrity")
+  @doc_external_documentation("xTools Application")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_rule_type("xTool")
   @doc_drools_file("client-di-last-name-provided.drl")
   @doc_rule_name("CLIENT-DI-LAST-NAME-PROVIDED")
+  @doc_rule_category("DataIntegrity, BusinessPolicy")
   
-  @doc_doctool_name("")
-  @doc_doctool_description("")
-  
-  @doc_di_entity("CLIENT_T")
-  @doc_di_attribute("COM_LST_NM")
+  @doc_di_entity("CLIENT")
+  @doc_di_attribute("COMMON_LAST_NAME")
   @doc_di_length("25")
   @doc_di_type("char")
   @doc_di_nullable("false")
   @doc_di_mandatory("true")
-  @doc_di_default("")
-  @doc_di_validation_table("")
-  @doc_di_validation_category("")
-  @doc_di_validation_sub_category("")
+  @doc_di_default()
+  @doc_di_validation_table()
+  @doc_di_validation_category()
+  @doc_di_validation_sub_category()
 
-  @doc_ri_entity("")
-  @doc_ri_attribute("")
-  @doc_ri_cardinality("")
-  @doc_ri_relationship("")
-  @doc_ri_related_entity("")
-  @doc_ri_related_attribute("")
-  
   dialect "mvel"
   agenda-group "ClientBusinessRules-validation-agenda"
   when

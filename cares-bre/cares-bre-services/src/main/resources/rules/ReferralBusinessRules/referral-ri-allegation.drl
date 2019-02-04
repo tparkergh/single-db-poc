@@ -1,0 +1,28 @@
+global java.util.Set validationDetailsList
+
+rule "referral-ri-allegation"
+
+  @doc_description("Referral has one to many Allegations")
+  
+  @doc_external_documentation("xTools")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_drools_file("referral-ri-allegation.drl")
+  @doc_rule_category("ReferentialIntegrity")
+  @doc_rule_name("REFERRAL-RI-ALLEGATION")
+  @doc_rule_type(xTool)
+  
+  @doc_ri_entity("REFERRAL")
+  @doc_ri_attribute("ID")
+  @doc_ri_cardinality("one to many")
+  @doc_ri_relationship("has additional info provided by")
+  @doc_ri_related_entity("ALLEGATION")
+  @doc_ri_related_attribute("FKREFERL_T")
+
+  dialect "mvel"
+  agenda-group "ReferralBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end

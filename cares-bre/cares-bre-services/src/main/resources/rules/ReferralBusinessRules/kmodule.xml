@@ -1,0 +1,5 @@
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+  <kbase name="ReferralBusinessRules-kbase">
+    <ksession name="ReferralBusinessRules-session"/>
+  </kbase>
+</kmodule>

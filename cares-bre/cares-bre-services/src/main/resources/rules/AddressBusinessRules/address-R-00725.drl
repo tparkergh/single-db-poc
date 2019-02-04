@@ -8,11 +8,12 @@ global java.util.Set validationDetailsList
 rule "address-R-00725"
 
   @doc_description("R - 00725 Street Name exigency") 
-  @doc_external_documentation("docTool")
+  @doc_external_documentation("docTool Application")
   @doc_enforcement_location("FE, BFE, ZOS")
   @doc_rule_type("DocTool")
   @doc_drools_file("address-R-00725.drl")
   @doc_rule_name("ADDRESS-R-00725")
+  @doc_rule_category("BusinessPolicy")
   
   @doc_doctool_name("R - 00725 Street Name exigency")
   @doc_doctool_description("If Street Number is entered, then Street Name is mandatory")
