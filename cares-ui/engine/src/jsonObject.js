@@ -1,6 +1,10 @@
 import JsonMap from './jsonMap'
 import JsonEntity from './jsonEntity'
-import { ARRAY_OPERATIONS } from './operations'
+import JsonSelector from './jsonSelector'
+import {
+  ARRAY_OPERATIONS,
+  DATA_OPERATIONS
+} from './operations'
 
 export default class JsonObject {
   constructor (definition) {
@@ -9,6 +13,9 @@ export default class JsonObject {
 
     if (ARRAY_OPERATIONS.includes(operator)) {
       return new JsonMap(this.value)
+    }
+    if (DATA_OPERATIONS.includes(operator)) {
+      return new JsonSelector(this.value)
     }
     return new JsonEntity(this.value)
   }
