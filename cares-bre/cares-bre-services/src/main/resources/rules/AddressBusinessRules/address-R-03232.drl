@@ -14,6 +14,7 @@ rule "address-R-03232"
   @doc_rule_type("DocTool")
   @doc_drools_file("address-R-03232.drl")
   @doc_rule_name("ADDRESS-R-03232")
+  @doc_rule_category("DataIntegrity")
   
   @doc_doctool_name("R - 03232 Zip codes are five digits")
   @doc_doctool_description("All zip codes entered must be 5 digits")

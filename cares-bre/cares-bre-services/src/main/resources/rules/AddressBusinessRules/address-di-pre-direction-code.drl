@@ -2,16 +2,14 @@ global java.util.Set validationDetailsList
 
 rule "address-di-pre-direction-code"
 
-  @doc_description("Code must be valid or null")
+  @doc_description("Pre Direction Code must be valid or empty")
   
   @doc_external_documentation("xTools")
-  @doc_enforcement_location("BRE, ZOS")
-  @doc_rule_type("DataIntegrity")
+  @doc_enforcement_location("FE, BRE")
+  @doc_rule_type("xTool")
   @doc_drools_file("address-di-pre-direction-code.drl")
+  @doc_rule_category("DataIntegrity, Validation")
   @doc_rule_name("ADDRESS-DI-PRE-DIRECTION-CODE")
-  
-  @doc_doctool_name("")
-  @doc_doctool_description("")
 
   @doc_di_entity("ADDRESS")
   @doc_di_attribute("PRE_DIRECTION_TEXT_CODE")
@@ -23,16 +21,7 @@ rule "address-di-pre-direction-code"
   @doc_di_validation_table("")
   @doc_di_validation_category("")
   @doc_di_validation_sub_category("")
-
-  @doc_ri_entity("")
-  @doc_ri_attribute("")
-  @doc_ri_cardinality("")
-  @doc_ri_relationship("")
-  @doc_ri_related_entity("")
-  @doc_ri_related_attribute("")
-
-  @doc_cpi_name("")
-  @doc_cpi_description("")
+  @doc_di_validation_values(" E = East, N = North, NE = NorthEast, NW = NorthWest, S = South, SE = SouthEast, SW = SouthWest, W = West")
 
   dialect "mvel"
   agenda-group "AddressBusinessRules-validation-agenda"

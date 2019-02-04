@@ -2,11 +2,11 @@ global java.util.Set validationDetailsList
 
 rule "address-di-unit-designator-type"
 
-  @doc_description("Unit Designator must be valid in SYS_CD_C/UNT_DSGC else 0")
+  @doc_description("Unit Designator must be valid in SYSTEM_CODE_TABLE/UNT_DSGC else 0")
   
   @doc_external_documentation("xTools")
   @doc_enforcement_location("BRE, ZOS")
-  @doc_rule_type("DataIntegrity")
+  @doc_rule_category("DataIntegrity, Validation")
   @doc_drools_file("address-di-unit-designator-type.drl")
   @doc_rule_name("ADDRESS-DI-UNIT-DESIGNATOR-TYPE")
   
@@ -20,9 +20,10 @@ rule "address-di-unit-designator-type"
   @doc_di_nullable("false")
   @doc_di_mandatory("false")
   @doc_di_default("0")
-  @doc_di_validation_table("SYS_CD_C")
+  @doc_di_validation_table("SYSTEM_CODE_TABLE")
   @doc_di_validation_category("UNT_DSGC")
   @doc_di_validation_sub_category("")
+  @doc_di_validation_values()
 	
   @doc_ri_entity("")
   @doc_ri_attribute("")
