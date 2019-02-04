@@ -8,7 +8,8 @@ export default class JsonMap {
   }
 
   directlyApplies (selector) {
-    return this.applies(selector)
+    const tuples = tuplize(selector)
+    return tuples.some((tuple) => this.accessor.directlyApplies(tuple[0]) && this.mapper.directlyApplies(tuple[1]))
   }
 
   applies (selector) {

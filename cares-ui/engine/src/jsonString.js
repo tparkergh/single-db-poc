@@ -3,11 +3,11 @@ export default class JsonString {
     this.value = definition
   }
 
-  directlyApplies (string) {
-    return this.value === string
+  directlyApplies (selector) {
+    return false
   }
 
-  applies (string) {
-    return this.value.includes(string)
+  applies (selector) {
+    return false
   }
 }
