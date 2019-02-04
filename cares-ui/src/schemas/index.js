@@ -28,7 +28,11 @@ export const client = new schema.Entity('client', {}, {
   idAttribute: 'identifier'
 })
 
-export const clientAddress = new schema.Entity('clientAddress', {}, {
+export const address = new schema.Entity('address', {}, {
+  idAttribute: 'identifier'
+})
+
+export const clientAddress = new schema.Entity('clientAddress', {address: address}, {
   idAttribute: 'identifier'
 })
 

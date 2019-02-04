@@ -11,3 +11,5 @@ export const getAllSystemMetasRoute = () => caresApiRoute('/system_metas')
 export const getSystemCodesRoute = (meta) => caresApiRoute(`/system_codes/${meta}`)
 
 export const getClientAddressesByClientIdRoute = (client_id) => caresApiRoute(`/clients/${client_id}/addresses`)
+
+export const putAddressRoute = (address_id) => caresApiRoute(`/addresses/${address_id}`)

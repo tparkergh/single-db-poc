@@ -46,20 +46,35 @@ export const selectOpenAllegationId = (rawState) => createSelector(
   rawState
 )
 
-export const selectAddresses = (rawState) => createSelector(
-  (state) => state.getIn(['entities', 'clientAddress'], Map())
+export const selectAddress = (rawState, addressId) => createSelector(
+  (state) => {
+      let clientAddress = state.getIn(['entities', 'clientAddress'], Map())
+        .first((clientAddress) => clientAddress.get('address') == addressId)
+      let address = state.getIn(['entities', 'address', addressId], Map())
+      return {
+         identifier: address.get('identifier', ''),
+         streetNumber: address.get('street_number', '').trim(),
+         streetName:  address.get('street_name', '').trim(),
+         city:  address.get('city', '').trim(),
+         stateCode:  address.get('state_code', ''),
+         zipCode:  address.get('zip_code', ''),
+         latitude:  address.get('latitude', ''),
+         longitude:  address.get('longitude', ''),
+         addressType:  clientAddress.get('address_tytpe_code', ''),
+      }
+    },
+  rawState
+)
+
+export const selectAddressIds = (rawState) => createSelector(
+  (state) => state.getIn(['entities', 'address'], Map())
     .toList()
-    .map((clientAddress) => ({
-      streetNumber: clientAddress.getIn(['address', 'street_number'], '').trim(),
-      streetName:  clientAddress.getIn(['address', 'street_name'], '').trim(),
-      city:  clientAddress.getIn(['address', 'city'], '').trim(),
-      stateCode:  clientAddress.getIn(['address', 'state_code'], ''),
-      zipCode:  clientAddress.getIn(['address', 'zip_code'], ''),
-      latitude:  clientAddress.getIn(['address', 'latitude'], ''),
-      longitude:  clientAddress.getIn(['address', 'longitude'], ''),
-      addressType:  clientAddress.get('address_tytpe_code', '')
-    })
-  ),
+    .map((address) => (address.get('identifier'))),
+  rawState
+)
+
+export const selectPutAddressRequest = (rawState, addressId) => createSelector(
+  (state) => state.getIn(['entities', 'address', addressId], Map()),
   rawState
 )
 
