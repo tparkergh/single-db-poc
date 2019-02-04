@@ -16,7 +16,7 @@ rule "address-R-05923"
   @doc_doctool_access_logic("")
 
   dialect "mvel"
-  agenda-group "AddressBusinessRules-validation-agenda"
+  agenda-group "AddressBusinessRules-data-processing-agenda"
     when
         //conditions
     then
