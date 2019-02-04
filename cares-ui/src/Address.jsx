@@ -11,34 +11,30 @@ import {
   Button
 } from '@cwds/reactstrap'
 
-import { selectStateOptions, selectAddressTypeOptions, selectAddress} from './selectors'
+import { selectStateOptions, selectAddressTypeOptions, selectAddress, selectPutAddressRequest} from './selectors'
 import { updateAddress } from './actions'
 import { DictionaryOptions } from './DictionaryOptions'
+import { putAddressRoute } from './routes'
 
 import '@cwds/core/dist/styles.css'
 
-const getFullAddress = (address, stateOptions) => {
-  return address.streetNumber + ' '
-      + address.streetName + ', '
-      + address.city + ", "
-      + (address.stateCode && stateOptions && stateOptions.find((o) => {return o.key == address.stateCode}).option) + ' '
-      + address.zipCode;
+const getFullAddress = ({
+    streetNumber,
+    streetName,
+    city,
+    stateCode,
+    zipCode
+    }, stateOptions) => {
+  const stateOption = stateOptions.find(({key}) => key === stateCode).option
+  return [streetNumber, streetName].join(' ')
+      + ['', city, stateOption].join(', ') + ['', zipCode].join(' ')
 }
 
 export class Address extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isOpen: false
-    }
-
-    this.onChangeAddress = this.onChangeAddress.bind(this)
-    this.onChangeStreetAddress = this.onChangeStreetAddress.bind(this)
-  }
+  state = { isOpen: false }
 
   onChangeAddress = (field, event) => {
-    this.props.updateAddress(this.props.address.identifier, field, event.target.value)
+    this.props.updateAddress(this.props.id, field, event.target.value)
   }
 
   onChangeStreetAddress = (event) => {
@@ -64,6 +60,7 @@ export class Address extends React.Component {
     const address = this.props.address
     const stateOptions = this.props.stateOptions
     const addressTypeOptions = this.props.addressTypeOptions
+    const putAddressRequest = this.props.putAddressRequest
 
     return (
         <div>
@@ -118,12 +115,29 @@ export class Address extends React.Component {
               </Col>
               <Col>
                 <Label>Latitude/Longitude</Label>
-                <Input type='text' name='latitudelongitude'
+                <Input id={'latLng-' + this.props.id} type='text' name='latitudelongitude'
                        value={ address.latitude + ', ' + address.longitude }/>
               </Col>
             </FormGroup>
             <FormGroup check row>
-              <Button className='save float-right' color='primary'>Save</Button>
+              <Button className='save float-right' color='primary'
+                onClick={
+                  ({ target }) => {
+                    axios({
+                      url: putAddressRoute(this.props.id),
+                      method: 'put',
+                      data: putAddressRequest
+                    }).then((response) => {
+                      this.props.updateAddressesCallback({})
+                    })
+                    .catch(function (error) {
+                      // handle error
+                      console.log(error);
+                    })
+                    this.setState({ isOpen: false })
+                  }
+                }
+              >Save</Button>
               <Button className='cancel float-right' color='secondary'
                 onClick={
                   ({ target }) => {
@@ -142,7 +156,8 @@ export class Address extends React.Component {
 const mapStateToProps = (state, props) => ({
     address: selectAddress(state, props.id),
     stateOptions: selectStateOptions(state),
-    addressTypeOptions: selectAddressTypeOptions(state)
+    addressTypeOptions: selectAddressTypeOptions(state),
+    putAddressRequest: selectPutAddressRequest(state, props.id)
 })
 
 const mapDispatchToProps = { updateAddress }

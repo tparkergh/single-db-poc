@@ -73,6 +73,11 @@ export const selectAddressIds = (rawState) => createSelector(
   rawState
 )
 
+export const selectPutAddressRequest = (rawState, addressId) => createSelector(
+  (state) => state.getIn(['entities', 'address', addressId], Map()),
+  rawState
+)
+
 export const selectApprovalStatusOptions = (rawState) => createSelector(
   selectOptionsByMetaName('APV_STC'),
   rawState
