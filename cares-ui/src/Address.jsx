@@ -13,7 +13,7 @@ import {
 
 import { selectStateOptions, selectAddressTypeOptions, selectAddress, selectPutAddressRequest} from './selectors'
 import { updateAddress } from './actions'
-import { DictionaryOptions } from './DictionaryOptions'
+import { CodedOptions } from './CodedOptions'
 import { putAddressRoute } from './routes'
 
 import '@cwds/core/dist/styles.css'
@@ -93,7 +93,7 @@ export class Address extends React.Component {
             <FormGroup row>
               <Col>
                 <Label>State</Label>
-                <DictionaryOptions
+                <CodedOptions
                     name='state_code'
                     options={ stateOptions }
                     code={ address.stateCode }
@@ -107,7 +107,7 @@ export class Address extends React.Component {
               </Col>
               <Col>
                 <Label>Address Type</Label>
-                <DictionaryOptions
+                <CodedOptions
                     name='address_type'
                     options={ addressTypeOptions }
                     code={ address.addressType }
