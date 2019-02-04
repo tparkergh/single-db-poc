@@ -15,6 +15,7 @@ describe('Logic and Boolean Operators', () => {
         const engine = new JsonBRE()
         engine.define(rule)
         expect(engine.find((rule) => rule.applies("client"))).toEqual([rule])
+        engine.reset()
       })
 
       it('must support dot notation', () => {
