@@ -24,9 +24,6 @@ rule "client-ri-child-client"
   @doc_ri_related_entity("CHILD_CLIENT")
   @doc_ri_related_attribute("FKCLIENT_T")
 
-  @doc_cpi_name("")
-  @doc_cpi_description("")
-
   dialect "mvel"
   agenda-group "ClientBusinessRules-validation-agenda"
     when

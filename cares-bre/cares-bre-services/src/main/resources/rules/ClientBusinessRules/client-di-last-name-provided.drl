@@ -5,7 +5,7 @@ import org.drools.core.util.StringUtils;
 
 global java.util.Set validationDetailsList
 
-rule "client-ri-last-name-provided"
+rule "client-di-last-name-provided"
   @doc_description("Last name must be provided")
   
   @doc_external_documentation("xTools Application")
@@ -14,9 +14,6 @@ rule "client-ri-last-name-provided"
   @doc_drools_file("client-di-last-name-provided.drl")
   @doc_rule_name("CLIENT-DI-LAST-NAME-PROVIDED")
   @doc_rule_category("DataIntegrity, BusinessPolicy")
-  
-  @doc_doctool_name("")
-  @doc_doctool_description("")
   
   @doc_di_entity("CLIENT")
   @doc_di_attribute("COMMON_LAST_NAME")

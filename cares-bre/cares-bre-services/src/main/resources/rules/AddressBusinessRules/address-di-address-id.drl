@@ -13,7 +13,7 @@ rule "address-di-address-id"
   @doc_enforcement_location("BRE, ZOS")
   @doc_drools_file("address-di-address-id.drl")
   @doc_rule_category("DataIntegrity")
-  @doc_rule_name("ADDRESS-DI-ADDRESS-ID"
+  @doc_rule_name("ADDRESS-DI-ADDRESS-ID")
   @doc_rule_type(xTool)
 
   @doc_di_entity("ADDRESS")

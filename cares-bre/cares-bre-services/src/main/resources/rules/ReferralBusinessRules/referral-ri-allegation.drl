@@ -11,20 +11,6 @@ rule "referral-ri-allegation"
   @doc_rule_name("REFERRAL-RI-ALLEGATION")
   @doc_rule_type(xTool)
   
-  @doc_doctool_name("")
-  @doc_doctool_description("")
-
-  @doc_di_entity("")
-  @doc_di_attribute("")
-  @doc_di_length("")
-  @doc_di_type("")
-  @doc_di_nullable("")
-  @doc_di_mandatory("")
-  @doc_di_default("")
-  @doc_di_validation_table("")
-  @doc_di_validation_category("")
-  @doc_di_validation_sub_category("")
-	
   @doc_ri_entity("REFERRAL")
   @doc_ri_attribute("ID")
   @doc_ri_cardinality("one to many")
