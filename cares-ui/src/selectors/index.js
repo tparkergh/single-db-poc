@@ -52,6 +52,7 @@ export const selectAddress = (rawState, addressId) => createSelector(
         .first((clientAddress) => clientAddress.get('address') == addressId)
       let address = state.getIn(['entities', 'address', addressId], Map())
       return {
+         identifier: address.get('identifier', ''),
          streetNumber: address.get('street_number', '').trim(),
          streetName:  address.get('street_name', '').trim(),
          city:  address.get('city', '').trim(),

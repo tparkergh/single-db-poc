@@ -12,8 +12,9 @@ import {
 } from '@cwds/reactstrap'
 
 import { selectStateOptions, selectAddressTypeOptions, selectAddress} from './selectors'
-import { setAddresses } from './actions'
+import { updateAddress } from './actions'
 import { ReferralInformationOptions } from './ReferralInformationOptions'
+import { clone } from './utils'
 
 import '@cwds/core/dist/styles.css'
 
@@ -26,15 +27,47 @@ const getFullAddress = (address, stateOptions) => {
 }
 
 export class Address extends React.Component {
-  state = {
-    isOpen: false
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isOpen: false
+    }
+
+    this.onChangeAddress = this.onChangeAddress.bind(this)
+    this.onChangeStreetAddress = this.onChangeStreetAddress.bind(this)
+  }
+
+  onChangeAddress = (field, event) => {
+    let address = clone(this.props.address)
+    address[field.outStoreName] = event.target.value
+    this.props.updateAddress(field, address)
+  }
+
+  onChangeStreetAddress = (event) => {
+    let address = clone(this.props.address)
+    let streetAddress = event.target.value.trim()
+    let i = streetAddress.indexOf(' ')
+    let streetNumber = '', streetName = ''
+    if (i == -1) {
+      streetName = streetAddress
+    } else {
+      streetNumber = streetAddress.substring(0, i)
+      if (isNaN(streetNumber)) {
+        streetNumber = ''
+        streetName = streetAddress
+      } else {
+        streetName = streetAddress.substring(i + 1)
+      }
+    }
+    address.streetNumber = streetNumber
+    this.props.updateAddress({inStoreName: 'street_number', outStoreName: 'streetNumber'}, address)
+    address.streetName = streetName
+    this.props.updateAddress({inStoreName: 'street_name', outStoreName: 'streetName'}, address)
   }
 
   render() {
     const address = this.props.address
-    if (address) {
-      console.log('address', address)
-    }
     const stateOptions = this.props.stateOptions
     const addressTypeOptions = this.props.addressTypeOptions
 
@@ -56,12 +89,14 @@ export class Address extends React.Component {
               <Col>
                 <Label>Address</Label>
                 <Input id={'street-' + this.props.id} type='text' name='street'
-                       value={ address.streetNumber + ' ' + address.streetName }/>
+                       value={ address.streetNumber + ' ' + address.streetName }
+                       onChange={(e) => this.onChangeStreetAddress(e)}/>
               </Col>
               <Col>
                 <Label>City</Label>
                 <Input id={'city-' + this.props.id} type='text' name='city'
-                       value={ address.city } disabled='false' onChange='() => {}'/>
+                       value={ address.city }
+                       onChange={(e) => this.onChangeAddress({inStoreName: 'city', outStoreName: 'city'}, e)}/>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -75,8 +110,9 @@ export class Address extends React.Component {
               </Col>
               <Col>
                 <Label>Zip</Label>
-                <Input id={'zip-' + this.props.id} type='text' name='zip'
-                       value={ address.zipCode }/>
+                <Input id={'zipCode-' + this.props.id} type='text' name='zipCode'
+                       value={ address.zipCode }
+                       onChange={(e) => this.onChangeAddress({inStoreName: 'zip_code', outStoreName: 'zipCode'}, e)}/>
               </Col>
               <Col>
                 <Label>Address Type</Label>
@@ -98,6 +134,7 @@ export class Address extends React.Component {
                 onClick={
                   ({ target }) => {
                     this.setState({ isOpen: false })
+                    this.props.updateAddressesCallback({})
                   }
                 }
               >Cancel</Button>
@@ -114,7 +151,7 @@ const mapStateToProps = (state, props) => ({
     addressTypeOptions: selectAddressTypeOptions(state)
 })
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { updateAddress }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Address)
 

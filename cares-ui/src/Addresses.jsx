@@ -36,7 +36,7 @@ export class Addresses extends React.Component {
           {
             addressIds && addressIds.map((addressId) =>
               <ListGroupItem>
-                <Address id={addressId}/>
+                <Address id={addressId} updateAddressesCallback={this.componentDidUpdate.bind(this)}/>
               </ListGroupItem>
             )
           }

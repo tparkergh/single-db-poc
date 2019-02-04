@@ -3,6 +3,7 @@ import {
   systemMetas,
   systemCodes,
   client,
+  address,
   clientAddresses
 } from '../schemas'
 import {
@@ -11,7 +12,8 @@ import {
   SET_SYSTEM_METAS,
   ADD_SYSTEM_CODES,
   OPEN_REFERRAL,
-  SET_ADDRESSES
+  SET_ADDRESSES,
+  UPDATE_ADDRESS
 } from '../actions'
 import { normalize } from 'normalizr'
 
@@ -65,8 +67,17 @@ export default (state = {}, action) => {
         entities: {
           ...state.entities,
           ...normalize(action.payload, clientAddresses).entities
-          }
-      };
+        }
+      }
+    case UPDATE_ADDRESS:
+      let newState = {
+        ...state,
+        entities: {
+          ...state.entities,
+        }
+      }
+      newState.entities.address[action.address.identifier][action.field.inStoreName] = action.address[action.field.outStoreName]
+      return newState;
     default:
       return state
   }
