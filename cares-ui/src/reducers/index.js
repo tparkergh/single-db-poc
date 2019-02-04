@@ -76,7 +76,7 @@ export default (state = {}, action) => {
           ...state.entities,
         }
       }
-      newState.entities.address[action.address.identifier][action.field.inStoreName] = action.address[action.field.outStoreName]
+      newState.entities.address[action.id][action.field] = action.value
       return newState;
     default:
       return state

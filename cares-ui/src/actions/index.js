@@ -36,8 +36,9 @@ export const setAddresses = payload => ({
   payload
 })
 
-export const updateAddress = (field, address) => ({
+export const updateAddress = (id, field, value) => ({
   type: UPDATE_ADDRESS,
+  id,
   field,
-  address
+  value
 })

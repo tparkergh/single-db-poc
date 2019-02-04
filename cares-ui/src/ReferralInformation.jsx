@@ -11,7 +11,7 @@ import React from 'react'
 import axios from 'axios'
 import { getSystemCodesRoute } from './routes'
 import { addSystemCodes } from './actions'
-import { ReferralInformationOptions } from './ReferralInformationOptions'
+import { DictionaryOptions } from './DictionaryOptions'
 import {
   Card,
   CardHeader,
@@ -79,7 +79,7 @@ class ReferralInformation extends React.Component {
               <FormGroup row>
                 <Col>
                   <Label>Approval Status</Label>
-                  <ReferralInformationOptions
+                  <DictionaryOptions
                     name='approval_status'
                     options={approvalStatusOptions}
                     code={approvalStatusCode}
@@ -87,7 +87,7 @@ class ReferralInformation extends React.Component {
                 </Col>
                 <Col>
                   <Label>Communication Method</Label>
-                  <ReferralInformationOptions
+                  <DictionaryOptions
                     name='communication_method'
                     options={communicationMethodOptions}
                     code={communicationMethodCode}
@@ -95,7 +95,7 @@ class ReferralInformation extends React.Component {
                 </Col>
                 <Col>
                   <Label>Government Entity</Label>
-                  <ReferralInformationOptions
+                  <DictionaryOptions
                     name='government_entity'
                     options={governmentEntityOptions}
                     code={governmentEntityCode}
@@ -125,7 +125,7 @@ class ReferralInformation extends React.Component {
               <FormGroup row>
                 <Col>
                   <Label>Responsible Agency</Label>
-                  <ReferralInformationOptions
+                  <DictionaryOptions
                     name='responsible_agency'
                     options={responsibleAgencyOptions}
                     code={responsibleAgencyOptions}
@@ -133,7 +133,7 @@ class ReferralInformation extends React.Component {
                 </Col>
                 <Col>
                   <Label>Referral Response</Label>
-                  <ReferralInformationOptions
+                  <DictionaryOptions
                     name='referral_response'
                     options={referralResponseOptions}
                     code={responseTypeCode}

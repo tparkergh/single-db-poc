@@ -13,8 +13,7 @@ import {
 
 import { selectStateOptions, selectAddressTypeOptions, selectAddress} from './selectors'
 import { updateAddress } from './actions'
-import { ReferralInformationOptions } from './ReferralInformationOptions'
-import { clone } from './utils'
+import { DictionaryOptions } from './DictionaryOptions'
 
 import '@cwds/core/dist/styles.css'
 
@@ -39,13 +38,10 @@ export class Address extends React.Component {
   }
 
   onChangeAddress = (field, event) => {
-    let address = clone(this.props.address)
-    address[field.outStoreName] = event.target.value
-    this.props.updateAddress(field, address)
+    this.props.updateAddress(this.props.address.identifier, field, event.target.value)
   }
 
   onChangeStreetAddress = (event) => {
-    let address = clone(this.props.address)
     let streetAddress = event.target.value.trim()
     let i = streetAddress.indexOf(' ')
     let streetNumber = '', streetName = ''
@@ -60,10 +56,8 @@ export class Address extends React.Component {
         streetName = streetAddress.substring(i + 1)
       }
     }
-    address.streetNumber = streetNumber
-    this.props.updateAddress({inStoreName: 'street_number', outStoreName: 'streetNumber'}, address)
-    address.streetName = streetName
-    this.props.updateAddress({inStoreName: 'street_name', outStoreName: 'streetName'}, address)
+    this.props.updateAddress(this.props.address.identifier, 'street_number', streetNumber)
+    this.props.updateAddress(this.props.address.identifier, 'street_name', streetName)
   }
 
   render() {
@@ -96,13 +90,13 @@ export class Address extends React.Component {
                 <Label>City</Label>
                 <Input id={'city-' + this.props.id} type='text' name='city'
                        value={ address.city }
-                       onChange={(e) => this.onChangeAddress({inStoreName: 'city', outStoreName: 'city'}, e)}/>
+                       onChange={ (e) => this.onChangeAddress('city', e) }/>
               </Col>
             </FormGroup>
             <FormGroup row>
               <Col>
                 <Label>State</Label>
-                <ReferralInformationOptions
+                <DictionaryOptions
                     name='state_code'
                     options={ stateOptions }
                     code={ address.stateCode }
@@ -112,11 +106,11 @@ export class Address extends React.Component {
                 <Label>Zip</Label>
                 <Input id={'zipCode-' + this.props.id} type='text' name='zipCode'
                        value={ address.zipCode }
-                       onChange={(e) => this.onChangeAddress({inStoreName: 'zip_code', outStoreName: 'zipCode'}, e)}/>
+                       onChange={ (e) => this.onChangeAddress('zip_code', e) }/>
               </Col>
               <Col>
                 <Label>Address Type</Label>
-                <ReferralInformationOptions
+                <DictionaryOptions
                     name='address_type'
                     options={ addressTypeOptions }
                     code={ address.addressType }
