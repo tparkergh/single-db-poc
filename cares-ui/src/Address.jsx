@@ -39,21 +39,15 @@ export class Address extends React.Component {
 
   onChangeStreetAddress = (event) => {
     let streetAddress = event.target.value.trim()
-    let i = streetAddress.indexOf(' ')
-    let streetNumber = '', streetName = ''
-    if (i == -1) {
+    let [streetNumber, ...streetName] = streetAddress.split(' ')
+    if (isNaN(streetNumber)) {
+      streetNumber = ''
       streetName = streetAddress
     } else {
-      streetNumber = streetAddress.substring(0, i)
-      if (isNaN(streetNumber)) {
-        streetNumber = ''
-        streetName = streetAddress
-      } else {
-        streetName = streetAddress.substring(i + 1)
-      }
+      streetName = streetName.join(' ')
     }
-    this.props.updateAddress(this.props.address.identifier, 'street_number', streetNumber)
-    this.props.updateAddress(this.props.address.identifier, 'street_name', streetName)
+    this.props.updateAddress(this.props.id, 'street_number', streetNumber)
+    this.props.updateAddress(this.props.id, 'street_name', streetName)
   }
 
   render() {
