@@ -1,12 +1,13 @@
 package gov.ca.cwds.bre.interfaces.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -18,8 +19,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class BreRequest {
   
-  private String businessRuleSetName;
-  private JsonNode data;
+  private String businessRuleSetName;  
+  private List<BreRequestData> data = new ArrayList<>();
   
   public String getBusinessRuleSetName() {
     return businessRuleSetName;
@@ -28,13 +29,17 @@ public final class BreRequest {
   public void setBusinessRuleSetName(String businessRuleSetName) {
     this.businessRuleSetName = businessRuleSetName;
   }
-  
-  public JsonNode getData() {
+
+  public List<BreRequestData> getData() {
     return data;
   }
 
-  public void setData(JsonNode data) {
+  public void setData(List<BreRequestData> data) {
     this.data = data;
+  }
+  
+  public void addData(BreRequestData data) {
+    this.data.add(data);
   }
 
   @Override

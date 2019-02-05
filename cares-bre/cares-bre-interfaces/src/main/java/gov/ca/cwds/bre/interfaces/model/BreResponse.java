@@ -1,6 +1,8 @@
 package gov.ca.cwds.bre.interfaces.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -8,7 +10,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import gov.ca.cwds.cares.common.model.ExecutionTimeRecorder;
@@ -25,7 +26,7 @@ public final class BreResponse implements ExecutionTimeRecorder {
   private Long executionTimeMillis;
   private String businessRuleSetName;
   private Set<IssueDetails> issues = new HashSet<>();
-  private JsonNode data;  
+  private List<BreResponseData> data = new ArrayList<>();
 
   public String getBusinessRuleSetName() {
     return businessRuleSetName;
@@ -46,15 +47,19 @@ public final class BreResponse implements ExecutionTimeRecorder {
   public void addIssue(IssueDetails issue) {
     this.issues.add(issue);
   }
-
-  public JsonNode getData() {
+  
+  public List<BreResponseData> getData() {
     return data;
   }
 
-  public void setData(JsonNode data) {
+  public void setData(List<BreResponseData> data) {
     this.data = data;
   }
   
+  public void addData(BreResponseData data) {
+    this.data.add(data);
+  }
+
   @Override
   public Long getExecutionTimeMillis() {
     return executionTimeMillis;

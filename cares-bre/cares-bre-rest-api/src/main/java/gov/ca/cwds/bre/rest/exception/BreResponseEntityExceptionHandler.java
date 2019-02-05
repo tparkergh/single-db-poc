@@ -36,7 +36,6 @@ public class BreResponseEntityExceptionHandler extends ResponseEntityExceptionHa
     BreResponse breResponse = new BreResponse();
     BreRequest breRequest = ex.getBreRequest();
     breResponse.setBusinessRuleSetName(breRequest != null ? breRequest.getBusinessRuleSetName() : null);
-    breResponse.setData(breRequest != null ? breRequest.getData() : null);
     breResponse.addIssue(issue);
     
     return new ResponseEntity<>(breResponse, HttpStatus.BAD_REQUEST);
