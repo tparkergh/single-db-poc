@@ -1,9 +1,9 @@
 {
   "business_rule_set_name": "AddressBusinessRules",
-  "data": [
+  "data_objects": [
     {
-      "data_class_name": "gov.ca.cwds.cics.model.AddressData",
-      "data_node": {
+      "data_object_class_name": "gov.ca.cwds.cics.model.AddressData",
+      "data_object": {
         "IDENTIFIER": "KfBDcqB00R",
         "TXN_HDR_STAFF_ID": "0WM",
         "CITY_NM": "Los Angeles",
