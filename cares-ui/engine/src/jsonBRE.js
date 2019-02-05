@@ -1,6 +1,6 @@
 import jsonLogic from 'json-logic-js'
 import Rule from './rule'
-import { length } from './operations'
+import { length } from './customOperators'
 
 // singleton business rules engine
 export default class JsonBRE {

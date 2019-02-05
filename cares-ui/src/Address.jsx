@@ -15,6 +15,7 @@ import { selectStateOptions, selectAddressTypeOptions, selectAddress, selectPutA
 import { updateAddress } from './actions'
 import { CodedOptions } from './CodedOptions'
 import { putAddressRoute } from './routes'
+import { ValidateInput } from './validateInput'
 
 import '@cwds/core/dist/styles.css'
 
@@ -95,9 +96,12 @@ export class Address extends React.Component {
               </Col>
               <Col>
                 <Label>Zip</Label>
-                <Input id={'zipCode-' + this.props.id} type='text' name='zipCode'
-                       value={ address.zipCode }
-                       onChange={ (e) => this.onChangeAddress('zip_code', e) }/>
+                <ValidateInput>
+                  type='text'
+                  name='zipCode'
+                  value={address.zipCode}
+                  onChange={ (e) => this.onChangeAddress('zip_code', e) }
+                </ValidateInput>
               </Col>
               <Col>
                 <Label>Address Type</Label>
