@@ -28,11 +28,8 @@ public final class BreRestApiClient implements BusinessRuleService {
   
   private final static Logger LOGGER = LoggerFactory.getLogger(BreRestApiClient.class);
 
-  @Value("${app.bre.base-url}")
+  @Value("${app.bre-service.base-url}")
   private String baseUrl;
-
-  @Value("${app.bre.bre-path}")
-  private String brePath;
 
   private final RestTemplate restTemplate;
   
@@ -51,6 +48,7 @@ public final class BreRestApiClient implements BusinessRuleService {
   public BreResponse executeBusinessRules(BreRequest breRequest) {
     LOGGER.info("BRE REQUEST: {}", breRequest);
     HttpEntity<BreRequest> request = new HttpEntity<>(breRequest);
+    String brePath = "/bre/exec";
     
     ResponseEntity<BreResponse> exchange =
         restTemplate.exchange(baseUrl + brePath, HttpMethod.POST, request, BreResponse.class);

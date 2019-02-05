@@ -1,10 +1,10 @@
 package gov.ca.cwds.cares.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import gov.ca.cwds.cares.geo.restclient.GeoRestClient;
-import gov.ca.cwds.cares.interfaces.model.Address;
-import gov.ca.cwds.cares.interfaces.model.ClientAddress;
-import gov.ca.cwds.cics.restclient.CicsAddressUpdaterRestApiClient;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -28,12 +28,12 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
-
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import gov.ca.cwds.bre.restclient.BreRestApiClient;
+import gov.ca.cwds.cares.geo.restclient.GeoRestClient;
+import gov.ca.cwds.cares.interfaces.model.Address;
+import gov.ca.cwds.cares.interfaces.model.ClientAddress;
+import gov.ca.cwds.cics.restclient.CicsAddressUpdaterRestApiClient;
 
 /**
  * CWDS J Team
@@ -61,6 +61,10 @@ public class CaresRestApiApplicationTest {
   @Autowired
   @Qualifier("GeoRestClient")
   private GeoRestClient geoRestClient;
+  
+  @Autowired
+  @Qualifier("BreRestApiClient")
+  private BreRestApiClient breRestClient;
 
   @Autowired
   @Qualifier("CicsAddressUpdaterRestApiClient")

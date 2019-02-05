@@ -3,6 +3,7 @@ package gov.ca.cwds.bre.interfaces.exception;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
+import gov.ca.cwds.bre.interfaces.model.BreResponse;
 
 /**
  * Base RuntimeException of BRE exceptions.
@@ -14,6 +15,7 @@ public class BreException extends RuntimeException {
   private static final long serialVersionUID = -7751948785552395397L;
 
   private BreRequest breRequest;
+  private BreResponse breResponse;
   
   /**
    * Construct a generic exception.
@@ -61,6 +63,14 @@ public class BreException extends RuntimeException {
 
   public void setBreRequest(BreRequest breRequest) {
     this.breRequest = breRequest;
+  }
+
+  public BreResponse getBreResponse() {
+    return breResponse;
+  }
+
+  public void setBreResponse(BreResponse breResponse) {
+    this.breResponse = breResponse;
   }
 
   /**

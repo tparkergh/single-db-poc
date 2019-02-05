@@ -40,7 +40,9 @@ dependencies {
     implementation project(':cares-geo:cares-geo-interfaces')
     implementation project(':cares:cares-interfaces')
     implementation project(':cares:cares-services')
-
+    implementation project(':cares-bre:cares-bre-interfaces')
+    testImplementation project(':cares-bre:cares-bre-rest-client')
+    
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-aop'

@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @author CWDS J Team
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"gov.ca.cwds.cares", "gov.ca.cwds.cics"})
+@ComponentScan(basePackages = {"gov.ca.cwds.cares", "gov.ca.cwds.cics", "gov.ca.cwds.bre"})
 @EntityScan(basePackages = {"gov.ca.cwds.cares.persistence"})
 @EnableJpaRepositories(basePackages = {"gov.ca.cwds.cares.persistence"})
 public class CaresRestApiApplication {
