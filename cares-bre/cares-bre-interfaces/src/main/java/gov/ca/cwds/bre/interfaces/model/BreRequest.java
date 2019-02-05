@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 public final class BreRequest {
   
   private String businessRuleSetName;  
-  private List<BreRequestData> data = new ArrayList<>();
+  private List<BreRequestData> dataObjects = new ArrayList<>();
   
   public String getBusinessRuleSetName() {
     return businessRuleSetName;
@@ -30,16 +30,16 @@ public final class BreRequest {
     this.businessRuleSetName = businessRuleSetName;
   }
 
-  public List<BreRequestData> getData() {
-    return data;
+  public List<BreRequestData> getDataObjects() {
+    return dataObjects;
   }
 
-  public void setData(List<BreRequestData> data) {
-    this.data = data;
+  public void setDataObjects(List<BreRequestData> dataObjects) {
+    this.dataObjects = dataObjects;
   }
   
-  public void addData(BreRequestData data) {
-    this.data.add(data);
+  public void addDataObject(BreRequestData dataObject) {
+    this.dataObjects.add(dataObject);
   }
 
   @Override

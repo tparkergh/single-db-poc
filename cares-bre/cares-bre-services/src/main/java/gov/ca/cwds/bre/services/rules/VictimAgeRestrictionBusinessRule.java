@@ -43,17 +43,17 @@ public class VictimAgeRestrictionBusinessRule implements BusinessRule {
     
     breResponse.setBusinessRuleSetName(breRequest.getBusinessRuleSetName());
     BreResponseData breResponseData = new BreResponseData();
-    breResponseData.setDataClassName(LocalDate.class.getName());
-    breResponseData.setDataNode(jacksonObjectMapper.convertValue(victimDob, JsonNode.class));
-    breResponse.addData(breResponseData);
+    breResponseData.setDataObjectClassName(LocalDate.class.getName());
+    breResponseData.setDataObject(jacksonObjectMapper.convertValue(victimDob, JsonNode.class));
+    breResponse.addDataObject(breResponseData);
     return breResponse;
   }
 
   private LocalDate getDob(BreRequest breRequest) {
     LocalDate clientDob;
     try {      
-      BreRequestData breRequestData = breRequest.getData().get(0);      
-      clientDob = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(breRequestData.getDataNode()), LocalDate.class);      
+      BreRequestData breRequestData = breRequest.getDataObjects().get(0);      
+      clientDob = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(breRequestData.getDataObject()), LocalDate.class);      
     } catch (IOException t) {
       throw new BreException("Error reading business rule data for: VictimAgeRestrictionBusinessRule", 
           t, breRequest);      

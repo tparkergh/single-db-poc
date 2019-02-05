@@ -26,7 +26,7 @@ public final class BreResponse implements ExecutionTimeRecorder {
   private Long executionTimeMillis;
   private String businessRuleSetName;
   private Set<IssueDetails> issues = new HashSet<>();
-  private List<BreResponseData> data = new ArrayList<>();
+  private List<BreResponseData> dataObjects = new ArrayList<>();
 
   public String getBusinessRuleSetName() {
     return businessRuleSetName;
@@ -48,16 +48,16 @@ public final class BreResponse implements ExecutionTimeRecorder {
     this.issues.add(issue);
   }
   
-  public List<BreResponseData> getData() {
-    return data;
+  public List<BreResponseData> getDataObjects() {
+    return dataObjects;
   }
 
-  public void setData(List<BreResponseData> data) {
-    this.data = data;
+  public void setDataObjects(List<BreResponseData> dataObjects) {
+    this.dataObjects = dataObjects;
   }
   
-  public void addData(BreResponseData data) {
-    this.data.add(data);
+  public void addDataObject(BreResponseData dataObject) {
+    this.dataObjects.add(dataObject);
   }
 
   @Override

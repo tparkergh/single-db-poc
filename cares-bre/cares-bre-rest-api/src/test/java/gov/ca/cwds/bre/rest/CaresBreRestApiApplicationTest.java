@@ -195,9 +195,9 @@ public class CaresBreRestApiApplicationTest {
     BreRequest breRequest = new BreRequest();
     breRequest.setBusinessRuleSetName(ruleName);
     BreRequestData breRequestData = new BreRequestData();
-    breRequestData.setDataClassName(data.getClass().getName());
-    breRequestData.setDataNode(jacksonObjectMapper.convertValue(data, JsonNode.class));
-    breRequest.addData(breRequestData);
+    breRequestData.setDataObjectClassName(data.getClass().getName());
+    breRequestData.setDataObject(jacksonObjectMapper.convertValue(data, JsonNode.class));
+    breRequest.addDataObject(breRequestData);
 
     long begin = System.currentTimeMillis();
     for (int i = 0; i < timesToCall; i++) {

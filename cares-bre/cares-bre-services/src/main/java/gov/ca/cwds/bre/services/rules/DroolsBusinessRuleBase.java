@@ -57,9 +57,9 @@ public abstract class DroolsBusinessRuleBase implements BusinessRule {
       JsonNode updatedFact = jacksonObjectMapper.convertValue(fact, JsonNode.class);   
       String dataClassName = fact.getClass().getName();
       BreResponseData breResponseData = new BreResponseData();
-      breResponseData.setDataClassName(dataClassName);
-      breResponseData.setDataNode(updatedFact);
-      breResponse.addData(breResponseData);
+      breResponseData.setDataObjectClassName(dataClassName);
+      breResponseData.setDataObject(updatedFact);
+      breResponse.addDataObject(breResponseData);
     }
     
     return breResponse;
@@ -75,12 +75,12 @@ public abstract class DroolsBusinessRuleBase implements BusinessRule {
   
   private Object[] getFacts(BreRequest breRequest) {
     List<Object> facts = new ArrayList<>();
-    List<BreRequestData> requestDataList = breRequest.getData();
+    List<BreRequestData> requestDataObjects = breRequest.getDataObjects();
     
-    for (BreRequestData requestData : requestDataList) {
+    for (BreRequestData requestData : requestDataObjects) {
       try {
-        Class<?> dataClass = Class.forName(requestData.getDataClassName());
-        JsonNode dataNode = requestData.getDataNode();
+        Class<?> dataClass = Class.forName(requestData.getDataObjectClassName());
+        JsonNode dataNode = requestData.getDataObject();
         Object fact = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(dataNode), dataClass);
         facts.add(fact);  
       } catch (IOException t) {

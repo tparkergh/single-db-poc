@@ -5,33 +5,43 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+/**
+ * @author CWDS J Team
+ */
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BreResponseData implements Serializable {
 
   private static final long serialVersionUID = -3377409645481859880L;
   
-  private String dataClassName;
-  private JsonNode dataNode;
+  private String dataObjectClassName;
+  private JsonNode dataObject;
   
   public BreResponseData() {
     // Default no-argument constructor.
   }
 
-  public String getDataClassName() {
-    return dataClassName;
+  public String getDataObjectClassName() {
+    return dataObjectClassName;
   }
 
-  public void setDataClassName(String dataClassName) {
-    this.dataClassName = dataClassName;
+  public void setDataObjectClassName(String dataObjectClassName) {
+    this.dataObjectClassName = dataObjectClassName;
   }
 
-  public JsonNode getDataNode() {
-    return dataNode;
+  public JsonNode getDataObject() {
+    return dataObject;
   }
 
-  public void setDataNode(JsonNode dataNode) {
-    this.dataNode = dataNode;
+  public void setDataObject(JsonNode dataObject) {
+    this.dataObject = dataObject;
   }
   
   @Override
