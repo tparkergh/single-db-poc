@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.interfaces.api.BusinessRuleService;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
+import gov.ca.cwds.bre.interfaces.model.BreRequestData;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.bre.services.rules.CalsChildClientBusinessRules;
 import gov.ca.cwds.bre.services.rules.CalsClientBusinessRules;
@@ -142,26 +143,6 @@ public class CaresBreRestApiApplicationTest {
   @Autowired
   private ObjectMapper jacksonObjectMapper;
 
-//  @Test
-//  public void testClientBusinessRules() throws Exception {
-//    String request = IOUtils.toString(getClass().getResourceAsStream("/fixtures/rules/ClientBusinessRules-sample-request.json"), StandardCharsets.UTF_8);
-//    String expectedResponse = IOUtils.toString(getClass().getResourceAsStream("/fixtures/rules/ClientBusinessRules-expected-response.json"), StandardCharsets.UTF_8);
-//    BreResponse breResponse = doTest(request, expectedResponse);
-//    
-//    JsonNode data = breResponse.getData();      
-//    gov.ca.cwds.cics.interfaces.model.Client breResponseClient = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(data), gov.ca.cwds.cics.interfaces.model.Client.class);
-//  }
-
-//  @Test
-//  public void testParticipantBusinessRules() throws Exception {
-//    String request = IOUtils.toString(getClass().getResourceAsStream("/fixtures/rules/ParticipantBusinessRules-sample-request.json"), StandardCharsets.UTF_8);
-//    String expectedResponse = IOUtils.toString(getClass().getResourceAsStream("/fixtures/rules/ParticipantBusinessRules-expected-response.json"), StandardCharsets.UTF_8);
-//    BreResponse breResponse = doTest(request, expectedResponse);
-//    
-//    JsonNode data = breResponse.getData();      
-//    Participant breResponseParticipant = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(data), Participant.class);
-//  }
-
   @Test
   public void performanceRestTestCalsClientBusinessRules() throws Exception {
     int timesToCall = 1;
@@ -207,10 +188,16 @@ public class CaresBreRestApiApplicationTest {
     return breResponse;
   }
 
-  private void doPerformanceTest(BusinessRuleService businessRuleService, Object data, String ruleName, int timesToCall) {
+  private void doPerformanceTest(BusinessRuleService businessRuleService, 
+      Object data, 
+      String ruleName, 
+      int timesToCall) {
     BreRequest breRequest = new BreRequest();
     breRequest.setBusinessRuleSetName(ruleName);
-    breRequest.setData(jacksonObjectMapper.convertValue(data, JsonNode.class));
+    BreRequestData breRequestData = new BreRequestData();
+    breRequestData.setDataObjectClassName(data.getClass().getName());
+    breRequestData.setDataObject(jacksonObjectMapper.convertValue(data, JsonNode.class));
+    breRequest.addDataObject(breRequestData);
 
     long begin = System.currentTimeMillis();
     for (int i = 0; i < timesToCall; i++) {

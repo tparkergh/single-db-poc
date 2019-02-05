@@ -1,30 +1,35 @@
 {
   "business_rule_set_name": "AddressBusinessRules",
-  "data": {
-    "IDENTIFIER": "KfBDcqB00R",
-    "TXN_HDR_STAFF_ID": "0WM",
-    "CITY_NM": "Los Angeles",
-    "EMRG_TELNO": 0,
-    "EMRG_EXTNO": 0,
-    "FRG_ADRT_B": "N",
-    "GVR_ENTC": 1086,
-    "MSG_TEL_NO": 0,
-    "MSG_EXT_NO": 0,
-    "HEADER_ADR": "",
-    "PRM_TEL_NO": 9161112222,
-    "PRM_EXT_NO": 3333,
-    "STATE_C": 1828,
-    "STREET_NM": "W 1st St",
-    "STREET_NO": "161",
-    "ZIP_NO": 99999,
-    "ADDR_DSC": "",
-    "ZIP_SFX_NO": 0,
-    "POSTDIR_CD": "",
-    "PREDIR_CD": "",
-    "ST_SFX_C": 0,
-    "UNT_DSGC": 0,
-    "UNIT_NO": "",
-    "LAT": "+0034.052440",
-    "LNG": "-0118.243736"
-  }
+  "data_objects": [
+    {
+      "data_object_class_name": "gov.ca.cwds.cics.model.AddressData",
+      "data_object": {
+        "IDENTIFIER": "KfBDcqB00R",
+        "TXN_HDR_STAFF_ID": "0WM",
+        "CITY_NM": "Los Angeles",
+        "EMRG_TELNO": 0,
+        "EMRG_EXTNO": 0,
+        "FRG_ADRT_B": "N",
+        "GVR_ENTC": 1086,
+        "MSG_TEL_NO": 0,
+        "MSG_EXT_NO": 0,
+        "HEADER_ADR": "",
+        "PRM_TEL_NO": 9161112222,
+        "PRM_EXT_NO": 3333,
+        "STATE_C": 1828,
+        "STREET_NM": "W 1st St",
+        "STREET_NO": "161",
+        "ZIP_NO": 99999,
+        "ADDR_DSC": "",
+        "ZIP_SFX_NO": 0,
+        "POSTDIR_CD": "",
+        "PREDIR_CD": "",
+        "ST_SFX_C": 0,
+        "UNT_DSGC": 0,
+        "UNIT_NO": "",
+        "LAT": "+0034.052440",
+        "LNG": "-0118.243736"
+      }
+    }
+  ]
 }

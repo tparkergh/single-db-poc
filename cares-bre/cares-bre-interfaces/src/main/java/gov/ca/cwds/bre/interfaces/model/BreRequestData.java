@@ -1,13 +1,13 @@
 package gov.ca.cwds.bre.interfaces.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -17,29 +17,31 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class BreRequest {
+public class BreRequestData implements Serializable {
+
+  private static final long serialVersionUID = -3377409645481859880L;
   
-  private String businessRuleSetName;  
-  private List<BreRequestData> dataObjects = new ArrayList<>();
+  private String dataObjectClassName;
+  private JsonNode dataObject;
   
-  public String getBusinessRuleSetName() {
-    return businessRuleSetName;
+  public BreRequestData() {
+    // Default no-argument constructor.
   }
 
-  public void setBusinessRuleSetName(String businessRuleSetName) {
-    this.businessRuleSetName = businessRuleSetName;
+  public String getDataObjectClassName() {
+    return dataObjectClassName;
   }
 
-  public List<BreRequestData> getDataObjects() {
-    return dataObjects;
+  public void setDataObjectClassName(String dataObjectClassName) {
+    this.dataObjectClassName = dataObjectClassName;
   }
 
-  public void setDataObjects(List<BreRequestData> dataObjects) {
-    this.dataObjects = dataObjects;
+  public JsonNode getDataObject() {
+    return dataObject;
   }
-  
-  public void addDataObject(BreRequestData dataObject) {
-    this.dataObjects.add(dataObject);
+
+  public void setDataObject(JsonNode dataObject) {
+    this.dataObject = dataObject;
   }
 
   @Override

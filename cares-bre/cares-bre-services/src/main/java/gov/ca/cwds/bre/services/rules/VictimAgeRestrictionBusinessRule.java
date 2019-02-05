@@ -8,7 +8,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
+import gov.ca.cwds.bre.interfaces.model.BreRequestData;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
+import gov.ca.cwds.bre.interfaces.model.BreResponseData;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 import gov.ca.cwds.bre.interfaces.model.RuleDocumentation;
 import gov.ca.cwds.bre.services.api.BusinessRule;
@@ -40,15 +42,18 @@ public class VictimAgeRestrictionBusinessRule implements BusinessRule {
     } 
     
     breResponse.setBusinessRuleSetName(breRequest.getBusinessRuleSetName());
-    breResponse.setData(breRequest.getData());
+    BreResponseData breResponseData = new BreResponseData();
+    breResponseData.setDataObjectClassName(LocalDate.class.getName());
+    breResponseData.setDataObject(jacksonObjectMapper.convertValue(victimDob, JsonNode.class));
+    breResponse.addDataObject(breResponseData);
     return breResponse;
   }
 
   private LocalDate getDob(BreRequest breRequest) {
     LocalDate clientDob;
     try {      
-      JsonNode data = breRequest.getData();      
-      clientDob = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(data), LocalDate.class);      
+      BreRequestData breRequestData = breRequest.getDataObjects().get(0);      
+      clientDob = jacksonObjectMapper.readValue(jacksonObjectMapper.writeValueAsString(breRequestData.getDataObject()), LocalDate.class);      
     } catch (IOException t) {
       throw new BreException("Error reading business rule data for: VictimAgeRestrictionBusinessRule", 
           t, breRequest);      
