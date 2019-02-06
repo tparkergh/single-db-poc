@@ -13,9 +13,12 @@ import { connect } from 'react-redux'
 import '@cwds/core/dist/styles.css'
 
 class App extends React.Component {
-  componentDidMount () {
+  constructor (props) {
+    super(props)
     const engine = new JsonBRE()
     Rules.map((rule) => engine.define(rule))
+  }
+  componentDidMount () {
     axios({
       url: getAllSystemMetasRoute(),
       method: 'get'

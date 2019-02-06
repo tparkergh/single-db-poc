@@ -1,0 +1,7 @@
+{
+  "if": [
+    { "===": [{"length": {"var": "address.zip"}}, 5]},
+    true,
+    "An address zip code must be 5 digits"
+  ]
+}

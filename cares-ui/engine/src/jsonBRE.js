@@ -1,11 +1,13 @@
 import jsonLogic from 'json-logic-js'
 import Rule from './rule'
+import { length } from './customOperators'
 
 // singleton business rules engine
 export default class JsonBRE {
   constructor () {
     if (JsonBRE.instance) { return JsonBRE.instance }
     this.rules = {}
+    jsonLogic.add_operation('length', length)
     JsonBRE.instance = this
   }
 
