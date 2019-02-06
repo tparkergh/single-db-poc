@@ -27,12 +27,11 @@ import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 public final class BreRestApiClient implements BusinessRuleService {
   
   private final static Logger LOGGER = LoggerFactory.getLogger(BreRestApiClient.class);
+  
+  public static final String BRE_EXEC_PATH = "/bre/exec";
 
-  @Value("${app.bre.base-url}")
+  @Value("${app.bre-service.base-url}")
   private String baseUrl;
-
-  @Value("${app.bre.bre-path}")
-  private String brePath;
 
   private final RestTemplate restTemplate;
   
@@ -53,7 +52,7 @@ public final class BreRestApiClient implements BusinessRuleService {
     HttpEntity<BreRequest> request = new HttpEntity<>(breRequest);
     
     ResponseEntity<BreResponse> exchange =
-        restTemplate.exchange(baseUrl + brePath, HttpMethod.POST, request, BreResponse.class);
+        restTemplate.exchange(baseUrl + BRE_EXEC_PATH, HttpMethod.POST, request, BreResponse.class);
 
     BreResponse breResponse = exchange.getBody();    
     LOGGER.info("BRE RESPONSE: {}", breResponse);

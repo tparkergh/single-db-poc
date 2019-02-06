@@ -17,6 +17,8 @@ dependencies {
     implementation project(':cares-geo:cares-geo-rest-client')
     implementation project(':cares-cics:cares-cics-interfaces')
     implementation project(':cares-cics:cares-cics-rest-client')
+    implementation project(':cares-bre:cares-bre-interfaces')
+    implementation project(':cares-bre:cares-bre-rest-client')
 
     implementation 'org.springframework.boot:spring-boot:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springBootVersion  
@@ -26,6 +28,8 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
     implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
+    
+    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
     
     implementation 'org.mapstruct:mapstruct-jdk8:' + mapstructVersion
     compileOnly 'org.mapstruct:mapstruct-processor:' + mapstructVersion
