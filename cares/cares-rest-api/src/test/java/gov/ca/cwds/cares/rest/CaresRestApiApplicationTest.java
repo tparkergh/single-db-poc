@@ -51,6 +51,9 @@ public class CaresRestApiApplicationTest {
 
   @Value("${app.cics-service.base-url}")
   private String cicsServiceBaseUrl;
+  
+  @Value("${app.bre-service.base-url}")
+  private String breServiceBaseUrl;
 
   @Autowired
   private RestTemplateBuilder restTemplateBuilder;
@@ -97,6 +100,11 @@ public class CaresRestApiApplicationTest {
     verifyGeoServiceCall(geoMockServer,
         "/fixtures/address/geo-address-expected-request.json", "/fixtures/address/geo-address-mock-response.json");
 
+    MockRestServiceServer breMockServer = MockRestServiceServer.bindTo(breRestClient.getRestTemplate()).build();
+
+    verifyBreServiceCall(breMockServer,
+        "/fixtures/address/bre-address-rules-expected-request.json", "/fixtures/address/bre-address-rules-mock-response.json");
+    
     MockRestServiceServer cicsMockServer = MockRestServiceServer.bindTo(cicsAddressUpdaterRestApiClient.getRestTemplate()).build();
 
     verifyCicsUpdateAddressServiceCall(cicsMockServer,
@@ -126,6 +134,11 @@ public class CaresRestApiApplicationTest {
     verifyGeoServiceCall(geoMockServer,
         "/fixtures/address/geo-address-expected-request.json", "/fixtures/address/geo-address-mock-response.json");
 
+    MockRestServiceServer breMockServer = MockRestServiceServer.bindTo(breRestClient.getRestTemplate()).build();
+
+    verifyBreServiceCall(breMockServer,
+        "/fixtures/address/bre-address-rules-expected-request.json", "/fixtures/address/bre-address-rules-mock-response.json");
+    
     MockRestServiceServer cicsMockServer = MockRestServiceServer.bindTo(cicsAddressUpdaterRestApiClient.getRestTemplate()).build();
 
     verifyCicsUpdateAddressServiceCall(cicsMockServer,
@@ -172,5 +185,17 @@ public class CaresRestApiApplicationTest {
         .andExpect(method(HttpMethod.PUT))
         .andExpect(header("Authorization", "Basic dGVzdC1jaWNzLXNlcnZpY2UtdXNlcm5hbWU6dGVzdC1jaWNzLXNlcnZpY2UtcGFzc3dvcmQ="))
         .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));
+  }
+  
+  private void verifyBreServiceCall(MockRestServiceServer mockServer, String expectedRequestPath, String mockResponsePath) throws IOException {
+    String breExpectedRequest = IOUtils.toString(getClass().getResourceAsStream(
+        expectedRequestPath), StandardCharsets.UTF_8);
+    String breMockResponse = IOUtils.toString(getClass().getResourceAsStream(
+        mockResponsePath), StandardCharsets.UTF_8);
+    mockServer.expect(
+        content().json(breExpectedRequest))
+        .andExpect(requestTo(breServiceBaseUrl + BreRestApiClient.BRE_EXEC_PATH))
+        .andExpect(method(HttpMethod.POST))
+        .andRespond(withSuccess(breMockResponse, MediaType.APPLICATION_JSON));
   }
 }
