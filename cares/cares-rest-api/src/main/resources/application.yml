@@ -25,7 +25,7 @@ app:
   geo-service:
     base-url: ${GEO_SERVICE_BASE_URL:http://api-a.sblegacy.cwds.io:8085}
   bre-service:
-    base-url: ${BRE_SERVICE_BASE_URL:https://api-a.sblegacy.cwds.io:3006}
+    base-url: ${BRE_SERVICE_BASE_URL:http://api-a.sblegacy.cwds.io:3006}
 
 spring.jackson.serialization.INDENT_OUTPUT: true
 
