@@ -2,14 +2,18 @@ import {
   referrals,
   systemMetas,
   systemCodes,
-  client
+  client,
+  address,
+  clientAddresses
 } from '../schemas'
 import {
   SET_REFERRALS,
   SET_CLIENT,
   SET_SYSTEM_METAS,
   ADD_SYSTEM_CODES,
-  OPEN_REFERRAL
+  OPEN_REFERRAL,
+  SET_ADDRESSES,
+  UPDATE_ADDRESS
 } from '../actions'
 import { normalize } from 'normalizr'
 
@@ -57,6 +61,23 @@ export default (state = {}, action) => {
         ...state,
         openReferralId: action.id,
       }
+    case SET_ADDRESSES:
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          ...normalize(action.payload, clientAddresses).entities
+        }
+      }
+    case UPDATE_ADDRESS:
+      let newState = {
+        ...state,
+        entities: {
+          ...state.entities,
+        }
+      }
+      newState.entities.address[action.id][action.field] = action.value
+      return newState;
     default:
       return state
   }

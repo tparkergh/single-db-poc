@@ -46,6 +46,38 @@ export const selectOpenAllegationId = (rawState) => createSelector(
   rawState
 )
 
+export const selectAddress = (rawState, addressId) => createSelector(
+  (state) => {
+      let clientAddress = state.getIn(['entities', 'clientAddress'], Map())
+        .first((clientAddress) => clientAddress.get('address') == addressId)
+      let address = state.getIn(['entities', 'address', addressId], Map())
+      return {
+         identifier: address.get('identifier', ''),
+         streetNumber: address.get('street_number', ''),
+         streetName:  address.get('street_name', ''),
+         city:  address.get('city', ''),
+         stateCode:  address.get('state_code', ''),
+         zipCode:  address.get('zip_code', ''),
+         latitude:  address.get('latitude', ''),
+         longitude:  address.get('longitude', ''),
+         addressType:  clientAddress.get('address_tytpe_code', ''),
+      }
+    },
+  rawState
+)
+
+export const selectAddressIds = (rawState) => createSelector(
+  (state) => state.getIn(['entities', 'address'], Map())
+    .toList()
+    .map((address) => (address.get('identifier'))),
+  rawState
+)
+
+export const selectPutAddressRequest = (rawState, addressId) => createSelector(
+  (state) => state.getIn(['entities', 'address', addressId], Map()),
+  rawState
+)
+
 export const selectApprovalStatusOptions = (rawState) => createSelector(
   selectOptionsByMetaName('APV_STC'),
   rawState
@@ -71,13 +103,23 @@ export const selectReferralResponseOptions = (rawState) => createSelector(
   rawState
 )
 
-const selectOptionsByMetaName = (metaName) => (rawState) => createSelector(
+export const selectAddressTypeOptions = (rawState) => createSelector(
+  selectOptionsByMetaName('ADDR_TPC'),
+  rawState
+)
+
+export const selectStateOptions = (rawState) => createSelector(
+    selectOptionsByMetaName('STATE_C', 'user_defined_logical_id'),
+    rawState
+)
+
+const selectOptionsByMetaName = (metaName, filedName = 'short_description') => (rawState) => createSelector(
   (state) => state.getIn(['entities', 'systemCode'], Map())
   .filter((systemCode) => systemCode.get('meta_name').includes(metaName))
   .toList()
   .map((systemCode) => Map({
     key: systemCode.get('system_id'),
-    option: systemCode.get('short_description', '').trim()
+    option: systemCode.get(filedName, '').trim()
   }))
   .sortBy((systemCode) => systemCode.get('key')) ,
   rawState

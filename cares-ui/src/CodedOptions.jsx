@@ -1,5 +1,5 @@
 import { Input } from '@cwds/reactstrap'
-export const ReferralInformationOptions = ({name, options, code}) => (
+export const CodedOptions = ({name, options, code}) => (
   <Input type='select' name={name} id={name}>
     <option
       key={0}

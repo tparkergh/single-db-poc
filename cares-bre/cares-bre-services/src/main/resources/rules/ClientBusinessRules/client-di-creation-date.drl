@@ -1,0 +1,34 @@
+global java.util.Set validationDetailsList
+
+rule "client-di-creation-date"
+
+  @doc_description("Creation Date must be a valid date")
+  
+  @doc_drools_file("client-di-creation-date.drl")
+  @doc_external_documentation("xTools Application")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_rule_category(dataIntegrity)
+  @doc_rule_name("CLIENT-DI-CREATION-DATE")
+  @doc_rule_type(xTool)
+  
+  @doc_di_entity(CLIENT)
+  @doc_di_attribute(CREATION_DATE)
+  @doc_di_length("10")
+  @doc_di_type("date")
+  @doc_di_nullable("false")
+  @doc_di_mandatory("true")
+  @doc_di_default("system date")
+  @doc_di_validation_table()
+  @doc_di_validation_category()
+  @doc_di_validation_sub_category()
+  @doc_di_validation_values()
+  
+
+  dialect "mvel"
+  agenda-group "ClientBusinessRules-validation-agenda"
+    when
+        //conditions
+    then
+        //actions
+
+end

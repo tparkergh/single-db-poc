@@ -9,6 +9,7 @@ rule "address-R-09774"
   @doc_rule_type("DataProcessing")
   @doc_drools_file("address-R-09774.drl")
   @doc_rule_name("ADDRESS-R-09774")
+  @doc_rule_category("DataProcessing")
   
   @doc_doctool_name("R - 09774 Set For_Add_Ind_Var = N")
   @doc_doctool_description("Set Foreign Address Indicator Variable to 'No' when foreign address information does not exist.")

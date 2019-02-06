@@ -1,11 +1,13 @@
-import { tokenize } from './tokenizer'
-
 export default class JsonString {
   constructor (definition) {
     this.value = definition
   }
 
+  directlyApplies (selector) {
+    return false
+  }
+
   applies (selector) {
-    return this.value === selector || tokenize(this.value).includes(selector)
+    return false
   }
 }

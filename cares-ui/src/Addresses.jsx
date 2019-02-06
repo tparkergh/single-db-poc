@@ -1,79 +1,42 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import axios from 'axios'
+
 import {
-  FormGroup,
-  Input,
-  Col,
   Label,
   ListGroup,
   ListGroupItem,
-  Collapse,
-  Button
 } from '@cwds/reactstrap'
+
+import { selectAddressIds } from './selectors'
+import { getClientAddressesByClientIdRoute } from './routes'
+import { setAddresses } from './actions'
+import Address from './Address'
 
 import '@cwds/core/dist/styles.css'
 
 export class Addresses extends React.Component {
-  state = {
-    currentIndex: -1
+
+  componentDidUpdate (prevProps) {
+    if (this.props.clientId !== prevProps.clientId) {
+      axios({
+        url: getClientAddressesByClientIdRoute(this.props.clientId),
+        method: 'get'
+      }).then((response) => this.props.setAddresses(response.data))
+    }
   }
+
   render () {
-    const addresses = [1, 2]
+    const addressIds = this.props.addressIds
+
     return (
       <div>
         <Label>Addresses</Label>
         <ListGroup>
           {
-            addresses.map((address, index) =>
+            addressIds && addressIds.map((addressId) =>
               <ListGroupItem>
-                <div>
-                  First St First City, CA 94716
-                  <Button
-                    color='link'
-                    className='float-right'
-                    onClick={
-                      ({ target }) => this.setState({ currentIndex: index })
-                    }
-                  >Edit</Button>
-                </div>
-                <Collapse isOpen={index === this.state.currentIndex}>
-                  <br />
-                  <FormGroup row>
-                    <Col>
-                      <Label>Address</Label>
-                      <Input type='text' name='street' value='First St' />
-                    </Col>
-                    <Col>
-                      <Label>City</Label>
-                      <Input type='text' name='street' value='First City' />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Col>
-                      <Label>State</Label>
-                      <Input type='text' name='street' value='CA' />
-                    </Col>
-                    <Col>
-                      <Label>Zip</Label>
-                      <Input type='text' name='street' value='94716' />
-                    </Col>
-                    <Col>
-                      <Label>Address Type</Label>
-                      <Input type='text' name='street' value='Home' />
-                    </Col>
-                    <Col>
-                      <Label>Latitude/Longitude</Label>
-                      <Input type='text' name='latitudelongitude' value='102.756,110.295' />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup check row>
-                    <Button className='save float-right' color='primary'>Save</Button>
-                    <Button className='cancel float-right' color='secondary'
-                      onClick={
-                        ({ target }) => this.setState({ currentIndex: -1 })
-                      }
-                    >Cancel</Button>
-                  </FormGroup>
-                </Collapse>
+                <Address id={addressId} updateAddressesCallback={this.componentDidUpdate.bind(this)}/>
               </ListGroupItem>
             )
           }
@@ -82,3 +45,12 @@ export class Addresses extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  addressIds: selectAddressIds(state)
+})
+
+const mapDispatchToProps = { setAddresses }
+
+export default connect(mapStateToProps, mapDispatchToProps) (Addresses)
+
