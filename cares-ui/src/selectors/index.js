@@ -53,9 +53,9 @@ export const selectAddress = (rawState, addressId) => createSelector(
       let address = state.getIn(['entities', 'address', addressId], Map())
       return {
          identifier: address.get('identifier', ''),
-         streetNumber: address.get('street_number', '').trim(),
-         streetName:  address.get('street_name', '').trim(),
-         city:  address.get('city', '').trim(),
+         streetNumber: address.get('street_number', ''),
+         streetName:  address.get('street_name', ''),
+         city:  address.get('city', ''),
          stateCode:  address.get('state_code', ''),
          zipCode:  address.get('zip_code', ''),
          latitude:  address.get('latitude', ''),
