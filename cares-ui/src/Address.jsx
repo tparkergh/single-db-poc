@@ -129,13 +129,13 @@ export class Address extends React.Component {
               </Col>
               <Col>
                 <Label>Zip</Label>
-                <ValidateInput>
+                <ValidateInput
                   id={'zipCode-' + this.props.id}
                   type='text'
                   name='zipCode'
                   value={address.zipCode}
                   onChange={ (e) => this.onChangeAddress('zip_code', e.target.value) }
-                </ValidateInput>
+                />
               </Col>
               <Col>
                 <Label>Address Type</Label>

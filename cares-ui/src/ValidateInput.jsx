@@ -1,6 +1,6 @@
 import React from 'react'
 import JsonBRE from 'JsonBRE'
-import { Validation } from './validation'
+import { Validation } from './Validation'
 import {
   Input,
 } from '@cwds/reactstrap'
@@ -21,7 +21,7 @@ export class ValidateInput extends React.Component {
       <div>
         <Input id={'zipCode-' + this.props.id} type={type} name={name}
                value={ value }
-               onChange={ onchange }
+               onChange={ onChange }
                onBlur={ ({target: { value: v }}) => this.setState({validate: v})}
         />
         { this.state.validate &&
