@@ -1,6 +1,6 @@
 allprojects {
     group = 'gov.ca.cwds'
-    version = '0.10.0-SNAPSHOT'
+    version = '0.19.3-SNAPSHOT'
 
     ext {
         //it's the place where we can change dockerhub account
