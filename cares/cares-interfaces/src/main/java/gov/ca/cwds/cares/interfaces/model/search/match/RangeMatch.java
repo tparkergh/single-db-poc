@@ -7,32 +7,32 @@ public class RangeMatch extends Match implements Serializable {
 
   private static final long serialVersionUID = 4227278240512325951L;
   
-  private SearchField<?> from;
-  private SearchField<?> to;
+  private SearchField from;
+  private SearchField to;
 
   public RangeMatch() {
     super();
   }
   
-  public RangeMatch(SearchField<?> from, SearchField<?> to) {
+  public RangeMatch(SearchField from, SearchField to) {
     super();
     this.from = from;
     this.to = to;
   }
 
-  public SearchField<?> getFrom() {
+  public SearchField getFrom() {
     return from;
   }
 
-  public void setFrom(SearchField<?> from) {
+  public void setFrom(SearchField from) {
     this.from = from;
   }
 
-  public SearchField<?> getTo() {
+  public SearchField getTo() {
     return to;
   }
 
-  public void setTo(SearchField<?> to) {
+  public void setTo(SearchField to) {
     this.to = to;
   }
 }

@@ -1,38 +1,30 @@
 package gov.ca.cwds.cares.interfaces.model.search.field;
 
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "value_type")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "bool", value = BooleanSearchField.class),
-    @JsonSubTypes.Type(name = "number", value = NumberSearchField.class),
-    @JsonSubTypes.Type(name = "string", value = StringSearchField.class),
-    @JsonSubTypes.Type(name = "date", value = DateSearchField.class)})
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class SearchField<T> {
+public class SearchField implements Serializable {
+  
+  private static final long serialVersionUID = 8373316748305123205L;
   
   private String name;
-  private T value;
+  private String value;
 
-  protected SearchField() {
+  public SearchField() {
     // Default no-argument constructor.
   }
   
-  protected SearchField(String name, T value) {
+  public SearchField(String name, String value) {
     this.name = name;
     this.value = value;
   }
@@ -45,11 +37,11 @@ public abstract class SearchField<T> {
     this.name = name;
   }
 
-  public T getValue() {
+  public String getValue() {
     return value;
   }
 
-  public void setValue(T value) {
+  public void setValue(String value) {
     this.value = value;
   }
   

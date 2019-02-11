@@ -1,14 +1,12 @@
 package gov.ca.cwds.cares.interfaces.model.search;
 
 import java.time.LocalDate;
+import org.junit.Assert;
 import org.junit.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import gov.ca.cwds.cares.interfaces.model.search.field.DateSearchField;
-import gov.ca.cwds.cares.interfaces.model.search.field.NumberSearchField;
-import gov.ca.cwds.cares.interfaces.model.search.field.StringSearchField;
+import gov.ca.cwds.cares.interfaces.model.search.field.SearchField;
 import gov.ca.cwds.cares.interfaces.model.search.match.FieldMatch;
 import gov.ca.cwds.cares.interfaces.model.search.match.RangeMatch;
-import org.junit.Assert;
 
 public class SearchCriteriaTest {
 
@@ -21,15 +19,15 @@ public class SearchCriteriaTest {
     searchCriteria.addSource("perpetrator");
     
     SearchQuery searchQuery = new SearchQuery();    
-    searchQuery.addMust(new FieldMatch(new StringSearchField("first_name", "Shahid")));
-    searchQuery.addMust(new FieldMatch(new StringSearchField("last_name", "Saleemi")));
-    searchQuery.addShould(new FieldMatch(new NumberSearchField("primary_phone", 1111111111)));
+    searchQuery.addMust(new FieldMatch(new SearchField("first_name", "Shahid")));
+    searchQuery.addMust(new FieldMatch(new SearchField("last_name", "Saleemi")));
+    searchQuery.addShould(new FieldMatch(new SearchField("primary_phone", "1111111111")));
     
     searchQuery.addShould(new RangeMatch(
-        new NumberSearchField("age", 1), new NumberSearchField("age", 18)));
+        new SearchField("age", "1"), new SearchField("age", "18")));
     
     searchQuery.addShould(new RangeMatch(
-        new DateSearchField("dob", LocalDate.now()), null));
+        new SearchField("dob", LocalDate.now().toString()), null));
     
     searchCriteria.setQuery(searchQuery);
     
