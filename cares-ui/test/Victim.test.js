@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme'
 import { Victim } from '../src/Victim'
-describe('Victim', () => {
+xdescribe('Victim', () => {
   it('should render a card for victim Joe Smoe', () => {
     const main = shallow(<Victim/>)
     const card = main.find('Card')
