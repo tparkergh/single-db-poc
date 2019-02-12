@@ -38,8 +38,8 @@ def buildPullRequest() {
       parameters([
         string(defaultValue: 'master', description: '', name: 'branch'),
         booleanParam(defaultValue: true, description: 'Default release version template is: <majorVersion>_<buildNumber>-RC', name: 'RELEASE_PROJECT'),
+      ])
     ])
-
     try {
       checkOut()
       verifySemVerLabel()
@@ -69,8 +69,8 @@ def buildMaster() {
         booleanParam(defaultValue: true, description: '', name: 'USE_NEWRELIC'),
         string(defaultValue: 'master', description: '', name: 'branch'),
         booleanParam(defaultValue: true, description: 'Default release version template is: <majorVersion>_<buildNumber>-RC', name: 'RELEASE_PROJECT'),
+      ])
     ])
-
     try {
       checkOut()
       incrementTag()
