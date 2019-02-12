@@ -7,6 +7,7 @@ import {
   CardTitle,
   Button
 } from '@cwds/reactstrap'
+import { Link } from 'react-router-dom'
 
 export class LandingPage extends React.Component {
   render() {
@@ -15,7 +16,7 @@ export class LandingPage extends React.Component {
         <Card body>
           <CardTitle>Single DB POC</CardTitle>
           <p>A proof of concept that exercises a single database to get information about referrals and update the addresses of victims.</p>
-          <Button>Go</Button>
+          <Button><Link to="/single-db-poc" style={{display: 'block', height: '100%'}}>Go</Link></Button>
         </Card>
         <Card body>
           <CardTitle>CARES Intake</CardTitle>
