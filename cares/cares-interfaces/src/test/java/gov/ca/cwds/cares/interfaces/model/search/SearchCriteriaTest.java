@@ -1,13 +1,9 @@
 package gov.ca.cwds.cares.interfaces.model.search;
 
-import java.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import gov.ca.cwds.cares.interfaces.model.search.field.SearchField;
-import gov.ca.cwds.cares.interfaces.model.search.field.SearchFieldName;
-import gov.ca.cwds.cares.interfaces.model.search.match.ExactMatch;
-import gov.ca.cwds.cares.interfaces.model.search.match.RangeMatch;
+import gov.ca.cwds.cares.interfaces.model.search.query.PersonSearchQuery;
 
 public class SearchCriteriaTest {
 
@@ -19,19 +15,10 @@ public class SearchCriteriaTest {
     searchCriteria.addSource("victim");
     searchCriteria.addSource("perpetrator");
     
-    SearchQuery searchQuery = new SearchQuery();    
-    searchQuery.addMustMatch(new ExactMatch(
-        new SearchField(SearchFieldName.PERSON_FIRST_NAME.getValue(), "Shahid")));
-    searchQuery.addMustMatch(
-        new ExactMatch(new SearchField(SearchFieldName.PERSON_LAST_NAME.getValue(), "Saleemi")));
-    searchQuery.addShouldMatch(
-        new ExactMatch(new SearchField(SearchFieldName.PERSON_PRIMARY_PHONR.getValue(), "1111111111")));
-    
-    searchQuery.addShouldMatch(new RangeMatch(
-        new SearchField("age", "1"), new SearchField("age", "18")));
-    
-    searchQuery.addShouldMatch(new RangeMatch(
-        new SearchField("dob", LocalDate.now().toString()), null));
+    PersonSearchQuery searchQuery = new PersonSearchQuery();
+    searchQuery.setFirstName("Shahid");
+    searchQuery.setLastName("Saleemi");
+    searchQuery.setPrimaryPhoneNumber(1111111111);
     
     searchCriteria.setQuery(searchQuery);
     

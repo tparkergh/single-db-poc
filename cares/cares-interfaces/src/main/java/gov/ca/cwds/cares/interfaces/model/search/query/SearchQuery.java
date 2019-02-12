@@ -1,50 +1,34 @@
-package gov.ca.cwds.cares.interfaces.model.search.field;
+package gov.ca.cwds.cares.interfaces.model.search.query;
 
-import java.io.Serializable;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+/**
+ * @author CWDS J Team
+ */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "hit_type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "person", value = PersonSearchQuery.class)})
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SearchField implements Serializable {
+public abstract class SearchQuery {
   
-  private static final long serialVersionUID = 8373316748305123205L;
-  
-  private String name;
-  private String value;
-
-  public SearchField() {
-    // Default no-argument constructor.
-  }
-  
-  public SearchField(String name, String value) {
-    this.name = name;
-    this.value = value;
+  public SearchQuery() {
+    super();
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
-  }
-  
   @Override
   public int hashCode() {
     return HashCodeBuilder.reflectionHashCode(this);
