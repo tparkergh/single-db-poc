@@ -14,4 +14,8 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion
     implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion 
+    
 }

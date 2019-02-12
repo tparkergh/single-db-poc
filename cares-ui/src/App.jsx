@@ -1,8 +1,7 @@
 import './App.css'
 import React from 'react'
 import { Page } from '@cwds/components'
-import { Main } from './Main.jsx'
-import SideNav from './SideNav'
+import LandingPage from './LandingPage'
 import JsonBRE from 'JsonBRE'
 import { Rules } from './rules'
 import axios from 'axios'
@@ -12,7 +11,7 @@ import { connect } from 'react-redux'
 
 import '@cwds/core/dist/styles.css'
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor (props) {
     super(props)
     const engine = new JsonBRE()
@@ -30,16 +29,17 @@ class App extends React.Component {
       <div className='App'>
         <Page
           layout='jumpnav'
-          title='CARES POC'
-          breadcrumb={<div>Proof of concept for CARES validation</div>}
-          sidenav={SideNav}
-          main={Main}
+          title='CARES Dashboard'
+          breadcrumb={<div>Welcome to CARES Dashboard</div>}
+          main={LandingPage}
         />
       </div>
     )
   }
 }
 
+const mapStateToProps = (state, ownProps) => ({})
+
 const mapDispatchToProps = { setSystemMetas }
 
-export default connect(undefined, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
