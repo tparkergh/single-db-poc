@@ -12,8 +12,8 @@ import gov.ca.cwds.cares.persistence.repository.ClientRepository;
 import gov.ca.cwds.cares.interfaces.api.AddressService;
 import gov.ca.cwds.cares.interfaces.api.ClientService;
 import gov.ca.cwds.cares.interfaces.model.Address;
-import gov.ca.cwds.cares.interfaces.model.Client;
-import gov.ca.cwds.cares.interfaces.model.ClientAddress;
+import gov.ca.cwds.cares.iterfaces.model.people.Client;
+import gov.ca.cwds.cares.iterfaces.model.people.ClientAddress;
 import gov.ca.cwds.cares.services.mapping.ClientAddressMapper;
 import gov.ca.cwds.cares.services.mapping.ClientMapper;
 

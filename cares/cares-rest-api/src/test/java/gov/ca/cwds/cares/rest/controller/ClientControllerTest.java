@@ -21,8 +21,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.cares.interfaces.api.ClientService;
-import gov.ca.cwds.cares.interfaces.model.Client;
-import gov.ca.cwds.cares.interfaces.model.ClientAddress;
+import gov.ca.cwds.cares.iterfaces.model.people.Client;
+import gov.ca.cwds.cares.iterfaces.model.people.ClientAddress;
 
 @Ignore
 @RunWith(MockitoJUnitRunner.class)

@@ -1,6 +1,7 @@
 package gov.ca.cwds.cares.rest.controller;
 
-import gov.ca.cwds.cares.interfaces.model.ClientAddress;
+import gov.ca.cwds.cares.iterfaces.model.people.Client;
+import gov.ca.cwds.cares.iterfaces.model.people.ClientAddress;
 import java.util.Collection;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 import gov.ca.cwds.cares.interfaces.api.ClientService;
-import gov.ca.cwds.cares.interfaces.model.Client;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 

@@ -1,4 +1,4 @@
-package gov.ca.cwds.cares.interfaces.model;
+package gov.ca.cwds.cares.iterfaces.model.people;
 
 import java.io.Serializable;
 import java.time.LocalDate;
