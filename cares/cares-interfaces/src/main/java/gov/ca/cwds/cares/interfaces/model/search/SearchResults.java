@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import gov.ca.cwds.cares.common.model.ExecutionTimeRecorder;
+import gov.ca.cwds.cares.interfaces.model.search.hit.SearchHit;
 
 /**
  * @author CWDS J Team
@@ -36,6 +37,10 @@ public class SearchResults implements Serializable, ExecutionTimeRecorder {
 
   public void setHits(List<SearchHit> hits) {
     this.hits = hits;
+  }
+  
+  public void addHit(SearchHit hit) {
+    this.hits.add(hit);
   }
 
   public Long getExecutionTimeMillis() {

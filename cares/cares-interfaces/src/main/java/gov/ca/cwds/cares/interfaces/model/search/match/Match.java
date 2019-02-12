@@ -16,8 +16,9 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
         include = JsonTypeInfo.As.PROPERTY,
         property = "match_type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(name = "range", value = RangeMatch.class),
-        @JsonSubTypes.Type(name = "field", value = FieldMatch.class)})
+        @JsonSubTypes.Type(name = "range_match", value = RangeMatch.class),
+        @JsonSubTypes.Type(name = "exact_match", value = ExactMatch.class),
+        @JsonSubTypes.Type(name = "partial_match", value = PartialMatch.class)})
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)

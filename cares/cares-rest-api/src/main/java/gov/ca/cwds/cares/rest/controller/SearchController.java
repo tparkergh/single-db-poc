@@ -49,4 +49,12 @@ public class SearchController {
   public Collection<String> getSearchSources() {
     return searchService.getSearchSources();
   }
+  
+  @GetMapping(value = "/searches/match_types",
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  @ApiOperation(value = "Get all search match types")
+  @ExecutionTimer
+  public Collection<String> getSearchMatchTypes() {
+    return searchService.getSearchMatchTypes();
+  }
 }

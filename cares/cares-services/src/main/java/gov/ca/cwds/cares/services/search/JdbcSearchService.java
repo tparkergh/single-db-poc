@@ -32,4 +32,9 @@ public class JdbcSearchService implements SearchService {
   public Collection<String> getSearchSources() {
     return Lists.newArrayList("reporter", "victim", "perpetrator");
   }
+
+  @Override
+  public Collection<String> getSearchMatchTypes() {
+    return Lists.newArrayList("exact_match", "partial_match", "range_match");
+  }
 }

@@ -10,25 +10,23 @@ public enum SearchFieldName implements Serializable {
   
   PERSON_LAST_NAME("person.last_name"),
   
-  PERSON_PRIMARY_PHONR("person.primary_phone"),
+  PERSON_PRIMARY_PHONR("person.primary_phone");
+    
+  private String value;
   
-  PERSON_DOB("person.dob");
-  
-  private String name;
-  
-  private SearchFieldName(String name) {
-    this.name = name;
+  private SearchFieldName(String value) {
+    this.value = value;
   }
 
-  public String getName() {
-    return name;
+  public String getValue() {
+    return value;
   }
   
   public static Collection<String> getAllFieldNames() {
     Collection<String> allNames = new ArrayList<>();
     
     for (SearchFieldName name : SearchFieldName.values()) {
-      allNames.add(name.getName());
+      allNames.add(name.getValue());
     }
     return allNames;
   }

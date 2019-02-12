@@ -3,17 +3,17 @@ package gov.ca.cwds.cares.interfaces.model.search.match;
 import java.io.Serializable;
 import gov.ca.cwds.cares.interfaces.model.search.field.SearchField;
 
-public class FieldMatch extends Match implements Serializable {
+public class ExactMatch extends Match implements Serializable {
 
   private static final long serialVersionUID = -1238246813125339584L;
   
   private SearchField field;
 
-  public FieldMatch() {
+  public ExactMatch() {
     super();
   }
   
-  public FieldMatch(SearchField field) {
+  public ExactMatch(SearchField field) {
     super();    
     this.field = field;
   }

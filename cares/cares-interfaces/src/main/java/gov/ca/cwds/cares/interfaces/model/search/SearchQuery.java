@@ -20,48 +20,48 @@ public final class SearchQuery implements Serializable {
   
   private static final long serialVersionUID = -4319859951956866212L;
   
-  private Collection<Match> musts = new ArrayList<>();
-  private Collection<Match> shoulds = new ArrayList<>();
-  private Collection<Match> mustNots = new ArrayList<>();
+  private Collection<Match> mustMatch = new ArrayList<>();
+  private Collection<Match> shouldMatch = new ArrayList<>();
+  private Collection<Match> mustNotMatch = new ArrayList<>();
   
   public SearchQuery() {
     super();
   }
 
-  public Collection<Match> getMusts() {
-    return musts;
+  public Collection<Match> getMustMatch() {
+    return mustMatch;
   }
   
-  public void addMust(Match match) {
-    this.musts.add(match);
+  public void addMustMatch(Match match) {
+    this.mustMatch.add(match);
   }
 
-  public void setMusts(Collection<Match> musts) {
-    this.musts = musts;
+  public void setMustMatch(Collection<Match> mustMatch) {
+    this.mustMatch = mustMatch;
   }
 
-  public Collection<Match> getMustNots() {
-    return mustNots;
+  public Collection<Match> getMustNotMatch() {
+    return mustNotMatch;
   }
 
-  public void setMustNots(Collection<Match> mustNots) {
-    this.mustNots = mustNots;
+  public void setMustNotMatch(Collection<Match> mustNotMatch) {
+    this.mustNotMatch = mustNotMatch;
   }
   
-  public void addMustNot(Match match) {
-    this.mustNots.add(match);
+  public void addMustNotMatch(Match match) {
+    this.mustNotMatch.add(match);
   }
 
-  public Collection<Match> getShoulds() {
-    return shoulds;
+  public Collection<Match> getShouldMatch() {
+    return shouldMatch;
   }
 
-  public void setShoulds(Collection<Match> shoulds) {
-    this.shoulds = shoulds;
+  public void setShouldMatch(Collection<Match> shouldMatch) {
+    this.shouldMatch = shouldMatch;
   }
   
-  public void addShould(Match match) {
-    this.shoulds.add(match);
+  public void addShouldMatch(Match match) {
+    this.shouldMatch.add(match);
   }
   
   @Override

@@ -14,5 +14,6 @@ public interface SearchService {
   Collection<String> getSearchFieldNames();
   
   Collection<String> getSearchSources();
-
+  
+  Collection<String> getSearchMatchTypes();
 }
