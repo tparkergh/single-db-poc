@@ -6,7 +6,7 @@ import {
   Card,
   CardTitle,
   Button
-} from '@cwds/reactstrap'
+} from '@cwds/components'
 import { Link } from 'react-router-dom'
 
 export class LandingPage extends React.Component {
