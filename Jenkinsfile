@@ -20,7 +20,7 @@ def githubHttpUrl = 'https://github.com/ca-cwds/single-db-poc'
 @Field
 def semverLable = 'caresIntake'
 @Field
-def node = 'linux'
+def buildNode = 'linux'
 
 switch(env.BUILD_JOB_TYPE) {
   case "master": buildMaster(); break;
@@ -29,7 +29,7 @@ switch(env.BUILD_JOB_TYPE) {
 }
 
 def buildPullRequest() {
-  node(${node}) {
+  node(buildNode) {
     def triggerProperties = githubPullRequestBuilderTriggerProperties()
     properties([disableConcurrentBuilds(), [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
       buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '25')),
@@ -49,7 +49,7 @@ def buildPullRequest() {
       sonarQubeAnalysis()
     } catch(Exception exception) {
         emailext attachLog: true, body: "Failed: ${e}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-        subject: "${appname} failed with ${e.message}", to: ${emailGroup}
+        subject: "${appname} failed with ${e.message}", to: emailGroup
         currentBuild.result = "FAILURE"
         throw exception
     } finally {
@@ -60,7 +60,7 @@ def buildPullRequest() {
 }
 
 def buildMaster() {
-  node(${node}) {
+  node(buildNode) {
     triggerProperties = pullRequestMergedTriggerProperties('cares-intake--master')
     properties([disableConcurrentBuilds(),  [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
       buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '25')),
@@ -82,7 +82,7 @@ def buildMaster() {
       cleanWorkspace()
     } catch (Exception exception) {
         emailext attachLog: true, body: "Failed: ${e}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-        subject: "${appname} The Build failed with ${e.message}", to: ${emailGroup}
+        subject: "${appname} The Build failed with ${e.message}", to: emailGroup
         currentBuild.result = "FAILURE"
     } finally {
         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'build/reports/tests', reportFiles: 'index.html', reportName: 'JUnit Report', reportTitles: 'JUnit tests summary'])
@@ -94,13 +94,13 @@ def buildMaster() {
 def checkOut()  {
   stage('Check Out') {
     cleanWs()
-    git branch: '$branch', credentialsId: GITHUB_CREDENTIALS_ID, url: ${githubSshUrl}
+    git branch: '$branch', credentialsId: GITHUB_CREDENTIALS_ID, url: githubSshUrl
   }
 }
 
 def verifySemVerLabel() {
   stage('Verify SemVer Label') {
-    checkForLabel(${semverLable})
+    checkForLabel(semverLable)
   }
 }
 
@@ -154,5 +154,5 @@ def cleanWorkspace() {
 }
 
 def githubConfig() {
-  githubConfigProperties(${githubHttpUrl})
+  githubConfigProperties(githubHttpUrl)
 }
