@@ -16,7 +16,7 @@ def appname = 'Cares Intake Application'
 @Field
 def githubSshUrl = 'git@github.com:ca-cwds/single-db-poc'
 @Field
-def githubHttpUrl = 'https://github.com/ca-cwds/jobs'
+def githubHttpUrl = 'https://github.com/ca-cwds/single-db-poc'
 @Field
 def semverLable = 'caresIntake'
 @Field
