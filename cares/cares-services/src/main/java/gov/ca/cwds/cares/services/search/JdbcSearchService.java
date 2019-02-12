@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import gov.ca.cwds.cares.interfaces.api.SearchService;
 import gov.ca.cwds.cares.interfaces.model.search.SearchCriteria;
 import gov.ca.cwds.cares.interfaces.model.search.SearchResults;
+import gov.ca.cwds.cares.interfaces.model.search.hit.PersonSearchHit;
 import gov.ca.cwds.cares.interfaces.model.search.query.SearchQuery;
 
 /**
@@ -31,6 +32,27 @@ public class JdbcSearchService implements SearchService {
     
     SearchQuery query = searchCriteria.getQuery();
     
-    return new SearchResults();
+    // This is canned response
+    SearchResults searchResults = new SearchResults();
+    searchResults.setExecutionTimeMillis(20L);
+    
+    PersonSearchHit personSearchHit_1 = new PersonSearchHit();
+    personSearchHit_1.setFirstName("Shahid");
+    personSearchHit_1.setLastName("Saleemi");
+    personSearchHit_1.setId("ss_id");
+    personSearchHit_1.setScore(0d);
+    personSearchHit_1.setSource("reporter");
+    
+    PersonSearchHit personSearchHit_2 = new PersonSearchHit();
+    personSearchHit_2.setFirstName("Bob");
+    personSearchHit_2.setLastName("Smith");
+    personSearchHit_2.setId("bb_id");
+    personSearchHit_2.setScore(0d);
+    personSearchHit_2.setSource("reporter");
+    
+    searchResults.addHit(personSearchHit_1);
+    searchResults.addHit(personSearchHit_2);
+    
+    return searchResults;
   }
 }

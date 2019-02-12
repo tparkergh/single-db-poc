@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
+    include = JsonTypeInfo.As.WRAPPER_OBJECT,
     property = "hit_type")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "person", value = PersonSearchQuery.class)})
