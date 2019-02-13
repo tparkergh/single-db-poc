@@ -18,7 +18,7 @@ def githubSshUrl = 'git@github.com:ca-cwds/single-db-poc'
 @Field
 def githubHttpUrl = 'https://github.com/ca-cwds/single-db-poc'
 @Field
-def semverLable = 'Cares-Intake'
+def semverLabel = 'Cares-Intake'
 @Field
 def buildNode = 'linux'
 
@@ -26,8 +26,6 @@ switch(env.BUILD_JOB_TYPE) {
   case "master": buildMaster(); break;
   case "release":releasePipeline(); break;
   default: buildPullRequest();
-
-  echo "done in switch"
 }
 
 def buildPullRequest() {
@@ -39,7 +37,6 @@ def buildPullRequest() {
       pipelineTriggers([triggerProperties]),
       parameters([
         string(defaultValue: 'master', description: '', name: 'branch'),
-        booleanParam(defaultValue: true, description: 'Default release version template is: <majorVersion>_<buildNumber>-RC', name: 'RELEASE_PROJECT'),
       ])
     ])
     try {
@@ -53,16 +50,13 @@ def buildPullRequest() {
         emailext attachLog: true, body: "Failed: ${e}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
         subject: "${appname} failed with ${e.message}", to: emailGroup
         currentBuild.result = "FAILURE"
-        echo "done in catch"
         throw exception
 
     } finally {
         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'build/reports/tests', reportFiles: 'index.html', reportName: 'JUnit Report', reportTitles: 'JUnit tests summary'])
         cleanWs()
-        echo "done in finally"
     }
   }
-  echo "done in buildPullRequest"
 }
 
 def buildMaster() {
@@ -72,9 +66,7 @@ def buildMaster() {
       buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '25')),
       pipelineTriggers([triggerProperties]),
       parameters([
-        booleanParam(defaultValue: true, description: '', name: 'USE_NEWRELIC'),
         string(defaultValue: 'master', description: '', name: 'branch'),
-        booleanParam(defaultValue: true, description: 'Default release version template is: <majorVersion>_<buildNumber>-RC', name: 'RELEASE_PROJECT'),
       ])
     ])
     try {
@@ -106,7 +98,7 @@ def checkOut()  {
 
 def verifySemVerLabel() {
   stage('Verify SemVer Label') {
-    checkForLabel(semverLable)
+    checkForLabel(semverLabel)
   }
 }
 
