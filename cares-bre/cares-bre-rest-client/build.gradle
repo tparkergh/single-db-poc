@@ -3,6 +3,10 @@ apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 
+plugins {
+    id "org.sonarqube" version "2.6"
+}
+
 dependencies {
 	implementation project(':cares-bre:cares-bre-interfaces')
 	

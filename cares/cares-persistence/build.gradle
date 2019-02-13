@@ -1,6 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+plugins {
+    id "org.sonarqube" version "2.6"
+}
+
+
 sourceCompatibility = 1.8
 
 dependencies {

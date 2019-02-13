@@ -21,10 +21,6 @@ subprojects  {
         maven {
             url 'http://sonar.dev.cwds.io:8081/artifactory/libs-release'
         }
-
-        plugins {
-            id "org.sonarqube" version "2.6"
-        }
     }
 
     ext {
