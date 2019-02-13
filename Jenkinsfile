@@ -53,7 +53,9 @@ def buildPullRequest() {
         emailext attachLog: true, body: "Failed: ${e}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
         subject: "${appname} failed with ${e.message}", to: emailGroup
         currentBuild.result = "FAILURE"
+        echo "done in catch"
         throw exception
+
     } finally {
         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'build/reports/tests', reportFiles: 'index.html', reportName: 'JUnit Report', reportTitles: 'JUnit tests summary'])
         cleanWs()
