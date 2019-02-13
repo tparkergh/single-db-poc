@@ -26,6 +26,8 @@ switch(env.BUILD_JOB_TYPE) {
   case "master": buildMaster(); break;
   case "release":releasePipeline(); break;
   default: buildPullRequest();
+
+  echo "done in switch"
 }
 
 def buildPullRequest() {
@@ -55,8 +57,10 @@ def buildPullRequest() {
     } finally {
         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'build/reports/tests', reportFiles: 'index.html', reportName: 'JUnit Report', reportTitles: 'JUnit tests summary'])
         cleanWs()
+        echo "done in finally"
     }
   }
+  echo "done in buildPullRequest"
 }
 
 def buildMaster() {
