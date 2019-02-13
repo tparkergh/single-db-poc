@@ -111,13 +111,13 @@ def build() {
     rtGradle.deployer.mavenCompatible = true
     rtGradle.deployer.deployMavenDescriptors = true
     rtGradle.useWrapper = true
-    def buildInfo = rtGradle.run buildFile: 'build.gradle', tasks: "jar shadowJar -DRelease=true -D build=${BUILD_NUMBER} -DnewVersion=${newTag}".toString()
+    def buildInfo = rtGradle.run buildFile: 'build.gradle', tasks: "clean build -D build=${BUILD_NUMBER} -DnewVersion=${newTag}".toString()
   }
 }
 
 def testAndCoverage() {
   stage('Tests and Coverage') {
-    buildInfo = rtGradle.run buildFile: 'build.gradle', switches: '--info', tasks: 'test jacocoTestReport'
+    buildInfo = rtGradle.run buildFile: 'build.gradle', switches: '--info', tasks: 'test'
   }
 }
 
