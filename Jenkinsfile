@@ -47,8 +47,8 @@ def buildPullRequest() {
       testAndCoverage()
       sonarQubeAnalysis()
     } catch(Exception exception) {
-        emailext attachLog: true, body: "Failed: ${e}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-        subject: "${appname} failed with ${e.message}", to: emailGroup
+        emailext attachLog: true, body: "Failed: ${exception}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+        subject: "${appname} failed with ${exception.message}", to: emailGroup
         currentBuild.result = "FAILURE"
         throw exception
 
@@ -79,8 +79,8 @@ def buildMaster() {
       tagRepo()
       cleanWorkspace()
     } catch (Exception exception) {
-        emailext attachLog: true, body: "Failed: ${e}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-        subject: "${appname} The Build failed with ${e.message}", to: emailGroup
+        emailext attachLog: true, body: "Failed: ${exception}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+        subject: "${appname} The Build failed with ${exception.message}", to: emailGroup
         currentBuild.result = "FAILURE"
     } finally {
         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'build/reports/tests', reportFiles: 'index.html', reportName: 'JUnit Report', reportTitles: 'JUnit tests summary'])
@@ -98,7 +98,7 @@ def checkOut()  {
 
 def verifySemVerLabel() {
   stage('Verify SemVer Label') {
-    //checkForLabel(githubProjectName)
+    checkForLabel(githubProjectName)
   }
 }
 
