@@ -9,6 +9,10 @@ allprojects {
     }
 }
 
+plugins {
+    id "org.sonarqube" version "2.6"
+}
+
 subprojects  {
     repositories {
         mavenLocal()
