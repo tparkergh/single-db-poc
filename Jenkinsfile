@@ -47,7 +47,6 @@ def buildPullRequest() {
       testAndCoverage()
       sonarQubeAnalysis()
     } catch(Exception exception) {
-        build()
         emailext attachLog: true, body: "Failed: ${e}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
         subject: "${appname} failed with ${e.message}", to: emailGroup
         currentBuild.result = "FAILURE"
