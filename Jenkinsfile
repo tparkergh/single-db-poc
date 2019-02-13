@@ -98,7 +98,7 @@ def checkOut()  {
 
 def verifySemVerLabel() {
   stage('Verify SemVer Label') {
-    checkForLabel(githubProjectName)
+    //checkForLabel(githubProjectName)
   }
 }
 
