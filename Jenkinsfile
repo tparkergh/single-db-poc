@@ -18,7 +18,7 @@ def githubSshUrl = 'git@github.com:ca-cwds/single-db-poc'
 @Field
 def githubHttpUrl = 'https://github.com/ca-cwds/single-db-poc'
 @Field
-def semverLabel = 'Cares-Intake'
+def semverLabel = 'single-db-poc'
 @Field
 def buildNode = 'linux'
 
