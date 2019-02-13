@@ -18,7 +18,7 @@ def githubSshUrl = 'git@github.com:ca-cwds/single-db-poc'
 @Field
 def githubHttpUrl = 'https://github.com/ca-cwds/single-db-poc'
 @Field
-def semverLabel = 'single-db-poc'
+def githubProjectName = 'single-db-poc'
 @Field
 def buildNode = 'linux'
 
@@ -98,7 +98,7 @@ def checkOut()  {
 
 def verifySemVerLabel() {
   stage('Verify SemVer Label') {
-    checkForLabel(semverLabel)
+    checkForLabel('single-db-poc')
   }
 }
 
