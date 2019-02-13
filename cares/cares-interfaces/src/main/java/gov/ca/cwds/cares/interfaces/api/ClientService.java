@@ -1,8 +1,8 @@
 package gov.ca.cwds.cares.interfaces.api;
 
-import gov.ca.cwds.cares.interfaces.model.ClientAddress;
 import java.util.Collection;
-import gov.ca.cwds.cares.interfaces.model.Client;
+import gov.ca.cwds.cares.interfaces.model.people.Client;
+import gov.ca.cwds.cares.interfaces.model.people.ClientAddress;
 
 public interface ClientService {
   

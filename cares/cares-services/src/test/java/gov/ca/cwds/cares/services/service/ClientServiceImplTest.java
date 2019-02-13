@@ -21,8 +21,8 @@ import gov.ca.cwds.cares.persistence.repository.ClientAddressRepository;
 import gov.ca.cwds.cares.persistence.repository.ClientRepository;
 import gov.ca.cwds.cares.interfaces.api.AddressService;
 import gov.ca.cwds.cares.interfaces.model.Address;
-import gov.ca.cwds.cares.interfaces.model.Client;
-import gov.ca.cwds.cares.interfaces.model.ClientAddress;
+import gov.ca.cwds.cares.interfaces.model.people.Client;
+import gov.ca.cwds.cares.interfaces.model.people.ClientAddress;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientServiceImplTest {
