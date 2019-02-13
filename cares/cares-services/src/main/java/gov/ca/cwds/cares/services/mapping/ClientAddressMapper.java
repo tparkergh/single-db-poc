@@ -1,6 +1,6 @@
 package gov.ca.cwds.cares.services.mapping;
 
-import gov.ca.cwds.cares.iterfaces.model.people.ClientAddress;
+import gov.ca.cwds.cares.interfaces.model.people.ClientAddress;
 import gov.ca.cwds.cares.persistence.entity.ClientAddressEntity;
 import gov.ca.cwds.cics.model.CicsAddressRequest;
 import java.util.Collection;

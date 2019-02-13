@@ -32,7 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.restclient.BreRestApiClient;
 import gov.ca.cwds.cares.geo.restclient.GeoRestClient;
 import gov.ca.cwds.cares.interfaces.model.Address;
-import gov.ca.cwds.cares.iterfaces.model.people.ClientAddress;
+import gov.ca.cwds.cares.interfaces.model.people.ClientAddress;
 import gov.ca.cwds.cics.restclient.CicsAddressUpdaterRestApiClient;
 
 /**

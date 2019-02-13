@@ -1,4 +1,4 @@
-package gov.ca.cwds.cares.iterfaces.model.people;
+package gov.ca.cwds.cares.interfaces.model.people;
 
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.EqualsBuilder;

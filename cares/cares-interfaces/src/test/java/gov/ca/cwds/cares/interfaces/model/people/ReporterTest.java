@@ -3,7 +3,7 @@ package gov.ca.cwds.cares.interfaces.model.people;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
-import gov.ca.cwds.cares.iterfaces.model.people.Reporter;
+import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 
 public class ReporterTest {
 
