@@ -36,7 +36,7 @@ def buildPullRequest() {
       githubConfig(),
       pipelineTriggers([triggerProperties]),
       parameters([
-        string(defaultValue: 'master', description: '', name: 'branch'),
+        string(defaultValue: 'tparker-jenkins', description: '', name: 'branch'),
       ])
     ])
     try {
