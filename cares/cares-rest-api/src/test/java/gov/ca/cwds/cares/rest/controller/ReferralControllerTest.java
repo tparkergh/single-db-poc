@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.Collection;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
@@ -20,7 +20,6 @@ import gov.ca.cwds.cares.interfaces.api.ReferralService;
 import gov.ca.cwds.cares.interfaces.model.Allegation;
 import gov.ca.cwds.cares.interfaces.model.Referral;
 
-@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class ReferralControllerTest {
   
@@ -29,6 +28,7 @@ public class ReferralControllerTest {
   @Mock
   private ReferralService referralService;
   
+  @InjectMocks
   private ReferralController referralController; 
 
   @Before

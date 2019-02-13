@@ -5,12 +5,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import gov.ca.cwds.cares.interfaces.api.AddressService;
 import java.util.Arrays;
 import java.util.Collection;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,11 +17,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import gov.ca.cwds.cares.interfaces.api.AddressService;
 import gov.ca.cwds.cares.interfaces.api.ClientService;
 import gov.ca.cwds.cares.interfaces.model.people.Client;
 import gov.ca.cwds.cares.interfaces.model.people.ClientAddress;
 
-@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class ClientControllerTest {
   

@@ -18,17 +18,17 @@ public class CicsMockRestController {
 
   private final static Logger LOGGER = LoggerFactory.getLogger(CicsMockRestController.class);
 
-  @PutMapping("/clients/{clientId}/{lastTimeStamp}")
+  @PutMapping("/clients/{client_id}/{last_time_stamp}")
   CicsResponse putClient(@RequestBody String request,
-      @PathVariable("clientId") String clientId,
-      @PathVariable("lastTimeStamp") String lastTimeStamp) {
+      @PathVariable("client_id") String clientId,
+      @PathVariable("last_time_stamp") String lastTimeStamp) {
     return executeRequest(request);
   }
   
-  @PutMapping("/addresses/{addressId}/{lastTimeStamp}")
+  @PutMapping("/addresses/{address_id}/{last_time_stamp}")
   CicsResponse putAddress(@RequestBody String request,
-      @PathVariable("addressId") String addressId,
-      @PathVariable("lastTimeStamp") String lastTimeStamp) {
+      @PathVariable("address_id") String addressId,
+      @PathVariable("last_time_stamp") String lastTimeStamp) {
     return executeRequest(request);
   }
 
