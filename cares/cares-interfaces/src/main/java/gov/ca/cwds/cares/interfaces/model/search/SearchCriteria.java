@@ -35,8 +35,8 @@ public class SearchCriteria implements Serializable {
     return limit;
   }
 
-  public void setLimit(Integer limit) {
-    this.limit = limit;
+  public void setLimit(Integer size) {
+    this.limit = size;
   }
 
   public SearchQuery getQuery() {

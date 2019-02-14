@@ -18,7 +18,7 @@ public class SearchCriteriaTest {
     PersonSearchQuery searchQuery = new PersonSearchQuery();
     searchQuery.setFirstName("Shahid");
     searchQuery.setLastName("Saleemi");
-    searchQuery.setPrimaryPhoneNumber(1111111111);
+    searchQuery.setPrimaryPhoneNumber(1111111111L);
     
     searchCriteria.setQuery(searchQuery);
     

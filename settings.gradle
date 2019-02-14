@@ -16,6 +16,5 @@ include 'cares-geo:cares-geo-rest-client'
 include 'cares-cics:cares-cics-interfaces'
 include 'cares-cics:cares-cics-rest-client'
 
-include 'cares-cics-mock-rest-api'
 include 'cares-common'
 include 'cares-ui'

@@ -1,4 +1,4 @@
-package gov.ca.cwds.cares.services.service;
+package gov.ca.cwds.cares.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

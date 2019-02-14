@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import gov.ca.cwds.cares.interfaces.api.SearchService;
 import gov.ca.cwds.cares.interfaces.model.search.SearchCriteria;
 import gov.ca.cwds.cares.interfaces.model.search.SearchResults;
@@ -48,7 +49,7 @@ public class SearchControllerTest {
     PersonSearchQuery searchQuery = new PersonSearchQuery();
     searchQuery.setFirstName("Shahid");
     searchQuery.setLastName("Saleemi");
-    searchQuery.setPrimaryPhoneNumber(1111111111);
+    searchQuery.setPrimaryPhoneNumber(1111111111L);
     
     searchCriteria.setQuery(searchQuery);
     
@@ -58,19 +59,19 @@ public class SearchControllerTest {
     PersonSearchHit personSearchHit_1 = new PersonSearchHit();
     personSearchHit_1.setFirstName("Shahid");
     personSearchHit_1.setLastName("Saleemi");
-    personSearchHit_1.setId("ss_id");
+    personSearchHit_1.setIdentifier("ss_id");
     personSearchHit_1.setScore(0d);
     personSearchHit_1.setSource("reporter");
     
     PersonSearchHit personSearchHit_2 = new PersonSearchHit();
     personSearchHit_2.setFirstName("Bob");
     personSearchHit_2.setLastName("Smith");
-    personSearchHit_2.setId("bb_id");
+    personSearchHit_2.setIdentifier("bb_id");
     personSearchHit_2.setScore(0d);
     personSearchHit_2.setSource("reporter");
     
-    searchResults.addHit(personSearchHit_1);
-    searchResults.addHit(personSearchHit_2);
+    searchResults.setHits(Lists.newArrayList(personSearchHit_1, personSearchHit_2));
+    searchResults.setTotalHitCount(2L);
     
     when(searchService.search(any())).thenReturn(searchResults);
 
