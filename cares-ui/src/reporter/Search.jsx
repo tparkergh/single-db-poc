@@ -1,88 +1,44 @@
 import { Component } from "react";
 import { Survey, Model, StylesManager } from "survey-react";
 // import * as Survey  from 'survey-react'
-import "survey-react/survey.css";
+import SearchJSON from "./jsonForms/search"
+import SearchResultsJSON from "./jsonForms/searchResults"
+import "survey-react/survey.css"
+import { setupModel } from './helpers/survey'
 
 export default class Search extends Component {
-  json = {
-    // checkErrorsMode: 'onComplete',
-    checkErrorsMode: "onValueChanged",
-    completeText: "Continue",
-    questionErrorLocation: "bottom",
-    elements: [
-      {
-        type: "text",
-        name: "first_name",
-        title: "First Name",
-        text: "Enter first name",
-        validators: [
-          {
-            type: 'expression',
-            expression: '{first_name} notempty or {last_name} notempty',
-            text: 'First Or Last Name is required'
-          }
-        ]
-      },
-      {
-        type: "text",
-        name: "last_name",
-        title: "Last Name",
-        startWithNewLine: false,
-        validators: [
-          {
-            type: 'expression',
-            expression: '{first_name} notempty or {last_name} notempty',
-            text: 'First Or Last Name is required'
-          }
-        ]
-      },
-
-      {
-        type: "text",
-        name: "number",
-        isRequired: true,
-        title: "Phone Number",
-        width: "30%"
-      },
-      {
-        type: "text",
-        name: "extension",
-        title: "Ext.",
-        width: "20%",
-        startWithNewLine: false
-      },
-      {
-        type: "dropdown",
-        name: "relationship",
-        title: "Relationship to Child",
-        optionsCaption: 'Reporter',
-        defaultValue: 'Reporter',
-        startWithNewLine: false
-      }
-    ],
-    completeSurveyText: "Save"
-  };
-
   constructor(props) {
-    super(props);
-
-    this.model = new Model(this.json);
-    this.model.onErrorCustomText.add((survey, options) => {
-      if (options.name === "required") {
-        options.text = "Required";
-      }
-    });
+    super(props)
+    this.search()
   }
 
-  onComplete(survey, options) {
-    // Write survey results into database
-    console.log("Survey results: " + JSON.stringify(survey.data));
+  search() {
+    this.model = setupModel(SearchJSON)
+    this.model.onComplete.add((result) => {
+      // this would be an action dispatch to update the store
+      // and re-render the component with updated search data
+      // it would also dynamically render the search results
+      this.setState({ results: this.model.data })
+      this.searchResults()
+    })
+  }
+
+  searchResults(setState = true) {
+    this.model = setupModel(SearchResultsJSON)
+    this.model.onComplete.add((result) => {
+      // this would be an action dispatch to create the reporter
+      // (maybe we need to use redux-saga)
+      // and re-render the component at the search screen
+      // it would also dynamically render a new survey
+      this.setState({ results: this.model.data })
+      this.search()
+    })
   }
 
   render() {
     // StylesManager.applyTheme('bootstrap')
     // Survey.cssType = 'bootstrap'
 
-    return <Survey model={this.model} onComplete={this.onComplete} />;
+    return <Survey model={this.model} />;
   }
 }
