@@ -36,8 +36,7 @@ public class BreDroolsService extends DroolsService {
         for (String ruleMetaKey : ruleMeta.keySet()) {
           Object ruleMetaObj = ruleMeta.get(ruleMetaKey);
           
-          if (ruleMetaObj != null 
-              && ruleMetaObj instanceof String 
+          if ( ruleMetaObj instanceof String
               && StringUtils.isNotBlank(ruleMetaObj.toString())) {            
             String ruleMetaValue = (String) ruleMetaObj;
             
