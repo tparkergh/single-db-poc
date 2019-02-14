@@ -21,7 +21,7 @@ export class LandingPage extends React.Component {
         <Card body>
           <CardTitle>CARES Intake</CardTitle>
           <p>A product that gives social workers the ability to add and search reporters through CARES</p>
-          <Button>Go</Button>
+          <Button><Link to="/report" style={{display: 'block', height: '100%'}}>Go</Link></Button>
         </Card>
       </div>
     )
