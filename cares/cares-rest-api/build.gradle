@@ -15,6 +15,7 @@ buildscript {
 plugins {
     id 'net.ltgt.apt' version '0.19'
     id 'org.springframework.boot' version '2.1.1.RELEASE'
+    id "org.sonarqube" version "2.6"
 }
 
 apply plugin: 'java'
