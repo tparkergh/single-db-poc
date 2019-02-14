@@ -2,6 +2,7 @@ package gov.ca.cwds.cares.services;
 
 import java.util.Collection;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,11 @@ public class SystemCodeServiceImpl implements SystemCodeService {
   @Override
   @ExecutionTimer
   public SystemCode getSystemCodeById(Integer id) {
-    SystemCodeEntity entity = systemCodeRepository.findById(id).get();
+    SystemCodeEntity entity = null;
+    Optional<SystemCodeEntity> systemCode = systemCodeRepository.findById(id);
+    if(systemCode.isPresent()){
+      entity = systemCode.get();
+    }
     return SystemCodeMapper.INSTANCE.mapToSystemCode(entity);
   }
 
