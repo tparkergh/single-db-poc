@@ -16,7 +16,7 @@ public class ReferralServiceImpl implements ReferralService {
 
   @Autowired
   private ReferralRepository referralRepository;
-  public static final String[] REFERRAL_IDS = new String[]{
+  private static final String[] REFERRAL_IDS = new String[]{
       "AgLPH9f00R",
       "Ai3VQBU0Um",
       "AqVHAqw0AB",

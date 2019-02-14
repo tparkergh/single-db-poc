@@ -29,7 +29,7 @@ public class ClientServiceImpl implements ClientService {
 
   @Autowired
   private AddressService addressService;
-  public static final String[] CLIENT_IDS = new String[]{"DDTDeJW05u", "FvdNhQH00T", "FMVyucz00d", "FZLOarC057", "GNCmGiP00d",
+  private static final String[] CLIENT_IDS = new String[]{"DDTDeJW05u", "FvdNhQH00T", "FMVyucz00d", "FZLOarC057", "GNCmGiP00d",
       "GT0fTeb00T", "HuZx7NS057", "HDJGm9a00T", "H8c2Qcr00T", "I6WYpiz00T", "MdgDbf700T",
       "RhrNhul00R", "RtpdA9q00T", "B83W9kg057", "SMHmoJl00d", "2D3pOpl00d", "33DlLkn00d",
       "43RKPsw057", "82tFIkz00T", "9d54R1e05u", "9RcYKrB00T", "Ajjgwny057"};
