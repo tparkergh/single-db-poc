@@ -71,6 +71,7 @@ public class SearchControllerTest {
     personSearchHit_2.setSource("reporter");
     
     searchResults.setHits(Lists.newArrayList(personSearchHit_1, personSearchHit_2));
+    searchResults.setTotalHitCount(2L);
     
     when(searchService.search(any())).thenReturn(searchResults);
 
