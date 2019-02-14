@@ -2,7 +2,7 @@ package gov.ca.cwds.cares.interfaces.model.search;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -25,22 +25,18 @@ public class SearchResults implements Serializable, ExecutionTimeRecorder {
   private static final long serialVersionUID = 4356596417435911062L;
   
   private Long executionTimeMillis;
-  private List<SearchHit> hits = new ArrayList<>();
+  private Collection<? extends SearchHit> hits = new ArrayList<>();
 
   public SearchResults() {
     // Default no-argument constructor
   }
   
-  public List<SearchHit> getHits() {
+  public Collection<? extends SearchHit> getHits() {
     return hits;
   }
 
-  public void setHits(List<SearchHit> hits) {
+  public void setHits(Collection<? extends SearchHit> hits) {
     this.hits = hits;
-  }
-  
-  public void addHit(SearchHit hit) {
-    this.hits.add(hit);
   }
 
   public Long getExecutionTimeMillis() {

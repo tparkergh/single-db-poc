@@ -1,7 +1,0 @@
-version: '2.1'
-services:
-  cares-cics-mock-rest-api:
-    image: cwds/cares-cics-mock-rest-api
-    container_name: cares-cics-mock-rest-api
-    ports:
-      - '3008:8093'    

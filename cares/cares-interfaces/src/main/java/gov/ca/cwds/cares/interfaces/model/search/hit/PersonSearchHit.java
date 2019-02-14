@@ -6,7 +6,7 @@ public class PersonSearchHit extends SearchHit implements Serializable {
 
   private static final long serialVersionUID = -971361222823606910L;
   
-  private String id;
+  private String identifier;
   private String firstName;
   private String lastName;
   
@@ -14,12 +14,12 @@ public class PersonSearchHit extends SearchHit implements Serializable {
     super();
   }
 
-  public String getId() {
-    return id;
+  public String getIdentifier() {
+    return identifier;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setIdentifier(String identifier) {
+    this.identifier = identifier;
   }
 
   public String getFirstName() {
