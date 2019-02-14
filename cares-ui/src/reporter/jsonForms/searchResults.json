@@ -1,0 +1,32 @@
+{
+  "title": "New Incident Report",
+  "checkErrorsMode": "onValueChanged",
+  "completeText": "Continue",
+  "questionErrorLocation": "bottom",
+  "elements": [
+    {
+      "type": "panel",
+      "name": "existing reporter",
+      "elements": [
+        {
+          "type": "checkbox",
+          "choices": [
+            {
+              "value": "1",
+              "text": "Amit\n address\nphone number"
+            },
+            {
+              "value": "2",
+              "text": "Nesh\n address\nphone number"
+            },
+            {
+              "value": "3",
+              "text": "Tyler\n address\nphone number"
+            }
+          ],
+          "name": "Is there an existing match to reporter?"
+        }
+      ]
+    }
+  ]
+}
