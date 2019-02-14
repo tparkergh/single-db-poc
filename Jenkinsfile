@@ -24,7 +24,6 @@ def buildNode = 'linux'
 
 switch(env.BUILD_JOB_TYPE) {
   case "master": buildMaster(); break;
-  case "release":releasePipeline(); break;
   default: buildPullRequest();
 }
 
