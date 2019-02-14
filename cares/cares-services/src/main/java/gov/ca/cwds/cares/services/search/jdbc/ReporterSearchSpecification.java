@@ -26,7 +26,7 @@ public class ReporterSearchSpecification implements Specification<ReporterEntity
       CriteriaBuilder cb) {
     String firstName = StringUtils.lowerCase(personSearchQuery.getFirstName());
     String lastName = StringUtils.lowerCase(personSearchQuery.getLastName());
-    Integer phone = personSearchQuery.getPrimaryPhoneNumber();
+    Long phone = personSearchQuery.getPrimaryPhoneNumber();
     
     List<Predicate> predicates = new ArrayList<>();
 

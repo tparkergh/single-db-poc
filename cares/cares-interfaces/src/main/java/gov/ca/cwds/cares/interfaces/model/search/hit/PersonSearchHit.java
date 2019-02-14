@@ -9,6 +9,7 @@ public class PersonSearchHit extends SearchHit implements Serializable {
   private String identifier;
   private String firstName;
   private String lastName;
+  private Long primaryPhoneNumber;
   
   public PersonSearchHit() {
     super();
@@ -36,5 +37,13 @@ public class PersonSearchHit extends SearchHit implements Serializable {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  public Long getPrimaryPhoneNumber() {
+    return primaryPhoneNumber;
+  }
+
+  public void setPrimaryPhoneNumber(Long primaryPhoneNumber) {
+    this.primaryPhoneNumber = primaryPhoneNumber;
   }
 }

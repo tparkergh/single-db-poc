@@ -39,7 +39,7 @@ public class JdbcSearchServiceTest {
     PersonSearchQuery searchQuery = new PersonSearchQuery();
     searchQuery.setFirstName("Shahid");
     searchQuery.setLastName("Saleemi");
-    searchQuery.setPrimaryPhoneNumber(1111111111);
+    searchQuery.setPrimaryPhoneNumber(1111111111L);
     
     searchCriteria.setQuery(searchQuery);
     
@@ -75,6 +75,7 @@ public class JdbcSearchServiceTest {
     personSearchHit_2.setSource("reporter");
     
     expected.setHits(Lists.newArrayList(personSearchHit_1, personSearchHit_2));
+    expected.setTotalHitCount(2L);
     
     assertEquals(expected, actual);
   }
@@ -90,11 +91,12 @@ public class JdbcSearchServiceTest {
     PersonSearchQuery searchQuery = new PersonSearchQuery();
     searchQuery.setFirstName("Shahid");
     searchQuery.setLastName("Saleemi");
-    searchQuery.setPrimaryPhoneNumber(1111111111);
+    searchQuery.setPrimaryPhoneNumber(1111111111L);
     
     searchCriteria.setQuery(searchQuery);
     
-    searchService.search(searchCriteria);        
+    executeSarchWithInvalidSearchCriteria(searchCriteria, 
+        "Max limit can not exceed 10, provided: " + searchCriteria.getLimit());
   }
   
   @Test(expected=IllegalArgumentException.class)
@@ -107,10 +109,42 @@ public class JdbcSearchServiceTest {
     PersonSearchQuery searchQuery = new PersonSearchQuery();
     searchQuery.setFirstName("Shahid");
     searchQuery.setLastName("Saleemi");
-    searchQuery.setPrimaryPhoneNumber(1111111111);
+    searchQuery.setPrimaryPhoneNumber(1111111111L);
     
     searchCriteria.setQuery(searchQuery);
     
-    searchService.search(searchCriteria);        
+    executeSarchWithInvalidSearchCriteria(searchCriteria, 
+        "Sources must contain 'reporter', provided: " + searchCriteria.getSources());
+  }
+  
+  @Test(expected=IllegalArgumentException.class)
+  public void testSearch_NullSearchCriteria() {
+    executeSarchWithInvalidSearchCriteria(null, "SearchCriteria must be provided");    
+  }
+  
+  @Test(expected=IllegalArgumentException.class)
+  public void testSearch_InvalidNames() {
+    SearchCriteria searchCriteria = new SearchCriteria();
+    searchCriteria.setLimit(10);
+    searchCriteria.addSource("reporter");
+    searchCriteria.addSource("victim");
+    searchCriteria.addSource("perpetrator");
+    
+    PersonSearchQuery searchQuery = new PersonSearchQuery();
+    searchQuery.setPrimaryPhoneNumber(1111111111L);
+    
+    searchCriteria.setQuery(searchQuery);
+    
+    executeSarchWithInvalidSearchCriteria(searchCriteria, 
+        "One of first name or last name must be provided");           
+  }
+  
+  private void executeSarchWithInvalidSearchCriteria(SearchCriteria searchCriteria, String expectedMessage) {
+    try {
+      searchService.search(searchCriteria);
+    } catch (IllegalArgumentException e) {
+      assertEquals(expectedMessage, e.getMessage());
+      throw e;
+    } 
   }
 }

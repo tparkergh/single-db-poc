@@ -8,7 +8,7 @@ public class PersonSearchQuery extends SearchQuery implements Serializable {
   
   private String firstName;
   private String lastName;
-  private Integer primaryPhoneNumber;
+  private Long primaryPhoneNumber;
 
   public PersonSearchQuery() {
     super();
@@ -30,11 +30,11 @@ public class PersonSearchQuery extends SearchQuery implements Serializable {
     this.lastName = lastName;
   }
 
-  public Integer getPrimaryPhoneNumber() {
+  public Long getPrimaryPhoneNumber() {
     return primaryPhoneNumber;
   }
 
-  public void setPrimaryPhoneNumber(Integer primaryPhoneNumber) {
+  public void setPrimaryPhoneNumber(Long primaryPhoneNumber) {
     this.primaryPhoneNumber = primaryPhoneNumber;
   }
 }

@@ -25,6 +25,7 @@ public class SearchResults implements Serializable, ExecutionTimeRecorder {
   private static final long serialVersionUID = 4356596417435911062L;
   
   private Long executionTimeMillis;
+  private Long totalHitCount;
   private Collection<? extends SearchHit> hits = new ArrayList<>();
 
   public SearchResults() {
@@ -37,6 +38,14 @@ public class SearchResults implements Serializable, ExecutionTimeRecorder {
 
   public void setHits(Collection<? extends SearchHit> hits) {
     this.hits = hits;
+  }
+ 
+  public Long getTotalHitCount() {
+    return totalHitCount;
+  }
+
+  public void setTotalHitCount(Long totalHitCount) {
+    this.totalHitCount = totalHitCount;
   }
 
   public Long getExecutionTimeMillis() {

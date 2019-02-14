@@ -2,6 +2,7 @@ package gov.ca.cwds.cares.services.search.jdbc;
 
 import java.util.Collection;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +15,7 @@ import gov.ca.cwds.cares.interfaces.model.search.SearchCriteria;
 import gov.ca.cwds.cares.interfaces.model.search.SearchResults;
 import gov.ca.cwds.cares.interfaces.model.search.hit.PersonSearchHit;
 import gov.ca.cwds.cares.interfaces.model.search.query.PersonSearchQuery;
+import gov.ca.cwds.cares.interfaces.model.search.query.SearchQuery;
 import gov.ca.cwds.cares.persistence.entity.ReporterEntity;
 import gov.ca.cwds.cares.persistence.repository.ReporterRepository;
 import gov.ca.cwds.cares.services.mapping.search.PersonSearchHitMapper;
@@ -36,14 +38,9 @@ public class JdbcSearchService implements SearchService {
 
   @Override
   public SearchResults search(SearchCriteria searchCriteria) {    
-    int limit = searchCriteria.getLimit();
-    Preconditions.checkArgument(limit > -1 && limit <= MAX_HITS, 
-        "Max limit can not exceed " + MAX_HITS + ", provided: " + limit);
+    ensureValidSearchCriteria(searchCriteria);
     
-    Collection<String> sources = searchCriteria.getSources();
-    Preconditions.checkArgument(sources != null && sources.contains(SUPPORTED_SOURCE), 
-        "Sources must contain '" + SUPPORTED_SOURCE + "', provided: " + sources);
-        
+    int limit = searchCriteria.getLimit();
     PersonSearchQuery query = (PersonSearchQuery) searchCriteria.getQuery();
     
     Specification<ReporterEntity> reporterSearchSpecs = new ReporterSearchSpecification(query);
@@ -61,8 +58,34 @@ public class JdbcSearchService implements SearchService {
     }
     
     SearchResults searchResults = new SearchResults();
+    searchResults.setTotalHitCount(reporterEntityPage.getTotalElements());
     searchResults.setHits(hits);
     
     return searchResults;
+  }
+  
+  private void ensureValidSearchCriteria(SearchCriteria searchCriteria) {
+    Preconditions.checkArgument(searchCriteria != null, "SearchCriteria must be provided");
+    
+    int limit = searchCriteria.getLimit();
+    Preconditions.checkArgument(limit > -1 && limit <= MAX_HITS, 
+        "Max limit can not exceed " + MAX_HITS + ", provided: " + limit);
+    
+    Collection<String> sources = searchCriteria.getSources();
+    Preconditions.checkArgument(sources != null && sources.contains(SUPPORTED_SOURCE), 
+        "Sources must contain '" + SUPPORTED_SOURCE + "', provided: " + sources);
+        
+    SearchQuery query = searchCriteria.getQuery();
+    Preconditions.checkArgument(query != null && query instanceof PersonSearchQuery, 
+        "Expected " + PersonSearchQuery.class + ", provided: " + query);
+
+    PersonSearchQuery personSearchQuery = (PersonSearchQuery) query;
+    
+    Preconditions.checkArgument(
+        !(
+            StringUtils.isBlank(personSearchQuery.getFirstName()) && 
+            StringUtils.isBlank(personSearchQuery.getLastName())
+        ), 
+        "One of first name or last name must be provided");
   }
 }
