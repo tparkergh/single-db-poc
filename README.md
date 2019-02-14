@@ -15,7 +15,7 @@ Stop application
 ## Cares API
 
 Docker compose file location
->cares-bre-rest-api
+>cares/cares-rest-api
 
 Start application
 >docker-compose -f docker-compose-cares-rest-api.yml up -d
