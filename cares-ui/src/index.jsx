@@ -9,6 +9,7 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
+import ReporterMain from './reporter/ReporterMain';
 
 const store = createStore(rootReducer)
 
@@ -20,6 +21,7 @@ const load = () => render((
         <div>
           <Route exact path="/" component={App}/>
           <Route path="/single-db-poc" component={SingleDbPoc} />
+          <Route path='/report' component={ReporterMain} />
         </div>
       </Router>
     </AppContainer>
