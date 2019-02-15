@@ -47,8 +47,6 @@ def buildPullRequest() {
       javadoc()
       testAndCoverage()
       sonarQubeAnalysis()
-      tagRepo()
-      deployDocker()
     } catch(Exception exception) {
         emailext attachLog: true, body: "Failed: ${exception}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
         subject: "${appname} failed with ${exception.message}", to: emailGroup
@@ -71,7 +69,7 @@ def buildMaster() {
       githubConfig(),
       parameters([
         string(defaultValue: 'master', description: '', name: 'branch'),
-        string(name: 'INCREMENT_VERSION', defaultValue: env.APP_VERSION, description: 'major, minor, or patch')
+        string(name: 'INCREMENT_VERSION', defaultValue: '', description: 'major, minor, or patch')
       ])
     ])
     try {
@@ -142,7 +140,7 @@ def javadoc() {
 
 def incrementTag() {
   stage('Increment Tag') {
-    newTag = newSemVer(env.APP_VERSION)
+    newTag = newSemVer(INCREMENT_VERSION)
   }
 }
 
