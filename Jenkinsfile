@@ -12,7 +12,7 @@ def serverArti
 @Field
 def rtGradle
 @Field
-def emailGroup = 'ratnesh.raval@osi.ca.gov, tyler.clemens@osi.ca.gov, shahid.saleemi@osi.ca.gov, prasad.mysore@osi.ca.gov, oleg.korniichuk@osi.ca.gov, james.lebeau@osi.ca.gov, tom.parker@osi.ca.gov'
+def emailGroup = 'tom.parker@osi.ca.gov'
 @Field
 def appname = 'Cares Intake Application'
 @Field
