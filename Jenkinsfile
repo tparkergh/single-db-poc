@@ -4,6 +4,8 @@ import groovy.transform.Field
 @Field
 def GITHUB_CREDENTIALS_ID = '433ac100-b3c2-4519-b4d6-207c029a103b'
 @Field
+def DOCKER_CREDENTIALS_ID = '6ba8d05c-ca13-4818-8329-15d41a089ec0'
+@Field
 def newTag
 @Field
 def serverArti
@@ -22,7 +24,7 @@ def githubProjectName = 'single-db-poc'
 @Field
 def buildNode = 'linux'
 
-switch(env.BUILD_JOB_TYPE) {
+switch(env.BUILD_TYPE) {
   case "master": buildMaster(); break;
   default: buildPullRequest();
 }
@@ -45,6 +47,8 @@ def buildPullRequest() {
       javadoc()
       testAndCoverage()
       sonarQubeAnalysis()
+      tagRepo()
+      deployDocker()
     } catch(Exception exception) {
         emailext attachLog: true, body: "Failed: ${exception}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
         subject: "${appname} failed with ${exception.message}", to: emailGroup
@@ -60,12 +64,14 @@ def buildPullRequest() {
 
 def buildMaster() {
   node(buildNode) {
-    triggerProperties = pullRequestMergedTriggerProperties('cares-intake--master')
+    triggerProperties = pullRequestMergedTriggerProperties('single-db-poc')
     properties([disableConcurrentBuilds(),  [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
       buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '25')),
       pipelineTriggers([triggerProperties]),
+      githubConfig(),
       parameters([
         string(defaultValue: 'master', description: '', name: 'branch'),
+        string(name: 'INCREMENT_VERSION', defaultValue: env.APP_VERSION, description: 'major, minor, or patch')
       ])
     ])
     try {
@@ -76,11 +82,13 @@ def buildMaster() {
       testAndCoverage()
       sonarQubeAnalysis()
       tagRepo()
+      deployDocker()
       cleanWorkspace()
     } catch (Exception exception) {
         emailext attachLog: true, body: "Failed: ${exception}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
         subject: "${appname} The Build failed with ${exception.message}", to: emailGroup
         currentBuild.result = "FAILURE"
+        throw exception
     } finally {
         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'build/reports/tests', reportFiles: 'index.html', reportName: 'JUnit Report', reportTitles: 'JUnit tests summary'])
         cleanWs()
@@ -134,13 +142,21 @@ def javadoc() {
 
 def incrementTag() {
   stage('Increment Tag') {
-    newTag = newSemVer()
+    newTag = newSemVer(env.APP_VERSION)
   }
 }
 
 def tagRepo() {
   stage('Tag Repo') {
     tagGithubRepo(newTag, GITHUB_CREDENTIALS_ID)
+  }
+}
+
+def deployDocker(){
+  stage ('Build Docker'){
+    withDockerRegistry([credentialsId: DOCKER_CREDENTIALS_ID]) {
+           buildInfo = rtGradle.run buildFile: 'build.gradle', tasks: 'dockerPushLatestVersion'
+    }
   }
 }
 
