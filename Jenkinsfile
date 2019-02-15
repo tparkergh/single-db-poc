@@ -99,7 +99,7 @@ def buildMaster() {
 def checkOut()  {
   stage('Check Out') {
     cleanWs()
-    git branch: '$branch', credentialsId: GITHUB_CREDENTIALS_ID, url: githubSshUrl
+    checkout scm
   }
 }
 
