@@ -6,24 +6,12 @@
   "elements": [
     {
       "type": "panel",
-      "name": "existing reporter",
+      "name": "existingReporter",
       "elements": [
         {
           "type": "checkbox",
-          "choices": [
-            {
-              "value": "1",
-              "text": "Amit\n address\nphone number"
-            },
-            {
-              "value": "2",
-              "text": "Nesh\n address\nphone number"
-            },
-            {
-              "value": "3",
-              "text": "Tyler\n address\nphone number"
-            }
-          ],
+          "name": "reporter",
+          "choices": [],
           "name": "Is there an existing match to reporter?"
         }
       ]
