@@ -9,6 +9,7 @@ include 'cares:cares-persistence'
 include 'cares:cares-interfaces'
 include 'cares:cares-rest-api'
 include 'cares:cares-services'
+include 'cares:cares-functional-tests'
 
 include 'cares-geo:cares-geo-interfaces'
 include 'cares-geo:cares-geo-rest-client'
