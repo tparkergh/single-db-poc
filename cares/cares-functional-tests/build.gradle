@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    implementation project(':cares-common')
+	implementation project(':cares:cares-interfaces')
+	
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+    implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
+    
+    implementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion 
+    implementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
+    implementation 'commons-io:commons-io:' + commonsIoVersion      
+    implementation 'io.rest-assured:rest-assured:' + restAssuredVersion            
+}
