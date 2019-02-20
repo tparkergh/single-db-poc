@@ -1,6 +1,6 @@
 import { Component } from  'react'
 import { Page } from '@cwds/components'
-import Search from './Search';
+import Search from './Search'
 
 export default class ReporterMain extends Component {
 
@@ -12,7 +12,6 @@ export default class ReporterMain extends Component {
         breadcrumb={<div>Reporter Search</div>}
         main={Search}
       /> 
-    
     ) 
   }
 }
