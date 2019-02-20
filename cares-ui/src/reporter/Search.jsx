@@ -9,7 +9,7 @@ import {
 } from './actions'
 import { selectReporterSearchResults } from './selectors'
 import SearchModel from './models/searchModel'
-import SearchResultsModel from './models/SearchResultsModel'
+import SearchResultsModel from './models/searchResultsModel'
 
 export class Search extends Component {
   constructor(props) {
