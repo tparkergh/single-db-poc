@@ -17,3 +17,12 @@ dependencies {
     implementation 'commons-io:commons-io:' + commonsIoVersion      
     implementation 'io.rest-assured:rest-assured:' + restAssuredVersion            
 }
+
+task restFunctionalTests(type: Test) {
+  testClassesDir = sourceSets.main.output.classesDir
+  classpath = sourceSets.main.runtimeClasspath
+
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+}
