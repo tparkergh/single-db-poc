@@ -1,0 +1,20 @@
+{
+  "title": "New Incident Report",
+  "checkErrorsMode": "onValueChanged",
+  "completeText": "Continue",
+  "questionErrorLocation": "bottom",
+  "elements": [
+    {
+      "type": "panel",
+      "name": "existingReporter",
+      "elements": [
+        {
+          "type": "checkbox",
+          "name": "reporter",
+          "choices": [],
+          "name": "Is there an existing match to reporter?"
+        }
+      ]
+    }
+  ]
+}
