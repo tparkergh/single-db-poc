@@ -80,7 +80,6 @@ def buildMaster() {
       testAndCoverage()
       sonarQubeAnalysis()
       tagRepo()
-      deployDocker()
       cleanWorkspace()
     } catch (Exception exception) {
         emailext attachLog: true, body: "Failed: ${exception}", recipientProviders: [[$class: 'DevelopersRecipientProvider']],
