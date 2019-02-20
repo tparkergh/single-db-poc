@@ -9,23 +9,36 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
+import reporterReducer from './reporter/reducers'
 import ReporterMain from './reporter/ReporterMain';
 
 const store = createStore(rootReducer)
 
+const reporterStore = createStore(reporterReducer)
+
 const root = document.getElementById('root')
 const load = () => render((
-  <Provider store={store}>
-    <AppContainer>
-      <Router>
-        <div>
-          <Route exact path="/" component={App}/>
-          <Route path="/single-db-poc" component={SingleDbPoc} />
-          <Route path='/report' component={ReporterMain} />
-        </div>
-      </Router>
-    </AppContainer>
-  </Provider>
+  <AppContainer>
+    <Router>
+      <div>
+        <Route exact path="/" render={()=>(
+          <Provider store={store}>
+            <App/>
+          </Provider>
+        )}/>
+        <Route path="/single-db-poc" render={()=>(
+          <Provider store={store}>
+            <SingleDbPoc/>
+          </Provider>
+        )} />
+        <Route path='/report' render={()=>(
+          <Provider store={reporterStore}>
+            <ReporterMain/>
+          </Provider>
+        )} />
+      </div>
+    </Router>
+  </AppContainer>
 ), root)
 
 // This is needed for Hot Module Replacement

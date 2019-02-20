@@ -9,8 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  * CWDS J Team
  */
 @RunWith(SpringRunner.class)
-@TestPropertySource
-public abstract class FunctionalTestBase {
+@TestPropertySource(locations = {"classpath:rest-functional-test.properties"})
+public abstract class RestFunctionalTestBase {
 
   @Value("${cares-service.base-url}")
   private String restServiceUrl;
