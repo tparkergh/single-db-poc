@@ -153,7 +153,7 @@ def tagRepo() {
 def deployDocker(){
   stage ('Build Docker'){
     withDockerRegistry([credentialsId: DOCKER_CREDENTIALS_ID]) {
-           buildInfo = rtGradle.run buildFile: 'build.gradle', tasks: 'dockerPushLatestVersion'
+           buildInfo = rtGradle.run buildFile: 'build.gradle',switches: '--info', tasks: 'dockerPushLatestVersion'
     }
   }
 }
