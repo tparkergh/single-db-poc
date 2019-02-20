@@ -18,7 +18,7 @@ dependencies {
     implementation 'io.rest-assured:rest-assured:' + restAssuredVersion            
 }
 
-task functionalTests(type: Test) {
+task restFunctionalTests(type: Test) {
   testClassesDir = sourceSets.main.output.classesDir
   classpath = sourceSets.main.runtimeClasspath
 
