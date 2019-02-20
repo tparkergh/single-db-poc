@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  ui-functional:
+    image: "cwds/acceptance_testing:${APP_VERSION}"
+    command: bash -c 'bundle exec spec/incident-report'
+    volumes:
+      - ./reports/:/var/www/acceptance_testing/reports/
+    environment:
+      - APP_URL
+    stdin_open: true
+    tty: true
