@@ -17,6 +17,7 @@
     "JsonBRE": "file:./engine",
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.16.0",
+    "eslint-plugin-import": "^2.16.0",
     "immutable": "^4.0.0-rc.12",
     "marked": "^0.6.0",
     "neutrino": "^8.3.0",
