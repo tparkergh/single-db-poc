@@ -1,0 +1,26 @@
+rule "reporter-ri-law-enforcement"
+
+  @doc_description("Optional foreign key that 'is employeed by' a LAW_ENFORCEMENT")
+  
+  @doc_external_documentation("xTool Application")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_rule_category("ReferentialIntegrity")
+  @doc_rule_type("xTool")
+  @doc_drools_file("reporter-ri-law-enforcement.drl")
+  @doc_rule_name("REPORTER-RI-LAW-ENFORCEMENT")
+
+  @doc_ri_entity("REPORTER")
+  @doc_ri_attribute("FKLAW_ENFT")
+  @doc_ri_cardinality("zero to one")
+  @doc_ri_relationship("is employed by")
+  @doc_ri_related_entity("LAW_ENFORCEMENT")
+  @doc_ri_related_attribute("ID")
+
+  dialect "mvel"
+  agenda-group "ReporterBusinessRules-validation-agenda"
+  
+  when
+
+  then
+
+end

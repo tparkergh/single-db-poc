@@ -1,0 +1,31 @@
+rule "reporter-di-colltr-client-rptr-reltnshp-type"
+
+  @doc_description("Collateral Client Reporter Relationship Type must be 0 or valid")
+  
+  @doc_external_documentation("xTool Application")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_rule_category("DataIntegrity, Validation")
+  @doc_rule_type("xTool")
+  @doc_drools_file("reporter-di-colltr-client-rptr-reltnshp-type.drl")
+  @doc_rule_name("REPORTER-DI-COLLTRL-CLIENT-RPTR-RELTNSHP-TYPE")
+
+  @doc_di_entity("REPORTER")
+  @doc_di_attribute("COLLTRL_CLIENT_RPTR_RELTNSHP_TYPE")
+  @doc_di_length("4")
+  @doc_di_type("smallint")
+  @doc_di_nullable("false")
+  @doc_di_mandatory("false")
+  @doc_di_default("0")
+  @doc_di_validation_table("SYSTEM_CODE_TABLE")
+  @doc_di_validation_category("COL_RELC")
+  @doc_di_validation_sub_category()
+  @doc_di_validation_values("")
+
+  dialect "mvel"
+  agenda-group "ReporterBusinessRules-validation-agenda"
+  
+  when
+
+  then
+
+end

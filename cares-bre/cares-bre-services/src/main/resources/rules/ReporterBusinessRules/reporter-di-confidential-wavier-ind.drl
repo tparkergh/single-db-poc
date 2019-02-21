@@ -1,0 +1,31 @@
+rule "reporter-di-confidential-wavier-ind"
+
+  @doc_description("Confidential Wavier indicator must by Y or N")
+  
+  @doc_external_documentation("xTool Application")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_rule_category("DataIntegrity, Validation")
+  @doc_rule_type("xTool")
+  @doc_drools_file("reporter-di-confidential-wavier-ind.drl")
+  @doc_rule_name("REPORTER-DI-CONFIDENTIAL-WAVIER-IND")
+
+  @doc_di_entity("REPORTER")
+  @doc_di_attribute("CONFIDENTIAL_WAVIER_IND")
+  @doc_di_length("1")
+  @doc_di_type("char")
+  @doc_di_nullable("false")
+  @doc_di_mandatory("true")
+  @doc_di_default("N")
+  @doc_di_validation_table()
+  @doc_di_validation_category()
+  @doc_di_validation_sub_category()
+  @doc_di_validation_values("Y = Yes, N - No")
+
+  dialect "mvel"
+  agenda-group "ReporterBusinessRules-validation-agenda"
+  
+  when
+
+  then
+
+end
