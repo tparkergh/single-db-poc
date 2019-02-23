@@ -55,6 +55,7 @@ dependencies {
 
     implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
     implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
+    implementation 'commons-io:commons-io:' + commonsIoVersion
 
     implementation 'io.springfox:springfox-swagger2:' + springFoxSwaggerVersion
     implementation 'io.springfox:springfox-swagger-ui:' + springFoxSwaggerVersion
@@ -69,7 +70,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-jdbc:' + springBootVersion
 
     testImplementation 'com.h2database:h2:' + h2Version
-    testImplementation 'commons-io:commons-io:' + commonsIoVersion
     testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
 }
 
