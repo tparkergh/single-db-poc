@@ -3,7 +3,6 @@ package gov.ca.cwds.cares.interfaces.model.people;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
-import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 
 public class ReporterTest {
 
@@ -25,11 +24,11 @@ public class ReporterTest {
     reporter.setIdentifier(identifier);
     reporter.setFirstName(firstName);
     reporter.setLastName(lastName);
-    reporter.setPrimaryPhoneNumber(primaryPhone);
+    reporter.setPhoneNumber(primaryPhone);
     assertEquals(reporter.getIdentifier(), identifier);
     assertEquals(reporter.getFirstName(), firstName);
     assertEquals(reporter.getLastName(), lastName);
-    assertEquals(reporter.getPrimaryPhoneNumber(), primaryPhone);
+    assertEquals(reporter.getPhoneNumber(), primaryPhone);
 
   }
 }
