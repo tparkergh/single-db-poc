@@ -35,4 +35,8 @@ export default class JsonBRE {
     return Object.values(this.rules)
       .filter(predicate)
   }
+
+  empty () {
+    return Object.values(this.rules).length === 0
+  }
 }

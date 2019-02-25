@@ -10,6 +10,6 @@ export default class JsonSelector {
   }
 
   applies (selector) {
-    return this.value === selector || tokenize(this.value).includes(selector)
+    return this.value === selector || tokenize(this.value).includes(selector) || this.directlyApplies(selector)
   }
 }

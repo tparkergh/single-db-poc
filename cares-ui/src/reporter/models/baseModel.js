@@ -1,9 +1,11 @@
 import { Model } from "survey-react";
+import JsonBRE from 'JsonBRE'
 import marked from 'marked'
 
 export default class BaseModel extends Model {
   constructor(json) {
     super(json)
+    this.engine = new JsonBRE()
 
     this.onErrorCustomText.add((survey, options) => {
       if (options.name === "required") {
