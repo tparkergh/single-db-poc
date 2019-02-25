@@ -26,6 +26,7 @@ rule "address-di-address-id"
   @doc_di_validation_table()
   @doc_di_validation_category()
   @doc_di_validation_sub_category()
+  @doc_di_validation_values()
 
   dialect "mvel"
   agenda-group "AddressBusinessRules-validation-agenda"

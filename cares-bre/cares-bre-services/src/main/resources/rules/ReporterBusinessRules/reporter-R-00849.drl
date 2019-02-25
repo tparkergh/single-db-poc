@@ -1,0 +1,20 @@
+rule "reporter-R-00849"
+  @doc_description("R - 00849  Employer Name specification")
+  @doc_external_documentation("docTools")
+  @doc_enforcement_location("BRE, ZOS")
+  @doc_rule_type("DocTool")
+  @doc_drools_file("client-R-00849.drl")
+  @doc_rule_name("REPORTER-R-00849")
+  @doc_rule_category(BusinessPolicy)
+  
+  @doc_doctool_name("R - 00846 00849  Employer Name specification")
+  @doc_doctool_description("If REPORTER is associated with LAW ENFORCEMENT, the EMPLOYER NAME (AGENCY NAME) must not be specified")
+  @doc_doctool_access_logic("If REPORTER>LAW_ENFORCEMENT exists, then disable Agency, and if Agency_Name exists, disable Law_Enforcement, else enable")
+  
+  dialect "mvel"
+  agenda-group "ReporterBusinessRules-validation-agenda"
+  when
+
+  then
+
+end
