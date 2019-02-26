@@ -25,28 +25,21 @@ public class CicsMockRestController {
   @Autowired
   private ObjectMapper jacksonObjectMapprer;
 
-  @PutMapping("/clients/{client_id}/{last_time_stamp}")
+  @PutMapping("/cics-mock/clients/{client_id}/{last_time_stamp}")
   CicsResponse putClient(@RequestBody String request,
       @PathVariable("client_id") String clientId,
       @PathVariable("last_time_stamp") String lastTimeStamp) {
     return executeRequest(request);
   }
   
-  @PutMapping("/addresses/{address_id}/{last_time_stamp}")
+  @PutMapping("/cics-mock/addresses/{address_id}/{last_time_stamp}")
   CicsResponse putAddress(@RequestBody String request,
       @PathVariable("address_id") String addressId,
       @PathVariable("last_time_stamp") String lastTimeStamp) {
     return executeRequest(request);
   }
 
-  @PutMapping("/reporters/{reporter_id}/{last_time_stamp}")
-  CicsResponse putReporter(@RequestBody String request,
-      @PathVariable("reporter_id") String reporterId,
-      @PathVariable("last_time_stamp") String lastTimeStamp) {
-    return executeRequest(request);
-  }
-
-  @PostMapping("/reporters")
+  @PostMapping("/cics-mock/reporters")
   CicsResponse postReporter(@RequestBody String request) {
     return executeRequest(request);
   }
