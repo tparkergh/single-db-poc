@@ -16,15 +16,21 @@ import {
 export class SearchResults extends Component {
   constructor (props) {
     super(props)
-    const { data, onCompleting } = props
+    const {
+      data,
+      updateSearchResultsModel,
+      updateSearchModel,
+      clearSearchResults
+    } = props
 
     this.model = new SearchResultsModel(this.props)
     this.model.onCompleting.add((result) => {
-      updateSearchResultsModel({
+      updateSearchResultsModel && updateSearchResultsModel({
         active: false,
         data
       })
-      updateSearchModel({ active: true })
+      updateSearchModel && updateSearchModel({ active: true })
+      clearSearchResults && clearSearchResults()
     })
   }
 
@@ -47,7 +53,9 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   setSearchResults,
-  clearSearchResults
+  clearSearchResults,
+  updateSearchModel,
+  updateSearchResultsModel
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults)

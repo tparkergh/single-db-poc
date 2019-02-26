@@ -17,12 +17,13 @@ export class Search extends Component {
     super(props)
 
     const search = new SearchModel(this.props)
+    const { updateSearchModel, updateSearchResultsModel } = this.props
     search.onCompleting.add((result) => {
-      updateSearchModel({
+      updateSearchModel && updateSearchModel({
         active: false,
         data: this.model.data
       })
-      updateSearchResultsModel({ active: true })
+      updateSearchResultsModel && updateSearchResultsModel({ active: true })
     })
     this.model = search
   }
@@ -41,4 +42,9 @@ const mapStateToProps = (state, ownProps) => ({
   active: selectSearchModelActive(state)
 })
 
-export default connect(mapStateToProps)(Search)
+const mapDispatchToProps = ({
+  updateSearchModel,
+  updateSearchResultsModel
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
