@@ -1,0 +1,21 @@
+rule "reporter-R-09453"
+  @doc_description("R - 09453")
+  @doc_external_documentation("docTools")
+  @doc_enforcement_location("BRE")
+  @doc_rule_type("DocTool")
+  @doc_drools_file("client-R-09453.drl")
+  @doc_rule_name("REPORTER-R-09453")
+  @doc_rule_category(BusinessPolicy)
+  
+  @doc_doctool_name("R - 09453")
+  @doc_doctool_description("When leaving the Reporter page, delete the underlying Reporter row if it contains only default values in the following fields:  Name field components (Prefix, First, Middle Initial, Last, and Suffix), Relationship to Referral, Address field components except State (Street No., Street Name, City, Zip, and Zip Ext), Phone fields (Primary Phone and Ext, Message Phone and Ext), Agency Name, Law Enforcement, Badge Number, Feedback field components except Feedback Required (Feedback Method, and Feedback Sent) and no Mandated Reporter document exists.")
+  @doc_doctool_access_logic("Upon losing focus of fraReporter, delete REPORTER (where .Name_Prefix_Description = ' ' and .First_Name = ' ' and .Middle_Initial_Name = ' ' and .Last_Name = ' ' and .Suffix_Title_Description = ' ' and .Colltr_Client_Rptr_Reltnshp_Type = 0 and .Street_Number = ' ' and .Street_Name = ' ' and .City_Name = ' ' and .Zip_Number = 0 and .Zip_Suffix_Number = 0 and .Primary_Phone_Number = 0 and .Primary_Phone_Extension_Number = 0 and .Message_Phone_Number = 0 and .Message_Phone_Extension_Number = 0 and .Employer_Name = ' ' and .Fklaw_Enft is null and .Badge_Number = ' ' and .Communication_Method_Type = 0 and .Feedback_Date is null and .Drms_Mandated_Rprtr_Feedback_Doc is null)")
+  @doc_doctool_notes("Do not create REPORTER under these conditions")
+  
+  dialect "mvel"
+  agenda-group "ReporterBusinessRules-validation-agenda"
+  when
+
+  then
+
+end
