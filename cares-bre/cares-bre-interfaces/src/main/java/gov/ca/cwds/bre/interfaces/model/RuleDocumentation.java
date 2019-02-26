@@ -21,7 +21,8 @@ public final class RuleDocumentation implements Serializable {
   private String name;
   private TreeMap<String, String> documentation = new TreeMap<>();
 
-  public RuleDocumentation() {    
+  public RuleDocumentation() {
+    // Default no-argument constructor.
   }
 
   public String getName() {
