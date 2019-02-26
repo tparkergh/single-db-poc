@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +43,11 @@ public class CicsMockRestController {
   CicsResponse putReporter(@RequestBody String request,
       @PathVariable("reporter_id") String reporterId,
       @PathVariable("last_time_stamp") String lastTimeStamp) {
+    return executeRequest(request);
+  }
+
+  @PostMapping("/reporters")
+  CicsResponse postReporter(@RequestBody String request) {
     return executeRequest(request);
   }
 
