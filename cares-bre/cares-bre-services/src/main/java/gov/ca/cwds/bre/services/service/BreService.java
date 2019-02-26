@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import gov.ca.cwds.bre.interfaces.api.BusinessRuleService;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 import gov.ca.cwds.bre.services.api.BusinessRule;
 import gov.ca.cwds.bre.services.api.BusinessRuleProvider;
@@ -31,7 +32,13 @@ public class BreService implements BusinessRuleService {
         .getBusinessRule(breRequest.getBusinessRuleSetName())
         .execute(breRequest);            
   }
-    
+  
+  @Override
+  @ExecutionTimer
+  public BusinessRuleSetDefinition getBusinessRuleSetDefinition(String name) {
+    return businessRuleProvider.getBusinessRule(name).getDefinition();
+  }
+
   @Override
   @ExecutionTimer
   public BusinessRuleSetDocumentation getBusinessRuleSetDocumentation(String name) {

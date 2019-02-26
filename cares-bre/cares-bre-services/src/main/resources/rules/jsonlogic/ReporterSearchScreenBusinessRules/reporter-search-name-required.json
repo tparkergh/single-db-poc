@@ -1,0 +1,24 @@
+{
+  "name": "reporter-search-name-required",
+  "logic": {
+    "if": [
+      {
+        "and": [
+          {
+            "missing": "search.reporter.first_name"
+          },
+          {
+            "missing": "search.reporter.last_name"
+          }
+        ]
+      },
+      "Last name or first name is required to search for a reporter.",
+      true
+    ]
+  },
+  "documentation": {
+    "doc_description": "One of first name or last name is required to search reporter",
+    "doc_jsonlogic_file": "reporter-search-name-required.json",
+    "doc_enforcement_location": "FE"
+  }
+}

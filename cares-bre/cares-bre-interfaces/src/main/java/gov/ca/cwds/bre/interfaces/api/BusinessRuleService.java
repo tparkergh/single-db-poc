@@ -3,6 +3,7 @@ package gov.ca.cwds.bre.interfaces.api;
 import java.util.Collection;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 
 /**
@@ -17,6 +18,14 @@ public interface BusinessRuleService {
    * @return BreResponse
    */
   public BreResponse executeBusinessRules(BreRequest breRequest);
+  
+  /**
+   * Get business rule set definition (logic)
+   * 
+   * @param name Business rule set name
+   * @return Business rule set definition (logic)
+   */
+  public BusinessRuleSetDefinition getBusinessRuleSetDefinition(String name); 
   
   /**
    * Get business rule set documentation
