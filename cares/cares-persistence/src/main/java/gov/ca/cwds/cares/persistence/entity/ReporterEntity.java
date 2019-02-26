@@ -23,7 +23,7 @@ public class ReporterEntity implements Serializable {
   private static final long serialVersionUID = 6969398151287232182L;
 
   @Id
-  @Column(name = "FKREFERL_T")
+  @Column(name = "IDENTIFIER")
   private String identifier;
 
   @Column(name = "CMM_MTHC")
@@ -49,6 +49,9 @@ public class ReporterEntity implements Serializable {
 
   @Column(name = "FKLAW_ENFT")
   private String lawEnforcementId;
+
+  @Column(name = "FKREFERL_T")
+  private String referralId;
 
   @Column(name = "LST_UPD_ID")
   private String lastUpdateId;
@@ -118,6 +121,14 @@ public class ReporterEntity implements Serializable {
     this.identifier = identifier;
   }
 
+  public Integer getCommunicationMethodCode() {
+    return communicationMethodCode;
+  }
+
+  public void setCommunicationMethodCode(Integer communicationMethodCode) {
+    this.communicationMethodCode = communicationMethodCode;
+  }
+
   public String getConfidentialWaiverIndicator() {
     return confidentialWaiverIndicator;
   }
@@ -174,6 +185,14 @@ public class ReporterEntity implements Serializable {
     this.lawEnforcementId = lawEnforcementId;
   }
 
+  public String getReferralId() {
+    return referralId;
+  }
+
+  public void setReferralId(String referralId) {
+    this.referralId = referralId;
+  }
+
   public String getLastUpdateId() {
     return lastUpdateId;
   }
@@ -206,12 +225,44 @@ public class ReporterEntity implements Serializable {
     this.mandatedReporterIndicator = mandatedReporterIndicator;
   }
 
+  public Integer getMessagePhoneExtension() {
+    return messagePhoneExtension;
+  }
+
+  public void setMessagePhoneExtension(Integer messagePhoneExtension) {
+    this.messagePhoneExtension = messagePhoneExtension;
+  }
+
+  public Long getMessagePhoneNumber() {
+    return messagePhoneNumber;
+  }
+
+  public void setMessagePhoneNumber(Long messagePhoneNumber) {
+    this.messagePhoneNumber = messagePhoneNumber;
+  }
+
   public String getNamePrefixDescription() {
     return namePrefixDescription;
   }
 
   public void setNamePrefixDescription(String namePrefixDescription) {
     this.namePrefixDescription = namePrefixDescription;
+  }
+
+  public Long getPrimaryPhoneNumber() {
+    return primaryPhoneNumber;
+  }
+
+  public void setPrimaryPhoneNumber(Long primaryPhoneNumber) {
+    this.primaryPhoneNumber = primaryPhoneNumber;
+  }
+
+  public Integer getPrimaryPhoneExtension() {
+    return primaryPhoneExtension;
+  }
+
+  public void setPrimaryPhoneExtension(Integer primaryPhoneExtension) {
+    this.primaryPhoneExtension = primaryPhoneExtension;
   }
 
   public String getBadgeNumber() {
@@ -270,54 +321,6 @@ public class ReporterEntity implements Serializable {
     this.streetNumber = streetNumber;
   }
 
-  public String getSuffixTitleDescription() {
-    return suffixTitleDescription;
-  }
-
-  public void setSuffixTitleDescription(String suffixTitleDescription) {
-    this.suffixTitleDescription = suffixTitleDescription;
-  }
-  
-  public Integer getCommunicationMethodCode() {
-    return communicationMethodCode;
-  }
-
-  public void setCommunicationMethodCode(Integer communicationMethodCode) {
-    this.communicationMethodCode = communicationMethodCode;
-  }
-
-  public Integer getMessagePhoneExtension() {
-    return messagePhoneExtension;
-  }
-
-  public void setMessagePhoneExtension(Integer messagePhoneExtension) {
-    this.messagePhoneExtension = messagePhoneExtension;
-  }
-
-  public Long getMessagePhoneNumber() {
-    return messagePhoneNumber;
-  }
-
-  public void setMessagePhoneNumber(Long messagePhoneNumber) {
-    this.messagePhoneNumber = messagePhoneNumber;
-  }
-
-  public Long getPrimaryPhoneNumber() {
-    return primaryPhoneNumber;
-  }
-
-  public void setPrimaryPhoneNumber(Long primaryPhoneNumber) {
-    this.primaryPhoneNumber = primaryPhoneNumber;
-  }
-
-  public Integer getPrimaryPhoneExtension() {
-    return primaryPhoneExtension;
-  }
-
-  public void setPrimaryPhoneExtension(Integer primaryPhoneExtension) {
-    this.primaryPhoneExtension = primaryPhoneExtension;
-  }
-
   public Integer getZipCode() {
     return zipCode;
   }
@@ -332,6 +335,14 @@ public class ReporterEntity implements Serializable {
 
   public void setStateCode(Integer stateCode) {
     this.stateCode = stateCode;
+  }
+
+  public String getSuffixTitleDescription() {
+    return suffixTitleDescription;
+  }
+
+  public void setSuffixTitleDescription(String suffixTitleDescription) {
+    this.suffixTitleDescription = suffixTitleDescription;
   }
 
   public Integer getZipSuffix() {
