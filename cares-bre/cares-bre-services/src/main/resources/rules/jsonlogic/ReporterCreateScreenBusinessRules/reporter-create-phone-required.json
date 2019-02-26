@@ -1,0 +1,17 @@
+{
+  "name": "reporter-create-phone-required",
+  "logic": {
+    "if": [
+      {
+        "missing": "create.reporter.phone_number"
+      },
+      "A phone number is required to create a reporter.",
+      true
+    ]
+  },
+  "documentation": {
+    "doc_description": "Primary phone number is required to create reporter",
+    "doc_jsonlogic_file": "reporter-create-phone-required.json",
+    "doc_enforcement_location": "FE"
+  }
+}
