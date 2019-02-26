@@ -10,7 +10,8 @@ import {
 import SearchResultsModel from './models/searchResultsModel'
 import {
   selectReporterSearchResults,
-  selectSearchResultsModelActive
+  selectSearchResultsModelActive,
+  selectSearchModelData
 } from './selectors'
 
 export class SearchResults extends Component {
@@ -48,7 +49,8 @@ export class SearchResults extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   searchResults: selectReporterSearchResults(state),
-  active: selectSearchResultsModelActive(state)
+  active: selectSearchResultsModelActive(state),
+  data: selectSearchModelData(state)
 })
 
 const mapDispatchToProps = {

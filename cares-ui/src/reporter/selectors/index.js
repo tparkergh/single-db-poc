@@ -28,3 +28,8 @@ export const selectSearchModelActive = (rawState) => createSelector(
   (state) => state.getIn(['models', 'search', 'active']) || false,
   rawState
 )
+
+export const selectSearchModelData = (rawState) => createSelector(
+  (state) => state.getIn(['models', 'search', 'data']) || {},
+  rawState
+)
