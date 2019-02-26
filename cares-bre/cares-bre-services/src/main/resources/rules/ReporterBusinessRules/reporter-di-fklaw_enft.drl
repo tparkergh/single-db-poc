@@ -20,7 +20,7 @@ rule "reporter-di-fklaw_enft"
   @doc_di_validation_category()
   @doc_di_validation_sub_category()
   @doc_di_validation_values()
-  @doc_di_validation_notes("If not null, then must point to a valid REPORTER row.")
+  @doc_di_validation_notes("If not null, then must point to a valid LAW_ENFORCEMENT row.")
 
   dialect "mvel"
   agenda-group "ReporterBusinessRules-validation-agenda"

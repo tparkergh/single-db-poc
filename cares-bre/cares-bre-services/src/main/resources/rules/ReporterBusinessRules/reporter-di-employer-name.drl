@@ -17,7 +17,7 @@ rule "reporter-di-employer-name"
   @doc_di_mandatory("false")
   @doc_di_default(" ")
   @doc_di_validation_table()
-  @doc_di_validation_category)
+  @doc_di_validation_category()
   @doc_di_validation_sub_category()
   @doc_di_validation_values("")
 

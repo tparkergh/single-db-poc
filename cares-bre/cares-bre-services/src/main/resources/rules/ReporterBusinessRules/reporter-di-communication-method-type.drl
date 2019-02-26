@@ -12,7 +12,7 @@ rule "reporter-di-communication-method-type"
   @doc_di_entity("REPORTER")
   @doc_di_attribute("COMMUNICATION_METHOD")
   @doc_di_length("4")
-  @doc_di_type("char")
+  @doc_di_type("smallint")
   @doc_di_nullable("false")
   @doc_di_mandatory("true")
   @doc_di_default("0")
