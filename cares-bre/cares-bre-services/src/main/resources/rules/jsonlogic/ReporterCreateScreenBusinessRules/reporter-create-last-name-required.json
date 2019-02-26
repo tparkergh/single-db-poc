@@ -1,0 +1,17 @@
+{
+  "name": "reporter-create-last-name-required",
+  "logic": {
+    "if": [
+      {
+        "missing": "create.reporter.last_name"
+      },
+      "A last name is required to create a reporter.",
+      true
+    ]
+  },
+  "documentation": {
+    "doc_description": "Last name is required to create reporter",
+    "doc_jsonlogic_file": "reporter-create-last-name-required.json",
+    "doc_enforcement_location": "FE"
+  }
+}

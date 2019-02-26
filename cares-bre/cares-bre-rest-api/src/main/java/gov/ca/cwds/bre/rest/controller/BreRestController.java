@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import gov.ca.cwds.bre.interfaces.api.BusinessRuleService;
 import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
+import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +32,13 @@ public class BreRestController {
   @ApiOperation(value = "Execute business rules")
   public BreResponse executeBusinessRules(@RequestBody BreRequest breRequest) {
     return businessRuleService.executeBusinessRules(breRequest);
+  }
+  
+  @GetMapping("/bre/defs/{name}")
+  @ExecutionTimer
+  @ApiOperation(value = "Get definition (logic) of business rule set identified by given name")
+  public BusinessRuleSetDefinition getBusinessRuleDefinition(@ApiParam("Business rule set name") @PathVariable("name") String name) {
+    return businessRuleService.getBusinessRuleSetDefinition(name);
   }
   
   @GetMapping("/bre/docs")

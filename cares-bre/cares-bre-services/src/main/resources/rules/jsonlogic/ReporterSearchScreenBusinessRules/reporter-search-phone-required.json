@@ -1,0 +1,17 @@
+{
+  "name": "reporter-search-phone-required",
+  "logic": {
+    "if": [
+      {
+        "missing": "search.reporter.phone_number"
+      },
+      "A phone number is required to search for a reporter.",
+      true
+    ]
+  },
+  "documentation": {
+    "doc_description": "Primary phone number is required to search reporter",
+    "doc_jsonlogic_file": "reporter-search-phone-required.json",
+    "doc_enforcement_location": "FE"
+  }
+}

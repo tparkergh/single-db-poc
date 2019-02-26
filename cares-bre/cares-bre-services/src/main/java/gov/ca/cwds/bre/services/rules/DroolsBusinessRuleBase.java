@@ -104,7 +104,7 @@ public abstract class DroolsBusinessRuleBase implements BusinessRule {
   }
   
   private String getDroolsRulesPath() {
-    return "rules/" + getName();
+    return "rules/drools/" + getName();
   }
   
   private String getDroolsValidationAgenda() {
