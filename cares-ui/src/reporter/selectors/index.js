@@ -18,3 +18,13 @@ export const selectReporterSearchResults = (rawState) => createSelector(
   (state) => state.getIn(['entities', 'person'], Map()).toList(),
   rawState
 )
+
+export const selectSearchResultsModelActive = (rawState) => createSelector(
+  (state) => state.getIn(['models', 'search_results', 'active']) || false,
+  rawState
+)
+
+export const selectSearchModelActive = (rawState) => createSelector(
+  (state) => state.getIn(['models', 'search', 'active']) || false,
+  rawState
+)
