@@ -4,56 +4,44 @@
   "checkErrorsMode": "onValueChanged",
   "completeText": "Continue",
   "questionErrorLocation": "bottom",
-  "elements": [
-    {
-      "type": "text",
-      "name": "first_name",
-      "title": "First Name",
-      "text": "Enter first name",
-      "validators": [
-        {
-          "type": "expression",
-          "expression": "{first_name} notempty or {last_name} notempty",
-          "text": "First Or Last Name is required"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "name": "last_name",
-      "title": "Last Name",
-      "startWithNewLine": false,
-      "validators": [
-        {
-          "type": "expression",
-          "expression": "{first_name} notempty or {last_name} notempty",
-          "text": "First Or Last Name is required"
-        }
-      ]
-    },
-
-    {
-      "type": "text",
-      "name": "number",
-      "isRequired": true,
-      "title": "Call back phone number",
-      "width": "30%"
-    },
-    {
-      "type": "text",
-      "name": "extension",
-      "title": "Ext.",
-      "width": "20%",
-      "startWithNewLine": false
-    },
-    {
-      "type": "dropdown",
-      "name": "relationship",
-      "title": "Relationship to child",
-      "optionsCaption": "Reporter",
-      "defaultValue": "Reporter",
-      "startWithNewLine": false
-    }
-  ],
+  "elements": [{
+    "type": "panel",
+    "name": "reporterName",
+    "elements": [
+      {
+        "type": "text",
+        "name": "first_name",
+        "title": "First Name",
+        "text": "Enter first name"
+      },
+      {
+        "type": "text",
+        "name": "last_name",
+        "title": "Last Name",
+        "startWithNewLine": false
+      }
+    ]},
+      {
+        "type": "text",
+        "name": "phone_number",
+        "title": "Call back phone number",
+        "width": "30%"
+      },
+      {
+        "type": "text",
+        "name": "extension",
+        "title": "Ext.",
+        "width": "20%",
+        "startWithNewLine": false
+      },
+      {
+        "type": "dropdown",
+        "name": "relationship",
+        "title": "Relationship to child",
+        "optionsCaption": "Reporter",
+        "defaultValue": "Reporter",
+        "startWithNewLine": false
+      }
+    ],
   "completeSurveyText": "Save"
 }

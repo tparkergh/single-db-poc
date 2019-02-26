@@ -23,8 +23,10 @@ public class Reporter implements Serializable {
   private String identifier;
   private String firstName;
   private String lastName;
-  private int primaryPhoneNumber;
-  
+  private Long phoneNumber;
+  private Integer phoneExtension;
+  private String relationToChild;
+
   public Reporter() {
     super();
   }
@@ -53,12 +55,28 @@ public class Reporter implements Serializable {
     this.lastName = lastName;
   }
 
-  public int getPrimaryPhoneNumber() {
-    return primaryPhoneNumber;
+  public long getPhoneNumber() {
+    return phoneNumber;
   }
 
-  public void setPrimaryPhoneNumber(int primaryPhoneNumber) {
-    this.primaryPhoneNumber = primaryPhoneNumber;
+  public void setPhoneNumber(long phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public int getPhoneExtension() {
+    return phoneExtension;
+  }
+
+  public void setPhoneExtension(int phoneExtension) {
+    this.phoneExtension = phoneExtension;
+  }
+
+  public String getRelationToChild() {
+    return relationToChild;
+  }
+
+  public void setRelationToChild(String relationToChild) {
+    this.relationToChild = relationToChild;
   }
 
   @Override

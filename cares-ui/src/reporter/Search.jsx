@@ -17,7 +17,12 @@ export class Search extends Component {
 
     const search = new SearchModel(this.props)
     const results = new SearchResultsModel(this.props)
-    search.onCompleting.add((result) => (this.model = results))
+    search.onCompleting.add((result) => {
+      const data = this.model.data
+      this.model = results
+      // copy over the data so that we can create a reporter
+      this.model.data = data
+    })
     results.onCompleting.add((result) => (this.model = search))
     this.model = search
   }
