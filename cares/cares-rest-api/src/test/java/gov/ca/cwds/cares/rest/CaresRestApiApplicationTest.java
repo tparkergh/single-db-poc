@@ -33,7 +33,7 @@ import gov.ca.cwds.bre.restclient.BreRestApiClient;
 import gov.ca.cwds.cares.geo.restclient.GeoRestClient;
 import gov.ca.cwds.cares.interfaces.model.Address;
 import gov.ca.cwds.cares.interfaces.model.people.ClientAddress;
-import gov.ca.cwds.cics.restclient.CicsAddressUpdaterRestApiClient;
+import gov.ca.cwds.cics.restclient.CicsAddressRestApiClient;
 
 /**
  * CWDS J Team
@@ -71,7 +71,7 @@ public class CaresRestApiApplicationTest {
 
   @Autowired
   @Qualifier("CicsAddressUpdaterRestApiClient")
-  private CicsAddressUpdaterRestApiClient cicsAddressUpdaterRestApiClient;
+  private CicsAddressRestApiClient cicsAddressUpdaterRestApiClient;
 
   @Test
   public void whenCallGetClientAddress_thenSuccessResponse() throws Exception {
@@ -181,7 +181,7 @@ public class CaresRestApiApplicationTest {
         mockResponsePath), StandardCharsets.UTF_8);
     mockServer.expect(
         content().json(cicsExpectedRequest))
-        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressUpdaterRestApiClient.ADDRESS_PATH + "/test-ad-10/2018-07-24-15.06.50.945749"))
+        .andExpect(requestTo(cicsServiceBaseUrl + CicsAddressRestApiClient.ADDRESS_PATH + "/test-ad-10/2018-07-24-15.06.50.945749"))
         .andExpect(method(HttpMethod.PUT))
         .andExpect(header("Authorization", "Basic dGVzdC1jaWNzLXNlcnZpY2UtdXNlcm5hbWU6dGVzdC1jaWNzLXNlcnZpY2UtcGFzc3dvcmQ="))
         .andRespond(withSuccess(cicsMockResponse, MediaType.APPLICATION_JSON));

@@ -31,7 +31,10 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
     
     implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
-    
+    implementation 'gov.ca.cwds.api:api-core-cms:' + apiCoreVersion, {
+        transitive = false
+    }
+
     implementation 'org.mapstruct:mapstruct-jdk8:' + mapstructVersion
     compileOnly 'org.mapstruct:mapstruct-processor:' + mapstructVersion
 
