@@ -3,7 +3,8 @@ import BaseModel from './baseModel'
 import { ItemValue, SurveyError } from "survey-react";
 import axios from 'axios'
 import {
-  createReporterRoute
+  createReporterRoute,
+  getBreRuleSetRoute
 } from '../../routes'
 
 export default class SearchResultsModel extends BaseModel {
@@ -98,40 +99,17 @@ export default class SearchResultsModel extends BaseModel {
 }
 
   loadJsonRules() {
-    // temporary as these rules will be loaded from the api later
-    const firstNameRule = {
-      identifier: 'create-reporter-first-name-rule',
-	  definition: {
-		"if": [
-		  { "missing": "create.reporter.first_name" },
-		  "A first name is required to create a reporter.",
-		  true
-		]
-	  }
-	}
-    const lastNameRule = {
-      identifier: 'create-reporter-last-name-rule',
-	  definition: {
-		"if": [
-		  { "missing": "create.reporter.last_name" },
-		  "A last name is required to create a reporter.",
-		  true
-		]
-	  }
-	}
-    const phoneNumberRule = {
-      identifier: 'create-reporter-phone-number-rule',
-	  definition: {
-		"if": [
-		  { "missing": "create.reporter.phone_number" },
-		  "A phone number is required to create a reporter.",
-		  true
-		]
-	  }
-    }
-    this.engine.define(firstNameRule)
-    this.engine.define(lastNameRule)
-    this.engine.define(phoneNumberRule)
+    axios({
+      url: getBreRuleSetRoute('ReporterCreateScreenBusinessRules'),
+      method: 'get',
+    }).then((result) => {
+      result.data.rules.map((rule) =>
+        this.engine.define({
+          identifier: rule.name,
+          definition: rule.logic
+        })
+      )
+    })
   }
 }
 
