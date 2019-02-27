@@ -3,7 +3,7 @@ rule "reporter-di-communication-method-type"
   @doc_description("Communication Method must be 0 or valid")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("")
   @doc_rule_category("DataIntegrity, Validation")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-di-communication-method.drl")
