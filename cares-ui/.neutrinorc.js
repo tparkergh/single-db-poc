@@ -13,7 +13,7 @@ module.exports = {
     [
       '@neutrinojs/dev-server', { disableHostCheck: true }
     ],
-    ['@neutrinojs/env', ['CARES_API_URL']],
+    ['@neutrinojs/env', ['CARES_API_URL', 'CARES_BRE_API_URL']],
     ['@neutrinojs/eslint', {
       eslint: {
         useEslintrc: true,

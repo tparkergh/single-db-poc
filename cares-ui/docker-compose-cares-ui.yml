@@ -7,3 +7,4 @@ services:
       - '3008:5000'
     environment:
       CARES_API_URL: http://api-a.sblegacy.cwds.io:3007
+      CARES_BRE_API_URL: http://api-a.sblegacy.cwds.io:3006
