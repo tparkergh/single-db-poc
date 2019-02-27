@@ -13,7 +13,6 @@ export default class SearchModel extends BaseModel {
   constructor(props) {
     super(SearchJSON)
 
-    this.onAfterRenderSurvey.add(this.loadJsonRules.bind(this))
     this.onValidatePanel.add(this.validateName.bind(this))
     this.onValidateQuestion.add(this.validatePhoneNumber.bind(this))
     this.onCompleting.add((result, options) => {
