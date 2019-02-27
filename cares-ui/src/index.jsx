@@ -14,7 +14,13 @@ import ReporterMain from './reporter/ReporterMain';
 
 const store = createStore(rootReducer)
 
-const reporterStore = createStore(reporterReducer)
+const reporterStore = createStore(reporterReducer, {
+  models: {
+    search: {
+      active: true
+    }
+  }
+})
 
 const root = document.getElementById('root')
 const load = () => render((
