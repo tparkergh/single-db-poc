@@ -3,6 +3,7 @@ package gov.ca.cwds.bre.rest.controller;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import io.swagger.annotations.ApiParam;
  * @author CWDS Team J
  */
 @RestController
+@CrossOrigin
 public class BreRestController {
   
   @Autowired
@@ -50,7 +52,7 @@ public class BreRestController {
   
   @GetMapping("/bre/docs/{name}")
   @ExecutionTimer
-  @ApiOperation(value = "Get documentation of business rule identified by given name")
+  @ApiOperation(value = "Get documentation of business rule set identified by given name")
   public BusinessRuleSetDocumentation getBusinessRuleDocumentation(@ApiParam("Business rule set name") @PathVariable("name") String name) {
     return businessRuleService.getBusinessRuleSetDocumentation(name);
   }
