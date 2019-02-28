@@ -61,7 +61,7 @@ dependencies {
     implementation 'io.springfox:springfox-swagger-ui:' + springFoxSwaggerVersion
 
 	implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion, {
-        exclude group: 'io.dropwizard'
+        transitive = false
     }
 
     testImplementation project(':cares-geo:cares-geo-rest-client')

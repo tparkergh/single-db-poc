@@ -15,7 +15,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootVersion
     
-    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
+    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion, {
+        transitive = false
+    }
     
     implementation 'gov.ca.cwds.api:legacy-data-access-services:' + apiCoreVersion, {
         exclude group: 'com.ibm'

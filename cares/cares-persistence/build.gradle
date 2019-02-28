@@ -14,6 +14,8 @@ dependencies {
     
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion     
     implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
-    
+    implementation 'org.hibernate:hibernate-entitymanager:' + hibernateVersion
+//    implementation 'org.hibernate:hibernate-core:' + hibernateJpaIntegratorVersion
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
 }
