@@ -99,7 +99,7 @@ export default class SearchResultsModel extends BaseModel {
 }
 
   loadJsonRules() {
-    axios({
+    return axios({
       url: getBreRuleSetRoute('ReporterCreateScreenBusinessRules'),
       method: 'get',
     }).then((result) => {
