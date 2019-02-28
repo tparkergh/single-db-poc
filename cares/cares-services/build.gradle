@@ -30,12 +30,10 @@ dependencies {
     implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
     implementation 'com.google.guava:guava:' + guavaVersion
-    implementation 'com.ibm:db2jcc4:' + db2DriverVersion
-    implementation 'com.ibm:db2jcc_license_cisuz:' + db2DriverVersion
+    implementation 'org.apache.commons:commons-collections4:' + commonsCollectionsVersion
+    implementation 'javax.validation:validation-api:' + javaxValidationVersion
+
     implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion, {
-        transitive = false
-    }
-    implementation 'gov.ca.cwds.api:api-core-cms:' + apiCoreVersion, {
         transitive = false
     }
 
