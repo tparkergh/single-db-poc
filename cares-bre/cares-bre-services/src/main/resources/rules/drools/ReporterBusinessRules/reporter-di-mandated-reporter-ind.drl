@@ -1,9 +1,16 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.ReporterData;
+import org.drools.core.util.StringUtils;
+
+global java.util.Set validationDetailsList
+
 rule "reporter-di-mandated-reporter-ind"
 
   @doc_description("Mandated Reporter indicator must by Y or N")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("BRE")
   @doc_rule_category("DataIntegrity, Validation")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-di-mandated-reporter-ind.drl")
@@ -25,7 +32,15 @@ rule "reporter-di-mandated-reporter-ind"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
+	reporterData: ReporterData(String.valueOf(mandatedReporterInd) != "Y" && String.valueOf(mandatedReporterInd) != "N")
 
   then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + reporterData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.CONSTRAINT_VALIDATION);
+    details.setProperty("reporterData.mandatedReporterInd");
+    details.setInvalidValue(reporterData.mandatedReporterInd);
+    validationDetailsList.add(details);
 
 end

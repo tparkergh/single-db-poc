@@ -1,9 +1,16 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.ReporterData;
+import org.drools.core.util.StringUtils;
+
+global java.util.Set validationDetailsList
+
 rule "reporter-di-confidential-wavier-ind"
 
   @doc_description("Confidential Wavier indicator must by Y or N")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("BRE")
   @doc_rule_category("DataIntegrity, Validation")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-di-confidential-wavier-ind.drl")
@@ -25,7 +32,14 @@ rule "reporter-di-confidential-wavier-ind"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-
+	reporterData: ReporterData(String.valueOf(confidentialWaiverInd) != "Y" && String.valueOf(confidentialWaiverInd) != "N")
   then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + reporterData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.CONSTRAINT_VALIDATION);
+    details.setProperty("reporterData.confidentialWaiverInd");
+    details.setInvalidValue(reporterData.confidentialWaiverInd);
+    validationDetailsList.add(details);
 
 end

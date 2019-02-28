@@ -1,16 +1,23 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.ReporterData;
+import org.drools.core.util.StringUtils;
+
+global java.util.Set validationDetailsList
+
 rule "reporter-di-employer-name"
 
-  @doc_description("Mandatory if the individual is acting as a mandated REPORTER and the employer address is not already associated with an identified LAW_ENFORCEMENT")
+  @doc_description("Employer name is mandatory if the individual is acting as a mandated REPORTER and the employer address is not already associated with an identified LAW_ENFORCEMENT")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("BRE")
   @doc_rule_category("DataIntegrity")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-di-employer-name.drl")
   @doc_rule_name("REPORTER-DI-EMPLOYER-NAME")
 
   @doc_di_entity("REPORTER")
-  @doc_di_attribute("RPTR-EMPNM")
+  @doc_di_attribute("EMPLOYER_NAME")
   @doc_di_length("35")
   @doc_di_type("char")
   @doc_di_nullable("false")
@@ -25,7 +32,13 @@ rule "reporter-di-employer-name"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-
+  	reporterData: ReporterData(String.valueOf(mandatedReporterInd) == "Y"  && StringUtils.isEmpty(fklaw_enft) && StringUtils.isEmpty(employerName))
   then
-
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + " : Reporter: " + reporterData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.CONSTRAINT_VALIDATION);
+    details.setProperty("reporterData.employerName");
+    details.setInvalidValue(reporterData.fkreferl_t);
+    validationDetailsList.add(details);
 end

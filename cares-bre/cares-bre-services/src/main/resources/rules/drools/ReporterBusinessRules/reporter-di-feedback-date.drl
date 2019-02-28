@@ -3,7 +3,7 @@ rule "reporter-di-feedback-date"
   @doc_description("Feedback date must be null or a valid date")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("")
   @doc_rule_category("DataIntegrity")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-di-feedback-date.drl")

@@ -1,9 +1,16 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.ReporterData;
+import org.drools.core.util.StringUtils;
+
+global java.util.Set validationDetailsList
+
 rule "reporter-di-drms-mandated-reporter-feedback"
 
   @doc_description("Mandated Reporter feedback document pointer must be null or 10 characters")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("BRE")
   @doc_rule_category("DataIntegrity")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-di-mandated-reporter-feedback.drl")
@@ -25,7 +32,14 @@ rule "reporter-di-drms-mandated-reporter-feedback"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-
+	reporterData: ReporterData(!StringUtils.isEmpty(drmsMandatedRprtrFeedback) && String.valueOf(drmsMandatedRprtrFeedback).length != 10)
   then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + reporterData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.CONSTRAINT_VALIDATION);
+    details.setProperty("reporterData.drmsMandatedRprtrFeedback");
+    details.setInvalidValue(reporterData.drmsMandatedRprtrFeedback);
+    validationDetailsList.add(details);
 
 end

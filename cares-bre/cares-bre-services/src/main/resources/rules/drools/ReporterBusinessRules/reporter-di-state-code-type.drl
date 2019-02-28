@@ -3,7 +3,7 @@ rule "reporter-di-state-code-typ"
   @doc_description("State Code Type must be a space or valid")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("")
   @doc_rule_category("DataIntegrity, Validation")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-di-state-code-type.drl")
