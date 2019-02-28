@@ -1,6 +1,6 @@
 import { Component } from  'react'
 import { Page } from '@cwds/components'
-import Search from './Search'
+import { ReportWizard } from './ReportWizard'
 
 export default class ReporterMain extends Component {
 
@@ -10,7 +10,7 @@ export default class ReporterMain extends Component {
         layout='jumpnav'
         title='Reporter Search'
         breadcrumb={<div>Reporter Search</div>}
-        main={Search}
+        main={ReportWizard}
       /> 
     ) 
   }

@@ -5,7 +5,7 @@ reporter-di-county-specific-code.drl
 reporter-di-drms-mandated-reporter-feedback.drl
 reporter-di-feedback-date.drl
 reporter-di-feedback-required-ind.drl
-reporter-di-fklaw_enft.drl
+reporter-di-fklaw-enft.drl
 reporter-di-fkreferl-t.drl
 reporter-di-employer-name.drl
 reporter-di-mandated-reporter-ind.drl

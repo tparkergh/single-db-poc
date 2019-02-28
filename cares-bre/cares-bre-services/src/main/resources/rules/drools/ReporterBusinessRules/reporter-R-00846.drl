@@ -1,7 +1,14 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.ReporterData;
+import org.drools.core.util.StringUtils;
+
+global java.util.Set validationDetailsList
+
 rule "reporter-R-00846"
   @doc_description("R - 00846 Badge Number Specification")
   @doc_external_documentation("docTools")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("BRE")
   @doc_rule_type("DocTool")
   @doc_drools_file("client-R-00846.drl")
   @doc_rule_name("REPORTER-R-00846")
@@ -14,7 +21,13 @@ rule "reporter-R-00846"
   dialect "mvel"
   agenda-group "ReporterBusinessRules-validation-agenda"
   when
-
+  	reporterData: ReporterData(!StringUtils.isEmpty(badgeNumber) && StringUtils.isEmpty(fklaw_enft))
   then
-
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_doctool_description") + ", Reporter: " + reporterData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.BUSINESS_VALIDATION);
+    details.setProperty("reporterData.badgeNumber");
+    details.setInvalidValue(reporterData.badgeNumber);
+    validationDetailsList.add(details);
 end

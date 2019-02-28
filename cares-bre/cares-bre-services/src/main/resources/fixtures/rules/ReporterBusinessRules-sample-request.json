@@ -1,0 +1,39 @@
+{
+  "business_rule_set_name": "ReporterBusinessRules",
+  "data_objects": [
+    {
+      "data_object_class_name": "gov.ca.cwds.cics.model.ReporterData",
+      "data_object": {
+      	"TXN_HDR_STAFF_ID": "0WM",
+		"IDENTIFIER":"1234567ABC",
+		"RPTR_BDGNO":"",
+		"RPTR_CTYNM":"",
+		"COL_RELC":0,
+		"CMM_MTHC":0,
+		"CNFWVR_IND":"N",
+		"FDBACK_DOC":"",
+		"RPTR_EMPNM":"",
+		"FEEDBCK_DT":"",
+		"FB_RQR_IND":"",
+		"RPTR_FSTNM":"first name",
+		"RPTR_LSTNM":"last name",
+		"MNRPTR_IND":"Y",
+		"MSG_EXT_NO":0,
+		"MSG_TEL_NO":0,
+		"MID_INI_NM":"",
+		"NMPRFX_DSC":"",
+		"PRM_TEL_NO":0,
+		"PRM_EXT_NO":0,
+		"STATE_C":0,
+		"RPTR_ST_NM":"street name",
+		"RPTR_ST_NO":"",
+		"SUFX_TLDSC":"",
+		"RPTR_ZIPNO":0,
+		"FKREFERL_T":"",
+		"FKLAW_ENFT":"",
+		"ZIP_SFX_NO":0,
+		"CNTY_SPFCD ":"99"
+      }
+    }
+  ]
+}

@@ -8,14 +8,10 @@ export default class SearchResultsModel extends BaseModel {
 
 	this.loadJsonRules()
 	this.onValidateQuestion.add(this.validate.bind(this))
-    this.onCompleting.add((result, options) => {
-      options.allowComplete=false
-      props.clearSearchResults()
-      // in the future this will update the store
-    })
   }
 
-  update (props) {
+  update (props, data) {
+    this.data = data
     this.loadResults(props)
   }
 

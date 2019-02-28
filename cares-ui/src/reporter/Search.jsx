@@ -4,47 +4,47 @@ import { Survey, StylesManager } from "survey-react";
 import "survey-react/survey.css"
 import { connect } from 'react-redux'
 import {
-  setSearchResults,
-  clearSearchResults
+  updateSearchModel,
+  updateSearchResultsModel
 } from './actions'
-import { selectReporterSearchResults } from './selectors'
 import SearchModel from './models/searchModel'
-import SearchResultsModel from './models/searchResultsModel'
+import {
+  selectSearchModelActive
+} from './selectors'
 
 export class Search extends Component {
   constructor(props) {
     super(props)
 
     const search = new SearchModel(this.props)
-    const results = new SearchResultsModel(this.props)
+    const { updateSearchModel, updateSearchResultsModel } = this.props
     search.onCompleting.add((result) => {
-      const data = this.model.data
-      this.model = results
-      // copy over the data so that we can create a reporter
-      this.model.data = data
+      updateSearchModel && updateSearchModel({
+        active: false,
+        data: this.model.data
+      })
+      updateSearchResultsModel && updateSearchResultsModel({ active: true })
     })
-    results.onCompleting.add((result) => (this.model = search))
     this.model = search
-  }
-
-  componentDidUpdate() {
-    this.model.update(this.props)
   }
 
   render() {
     // StylesManager.applyTheme('bootstrap')
     // Survey.cssType = 'bootstrap'
 
-    return <Survey model={this.model} />;
+    if (this.props.active)
+      return <Survey model={this.model} />;
+    return null
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  searchResults: selectReporterSearchResults(state)
+  active: selectSearchModelActive(state)
 })
 
-const mapDispatchToProps = {
-  setSearchResults,
-  clearSearchResults
-}
+const mapDispatchToProps = ({
+  updateSearchModel,
+  updateSearchResultsModel
+})
+
 export default connect(mapStateToProps, mapDispatchToProps)(Search)
