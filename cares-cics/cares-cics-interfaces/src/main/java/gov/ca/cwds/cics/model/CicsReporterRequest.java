@@ -1,5 +1,7 @@
 package gov.ca.cwds.cics.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -8,7 +10,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * CWDS J Team
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CicsReporterRequest implements CicsRequest {
+  @JsonProperty("REPORTER-DATA")
   private ReporterData reporterData;
 
   public CicsReporterRequest() {
