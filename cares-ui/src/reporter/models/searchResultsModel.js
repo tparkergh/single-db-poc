@@ -6,8 +6,10 @@ export default class SearchResultsModel extends BaseModel {
   constructor (props) {
     super(SearchResultsJSON)
 
-	this.loadJsonRules()
-	this.onValidateQuestion.add(this.validate.bind(this))
+    this.completeText = "Create Reporter"
+    this.loadJsonRules()
+    this.onValidatePanel.add(this.validate.bind(this))
+    this.onValidateQuestion.add(this.setContinueText.bind(this))
   }
 
   update (props, data) {
@@ -34,6 +36,16 @@ export default class SearchResultsModel extends BaseModel {
         element.addError(new SurveyError("There are no matching existing reporters"))
       }
     }
+  }
+
+  setContinueText(sender, options) {
+    if(options.name === "reporter") {
+      if (options.question.isEmpty())
+        this.completeText = "Create Reporter"
+      else
+        this.completeText = "Continue"
+    }
+    this.render()
   }
 
   validationData() {

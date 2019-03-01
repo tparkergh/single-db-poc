@@ -1,7 +1,6 @@
 {
   "title": "New Incident Report",
   "checkErrorsMode": "onValueChanged",
-  "completeText": "Continue",
   "questionErrorLocation": "bottom",
   "elements": [
     {
@@ -12,7 +11,7 @@
           "type": "checkbox",
           "name": "reporter",
           "choices": [],
-          "name": "Is there an existing match to reporter?"
+          "title": "Is there an existing match to reporter?"
         }
       ]
     }
