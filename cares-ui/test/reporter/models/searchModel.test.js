@@ -74,8 +74,8 @@ describe('SearchModel', () => {
       })
       const model = new SearchModel()
       model.loadJsonRules().then(() => {
-        const rule = model.engine.find((rule) => rule.identifier === 'rule')
-        expect(rule).toEqual(rule)
+        const foundRule = model.engine.find((rule) => rule.identifier === 'rule')
+        expect(foundRule[0].definition).toEqual(rule)
         done()
       })
     })
