@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
 public class ReporterServiceImpl implements ReporterService {
   @Override
   public Reporter createReporter(Reporter reporter) {
-    return new Reporter();
+    return reporter;
   }
 }
