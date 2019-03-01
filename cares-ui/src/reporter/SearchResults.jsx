@@ -35,6 +35,10 @@ export class SearchResults extends Component {
     })
   }
 
+  componentDidMount() {
+    this.model.loadJsonRules()
+  }
+
   componentDidUpdate() {
     const { data } = this.props
     this.model.update(this.props, data)

@@ -1,18 +1,27 @@
 import SearchModel from '../../../src/reporter/models/searchModel'
-import { searchRoute } from '../../../src/routes'
+import {
+  searchRoute,
+  getBreRuleSetRoute
+} from '../../../src/routes'
 import { Survey } from "survey-react";
 import { mount } from 'enzyme'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
+const mockAxios = new MockAdapter(axios)
+
 describe('SearchModel', () => {
+  afterEach(() => {
+    mockAxios.reset()
+  })
+
   it('makes an api call to search on complete and sets search results', (done) => {
     const props = {
       setSearchResults: (data) => true
     }
-    const mockAxios = new MockAdapter(axios)
 
     mockAxios.onPost(searchRoute()).reply(200, {})
+    mockAxios.onGet(getBreRuleSetRoute('ReporterSearchScreenBusinessRules')).reply(200, { rules: [] })
     spyOn(props, 'setSearchResults').and.callFake((data) => {
       expect(mockAxios.history.post.length).toEqual(1)
       expect(props.setSearchResults).toHaveBeenCalledWith({})
@@ -21,12 +30,6 @@ describe('SearchModel', () => {
 
     const model = new SearchModel(props)
     model.doComplete()
-  })
-
-  it('loads json rules for search after rendering', () => {
-    const model = new SearchModel()
-    const survey = mount(<Survey model={model}/>)
-    expect(model.engine.empty()).toEqual(false)
   })
 
   describe('validateName', () => {
@@ -55,6 +58,26 @@ describe('SearchModel', () => {
       }
       model.validatePhoneNumber({}, options)
       expect(options.error).toEqual(undefined)
+    })
+  })
+
+  describe('loadJsonRules', () => {
+    it('loads the json rules from an api', (done) => {
+      const rule = {
+        "and": [1,2]
+      }
+      mockAxios.onGet(getBreRuleSetRoute('ReporterSearchScreenBusinessRules')).reply(200, {
+        rules: [{
+          name: 'rule',
+          logic: rule
+        }]
+      })
+      const model = new SearchModel()
+      model.loadJsonRules().then(() => {
+        const foundRule = model.engine.find((rule) => rule.identifier === 'rule')
+        expect(foundRule[0].definition).toEqual(rule)
+        done()
+      })
     })
   })
 })

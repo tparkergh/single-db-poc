@@ -1,5 +1,7 @@
 const caresApiRoute = (extension) => process.env.CARES_API_URL + extension
 
+const caresBreApiRoute = (extension) => process.env.CARES_BRE_API_URL + extension
+
 export const getAllReferralsRoute = () => caresApiRoute('/referrals')
 
 export const getReferralByIdRoute = (id) => caresApiRoute(`/referrals/${id}`)
@@ -21,3 +23,7 @@ export const searchRoute = () => caresApiRoute('/searches')
 // reporter routes
 
 export const createReporterRoute = () => caresApiRoute('/reporters')
+
+// business rules routes
+
+export const getBreRuleSetRoute = (ruleSet) => caresBreApiRoute(`/bre/defs/${ruleSet}`)

@@ -1,5 +1,10 @@
 import SearchJSON from "../jsonForms/search"
-import { searchRoute } from '../../routes'
+import {
+  searchRoute,
+  getBreRuleSetRoute
+} from '../../routes'
+
+import marked from 'marked'
 import BaseModel from "./baseModel.js"
 import axios from 'axios'
 
@@ -8,7 +13,6 @@ export default class SearchModel extends BaseModel {
   constructor(props) {
     super(SearchJSON)
 
-    this.onAfterRenderSurvey.add(this.loadJsonRules.bind(this))
     this.onValidatePanel.add(this.validateName.bind(this))
     this.onValidateQuestion.add(this.validatePhoneNumber.bind(this))
     this.onCompleting.add((result, options) => {
@@ -57,32 +61,17 @@ export default class SearchModel extends BaseModel {
   }
 
   loadJsonRules() {
-    // temporary as these rules will be loaded from the api later
-    const nameRule = {
-      identifier: 'search-first-name-last-name-rule',
-      definition: {
-        "if": [
-          { "and":
-            [{ "missing": "search.reporter.first_name" },
-              { "missing": "search.reporter.last_name" }]
-          },
-          "Last name or first name is required to search for a reporter.",
-          true
-        ]
-      }
-    }
-    const phoneNumberRule = {
-      identifier: 'phone-number-rule',
-      definition: {
-        "if": [
-          { "missing": "search.reporter.phone_number" },
-          "A phone number is required to search for a reporter.",
-          true
-        ]
-      }
-    }
-    this.engine.define(nameRule)
-    this.engine.define(phoneNumberRule)
+    return axios({
+      url: getBreRuleSetRoute('ReporterSearchScreenBusinessRules'),
+      method: 'get',
+    }).then((result) => {
+      result.data.rules.map((rule) =>
+        this.engine.define({
+          identifier: rule.name,
+          definition: rule.logic
+        })
+      )
+    })
   }
 
   buildSearchQuery({first_name, last_name, number}) {

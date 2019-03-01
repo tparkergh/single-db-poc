@@ -40,6 +40,10 @@ export class Search extends Component {
     this.model = search
   }
 
+  componentDidMount() {
+    this.model.loadJsonRules()
+  }
+
   render() {
     if (this.props.active)
     {

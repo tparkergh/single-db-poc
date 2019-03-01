@@ -4,9 +4,12 @@ import { searchRoute } from '../../../src/routes'
 import { mount } from 'enzyme'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import { createReporterRoute } from '../../../src/routes'
+import {
+  createReporterRoute,
+  getBreRuleSetRoute
+} from '../../../src/routes'
 
-export const mockAxios = new MockAdapter(axios)
+const mockAxios = new MockAdapter(axios)
 
 describe('SearchResultsModel', () => {
   it('loads the search results from the props when there is an update', () => {
@@ -16,12 +19,6 @@ describe('SearchResultsModel', () => {
     model.update(props)
 
     expect(model.loadResults).toHaveBeenCalledWith(props)
-  })
-
-  it('loads json rules for search after rendering', () => {
-    const model = new SearchResultsModel()
-    const survey = mount(<Survey model={model}/>)
-    expect(model.engine.empty()).toEqual(false)
   })
 
   describe('createReporter', () => {
@@ -56,6 +53,26 @@ describe('SearchResultsModel', () => {
       }
       model.validate({}, options)
       expect(options.error).toEqual(undefined)
+    })
+  })
+
+  describe('loadJsonRules', () => {
+    it('loads the json rules from an api', (done) => {
+      const rule = {
+        "and": [1,2]
+      }
+      mockAxios.onGet(getBreRuleSetRoute('ReporterCreateScreenBusinessRules')).reply(200, {
+        rules: [{
+          name: 'rule',
+          logic: rule
+        }]
+      })
+      const model = new SearchResultsModel()
+      model.loadJsonRules().then(() => {
+        const rule = model.engine.find((rule) => rule.identifier === 'rule')
+        expect(rule).toEqual(rule)
+        done()
+      })
     })
   })
 })
