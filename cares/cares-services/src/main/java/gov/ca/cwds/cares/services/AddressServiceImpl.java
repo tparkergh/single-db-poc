@@ -15,7 +15,7 @@ import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreRequestData;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
-import gov.ca.cwds.cares.common.exception.CicsUpdateException;
+import gov.ca.cwds.cares.common.exception.CicsException;
 import gov.ca.cwds.cares.geo.api.GeoService;
 import gov.ca.cwds.cares.geo.model.GeoAddress;
 import gov.ca.cwds.cares.interfaces.api.AddressService;
@@ -26,7 +26,7 @@ import gov.ca.cwds.cics.model.AddressData;
 import gov.ca.cwds.cics.model.CicsAddressRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
 import gov.ca.cwds.cics.model.DfhCommArea;
-import gov.ca.cwds.cics.restclient.CicsAddressUpdaterRestApiClient;
+import gov.ca.cwds.cics.restclient.CicsAddressRestApiClient;
 import gov.ca.cwds.rest.exception.IssueDetails;
 
 /**
@@ -47,8 +47,7 @@ public class AddressServiceImpl implements AddressService {
   private BusinessRuleService businessRuleService;
 
   @Autowired
-  @Qualifier("CicsAddressUpdaterRestApiClient")
-  private CicsAddressUpdaterRestApiClient cicsAddressUpdaterRestApiClient;
+  private CicsAddressRestApiClient cicsAddressRestApiClient;
 
   @Autowired
   SystemCodeService systemCodeService;
@@ -91,12 +90,12 @@ public class AddressServiceImpl implements AddressService {
   }
 
   private CicsResponse doCicsUpdateClientAddress(CicsAddressRequest cicsAddressRequest, LocalDateTime lastUpdateTimestamp) {
-    CicsResponse cicsAddressResponse = cicsAddressUpdaterRestApiClient.updateAddress(cicsAddressRequest, lastUpdateTimestamp);
+    CicsResponse cicsAddressResponse = cicsAddressRestApiClient.updateAddress(cicsAddressRequest, lastUpdateTimestamp);
     DfhCommArea dfhCommArea = cicsAddressResponse.getDfhCommArea();
     if (0 != dfhCommArea.getProgReturnCode()) {
       String message = String.format("Cannot update address. Error code %s. Message: %s%s ",
           dfhCommArea.getErrorMsgCode(), dfhCommArea.getErrorMsgPart1(), dfhCommArea.getErrorMsgPart2());
-      throw new CicsUpdateException(message);
+      throw new CicsException(message);
     }
     return cicsAddressResponse;
   }

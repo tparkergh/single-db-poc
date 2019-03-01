@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import gov.ca.cwds.cares.services.ReferralServiceImpl;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
-import gov.ca.cwds.cares.common.exception.CicsUpdateException;
+import gov.ca.cwds.cares.common.exception.CicsException;
 import gov.ca.cwds.rest.exception.IssueDetails;
 
 /**
@@ -22,9 +22,9 @@ public class CaresRestExceptionHandler {
 
   
   @ResponseBody
-  @ExceptionHandler(CicsUpdateException.class)
+  @ExceptionHandler(CicsException.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  String cicsUpdateHandler(CicsUpdateException ex) {
+  String cicsUpdateHandler(CicsException ex) {
     LOGGER.error(ex.getMessage(), ex);  
     return ex.getMessage();
   }

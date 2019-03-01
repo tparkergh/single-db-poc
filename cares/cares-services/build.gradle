@@ -29,9 +29,14 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
     implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
-    
-    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
-    
+    implementation 'com.google.guava:guava:' + guavaVersion
+    implementation 'org.apache.commons:commons-collections4:' + commonsCollectionsVersion
+    implementation 'javax.validation:validation-api:' + javaxValidationVersion
+
+    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion, {
+        transitive = false
+    }
+
     implementation 'org.mapstruct:mapstruct-jdk8:' + mapstructVersion
     compileOnly 'org.mapstruct:mapstruct-processor:' + mapstructVersion
 

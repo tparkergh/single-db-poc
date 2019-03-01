@@ -18,8 +18,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 /**
  * CWDS J Team
  */
-@Component("CicsAddressUpdaterRestApiClient")
-public class CicsAddressUpdaterRestApiClient {
+@Component
+public class CicsAddressRestApiClient {
   public static final String ADDRESS_PATH = "/addresses";
 
   @Value("${app.cics-service.base-url}")
@@ -29,7 +29,7 @@ public class CicsAddressUpdaterRestApiClient {
   @Qualifier("CicsRestApiHelper")
   private CicsRestApiHelper cicsRestApiHelper;
 
-  public CicsAddressUpdaterRestApiClient() {
+  public CicsAddressRestApiClient() {
     // Default no-argument constructor
   }
 

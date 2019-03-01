@@ -10,8 +10,12 @@ sourceCompatibility = 1.8
 dependencies {   
     implementation project(':cares-common')
     
-    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion
- 
+    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion, {
+        transitive = false
+    }
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
         
 }

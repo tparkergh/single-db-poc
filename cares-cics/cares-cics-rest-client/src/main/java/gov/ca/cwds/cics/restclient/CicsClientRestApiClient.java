@@ -19,9 +19,9 @@ import gov.ca.cwds.cics.model.CicsResponse;
 /**
  * CWDS J Team
  */
-@Component("CicsClientUpdaterRestApiClient")
+@Component
 @Lazy
-public final class CicsClientUpdaterRestApiClient {
+public final class CicsClientRestApiClient {
   public static final String CLIENT_PATH = "/clients";
 
   @Value("${app.cics-service.base-url}")
@@ -33,7 +33,7 @@ public final class CicsClientUpdaterRestApiClient {
   @Autowired
   private ObjectMapper jacksonObjectMapper;
 
-  public CicsClientUpdaterRestApiClient() {
+  public CicsClientRestApiClient() {
     // Default no-argument constructor
   }
 

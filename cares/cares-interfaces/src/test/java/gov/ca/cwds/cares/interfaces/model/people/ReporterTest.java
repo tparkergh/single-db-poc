@@ -17,7 +17,7 @@ public class ReporterTest {
     String identifier = "12345678ABC";
     String firstName = "first name";
     String lastName = "last name";
-    int primaryPhone = 1112223333;
+    Long primaryPhone = 1112223333L;
 
     Reporter reporter = new Reporter();
 

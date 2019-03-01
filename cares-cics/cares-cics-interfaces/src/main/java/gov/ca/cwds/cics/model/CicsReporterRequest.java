@@ -1,23 +1,21 @@
 package gov.ca.cwds.cics.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import gov.ca.cwds.cares.common.binding.SnakeUpperCaseStrategy;
 
 /**
  * CWDS J Team
  */
-@JsonNaming(SnakeUpperCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CicsReporterRequest implements CicsRequest {
+  @JsonProperty("REPORTER-DATA")
   private ReporterData reporterData;
 
   public CicsReporterRequest() {
-
   }
 
   public ReporterData getReporterData() {

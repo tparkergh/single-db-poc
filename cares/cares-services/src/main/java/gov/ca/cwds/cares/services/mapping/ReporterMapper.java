@@ -1,10 +1,16 @@
 package gov.ca.cwds.cares.services.mapping;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 import gov.ca.cwds.cics.model.ReporterData;
+import gov.ca.cwds.data.persistence.cms.CmsKeyIdGenerator;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
+
+
+import static gov.ca.cwds.cares.common.Constants.LOGGED_USER_STAFF_ID;
 
 /**
  * CWDS J Team
@@ -13,19 +19,13 @@ import gov.ca.cwds.cics.model.ReporterData;
 public interface ReporterMapper {
   ReporterMapper INSTANCE = Mappers.getMapper(ReporterMapper.class);
 
-  @Mapping(target = "txnHeaderStaffId", constant = "0WM")
-  @Mapping(target = "colltrClientRptrReltnshipType", constant = "0")
-  @Mapping(target = "communicationMethodType", constant = "0")
-  @Mapping(target = "countySpecificCode", constant = "99")
-  @Mapping(target = "messagePhoneExtensionNumber", constant = "0")
-  @Mapping(target = "messagePhoneNumber", constant = "0")
-  @Mapping(target = "primaryPhoneExtensionNumber", constant = "0")
-  @Mapping(target = "primaryPhoneNumber", constant = "0")
-  @Mapping(target = "zipNumber", constant = "0")
-  @Mapping(target = "zipSuffixNumber", constant = "0")
+  @Mapping(target = "txnHeaderStaffId", constant = LOGGED_USER_STAFF_ID)
+  @Mapping(target = "primaryPhoneExtensionNumber", source = "phoneExtension")
+  @Mapping(target = "primaryPhoneNumber", source = "phoneNumber")
+  ReporterData mapToReporterData(Reporter address);
 
-  ReporterData mapToReporterData(Reporter reporter);
-
-  Reporter mapToReporter(ReporterData reporterDate);
-
+  @AfterMapping
+  default void enrichReporterData(@MappingTarget ReporterData reporterData) {
+    reporterData.setIdentifier(CmsKeyIdGenerator.getNextValue(LOGGED_USER_STAFF_ID));
+  }
 }
