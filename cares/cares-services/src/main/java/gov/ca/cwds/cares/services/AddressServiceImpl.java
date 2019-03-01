@@ -15,7 +15,7 @@ import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreRequestData;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
-import gov.ca.cwds.cares.common.exception.CicsUpdateException;
+import gov.ca.cwds.cares.common.exception.CicsException;
 import gov.ca.cwds.cares.geo.api.GeoService;
 import gov.ca.cwds.cares.geo.model.GeoAddress;
 import gov.ca.cwds.cares.interfaces.api.AddressService;
@@ -95,7 +95,7 @@ public class AddressServiceImpl implements AddressService {
     if (0 != dfhCommArea.getProgReturnCode()) {
       String message = String.format("Cannot update address. Error code %s. Message: %s%s ",
           dfhCommArea.getErrorMsgCode(), dfhCommArea.getErrorMsgPart1(), dfhCommArea.getErrorMsgPart2());
-      throw new CicsUpdateException(message);
+      throw new CicsException(message);
     }
     return cicsAddressResponse;
   }

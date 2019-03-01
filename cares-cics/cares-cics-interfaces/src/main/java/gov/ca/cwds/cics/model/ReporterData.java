@@ -2,6 +2,10 @@ package gov.ca.cwds.cics.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import java.time.LocalDate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -30,6 +34,8 @@ public class ReporterData {
   @JsonProperty("FDBACK_DOC")
   private String feedbackDocument;
   @JsonProperty("FEEDBCK_DT")
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
   private LocalDate feedbackDate;
   @JsonProperty("FKLAW_ENFT")
   private String fkLawEnforcement;
