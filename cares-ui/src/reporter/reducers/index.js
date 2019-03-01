@@ -22,7 +22,7 @@ export default (state = {}, action) => {
         }
       }
     case CLEAR_SEARCH_RESULTS:
-      const { person, ...rest } = state.entities
+      const { person, ...rest } = state.entities || {}
       return {
         ...state,
         searchError: undefined,
