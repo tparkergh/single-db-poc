@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-//import javax.validation.constraints.NotNull;
-//import javax.validation.constraints.Pattern;
-//import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.collections4.map.PassiveExpiringMap;
 import org.apache.commons.lang3.StringUtils;
@@ -574,9 +574,9 @@ public class CmsKeyIdGenerator {
    */
   public static final class StringKey {
 
-//    @NotNull
-//    @Size(min = 3, max = 3)
-//    @Pattern(regexp = "[a-zA-Z0-9]+")
+    @NotNull
+    @Size(min = 3, max = 3)
+    @Pattern(regexp = "[a-zA-Z0-9]+")
     private String value;
 
     /**
