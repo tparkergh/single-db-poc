@@ -21,14 +21,21 @@ export class Search extends Component {
 
     const search = new SearchModel(this.props)
     const { updateSearchModel, updateSearchResultsModel } = this.props
-    search.onComplete.add((result) => {
-      updateSearchModel && updateSearchModel({
-        active: false,
-        data: this.model.data
-      })
-      updateSearchResultsModel && updateSearchResultsModel({ 
-        active: true 
-      })
+    search.onCompleting.add((result, options) => {
+      if(this.model.onCompleting.error) {
+        updateSearchModel && updateSearchModel({
+          active: true,
+          data: this.model.data
+        })
+      } else {
+        updateSearchModel && updateSearchModel({
+          active: false,
+          data: this.model.data
+        })
+        updateSearchResultsModel && updateSearchResultsModel({ 
+          active: true
+        })
+      }
     })
     this.model = search
   }

@@ -12,13 +12,17 @@ export default class SearchModel extends BaseModel {
     this.onValidatePanel.add(this.validateName.bind(this))
     this.onValidateQuestion.add(this.validatePhoneNumber.bind(this))
     this.onCompleting.add((result, options) => {
-      axios(searchRoute(), 'post', this.buildSearchQuery(result.data))
+      axios({
+        url: searchRoute(), 
+        method: 'post',
+        data: this.buildSearchQuery(result.data)})
       .then((result) => {
         props.setSearchResults && props.setSearchResults(result.data)
+        this.onCompleting.error = false
       })
       .catch((error) => {
         props.errorSearchResults && props.errorSearchResults(error)
-        options.allowComplete = false
+        this.onCompleting.error = true
       })
     })
   }

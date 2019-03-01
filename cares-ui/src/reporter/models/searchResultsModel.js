@@ -21,6 +21,7 @@ export default class SearchResultsModel extends BaseModel {
     const element = panel.elements[0]
     if (element) {
       element.choices = []
+      element.errors = []
       if (searchResults && searchResults.length > 0) {
         searchResults.map((result, index) => {
           const { first_name: firstName, last_name: lastName } = result

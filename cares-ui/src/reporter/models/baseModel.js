@@ -12,6 +12,7 @@ export default class BaseModel extends Model {
         options.text = "Required"
       }
     })
+    //this.showCompletedPage=false
     this.onCompleting.add((result, options) => {
       options.allowComplete=false
     })
