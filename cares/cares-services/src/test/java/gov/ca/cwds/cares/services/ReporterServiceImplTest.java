@@ -32,7 +32,7 @@ public class ReporterServiceImplTest {
   private ReporterServiceImpl reporterService;
 
   @Test
-  public void testCreateReporter_Success() throws Exception {
+  public void shouldSuccess() throws Exception {
     Reporter reporter = createReporter();
 
     when(businessRuleExecutor.executeBusinessRules(

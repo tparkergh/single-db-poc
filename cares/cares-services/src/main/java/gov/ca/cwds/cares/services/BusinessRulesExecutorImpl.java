@@ -40,7 +40,7 @@ public class BusinessRulesExecutorImpl implements BusinessRulesExecutor<BreRespo
     try {
       breResponse = businessRuleService.executeBusinessRules(breRequest);
     } catch (Exception e) {
-      throw new BreException("BRE service exception: " + e.getMessage());
+      throw new BreException("BRE service exception", e);
     }
     Set<IssueDetails> issues = breResponse.getIssues();
 

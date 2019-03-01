@@ -44,7 +44,7 @@ public class BusinessRulesExecutorImplTest {
   }
 
   @Test
-  public void when_executeServiceCall_then_Success() {
+  public void shouldSuccess() {
     BreResponse breResponse = new BreResponse();
 
     when(businessRuleService.executeBusinessRules(argThat(new ArgumentMatcher<BreRequest>() {
@@ -101,7 +101,7 @@ public class BusinessRulesExecutorImplTest {
   }
 
   @Test(expected = BreException.class)
-  public void when_executeServiceCall_then_Issues() {
+  public void shouldThrowBreExceptionWhenHasValidationIssuesInBreResponse() {
     BreResponse breResponse = new BreResponse();
     Set<IssueDetails> issues = new HashSet<>();
     issues.add(new IssueDetails());
@@ -115,7 +115,7 @@ public class BusinessRulesExecutorImplTest {
   }
 
   @Test(expected = BreException.class)
-  public void when_executeServiceCall_then_Exception() {
+  public void shouldThrowBreExceptionWhenHasExceptionFromBreServiceCall() {
     when(businessRuleService.executeBusinessRules(any())).thenThrow(new RuntimeException());
 
     ReporterData reporterData = createReporterData();

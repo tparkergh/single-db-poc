@@ -29,7 +29,7 @@ public class CicsReporterServiceCallExecutorTest {
   private CicsReporterServiceCallExecutor cicsReporterServiceCallExecutor;
 
   @Test
-  public void when_executeServiceCall_then_Success() {
+  public void shouldSuccess() {
     CicsReporterRequest cicsReporterRequest = new CicsReporterRequest();
 
     CicsResponse cicsResponse = getSuccessCicsResponse();
@@ -47,7 +47,7 @@ public class CicsReporterServiceCallExecutorTest {
   }
 
   @Test(expected = CicsException.class)
-  public void when_executeServiceCall_then_Exception() {
+  public void shouldThrowCicsExceptionWhenHasExceptionFromCicsServiceCall() {
     CicsResponse cicsResponse = getExceptionCicsResponse();
 
     when(cicsReporterRestApiClient.createReporter(any())).thenReturn(cicsResponse);

@@ -46,7 +46,7 @@ public class CicsReporterRestApiClient {
           request,
           CicsResponse.class);
     } catch (Exception e) {
-      throw new CicsException("CICS service exception: " + e.getMessage());
+      throw new CicsException("CICS service exception", e);
     }
 
     return response;
