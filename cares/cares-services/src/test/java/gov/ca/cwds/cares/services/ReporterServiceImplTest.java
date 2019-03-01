@@ -104,7 +104,7 @@ public class ReporterServiceImplTest {
     Reporter reporter = new Reporter();
     reporter.setFirstName("test first name");
     reporter.setLastName("test last name");
-    reporter.setPhoneNumber(-1);
+    reporter.setPhoneNumber(-1L);
     reporter.setPhoneExtension(-2);
     reporter.setRelationToChild("test relation to child");
     return reporter;
