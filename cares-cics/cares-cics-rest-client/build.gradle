@@ -15,7 +15,5 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:' + apacheHttpclientVersion
     implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
     
-    testImplementation 'junit:junit:' + junitVersion
-    testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
-    testImplementation 'commons-io:commons-io:' + commonsIoVersion
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
 }

@@ -1,6 +1,7 @@
 package gov.ca.cwds.cics.restclient;
 
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
+import gov.ca.cwds.cares.common.exception.CicsException;
 import gov.ca.cwds.cics.CicsRestApiHelper;
 import gov.ca.cwds.cics.model.CicsReporterRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
@@ -37,13 +38,21 @@ public class CicsReporterRestApiClient {
         .path(REPORTER_PATH)
         .build().toUri();
 
-    CicsResponse response = cicsRestApiHelper.exchange(
-        requestUri,
-        HttpMethod.POST,
-        request,
-        CicsResponse.class);
+    CicsResponse response;
+    try {
+      response = cicsRestApiHelper.exchange(
+          requestUri,
+          HttpMethod.POST,
+          request,
+          CicsResponse.class);
+    } catch (Exception e) {
+      throw new CicsException("CICS service exception: " + e.getMessage());
+    }
 
     return response;
   }
 
+  void setBaseUrl(String baseUrl) {
+    this.baseUrl = baseUrl;
+  }
 }
