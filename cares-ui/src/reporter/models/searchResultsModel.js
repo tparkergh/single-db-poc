@@ -12,7 +12,6 @@ export default class SearchResultsModel extends BaseModel {
     super(SearchResultsJSON)
 
     this.completeText = "Create Reporter"
-    this.loadJsonRules()
     this.onValidatePanel.add(this.validate.bind(this))
     this.onValidateQuestion.add(this.setContinueText.bind(this))
     this.onCompleting.add(this.createReporter.bind(this))

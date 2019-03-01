@@ -21,12 +21,6 @@ describe('SearchResultsModel', () => {
     expect(model.loadResults).toHaveBeenCalledWith(props)
   })
 
-  xit('loads json rules for search after rendering', () => {
-    const model = new SearchResultsModel()
-    const survey = mount(<Survey model={model}/>)
-    expect(model.engine.empty()).toEqual(false)
-  })
-
   describe('createReporter', () => {
     it('creates a reporter', () => {
       mockAxios.onPost(createReporterRoute()).reply(200)

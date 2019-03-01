@@ -7,7 +7,8 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import {
   searchRoute,
-  getBreRuleSetRoute
+  getBreRuleSetRoute,
+  createReporterRoute
 } from '../../src/routes'
 
 export const mockAxios = new MockAdapter(axios)
@@ -27,6 +28,7 @@ describe('SearchResults', () => {
   })
 
   it('on completing the search results it sets the search model as active', (done) => {
+    mockAxios.onPost(createReporterRoute()).reply(200)
     const updateSearchModel = jasmine.createSpy('updateSearchModel')
     const search = mount(<SearchResults
       active={true}
@@ -48,6 +50,7 @@ describe('SearchResults', () => {
   })
 
   it('on completing the search results it sets the search results model as inactive with data', (done) => {
+    mockAxios.onPost(createReporterRoute()).reply(200)
     const updateSearchResultsModel = jasmine.createSpy('updateSearchResultsModel')
     const search = mount(<SearchResults
       active={true}
@@ -69,6 +72,7 @@ describe('SearchResults', () => {
   })
 
   it('on completing the search results it clears the search results', (done) => {
+    mockAxios.onPost(createReporterRoute()).reply(200)
     const clearSearchResults = jasmine.createSpy('clearSearchResults')
     const search = mount(<SearchResults
       active={true}
