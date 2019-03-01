@@ -10,7 +10,7 @@ import org.junit.Test;
 public class BusinessRuleSetDocumentationTest {
 
   @Test
-  public void shouldCreateObjectUsingEmptyContructor() throws Exception {
+  public void shouldCreateObjectUsingDefaultContructor() throws Exception {
     BusinessRuleSetDocumentation brd = new BusinessRuleSetDocumentation();
     assertThat("BusinessRuleDocumentation is not null", brd, notNullValue());
   }
