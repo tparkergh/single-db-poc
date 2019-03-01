@@ -1,9 +1,7 @@
 import SearchJSON from "../jsonForms/search"
 import { searchRoute } from '../../routes'
-import axios from 'axios'
-
-import marked from 'marked'
 import BaseModel from "./baseModel.js"
+import axios from 'axios'
 
 export default class SearchModel extends BaseModel {
 
@@ -15,11 +13,16 @@ export default class SearchModel extends BaseModel {
     this.onValidateQuestion.add(this.validatePhoneNumber.bind(this))
     this.onCompleting.add((result, options) => {
       axios({
-        url: searchRoute(),
+        url: searchRoute(), 
         method: 'post',
-        data: this.buildSearchQuery(result.data)
-      }).then((result) => {
+        data: this.buildSearchQuery(result.data)})
+      .then((result) => {
         props.setSearchResults && props.setSearchResults(result.data)
+        this.onCompleting.error = false
+      })
+      .catch((error) => {
+        props.errorSearchResults && props.errorSearchResults(error)
+        this.onCompleting.error = true
       })
     })
   }

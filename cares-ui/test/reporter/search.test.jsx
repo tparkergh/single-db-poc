@@ -15,8 +15,14 @@ describe('Search', () => {
   it('renders a search model when it is active', () => {
     const search = shallow(<Search active={true} />)
     const survey = search.find('Survey')
+    expect(survey.length).toEqual(1)
     const searchModel = new SearchModel(search.props())
     expect(survey.props().model.toJSON()).toEqual(searchModel.toJSON())
+  })
+
+  it('renders a search with error', () => {
+    const search = shallow(<Search active={true} searchError={'error here'}/>)
+    expect(search.find('Alert').length).toEqual(1)
   })
 
   it('renders nothing when the search model is not active', () => {
