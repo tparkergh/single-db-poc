@@ -55,19 +55,19 @@ public class Reporter implements Serializable {
     this.lastName = lastName;
   }
 
-  public long getPhoneNumber() {
+  public Long getPhoneNumber() {
     return phoneNumber;
   }
 
-  public void setPhoneNumber(long phoneNumber) {
+  public void setPhoneNumber(Long phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
 
-  public int getPhoneExtension() {
+  public Integer getPhoneExtension() {
     return phoneExtension;
   }
 
-  public void setPhoneExtension(int phoneExtension) {
+  public void setPhoneExtension(Integer phoneExtension) {
     this.phoneExtension = phoneExtension;
   }
 
