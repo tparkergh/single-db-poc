@@ -1,6 +1,10 @@
 import SearchResultsJSON from "../jsonForms/searchResults"
 import BaseModel from './baseModel'
 import { ItemValue, SurveyError } from "survey-react";
+import axios from 'axios'
+import {
+  createReporterRoute
+} from '../../routes'
 
 export default class SearchResultsModel extends BaseModel {
   constructor (props) {
@@ -10,6 +14,34 @@ export default class SearchResultsModel extends BaseModel {
     this.loadJsonRules()
     this.onValidatePanel.add(this.validate.bind(this))
     this.onValidateQuestion.add(this.setContinueText.bind(this))
+    this.onCompleting.add(this.createReporter.bind(this))
+  }
+
+  createReporter (result, options) {
+    return axios({
+      url: createReporterRoute(),
+      method: 'post',
+      data: this.buildReporter(result.data)})
+    .then((result) => {
+      this.onCompleting.error = false
+    })
+    .catch((error) => {
+      this.onCompleting.error = true
+    })
+  }
+
+  buildReporter ({
+    first_name,
+    last_name,
+    phone_number,
+    relationship
+  }) {
+    return {
+      first_name,
+      last_name,
+      phone_number: parseInt(phone_number),
+      relation_to_child: relationship
+    }
   }
 
   update (props, data) {

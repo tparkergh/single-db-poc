@@ -17,3 +17,7 @@ export const putAddressRoute = (address_id) => caresApiRoute(`/addresses/${addre
 // search routes
 
 export const searchRoute = () => caresApiRoute('/searches')
+
+// reporter routes
+
+export const createReporterRoute = () => caresApiRoute('/reporters')

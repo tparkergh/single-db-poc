@@ -2,6 +2,11 @@ import SearchResultsModel from '../../../src/reporter/models/searchResultsModel'
 import { Survey } from "survey-react";
 import { searchRoute } from '../../../src/routes'
 import { mount } from 'enzyme'
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+import { createReporterRoute } from '../../../src/routes'
+
+export const mockAxios = new MockAdapter(axios)
 
 describe('SearchResultsModel', () => {
   it('loads the search results from the props when there is an update', () => {
@@ -17,6 +22,27 @@ describe('SearchResultsModel', () => {
     const model = new SearchResultsModel()
     const survey = mount(<Survey model={model}/>)
     expect(model.engine.empty()).toEqual(false)
+  })
+
+  describe('createReporter', () => {
+    it('creates a reporter', () => {
+      mockAxios.onPost(createReporterRoute()).reply(200)
+      const model = new SearchResultsModel()
+      const props = { searchResults: [] }
+      const result = {
+        data: {
+          first_name: 'first',
+          last_name: 'last',
+          phone_number: '123456789',
+          relationship_to_child: 'reporter'
+        }
+      }
+      model.createReporter(result)
+        .then(() => {
+          expect(mockAxios.history.post.length).toEqual(1)
+          done()
+        })
+    })
   })
 
   describe('validate', () => {
