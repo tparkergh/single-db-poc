@@ -6,6 +6,8 @@ import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 import gov.ca.cwds.cics.model.CicsReporterRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
 import gov.ca.cwds.cics.model.ReporterData;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
@@ -33,7 +35,8 @@ public class ReporterServiceImplTest {
 
   @Test
   public void shouldSuccess() throws Exception {
-    Reporter reporter = createReporter();
+    Reporter request = createReporter();
+    List<String> generatedIdBag = new ArrayList<>();
 
     when(businessRuleExecutor.executeBusinessRules(
         argThat(new ArgumentMatcher<String>() {
@@ -47,6 +50,7 @@ public class ReporterServiceImplTest {
           @Override
           public boolean matches(ReporterData reporterData) {
             assertReporterData(reporterData);
+            generatedIdBag.add(reporterData.getIdentifier());
             return true;
           }
         })
@@ -61,7 +65,15 @@ public class ReporterServiceImplTest {
         }
       }))).thenReturn(new CicsResponse());
 
-    assertSame(reporter, reporterService.createReporter(reporter));
+    Reporter response = reporterService.createReporter(request);
+
+    assertEquals(generatedIdBag.get(0), response.getIdentifier());
+    assertEquals(request.getFirstName(), response.getFirstName());
+    assertEquals(request.getLastName(), response.getLastName());
+    assertEquals(request.getLastName(), response.getLastName());
+    assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
+    assertEquals(request.getPhoneExtension(), response.getPhoneExtension());
+    assertEquals(request.getRelationToChild(), response.getRelationToChild());
     verify(businessRuleExecutor).executeBusinessRules(any(), any());
     verify(cicsServiceCallExecutor).executeServiceCall(any());
   }

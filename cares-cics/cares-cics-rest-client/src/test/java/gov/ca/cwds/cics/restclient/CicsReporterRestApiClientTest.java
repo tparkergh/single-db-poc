@@ -36,7 +36,7 @@ public class CicsReporterRestApiClientTest {
   }
 
   @Test
-  public void when_createReporter_then_Success() {
+  public void shouldSuccess() {
     CicsReporterRequest request = new CicsReporterRequest();
 
     CicsResponse response = new CicsResponse();
@@ -44,7 +44,7 @@ public class CicsReporterRestApiClientTest {
         argThat(new ArgumentMatcher<URI>() {
           @Override
           public boolean matches(URI uri) {
-            assertEquals("http://test-BaseUrl/reporters", uri.toString());
+            assertEquals("http://test-BaseUrl/reporters/", uri.toString());
             return true;
           }
         }),
@@ -58,7 +58,7 @@ public class CicsReporterRestApiClientTest {
   }
 
   @Test(expected = CicsException.class)
-  public void when_createReporter_then_Exception() {
+  public void shouldThrowExceptionWhenHasNoResponseFromCicsService() {
     when(cicsRestApiHelper.exchange(any(), any(), any(), any()));
 
     cicsReporterRestApiClient.createReporter(new CicsReporterRequest());

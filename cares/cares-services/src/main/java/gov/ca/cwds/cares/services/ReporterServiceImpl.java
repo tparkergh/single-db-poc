@@ -31,6 +31,8 @@ public class ReporterServiceImpl implements ReporterService {
     CicsReporterRequest cicsReporterRequest = new CicsReporterRequest();
     cicsReporterRequest.setReporterData(reporterData);
     cicsServiceCallExecutor.executeServiceCall(cicsReporterRequest);
+
+    reporter.setIdentifier(reporterData.getIdentifier());
     return reporter;
   }
 }
