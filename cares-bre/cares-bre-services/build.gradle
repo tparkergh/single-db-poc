@@ -22,5 +22,8 @@ dependencies {
     implementation 'gov.ca.cwds.api:legacy-data-access-services:' + apiCoreVersion, {
         exclude group: 'com.ibm'
         exclude group: 'io.dropwizard'
+
+   testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
+
     }    
 }
