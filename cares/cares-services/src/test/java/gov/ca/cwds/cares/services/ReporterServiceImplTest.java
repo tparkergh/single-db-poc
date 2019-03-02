@@ -42,7 +42,7 @@ public class ReporterServiceImplTest {
         argThat(new ArgumentMatcher<String>() {
           @Override
           public boolean matches(String ruleName) {
-            assertEquals("ReporterCreateScreenBusinessRules", ruleName);
+            assertEquals("ReporterBusinessRules", ruleName);
             return true;
           }
         }),

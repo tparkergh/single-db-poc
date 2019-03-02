@@ -26,7 +26,7 @@ public class ReporterServiceImpl implements ReporterService {
   public Reporter createReporter(Reporter reporter) {
     ReporterData reporterData = ReporterMapper.INSTANCE.mapToReporterData(reporter);
 
-    businessRuleExecutor.executeBusinessRules("ReporterCreateScreenBusinessRules", reporterData);
+    businessRuleExecutor.executeBusinessRules("ReporterBusinessRules", reporterData);
 
     CicsReporterRequest cicsReporterRequest = new CicsReporterRequest();
     cicsReporterRequest.setReporterData(reporterData);
