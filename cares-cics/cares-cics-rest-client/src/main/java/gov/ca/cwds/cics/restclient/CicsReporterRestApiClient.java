@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 @Component
 public class CicsReporterRestApiClient {
-  public static final String REPORTER_PATH = "/reporters";
+  public static final String REPORTER_PATH = "/reporters/";
 
   @Value("${app.cics-service.base-url}")
   private String baseUrl;
