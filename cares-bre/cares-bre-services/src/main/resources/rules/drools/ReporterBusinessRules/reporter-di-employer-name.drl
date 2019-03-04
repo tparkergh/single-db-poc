@@ -32,13 +32,13 @@ rule "reporter-di-employer-name"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-  	reporterData: ReporterData(String.valueOf(mandatedReporterInd) == "Y"  && StringUtils.isEmpty(fklaw_enft) && StringUtils.isEmpty(employerName))
+  	reporterData: ReporterData(String.valueOf(mandatedReporterIndicator) == "Y"  && StringUtils.isEmpty(fkLawEnforcement) && StringUtils.isEmpty(employerName))
   then
     IssueDetails details = new IssueDetails();
     details.setUserMessage(rule.getMetaData().get("doc_description") + " : Reporter: " + reporterData.identifier);
     details.setCode(drools.getRule().getName());
     details.setType(IssueType.CONSTRAINT_VALIDATION);
     details.setProperty("reporterData.employerName");
-    details.setInvalidValue(reporterData.fkreferl_t);
+    details.setInvalidValue(reporterData.fkLawEnforcement);
     validationDetailsList.add(details);
 end
