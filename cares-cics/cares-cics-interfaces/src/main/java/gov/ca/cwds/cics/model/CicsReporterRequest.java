@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CicsReporterRequest implements CicsRequest {
-  @JsonProperty("REPORTER-DATA")
+  @JsonProperty("REPORTER_DATA")
   private ReporterData reporterData;
 
   public CicsReporterRequest() {
