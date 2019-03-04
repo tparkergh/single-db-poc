@@ -11,6 +11,9 @@ import org.mapstruct.factory.Mappers;
 
 
 import static gov.ca.cwds.cares.common.Constants.LOGGED_USER_STAFF_ID;
+import static gov.ca.cwds.cares.common.Constants.NOT;
+import static gov.ca.cwds.cares.common.Constants.ZERO;
+import static gov.ca.cwds.cares.common.Constants.STATE_OF_CALIFORNIA;
 
 /**
  * CWDS J Team
@@ -22,6 +25,13 @@ public interface ReporterMapper {
   @Mapping(target = "txnHeaderStaffId", constant = LOGGED_USER_STAFF_ID)
   @Mapping(target = "primaryPhoneExtensionNumber", source = "phoneExtension")
   @Mapping(target = "primaryPhoneNumber", source = "phoneNumber")
+  @Mapping(target = "communicationMethod", constant = ZERO)
+  @Mapping(target = "collateralClientReporterRelationship", constant = ZERO)
+  @Mapping(target = "confidentialWaiverIndicator", constant = NOT)
+  @Mapping(target = "countySpecificCode", constant = STATE_OF_CALIFORNIA)
+  @Mapping(target = "feedbackRequiredIndicator", constant = NOT)
+  @Mapping(target = "mandatedReporterIndicator", constant = NOT)
+  @Mapping(target = "state", constant = ZERO)
   ReporterData mapToReporterData(Reporter address);
 
   @AfterMapping

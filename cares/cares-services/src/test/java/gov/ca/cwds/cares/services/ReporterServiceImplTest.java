@@ -1,7 +1,6 @@
 package gov.ca.cwds.cares.services;
 
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
-import gov.ca.cwds.cares.common.Constants;
 import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 import gov.ca.cwds.cics.model.CicsReporterRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
@@ -82,22 +81,23 @@ public class ReporterServiceImplTest {
     assertNotNull(reporterData);
 
     assertNotNull(reporterData.getIdentifier());
-    assertEquals(Constants.LOGGED_USER_STAFF_ID, reporterData.getTxnHeaderStaffId());
+    assertEquals("0WM", reporterData.getTxnHeaderStaffId());
     assertEquals("test first name", reporterData.getFirstName());
     assertEquals("test last name", reporterData.getLastName());
     assertEquals(new Long(-1L), reporterData.getPrimaryPhoneNumber());
     assertEquals(new Integer(-2), reporterData.getPrimaryPhoneExtensionNumber());
-    assertNull(reporterData.getCommunicationMethod());
-    assertNull(reporterData.getConfidentialWaiverIndicator());
-    assertNull(reporterData.getCountySpecificCode());
-    assertNull(reporterData.getCollateralClientReporterRelationship());
-    assertNull(reporterData.getFeedbackRequiredIndicator());
+    assertEquals(new Integer(0), reporterData.getCommunicationMethod());
+    assertEquals(new Integer(0), reporterData.getCollateralClientReporterRelationship());
+    assertEquals("N", reporterData.getConfidentialWaiverIndicator());
+    assertEquals("99", reporterData.getCountySpecificCode());
+    assertEquals("N", reporterData.getFeedbackRequiredIndicator());
+    assertEquals("N", reporterData.getMandatedReporterIndicator());
+    assertEquals(new Integer(0), reporterData.getState());
     assertNull(reporterData.getFeedbackDocument());
     assertNull(reporterData.getFeedbackDate());
     assertNull(reporterData.getFkLawEnforcement());
     assertNull(reporterData.getFkReferral());
     assertNull(reporterData.getMiddleInitialName());
-    assertNull(reporterData.getMandatedReporterIndicator());
     assertNull(reporterData.getMessagePhoneExtensionNumber());
     assertNull(reporterData.getMessagePhoneNumber());
     assertNull(reporterData.getNamePrefixDescription());
@@ -107,7 +107,6 @@ public class ReporterServiceImplTest {
     assertNull(reporterData.getStreetName());
     assertNull(reporterData.getStreetNumber());
     assertNull(reporterData.getZipNumber());
-    assertNull(reporterData.getState());
     assertNull(reporterData.getSuffixTitleDescription());
     assertNull(reporterData.getZipSuffixNumber());
   }
