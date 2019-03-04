@@ -32,14 +32,14 @@ rule "reporter-di-fkreferl_t"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-  	reporterData: ReporterData(!StringUtils.isEmpty(fkreferl_t) && String.valueOf(fkreferl_t).length != 10)
+  	reporterData: ReporterData(!StringUtils.isEmpty(fkReferral) && String.valueOf(fkReferral).length != 10)
   then
     IssueDetails details = new IssueDetails();
     details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + reporterData.identifier);
     details.setCode(drools.getRule().getName());
     details.setType(IssueType.CONSTRAINT_VALIDATION);
-    details.setProperty("reporterData.fkreferl_t");
-    details.setInvalidValue(reporterData.fkreferl_t);
+    details.setProperty("reporterData.fkReferral");
+    details.setInvalidValue(reporterData.fkReferral);
     validationDetailsList.add(details);
 
 end
