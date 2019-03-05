@@ -111,6 +111,7 @@ export default class SearchResultsModel extends BaseModel {
 }
 
   loadJsonRules() {
+    const { createReporterError } = this.props
     return axios({
       url: getBreRuleSetRoute('ReporterCreateScreenBusinessRules'),
       method: 'get',
@@ -121,6 +122,8 @@ export default class SearchResultsModel extends BaseModel {
           definition: rule.logic
         })
       )
+    }).catch((error) => {
+      createReporterError && createReporterError(error)
     })
   }
 }
