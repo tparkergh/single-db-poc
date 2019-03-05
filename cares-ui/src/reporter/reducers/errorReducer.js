@@ -1,6 +1,6 @@
 export const errorReducer = (state = {}, action) => {
   const { type, payload } = action;
-  const matches = /(.*)_(REQUEST|ERROR)/.exec(type);
+  const matches = /(.*)_(REQUEST|SUCCESS|ERROR)/.exec(type);
 
   // not a *_REQUEST / *_ERROR actions, so we ignore them
   if (!matches) return state;

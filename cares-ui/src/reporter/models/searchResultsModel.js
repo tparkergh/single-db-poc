@@ -15,6 +15,8 @@ export default class SearchResultsModel extends BaseModel {
     this.onValidatePanel.add(this.validate.bind(this))
     this.onValidateQuestion.add(this.setContinueText.bind(this))
     this.onCompleting.add(this.createReporter.bind(this))
+
+    this.props = props
   }
 
   createReporter (result, options) {
@@ -23,10 +25,15 @@ export default class SearchResultsModel extends BaseModel {
       method: 'post',
       data: this.buildReporter(result.data)})
     .then((result) => {
-      this.onCompleting.error = false
+      this.props.updateSearchResultsModel({
+        active: false,
+        data: this.data
+      })
+      this.props.updateSearchModel({ active: true })
+      this.props.createReporterSuccess()
     })
     .catch((error) => {
-      this.onCompleting.error = true
+      this.props.createReporterError(error)
     })
   }
 

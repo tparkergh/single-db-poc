@@ -29,12 +29,12 @@ export class Search extends Component {
   render() {
     if (this.props.active)
     {
-      const errorMsg = this.props.searchError
+      const errorMsg = this.props.error
       return (
         <Fragment>
           {errorMsg && 
             <Alert className="errorMessage-customizable" color="danger">
-              {errorMsg.user_message ? errorMsg.user_message : errorMsg}
+              {errorMsg}
             </Alert>
           }
           <Survey model={this.model} />
@@ -46,7 +46,7 @@ export class Search extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   active: selectSearchModelActive(state),
-  searchError: state.errors.SEARCH_RESULTS
+  error: state.errors.SEARCH_RESULTS
 })
 
 const mapDispatchToProps = ({
