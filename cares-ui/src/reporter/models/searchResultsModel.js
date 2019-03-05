@@ -20,27 +20,30 @@ export default class SearchResultsModel extends BaseModel {
   }
 
   createReporter (result, options) {
-    const {
-      updateSearchModel,
-      updateSearchResultsModel,
-      createReporterSuccess,
-      createReporterError
-    } = this.props
-    return axios({
-      url: createReporterRoute(),
-      method: 'post',
-      data: this.buildReporter(result.data)})
-    .then((result) => {
-      updateSearchResultsModel && updateSearchResultsModel({
-        active: false,
-        data: this.data
+    if (result.getQuestionByName('reporter').isEmpty()) {
+      const {
+        updateSearchModel,
+        updateSearchResultsModel,
+        createReporterSuccess,
+        createReporterError
+      } = this.props
+      return axios({
+        url: createReporterRoute(),
+        method: 'post',
+        data: this.buildReporter(result.data)
       })
-      updateSearchModel && updateSearchModel({ active: true })
-      createReporterSuccess && createReporterSuccess()
-    })
-    .catch((error) => {
-      createReporterError && createReporterError(error)
-    })
+        .then((result) => {
+          updateSearchResultsModel && updateSearchResultsModel({
+            active: false,
+            data: this.data
+          })
+          updateSearchModel && updateSearchModel({ active: true })
+          createReporterSuccess && createReporterSuccess()
+        })
+        .catch((error) => {
+          createReporterError && createReporterError(error)
+        })
+    }
   }
 
   buildReporter ({
