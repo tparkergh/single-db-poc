@@ -73,6 +73,7 @@ export default class SearchModel extends BaseModel {
   }
 
   loadJsonRules() {
+    const { errorSearchResults } = this.props
     return axios({
       url: getBreRuleSetRoute('ReporterSearchScreenBusinessRules'),
       method: 'get',
@@ -83,6 +84,8 @@ export default class SearchModel extends BaseModel {
           definition: rule.logic
         })
       )
+    }).catch((error) => {
+      errorSearchResults && errorSearchResults(error)
     })
   }
 
