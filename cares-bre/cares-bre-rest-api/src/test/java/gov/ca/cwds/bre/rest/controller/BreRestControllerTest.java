@@ -9,7 +9,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
@@ -21,12 +23,16 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.bre.interfaces.api.BusinessRuleService;
+import gov.ca.cwds.bre.interfaces.model.BreResponse;
+import gov.ca.cwds.bre.interfaces.model.BreResponseData;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDefinition;
 import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 import gov.ca.cwds.bre.interfaces.model.RuleDefinition;
 import gov.ca.cwds.bre.interfaces.model.RuleDocumentation;
+import gov.ca.cwds.rest.exception.IssueDetails;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BreRestControllerTest {
@@ -105,7 +111,7 @@ public class BreRestControllerTest {
     setDefinition.setRules(rules);
     String json = MAPPER.writeValueAsString(setDefinition);
 
-    when(breRestController.getBusinessRuleDefinition(any())).thenReturn(setDefinition);
+    when(businessRuleService.getBusinessRuleSetDefinition(any())).thenReturn(setDefinition);
 
     mockMvc.perform(get("/bre/defs/" + businessRuleSetName).accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk()).andExpect(content().json(json));
@@ -113,9 +119,31 @@ public class BreRestControllerTest {
 
   @Test
   public void should_call_executeBusinessRules() throws Exception {
+    BreResponse response = new BreResponse();
+    String businessRuleSetName = "ReporterSearchScreenBusinessRules";
+    Long executionTime = 1010L;
+    Set<IssueDetails> issueDetails = new HashSet<>();
+    IssueDetails issue = new IssueDetails();
+    issue.setUserMessage("test user message");
+    issueDetails.add(issue);
+    List<BreResponseData> responseData = new ArrayList<>();
+    BreResponseData rs = new BreResponseData();
+    rs.setDataObjectClassName("ReporterData");
+    String json = "{ \"f1\" : \"v1\" } ";
+    JsonNode jsonNode = MAPPER.readTree(json);
+    rs.setDataObject(jsonNode);
+    responseData.add(rs);
+
+    response.setBusinessRuleSetName(businessRuleSetName);
+    response.setDataObjects(responseData);
+    response.setExecutionTimeMillis(executionTime);
+
+    when(businessRuleService.executeBusinessRules(any())).thenReturn(response);
+
     String request = IOUtils.toString(
         getClass().getResource("/fixtures/rules/ReporterBusinessRulesRequest.json"),
         StandardCharsets.UTF_8);
+
     mockMvc
         .perform(post("/bre/exec").content(request).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
