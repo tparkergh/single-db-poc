@@ -3,8 +3,6 @@ import {
   searchRoute,
   getBreRuleSetRoute
 } from '../../routes'
-
-import marked from 'marked'
 import BaseModel from "./baseModel.js"
 import axios from 'axios'
 
@@ -15,18 +13,23 @@ export default class SearchModel extends BaseModel {
 
     this.onValidatePanel.add(this.validateName.bind(this))
     this.onValidateQuestion.add(this.validatePhoneNumber.bind(this))
-    this.onCompleting.add((result, options) => {
+    this.onCompleting.add((result, options) => {      
       axios({
         url: searchRoute(), 
         method: 'post',
         data: this.buildSearchQuery(result.data)})
       .then((result) => {
-        props.setSearchResults && props.setSearchResults(result.data)
         this.onCompleting.error = false
+        props.setSearchResults && props.setSearchResults(result.data)
+        props.updateSearchModel({
+          active: false,
+          data: this.data
+        })
+        props.updateSearchResultsModel({active: true})
       })
       .catch((error) => {
-        props.errorSearchResults && props.errorSearchResults(error)
         this.onCompleting.error = true
+        props.errorSearchResults && props.errorSearchResults(error)
       })
     })
   }
