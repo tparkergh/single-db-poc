@@ -5,7 +5,7 @@ import org.drools.core.util.StringUtils;
 
 global java.util.Set validationDetailsList
 
-rule "reporter-di-feedback-required-date"
+rule "reporter-di-feedback-required-ind"
 
   @doc_description("Feedback required indicator must be blank, Y, or N")
   
@@ -32,7 +32,9 @@ rule "reporter-di-feedback-required-date"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-	reporterData: ReporterData(!StringUtils.isEmpty(feedbackRequiredIndicator) && String.valueOf(feedbackRequiredIndicator) != "Y" && String.valueOf(feedbackRequiredIndicator) != "N")
+    reporterData: ReporterData(
+      StringUtils.isEmpty(feedbackRequiredIndicator) || 
+      !feedbackRequiredIndicator.matches("Y|N"))       
   then
     IssueDetails details = new IssueDetails();
     details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + reporterData.identifier);

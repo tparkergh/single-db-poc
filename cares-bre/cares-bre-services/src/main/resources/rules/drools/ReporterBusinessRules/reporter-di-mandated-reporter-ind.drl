@@ -32,7 +32,9 @@ rule "reporter-di-mandated-reporter-ind"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-	reporterData: ReporterData(String.valueOf(mandatedReporterIndicator) != "Y" && String.valueOf(mandatedReporterIndicator) != "N")
+  	reporterData: ReporterData(
+      StringUtils.isEmpty(mandatedReporterIndicator) || 
+      !mandatedReporterIndicator.matches("Y|N")) 
 
   then
     IssueDetails details = new IssueDetails();
