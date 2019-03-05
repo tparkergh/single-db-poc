@@ -15,18 +15,31 @@ export default class SearchResultsModel extends BaseModel {
     this.onValidatePanel.add(this.validate.bind(this))
     this.onValidateQuestion.add(this.setContinueText.bind(this))
     this.onCompleting.add(this.createReporter.bind(this))
+
+    this.props = props
   }
 
   createReporter (result, options) {
+    const {
+      updateSearchModel,
+      updateSearchResultsModel,
+      createReporterSuccess,
+      createReporterError
+    } = this.props
     return axios({
       url: createReporterRoute(),
       method: 'post',
       data: this.buildReporter(result.data)})
     .then((result) => {
-      this.onCompleting.error = false
+      updateSearchResultsModel && updateSearchResultsModel({
+        active: false,
+        data: this.data
+      })
+      updateSearchModel && updateSearchModel({ active: true })
+      createReporterSuccess && createReporterSuccess()
     })
     .catch((error) => {
-      this.onCompleting.error = true
+      createReporterError && createReporterError(error)
     })
   }
 

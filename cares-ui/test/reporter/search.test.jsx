@@ -25,7 +25,7 @@ describe('Search', () => {
   })
 
   it('renders a search with error', () => {
-    const search = shallow(<Search active={true} searchError={'error here'}/>)
+    const search = shallow(<Search active={true} error={'error here'}/>)
     expect(search.find('Alert').length).toEqual(1)
   })
 
@@ -42,41 +42,5 @@ describe('Search', () => {
     const spy = jest.spyOn(model, 'loadJsonRules')
     search.instance().componentDidMount()
     expect(spy).toHaveBeenCalled()
-  })
-
-  it('on completing the search it sets the search model as inactive with data', (done) => {
-    const updateSearchModel = jasmine.createSpy('updateSearchModel')
-    const search = mount(
-      <Search active={true} updateSearchModel={updateSearchModel} />,
-      { disableLifecycleMethods: true })
-    const survey = search.find('Survey')
-
-    survey.props().model.onCompleting.add((data) => {
-      expect(updateSearchModel).toHaveBeenCalledWith({
-        active: false,
-        data: jasmine.anything()
-      })
-      done()
-    })
-
-    survey.props().model.doComplete()
-  })
-
-  it('on completing the search it sets the search results model as active', (done) => {
-    const updateSearchResultsModel = jasmine.createSpy('updateSearchModel')
-    const search = mount(
-      <Search active={true} updateSearchResultsModel={updateSearchResultsModel} />,
-      { disableLifecycleMethods: true }
-    )
-    const survey = search.find('Survey')
-
-    survey.props().model.onCompleting.add((data) => {
-      expect(updateSearchResultsModel).toHaveBeenCalledWith({
-        active: true
-      })
-      done()
-    })
-
-    survey.props().model.doComplete()
   })
 })
