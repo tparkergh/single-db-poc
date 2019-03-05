@@ -4,6 +4,7 @@ include 'cares-bre:cares-bre-interfaces'
 include 'cares-bre:cares-bre-services'
 include 'cares-bre:cares-bre-rest-client'
 include 'cares-bre:cares-bre-rest-api'
+include 'cares-bre:cares-bre-functional-tests'
 
 include 'cares:cares-persistence'
 include 'cares:cares-interfaces'
