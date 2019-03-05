@@ -10,28 +10,37 @@ export default class SearchModel extends BaseModel {
 
   constructor(props) {
     super(SearchJSON)
+    this.props = props
 
     this.onValidatePanel.add(this.validateName.bind(this))
     this.onValidateQuestion.add(this.validatePhoneNumber.bind(this))
-    this.onCompleting.add((result, options) => {      
-      axios({
-        url: searchRoute(), 
-        method: 'post',
-        data: this.buildSearchQuery(result.data)})
+    this.onCompleting.add(this.search.bind(this))
+  }
+
+  search(result, options) {
+    const {
+      setSearchResults,
+      updateSearchModel,
+      updateSearchResultsModel,
+      errorSearchResults
+    } = this.props
+    return axios({
+      url: searchRoute(), 
+      method: 'post',
+      data: this.buildSearchQuery(result.data)})
       .then((result) => {
         this.onCompleting.error = false
-        props.setSearchResults && props.setSearchResults(result.data)
-        props.updateSearchModel({
+        setSearchResults && setSearchResults(result.data)
+        updateSearchModel && updateSearchModel({
           active: false,
           data: this.data
         })
-        props.updateSearchResultsModel({active: true})
+        updateSearchResultsModel && updateSearchResultsModel({active: true})
       })
       .catch((error) => {
         this.onCompleting.error = true
-        props.errorSearchResults && props.errorSearchResults(error)
+        errorSearchResults && errorSearchResults(error)
       })
-    })
   }
 
   validationData() {

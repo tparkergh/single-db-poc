@@ -34,7 +34,6 @@ export class SearchResults extends Component {
 
   render () {
     if (this.props.active) {
-      
       const errorMsg = this.props.error
       return (
         <Fragment>
