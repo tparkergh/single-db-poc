@@ -32,7 +32,9 @@ rule "reporter-di-confidential-wavier-ind"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-	reporterData: ReporterData(String.valueOf(confidentialWaiverIndicator) != "Y" && String.valueOf(confidentialWaiverIndicator) != "N")
+    reporterData: ReporterData(
+      StringUtils.isEmpty(confidentialWaiverIndicator) || 
+      !confidentialWaiverIndicator.matches("Y|N"))        
   then
     IssueDetails details = new IssueDetails();
     details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + reporterData.identifier);

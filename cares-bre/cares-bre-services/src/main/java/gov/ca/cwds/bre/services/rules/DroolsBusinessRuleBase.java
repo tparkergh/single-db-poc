@@ -129,4 +129,20 @@ public abstract class DroolsBusinessRuleBase implements BusinessRule {
   private DroolsConfiguration getDroolsConfiguration(String agenda) {
     return new DroolsConfiguration(getDroolsSessionName(), agenda, getDroolsRulesPath());
   }
+
+  public BreDroolsService getBreDroolsService() {
+    return breDroolsService;
+  }
+
+  public void setBreDroolsService(BreDroolsService breDroolsService) {
+    this.breDroolsService = breDroolsService;
+  }
+
+  public ObjectMapper getJacksonObjectMapper() {
+    return jacksonObjectMapper;
+  }
+
+  public void setJacksonObjectMapper(ObjectMapper jacksonObjectMapper) {
+    this.jacksonObjectMapper = jacksonObjectMapper;
+  }
 }
