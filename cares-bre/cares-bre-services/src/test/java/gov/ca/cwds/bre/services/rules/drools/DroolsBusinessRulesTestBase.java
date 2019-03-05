@@ -7,7 +7,6 @@ import gov.ca.cwds.bre.interfaces.model.BreRequest;
 import gov.ca.cwds.bre.interfaces.model.BreRequestData;
 import gov.ca.cwds.bre.services.rules.BreDroolsService;
 import gov.ca.cwds.bre.services.rules.DroolsBusinessRuleBase;
-import gov.ca.cwds.cics.model.ReporterData;
 
 public abstract class DroolsBusinessRulesTestBase {
   
@@ -29,15 +28,15 @@ public abstract class DroolsBusinessRulesTestBase {
     return droolsBusinessRules;
   }
   
-  protected BreRequest createBreRequest(String businessRuleSetName, Object data) {
+  protected BreRequest createBreRequest(String businessRuleSetName, Object dataObject) {
     BreRequest breRequest = new BreRequest();
     breRequest.setBusinessRuleSetName(businessRuleSetName);
     
     BreRequestData breRequestData = new BreRequestData();
-    breRequestData.setDataObjectClassName(ReporterData.class.getName());
+    breRequestData.setDataObjectClassName(dataObject.getClass().getName());
         
     ObjectMapper mapper = new ObjectMapper();
-    breRequestData.setDataObject(mapper.convertValue(data, JsonNode.class));
+    breRequestData.setDataObject(mapper.convertValue(dataObject, JsonNode.class));
     
     breRequest.addDataObject(breRequestData);
     
