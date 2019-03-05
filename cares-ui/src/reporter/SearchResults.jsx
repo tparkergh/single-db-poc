@@ -1,11 +1,13 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 import { Survey } from "survey-react";
 import { connect } from 'react-redux'
 import {
   setSearchResults,
   clearSearchResults,
   updateSearchModel,
-  updateSearchResultsModel
+  updateSearchResultsModel,
+  createReporterSuccess, 
+  createReporterError
 } from './actions'
 import SearchResultsModel from './models/searchResultsModel'
 import {
@@ -13,26 +15,12 @@ import {
   selectSearchResultsModelActive,
   selectSearchModelData
 } from './selectors'
+import { Alert } from "@cwds/components";
 
 export class SearchResults extends Component {
   constructor (props) {
     super(props)
-    const {
-      data,
-      updateSearchResultsModel,
-      updateSearchModel,
-      clearSearchResults
-    } = props
-
     this.model = new SearchResultsModel(this.props)
-    this.model.onCompleting.add((result) => {
-      updateSearchResultsModel && updateSearchResultsModel({
-        active: false,
-        data
-      })
-      updateSearchModel && updateSearchModel({ active: true })
-      clearSearchResults && clearSearchResults()
-    })
   }
 
   componentDidMount() {
@@ -45,8 +33,18 @@ export class SearchResults extends Component {
   }
 
   render () {
-    if (this.props.active)
-      return <Survey model = {this.model} />
+    if (this.props.active) {
+      const errorMsg = this.props.error
+      return (
+        <Fragment>
+          {errorMsg && 
+            <Alert className="errorMessage-customizable" color="danger">
+              {errorMsg}
+            </Alert>
+          }
+          <Survey model={this.model} />
+       </Fragment>)
+    } 
     return null
   }
 }
@@ -54,14 +52,17 @@ export class SearchResults extends Component {
 const mapStateToProps = (state, ownProps) => ({
   searchResults: selectReporterSearchResults(state),
   active: selectSearchResultsModelActive(state),
-  data: selectSearchModelData(state)
+  data: selectSearchModelData(state), 
+  error: state.errors.CREATE_REPORTER
 })
 
 const mapDispatchToProps = {
   setSearchResults,
   clearSearchResults,
   updateSearchModel,
-  updateSearchResultsModel
+  updateSearchResultsModel,
+  createReporterSuccess,
+  createReporterError
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults)
