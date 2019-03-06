@@ -28,8 +28,6 @@ public class ReporterController {
   private ReporterService reporterService;
 
   @PostMapping
-  @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Create Reporter")
   @ExecutionTimer

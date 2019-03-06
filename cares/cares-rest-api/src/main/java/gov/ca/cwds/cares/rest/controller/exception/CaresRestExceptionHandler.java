@@ -1,5 +1,10 @@
 package gov.ca.cwds.cares.rest.controller.exception;
 
+import gov.ca.cwds.bre.interfaces.model.BreResponse;
+import gov.ca.cwds.cares.common.exception.CicsException;
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import java.util.HashSet;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
-import gov.ca.cwds.cares.common.exception.CicsException;
-import gov.ca.cwds.rest.exception.IssueDetails;
 
 /**
  * CWDS J Team
@@ -20,19 +23,38 @@ public class CaresRestExceptionHandler {
   
   private final static Logger LOGGER = LoggerFactory.getLogger(CaresRestExceptionHandler.class);
 
-  
   @ResponseBody
   @ExceptionHandler(CicsException.class)
-  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  String cicsUpdateHandler(CicsException ex) {
-    LOGGER.error(ex.getMessage(), ex);  
-    return ex.getMessage();
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  Set<IssueDetails> cicsExceptionHandler(CicsException ex) {
+    LOGGER.error(ex.getMessage(), ex);
+    Set<IssueDetails> issueDetailsSet = new HashSet<>();
+    IssueDetails issueDetails = new IssueDetails();
+    issueDetails.setUserMessage(ex.getMessage());
+    issueDetails.setType(IssueType.EXPECTED_EXCEPTION);
+    issueDetailsSet.add(issueDetails);
+    return issueDetailsSet;
   }
   
   @ResponseBody
   @ExceptionHandler(BreException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
   Set<IssueDetails> breExceptionHandler(BreException ex) {
-    LOGGER.error(ex.getMessage(), ex);  
-    return ex.getBreResponse().getIssues();
+    LOGGER.error(ex.getMessage(), ex);
+    Set<IssueDetails> issueDetailsSet = new HashSet<>();
+    BreResponse breResponse = ex.getBreResponse();
+    if (breResponse != null) {
+      issueDetailsSet.addAll(ex.getBreResponse().getIssues());
+    } else {
+      IssueDetails issueDetails = new IssueDetails();
+      issueDetails.setType(IssueType.EXPECTED_EXCEPTION);
+      issueDetails.setUserMessage(ex.getMessage());
+      Throwable causeEx = ex.getCause();
+      if (causeEx != null) {
+        issueDetails.setTechnicalMessage(causeEx.getMessage());
+      }
+      issueDetailsSet.add(issueDetails);
+    }
+    return issueDetailsSet;
   }
 }
