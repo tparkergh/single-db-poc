@@ -1,3 +1,5 @@
 reporter-create-first-name-required.json
 reporter-create-last-name-required.json
 reporter-create-phone-required.json
+reporter-create-phone-non-zero.json
+reporter-create-phone-length.json
