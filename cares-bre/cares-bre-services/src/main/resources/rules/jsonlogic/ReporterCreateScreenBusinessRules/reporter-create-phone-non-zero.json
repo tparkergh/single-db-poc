@@ -1,0 +1,28 @@
+{
+  "name": "reporter-create-phone-non-zero",
+  "logic": {
+    "if": [
+      {
+        "===": [
+          {
+            "substr": [
+              {
+                "var": "create.reporter.phone_number"
+              },
+              0,
+              1
+            ]
+          },
+          "0"
+        ]
+      },
+      "A phone number cannot start with zero to create a reporter",
+      true
+    ]
+  },
+  "documentation": {
+    "doc_description": "A phone number cannot start with zero to create a reporter",
+    "doc_jsonlogic_file": "reporter-create-phone-non-zero",
+    "doc_enforcement_location": "FE"
+  }
+}
