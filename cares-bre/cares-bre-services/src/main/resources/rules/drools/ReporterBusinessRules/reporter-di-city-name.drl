@@ -1,0 +1,37 @@
+rule "reporter-di-city-name"
+
+  @doc_description("City name cannot be more than 20 characters")
+  
+  @doc_external_documentation("xTool Application")
+  @doc_enforcement_location("BRE")
+  @doc_rule_category("DataIntegrity")
+  @doc_rule_type("xTool")
+  @doc_drools_file("reporter-di-city-name.drl")
+  @doc_rule_name("REPORTER-DI-CITY-NAME")
+
+  @doc_di_entity("REPORTER")
+  @doc_di_attribute("CITY_NAME")
+  @doc_di_length("20")
+  @doc_di_type("string")
+  @doc_di_nullable("false")
+  @doc_di_mandatory("false")
+  @doc_di_default("")
+  @doc_di_validation_table("")
+  @doc_di_validation_category("")
+  @doc_di_validation_sub_category()
+  @doc_di_validation_values("")
+
+  dialect "mvel"
+  agenda-group "ReporterBusinessRules-validation-agenda"
+  
+  when
+	reporterData: ReporterData(String.valueOf(cityName).length > 20)
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + reporterData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.CONSTRAINT_VALIDATION);
+    details.setProperty("reporterData.cityName");
+    details.setInvalidValue(reporterData.cityName);
+    validationDetailsList.add(details);
+end

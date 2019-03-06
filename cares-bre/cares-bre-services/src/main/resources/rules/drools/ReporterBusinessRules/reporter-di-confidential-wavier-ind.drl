@@ -19,7 +19,7 @@ rule "reporter-di-confidential-wavier-ind"
   @doc_di_entity("REPORTER")
   @doc_di_attribute("CONFIDENTIAL_WAVIER_IND")
   @doc_di_length("1")
-  @doc_di_type("char")
+  @doc_di_type("string")
   @doc_di_nullable("false")
   @doc_di_mandatory("true")
   @doc_di_default("N")
