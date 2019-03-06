@@ -12,7 +12,7 @@ rule "reporter-di-county-specific-code"
   @doc_di_entity("REPORTER")
   @doc_di_attribute("COUNTY_SPECIFIC_CODE")
   @doc_di_length("2")
-  @doc_di_type("char")
+  @doc_di_type("string")
   @doc_di_nullable("false")
   @doc_di_mandatory("true")
   @doc_di_default("99")

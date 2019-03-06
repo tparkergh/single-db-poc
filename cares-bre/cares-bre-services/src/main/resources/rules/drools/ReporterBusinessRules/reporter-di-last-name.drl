@@ -5,7 +5,7 @@ rule "reporter-di-last-name"
   @doc_external_documentation("xTool Application")
   @doc_enforcement_location("")
   @doc_rule_category("DataIntegrity")
-  @doc_rule_type("xTool")
+  @doc_rule_type("xTool, Z/OS")
   @doc_drools_file("reporter-di-last-name.drl")
   @doc_rule_name("REPORTER-DI-LAST-NAME")
 

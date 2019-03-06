@@ -3,7 +3,7 @@ rule "reporter-di-city-name"
   @doc_description("City name cannot be more than 20 characters")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("")
+  @doc_enforcement_location("BRE")
   @doc_rule_category("DataIntegrity")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-di-city-name.drl")
