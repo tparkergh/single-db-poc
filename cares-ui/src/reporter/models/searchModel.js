@@ -89,7 +89,7 @@ export default class SearchModel extends BaseModel {
     })
   }
 
-  buildSearchQuery({first_name, last_name, number}) {
+  buildSearchQuery({first_name, last_name, phone_number}) {
     return {
       limit: 10,
       sources: [
@@ -99,7 +99,7 @@ export default class SearchModel extends BaseModel {
         person: {
           first_name,
           last_name,
-          primary_phone_number: number
+          primary_phone_number: phone_number
         }
       }
     }
