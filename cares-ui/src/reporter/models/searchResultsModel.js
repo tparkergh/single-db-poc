@@ -107,10 +107,14 @@ export default class SearchResultsModel extends BaseModel {
   }
 
   validate(sender, options) {
-	const rules = this.engine.find((rule) => rule.applies('create.reporter'))
-	const results = rules.map((rule) => this.engine.evaluate(rule, this.validationData()))
-	const errors = results.filter((result) => result !== true)
-	options.error = errors.join("\n") || undefined
+    const panel = this.getPanelByName("existingReporter")
+    const question = panel.getElementByName("reporter")
+    if (question.isEmpty()) {
+      const rules = this.engine.find((rule) => rule.applies('create.reporter'))
+      const results = rules.map((rule) => this.engine.evaluate(rule, this.validationData()))
+      const errors = results.filter((result) => result !== true)
+      options.error = errors.join("\n") || undefined
+    }
 }
 
   loadJsonRules() {

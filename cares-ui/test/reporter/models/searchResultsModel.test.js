@@ -102,6 +102,22 @@ describe('SearchResultsModel', () => {
       model.validate({}, options)
       expect(options.error).toEqual(undefined)
     })
+
+    it('does not validate the reporter when the question is empty', () => {
+      const model = new SearchResultsModel()
+      spyOn(model, 'getPanelByName').and.returnValue({
+        getElementByName: jasmine.createSpy('getElementByName').and.returnValue({
+          isEmpty: () => false
+        })
+      })
+      const options = {}
+      model.data = {
+        first_name: 'first',
+        phone_number: 123
+      }
+      model.validate({}, options)
+      expect(options.error).toEqual(undefined)
+    })
   })
 
   describe('loadJsonRules', () => {
