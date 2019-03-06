@@ -142,10 +142,21 @@ describe('SearchModel', () => {
           logic: rule
         }]
       })
-      const model = new SearchModel()
+      const model = new SearchModel({})
       model.loadJsonRules().then(() => {
         const foundRule = model.engine.find((rule) => rule.identifier === 'rule')
         expect(foundRule[0].definition).toEqual(rule)
+        done()
+      })
+    })
+
+    it('sets the search results error when there is a problem with BRE', (done) => {
+      mockAxios.onGet(getBreRuleSetRoute('ReporterSearchScreenBusinessRules')).reply(404)
+      const errorSearchResults = jasmine.createSpy('reporterSearchScreenBusinessRules')
+      const props =  { errorSearchResults }
+      const model = new SearchModel(props)
+      model.loadJsonRules().then(() => {
+        expect(errorSearchResults).toHaveBeenCalled()
         done()
       })
     })

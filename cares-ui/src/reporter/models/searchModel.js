@@ -73,6 +73,7 @@ export default class SearchModel extends BaseModel {
   }
 
   loadJsonRules() {
+    const { errorSearchResults } = this.props
     return axios({
       url: getBreRuleSetRoute('ReporterSearchScreenBusinessRules'),
       method: 'get',
@@ -83,10 +84,12 @@ export default class SearchModel extends BaseModel {
           definition: rule.logic
         })
       )
+    }).catch((error) => {
+      errorSearchResults && errorSearchResults(error)
     })
   }
 
-  buildSearchQuery({first_name, last_name, number}) {
+  buildSearchQuery({first_name, last_name, phone_number}) {
     return {
       limit: 10,
       sources: [
@@ -96,7 +99,7 @@ export default class SearchModel extends BaseModel {
         person: {
           first_name,
           last_name,
-          primary_phone_number: number
+          primary_phone_number: phone_number
         }
       }
     }
