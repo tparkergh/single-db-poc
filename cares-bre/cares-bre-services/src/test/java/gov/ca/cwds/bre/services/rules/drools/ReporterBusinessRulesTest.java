@@ -29,6 +29,31 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
   }
   
   @Test
+  public void reporter_di_badge_number() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setBadgeNumber("1234567");
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setBadgeNumber("123456");
+    checkBusinessRulesExecution(reporterData, 0);
+
+  }
+
+  @Test
+  public void reporter_di_city_name() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setCityName("123456789012345678901");
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setCityName("12345678901234567890");
+    checkBusinessRulesExecution(reporterData, 0);
+
+  }
+
+
+  @Test
   public void reporter_di_confidential_wavier_ind() {
     ReporterData reporterData = createValidReporterData();
     
@@ -36,6 +61,9 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
     reporterData.setConfidentialWaiverIndicator("D");        
     checkBusinessRulesExecution(reporterData, 1);
     
+    reporterData.setConfidentialWaiverIndicator("Yes");
+    checkBusinessRulesExecution(reporterData, 1);
+
     reporterData.setConfidentialWaiverIndicator("Y");
     checkBusinessRulesExecution(reporterData, 0);
     
@@ -64,6 +92,11 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
   public void reporter_di_employer_name() {
     ReporterData reporterData = createValidReporterData();
     
+    reporterData.setMandatedReporterIndicator("Y");
+    reporterData.setFkLawEnforcement("1234567ABC");
+    reporterData.setEmployerName("12345678901234567890123456789012345");
+    checkBusinessRulesExecution(reporterData, 1);
+
     // Set to N and no employer name
     reporterData.setMandatedReporterIndicator("N");  
     reporterData.setEmployerName(null);    
@@ -75,6 +108,7 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
     reporterData.setFkLawEnforcement(null);
     reporterData.setBadgeNumber(null);
     checkBusinessRulesExecution(reporterData, 1);
+
   }
   
   @Test
@@ -92,6 +126,14 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
     checkBusinessRulesExecution(reporterData, 0);
   }
   
+  @Test
+  public void reporter_di_first_name() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setFirstName("123456789012345678901");
+    checkBusinessRulesExecution(reporterData, 1);
+  }
+
   @Test
   public void reporter_di_fklaw_enft() {
     ReporterData reporterData = createValidReporterData();
@@ -129,6 +171,15 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
   }
 
   @Test
+  public void reporter_di_last_name() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setLastName("12345678901234567890123456");
+    checkBusinessRulesExecution(reporterData, 1);
+
+  }
+
+  @Test
   public void reporter_di_mandated_reporter_ind() {
     ReporterData reporterData = createValidReporterData();
     
@@ -143,6 +194,20 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
     checkBusinessRulesExecution(reporterData, 0);
   }
   
+  @Test
+  public void reporter_di_primary_phone_number() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setPrimaryPhoneNumber(12345678L);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setPrimaryPhoneNumber(12345678901L);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setPrimaryPhoneNumber(1234567890L);
+    checkBusinessRulesExecution(reporterData, 0);
+  }
+
   @Test
   public void reporter_di_reporter_id() {
     ReporterData reporterData = createValidReporterData();
@@ -160,6 +225,43 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
     checkBusinessRulesExecution(reporterData, 1); 
   }
   
+  @Test
+  public void reporter_di_required_fields() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setFirstName("");
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setFirstName("firstname");
+    reporterData.setLastName("");
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setLastName("lastname");
+    reporterData.setPrimaryPhoneNumber(0L);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setPrimaryPhoneNumber(1234567890L);
+    checkBusinessRulesExecution(reporterData, 0);
+  }
+
+  @Test
+  public void reporter_di_street_name() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setStreetName("12345678901234567890123456789012345678901");
+    checkBusinessRulesExecution(reporterData, 1);
+
+  }
+
+  @Test
+  public void reporter_di_street_number() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setStreetNumber("12345678901");
+    checkBusinessRulesExecution(reporterData, 1);
+
+  }
+
   @Test
   public void reporter_R_00725() {
     ReporterData reporterData = createValidReporterData();
@@ -189,34 +291,34 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
     ReporterData reporterData = new ReporterData();
 
     reporterData.setIdentifier("yr7ytiu7yg");
-    reporterData.setTxnHeaderStaffId("test TxnHeaderStaffId");
+    reporterData.setTxnHeaderStaffId("0X5");
     reporterData.setFirstName("test FirstName");
     reporterData.setLastName("test LastName");
-    reporterData.setPrimaryPhoneNumber(-1L);
-    reporterData.setPrimaryPhoneExtensionNumber(-2);
-    reporterData.setCommunicationMethod(-3);
+    reporterData.setPrimaryPhoneNumber(1234567890L);
+    reporterData.setPrimaryPhoneExtensionNumber(123);
+    reporterData.setCommunicationMethod(0);
     reporterData.setConfidentialWaiverIndicator("Y");
-    reporterData.setCountySpecificCode("test CountySpecificCode");
-    reporterData.setCollateralClientReporterRelationship(-4);
-    reporterData.setFeedbackRequiredIndicator("Y");
+    reporterData.setCountySpecificCode("99");
+    reporterData.setCollateralClientReporterRelationship(0);
+    reporterData.setFeedbackRequiredIndicator("N");
     reporterData.setFeedbackDocument("FdbkDocume");
     reporterData.setFeedbackDate(LocalDate.now());
     reporterData.setFkLawEnforcement("FkLawEnfor");
     reporterData.setFkReferral("FkReferral");
-    reporterData.setMiddleInitialName("test MiddleInitialName");
+    reporterData.setMiddleInitialName("");
     reporterData.setMandatedReporterIndicator("Y");
-    reporterData.setMessagePhoneExtensionNumber(-5);
-    reporterData.setMessagePhoneNumber(-6L);
+    reporterData.setMessagePhoneExtensionNumber(234);
+    reporterData.setMessagePhoneNumber(2345678901L);
     reporterData.setNamePrefixDescription("test NamePrefixDescription");
-    reporterData.setBadgeNumber("test BadgeNumber");
+    reporterData.setBadgeNumber("123456");
     reporterData.setCityName("test CityName");
     reporterData.setEmployerName("");
     reporterData.setStreetName("test StreetName");
-    reporterData.setStreetNumber("test StreetNumber");
-    reporterData.setZipNumber(-7);
-    reporterData.setState(-8);
+    reporterData.setStreetNumber("1234567890");
+    reporterData.setZipNumber(0);
+    reporterData.setState(0);
     reporterData.setSuffixTitleDescription("test SuffixTitleDescription");
-    reporterData.setZipSuffixNumber(-9);
+    reporterData.setZipSuffixNumber(0);
 
     return reporterData;
   }
