@@ -5,10 +5,10 @@
       {
         "and": [
           {
-            "missing": "search.reporter.first_name"
+            "missing": ["search.reporter.first_name"]
           },
           {
-            "missing": "search.reporter.last_name"
+            "missing": ["search.reporter.last_name"]
           }
         ]
       },
