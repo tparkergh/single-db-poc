@@ -1,8 +1,8 @@
 version: '2.1'
 services:
   cares-rest-api:
-    image: cwds/cares-rest-api:0.10.0-SNAPSHOT
-    container_name: cares-rest-api
+    image: cwds/cares-iir-rest-api:0.10.0-SNAPSHOT
+    container_name: cares-iir-rest-api
     ports:
       - '3007:8090'
     environment:
