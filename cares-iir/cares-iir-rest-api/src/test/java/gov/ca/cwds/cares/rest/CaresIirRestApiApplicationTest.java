@@ -43,7 +43,7 @@ import gov.ca.cwds.cics.restclient.CicsAddressRestApiClient;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestPropertySource
-public class CaresRestApiApplicationTest {
+public class CaresIirRestApiApplicationTest {
 
   @Value("${server.port}")
   private String port;
