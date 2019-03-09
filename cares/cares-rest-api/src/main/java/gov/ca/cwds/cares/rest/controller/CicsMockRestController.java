@@ -44,6 +44,13 @@ public class CicsMockRestController {
     return executeRequest(request);
   }
 
+  @PutMapping("/cics-mock/reporters/{reporter_id}/{last_time_stamp}")
+  CicsResponse putReporter(@RequestBody String request,
+      @PathVariable("reporter_id") String reporterId,
+      @PathVariable("last_time_stamp") String lastTimeStamp) {
+    return executeRequest(request);
+  }
+
   private CicsResponse executeRequest(String request) {
     LOGGER.info("Received: {}", request);
 
