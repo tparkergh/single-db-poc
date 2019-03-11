@@ -61,6 +61,7 @@ export default class SearchResultsModel extends BaseModel {
   }
 
   update (props) {
+    this.props = props
     this.data = props.data
     this.loadResults(props)
   }

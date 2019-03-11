@@ -12,8 +12,9 @@ import SearchModel from './models/searchModel'
 import {
   selectSearchModelActive
 } from './selectors'
-import { Alert } from "@cwds/components";
 import JsonForm from './JsonForm'
+
+const model = new SearchModel({})
 
 const mapStateToProps = (state, ownProps) => ({
   active: selectSearchModelActive(state),
@@ -27,18 +28,12 @@ const mapDispatchToProps = ({
   errorSearchResults
 })
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const props = {
-    ...stateProps,
-    ...dispatchProps,
-    ...ownProps
-  }
-  const model = new SearchModel(props)
-  return ({
-    ...props,
-    model
-  })
-}
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  model
+})
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(JsonForm)
 

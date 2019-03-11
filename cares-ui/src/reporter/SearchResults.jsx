@@ -15,6 +15,8 @@ import {
 } from './selectors'
 import JsonForm from './JsonForm'
 
+const model = new SearchResultsModel({})
+
 const mapStateToProps = (state, ownProps) => ({
   searchResults: selectReporterSearchResults(state),
   active: selectSearchResultsModelActive(state),
@@ -31,17 +33,11 @@ const mapDispatchToProps = {
   createReporterError
 }
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const props = {
-    ...stateProps,
-    ...dispatchProps,
-    ...ownProps
-  }
-  const model = new SearchResultsModel(props)
-  return ({
-    ...props,
-    model
-  })
-}
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  model
+})
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(JsonForm)

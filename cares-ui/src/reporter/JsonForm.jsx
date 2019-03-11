@@ -1,9 +1,10 @@
 import { Survey } from "survey-react";
 import { Component, Fragment } from "react";
+import { Alert } from "@cwds/components";
 
 export default class JsonForm extends Component {
   componentDidMount() {
-    console.log(this.props.model)
+    this.props.model.update(this.props)
     this.props.model.loadJsonRules()
   }
 
