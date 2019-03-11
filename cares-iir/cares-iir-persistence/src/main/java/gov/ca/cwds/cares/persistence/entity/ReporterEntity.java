@@ -17,7 +17,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 @Entity
 @Table(name = "REPTR_T")
-
 public class ReporterEntity implements Serializable {
 
   private static final long serialVersionUID = 6969398151287232182L;
@@ -112,6 +111,12 @@ public class ReporterEntity implements Serializable {
 
   @Column(name = "ZIP_SFX_NO")
   private Integer zipSuffix;
+
+  @Column(name = "BIRTH_DATE")
+  private LocalDate birthDate;
+
+  @Column(name = "TITLE_DESCRIPTION")
+  private String titleDescription;
 
   public String getIdentifier() {
     return identifier;
@@ -351,6 +356,22 @@ public class ReporterEntity implements Serializable {
 
   public void setZipSuffix(Integer zipSuffix) {
     this.zipSuffix = zipSuffix;
+  }
+
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
+
+  public void setBirthDate(LocalDate birthDate) {
+    this.birthDate = birthDate;
+  }
+
+  public String getTitleDescription() {
+    return titleDescription;
+  }
+
+  public void setTitleDescription(String titleDescription) {
+    this.titleDescription = titleDescription;
   }
 
   @Override
