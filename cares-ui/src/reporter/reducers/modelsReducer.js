@@ -1,4 +1,8 @@
-import { UPDATE_SEARCH_MODEL, UPDATE_SEARCH_RESULTS_MODEL } from "../actions";
+import {
+  UPDATE_SEARCH_MODEL,
+  UPDATE_SEARCH_RESULTS_MODEL,
+  UPDATE_REPORTER_MODEL
+} from "../actions";
 
 export default (state = {}, action) => {
   const { active, data } = action;
@@ -15,6 +19,14 @@ export default (state = {}, action) => {
       return {
         ...state,
         search_results: {
+          active,
+          data
+        }
+      };
+    case UPDATE_REPORTER_MODEL:
+      return {
+        ...state,
+        reporter: {
           active,
           data
         }

@@ -3,6 +3,7 @@ export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS'
 export const SEARCH_RESULTS_ERROR = 'SEARCH_RESULTS_ERROR'
 export const UPDATE_SEARCH_MODEL = 'UPDATE_SEARCH_MODEL'
 export const UPDATE_SEARCH_RESULTS_MODEL = 'UPDATE_SEARCH_RESULTS_MODEL'
+export const UPDATE_REPORTER_MODEL = 'UPDATE_REPORTER_MODEL'
 export const CREATE_REPORTER_SUCCESS = 'CREATE_REPORTER_SUCCESS' 
 export const  CREATE_REPORTER_ERROR = 'CREATE_REPORTER_ERROR'
 
@@ -29,6 +30,12 @@ export const updateSearchModel = ({ active, data }) => ({
 
 export const updateSearchResultsModel = ({ active, data }) => ({
   type: UPDATE_SEARCH_RESULTS_MODEL,
+  active,
+  data
+})
+
+export const updateReporterModel = ({ active, data }) => ({
+  type: UPDATE_REPORTER_MODEL,
   active,
   data
 })
