@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 describe('ReportWizard', () => {
   it('renders a search component', () => {
     const reportWizard = shallow(<ReportWizard />)
-    expect(reportWizard.find('Connect(Search)').exists()).toBeTruthy()
+    expect(reportWizard.find('Connect(JsonForm)').exists()).toBeTruthy()
   })
 
   it('renders a search results component', () => {

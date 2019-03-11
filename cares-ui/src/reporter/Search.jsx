@@ -13,36 +13,7 @@ import {
   selectSearchModelActive
 } from './selectors'
 import { Alert } from "@cwds/components";
-
-export class Search extends Component {
-  constructor(props) {
-    super(props)
-
-    const search = new SearchModel(this.props)
-    this.model = search
-  }
-
-  componentDidMount() {
-    this.model.loadJsonRules()
-  }
-
-  render() {
-    if (this.props.active)
-    {
-      const errorMsg = this.props.error
-      return (
-        <Fragment>
-          {errorMsg && 
-            <Alert className="errorMessage-customizable" color="danger">
-              {errorMsg}
-            </Alert>
-          }
-          <Survey model={this.model} />
-       </Fragment>)
-    }
-    return null
-  }
-}
+import JsonForm from './JsonForm'
 
 const mapStateToProps = (state, ownProps) => ({
   active: selectSearchModelActive(state),
@@ -56,5 +27,18 @@ const mapDispatchToProps = ({
   errorSearchResults
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search)
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const props = {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps
+  }
+  const model = new SearchModel(props)
+  return ({
+    ...props,
+    model
+  })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(JsonForm)
 
