@@ -1,6 +1,6 @@
 {
   "if": [
-    { "in": [ "firstName", { "missing": "firstName" }] },
+    { "in": [ "firstName", { "missing": ["firstName"] }] },
     "First name is required.",
     true
   ]

@@ -3,7 +3,7 @@
   "logic": {
     "if": [
       {
-        "missing": "create.reporter.first_name"
+        "missing": ["create.reporter.first_name"]
       },
       "A first name is required to create a reporter.",
       true
