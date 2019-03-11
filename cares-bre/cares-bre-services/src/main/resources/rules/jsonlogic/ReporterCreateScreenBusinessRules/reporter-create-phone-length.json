@@ -19,6 +19,8 @@
   "documentation": {
     "doc_description": "A phone number must be 10 digits to create a reporter",
     "doc_jsonlogic_file": "reporter-create-phone-length",
+    "doc_rule_category": "DataIntegrity",
+    "doc_rule_type": "CARES",
     "doc_enforcement_location": "FE"
   }
 }

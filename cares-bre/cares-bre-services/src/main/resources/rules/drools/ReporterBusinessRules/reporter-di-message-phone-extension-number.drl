@@ -1,16 +1,16 @@
-rule "reporter-di-primary-phone-number"
+rule "reporter-di-message-phone-extension-number"
 
-  @doc_description("Primary phone number must be a 0 or consist of 10 digits")
+  @doc_description("Message phone extension number must be a 0 or consist of three digits")
   
   @doc_external_documentation("xTool Application")
   @doc_enforcement_location("BRE")
   @doc_rule_category("DataIntegrity")
   @doc_rule_type("xTool")
-  @doc_drools_file("reporter-di-primary-phone-number.drl")
-  @doc_rule_name("REPORTER-DI-PRIMARY-PHONE-NUMBER")
+  @doc_drools_file("reporter-di-message-phone-extension-number.drl")
+  @doc_rule_name("REPORTER-DI-MESSAGE-PHONE-EXTENSION-NUMBER")
 
   @doc_di_entity("REPORTER")
-  @doc_di_attribute("PRIMARY_PHONE_NUMBER")
+  @doc_di_attribute("MESSAGE_PHONE_EXTENSION_NUMBER")
   @doc_di_length("7")
   @doc_di_type("integer")
   @doc_di_nullable("false")
@@ -25,13 +25,13 @@ rule "reporter-di-primary-phone-number"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-  	$reporterData: ReporterData(primaryPhoneNumber == null || (primaryPhoneNumber != 0 && String.valueOf(primaryPhoneNumber).length != 10))
+	$reporterData: ReporterData(messagePhoneExtensionNumber == null || (messagePhoneExtensionNumber != 0 && String.valueOf(messagePhoneExtensionNumber).length != 3))
   then
     IssueDetails details = new IssueDetails();
     details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + $reporterData.identifier);
     details.setCode(drools.getRule().getName());
     details.setType(IssueType.CONSTRAINT_VALIDATION);
-    details.setProperty("reporterData.primaryPhoneNumber");
-    details.setInvalidValue($reporterData.primaryPhoneNumber);
+    details.setProperty("reporterData.messagePhoneExtensionNumber");
+    details.setInvalidValue($reporterData.messagePhoneExtensionNumber);
     validationDetailsList.add(details);
 end

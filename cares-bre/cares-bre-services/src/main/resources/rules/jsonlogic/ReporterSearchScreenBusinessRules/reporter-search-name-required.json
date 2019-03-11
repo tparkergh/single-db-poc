@@ -19,6 +19,8 @@
   "documentation": {
     "doc_description": "One of first name or last name is required to search reporter",
     "doc_jsonlogic_file": "reporter-search-name-required.json",
+    "doc_rule_category": "BusinessPolicy",
+    "doc_rule_type": "CARES",
     "doc_enforcement_location": "FE"
   }
 }

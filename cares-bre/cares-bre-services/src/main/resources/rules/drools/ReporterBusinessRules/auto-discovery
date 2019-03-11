@@ -13,12 +13,17 @@ reporter-di-fklaw-enft.drl
 reporter-di-fkreferl-t.drl
 reporter-di-last-name.drl
 reporter-di-mandated-reporter-ind.drl
+reporter-di-message-phone-extension-number.drl
+reporter-di-message-phone-number.drl
+reporter-di-middle-initial-name.drl
+reporter-di-primary-phone-extension-number.drl
 reporter-di-primary-phone-number.drl
 reporter-di-reporter-id.drl
 reporter-di-required-fields.drl
 reporter-di-state-code-type.drl
 reporter-di-street-name.drl
 reporter-di-street-number.drl
+reporter-di-suffix-title-description.drl
 reporter-R-00725.drl
 reporter-R-00846.drl
 reporter-R-00849.drl

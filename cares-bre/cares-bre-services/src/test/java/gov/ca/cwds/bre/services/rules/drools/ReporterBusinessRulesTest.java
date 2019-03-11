@@ -195,6 +195,57 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
   }
   
   @Test
+  public void reporter_di_message_phone_extension_number() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setMessagePhoneExtensionNumber(null);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setMessagePhoneExtensionNumber(1234);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setMessagePhoneExtensionNumber(123);
+    checkBusinessRulesExecution(reporterData, 0);
+
+  }
+
+  @Test
+  public void reporter_di_message_phone_number() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setMessagePhoneNumber(12345678L);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setMessagePhoneNumber(12345678901L);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setMessagePhoneNumber(null);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setMessagePhoneNumber(1234567890L);
+    checkBusinessRulesExecution(reporterData, 0);
+
+  }
+
+  @Test
+  public void reporter_di_middle_initial_name() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setMiddleInitialName("XX");
+    checkBusinessRulesExecution(reporterData, 1);
+
+  }
+
+  @Test
+  public void reporter_di_primary_phone_extenstion_number() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setPrimaryPhoneExtensionNumber(null);
+    checkBusinessRulesExecution(reporterData, 1);
+
+  }
+
+  @Test
   public void reporter_di_primary_phone_number() {
     ReporterData reporterData = createValidReporterData();
 
@@ -203,6 +254,10 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
 
     reporterData.setPrimaryPhoneNumber(12345678901L);
     checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setPrimaryPhoneNumber(null);
+    // fails reporter-di-required-fields (first, last, phone are required)
+    checkBusinessRulesExecution(reporterData, 2);
 
     reporterData.setPrimaryPhoneNumber(1234567890L);
     checkBusinessRulesExecution(reporterData, 0);
@@ -263,6 +318,18 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
   }
 
   @Test
+  public void reporter_di_suffix_title_description() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setSuffixTitleDescription("abcde");
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setSuffixTitleDescription("abcd");
+    checkBusinessRulesExecution(reporterData, 0);
+
+  }
+
+  @Test
   public void reporter_R_00725() {
     ReporterData reporterData = createValidReporterData();
     
@@ -317,7 +384,7 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
     reporterData.setStreetNumber("1234567890");
     reporterData.setZipNumber(0);
     reporterData.setState(0);
-    reporterData.setSuffixTitleDescription("test SuffixTitleDescription");
+    reporterData.setSuffixTitleDescription("");
     reporterData.setZipSuffixNumber(0);
 
     return reporterData;
