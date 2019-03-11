@@ -9,6 +9,6 @@ describe('ReportWizard', () => {
 
   it('renders a search results component', () => {
     const reportWizard = shallow(<ReportWizard/>)
-    expect(reportWizard.find('Connect(SearchResults)').exists()).toBeTruthy()
+    expect(reportWizard.find('Connect(JsonForm)').exists()).toBeTruthy()
   })
 })
