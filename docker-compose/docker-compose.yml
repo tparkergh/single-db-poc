@@ -19,9 +19,9 @@ services:
 
   cares-rest-api:
     extends:
-      file: ./../cares/cares-rest-api/docker-compose-cares-rest-api.yml
-      service: cares-rest-api
-    container_name: cares-rest-api
+      file: ./../cares-iir/cares-iir-rest-api/docker-compose-cares-iir-rest-api.yml
+      service: cares-iir-rest-api
+    container_name: cares-iir-rest-api
     ports:
       - '3007:8090'
     environment:
