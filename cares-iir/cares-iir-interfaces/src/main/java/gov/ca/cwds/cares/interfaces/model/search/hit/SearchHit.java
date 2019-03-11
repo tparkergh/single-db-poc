@@ -1,5 +1,6 @@
 package gov.ca.cwds.cares.interfaces.model.search.hit;
 
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -22,8 +23,10 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class SearchHit {
+public abstract class SearchHit implements Serializable {
 
+  private static final long serialVersionUID = -3254906030686979013L;
+  
   private Double score;
   private String source;
   
