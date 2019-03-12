@@ -1,0 +1,48 @@
+plugins {
+    id 'net.ltgt.apt' version '0.15'
+    id "org.sonarqube" version "2.6"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'net.ltgt.apt-idea'
+apply plugin: 'net.ltgt.apt-eclipse'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    implementation project(':cares-common')
+	implementation project(':cares-iir:cares-iir-interfaces')
+	implementation project(':cares-iir:cares-iir-persistence')
+    implementation project(':cares-geo:cares-geo-interfaces')
+    implementation project(':cares-geo:cares-geo-rest-client')
+    implementation project(':cares-cics:cares-cics-interfaces')
+    implementation project(':cares-cics:cares-cics-rest-client')
+    implementation project(':cares-bre:cares-bre-interfaces')
+    implementation project(':cares-bre:cares-bre-rest-client')
+
+    implementation 'org.springframework.boot:spring-boot:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springBootVersion  
+    implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootVersion
+   
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
+    implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
+    implementation 'com.google.guava:guava:' + guavaVersion
+    implementation 'org.apache.commons:commons-collections4:' + commonsCollectionsVersion
+    implementation 'javax.validation:validation-api:' + javaxValidationVersion
+
+    implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion, {
+        transitive = false
+    }
+
+    implementation 'org.mapstruct:mapstruct-jdk8:' + mapstructVersion
+    compileOnly 'org.mapstruct:mapstruct-processor:' + mapstructVersion
+
+    annotationProcessor 'org.mapstruct:mapstruct-processor:' + mapstructVersion
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion 
+    testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
+    testImplementation 'commons-io:commons-io:' + commonsIoVersion        
+}

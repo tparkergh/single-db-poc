@@ -1,0 +1,12 @@
+version: '2.1'
+services:
+  cares-iir-rest-api:
+    image: cwds/cares-iir-rest-api
+    container_name: cares-iir-rest-api
+    ports:
+      - '3007:8090'
+    environment:
+      DB_CMS_JDBC_URL: jdbc:db2://db-1a.nonprod-gateway.cwds.io:4016/DBN1SOC
+      DB_CMS_USER: CWDSNS6
+      DB_CMS_PASSWORD: Dec2018A
+      DB_CMS_SCHEMA: CWSNS4

@@ -3,14 +3,7 @@
   "logic": {
     "if": [
       {
-        "and": [
-          {
-            "missing": "search.reporter.first_name"
-          },
-          {
-            "missing": "search.reporter.last_name"
-          }
-        ]
+        "missing_some": [1, ["search.reporter.first_name", "search.reporter.last_name"]]
       },
       "Last name or first name is required to search for a reporter.",
       true
