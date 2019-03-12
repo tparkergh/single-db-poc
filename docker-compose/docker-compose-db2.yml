@@ -1,0 +1,11 @@
+version: '2.1'
+services:
+  cwds-db2data:
+    image: cwds/db2data:single-db-poc
+    container_name: cwds-db2data
+    ports:
+    - '3010:50000'
+    privileged: true
+    environment:
+      DB2INST1_PASSWORD: db2inst1
+      LICENSE: accept
