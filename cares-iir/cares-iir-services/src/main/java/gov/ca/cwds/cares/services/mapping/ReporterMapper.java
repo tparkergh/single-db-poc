@@ -1,8 +1,8 @@
 package gov.ca.cwds.cares.services.mapping;
 
+import gov.ca.cwds.cares.common.identifier.CmsKeyIdGenerator;
 import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 import gov.ca.cwds.cics.model.ReporterData;
-import gov.ca.cwds.data.persistence.cms.CmsKeyIdGenerator;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

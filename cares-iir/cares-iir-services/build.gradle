@@ -26,13 +26,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop:' + springBootVersion
    
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:' + jacksonVersion
-    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
     implementation 'commons-beanutils:commons-beanutils:' + commonsBeanutilsVersion
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
+    implementation 'org.apache.commons:commons-lang3:' + commonsLangVersion
     implementation 'com.google.guava:guava:' + guavaVersion
-    implementation 'org.apache.commons:commons-collections4:' + commonsCollectionsVersion
-    implementation 'javax.validation:validation-api:' + javaxValidationVersion
-
     implementation 'gov.ca.cwds.api:api-core-common:' + apiCoreVersion, {
         transitive = false
     }
@@ -44,5 +41,5 @@ dependencies {
     
     testImplementation 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion 
     testImplementation 'org.skyscreamer:jsonassert:' + jsonassertVersion
-    testImplementation 'commons-io:commons-io:' + commonsIoVersion        
+    testImplementation 'commons-io:commons-io:' + commonsIoVersion
 }
