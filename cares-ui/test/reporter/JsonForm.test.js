@@ -20,7 +20,8 @@ describe("JsonForm", () => {
   })
 
   it('renders errors', () => {
-    const jsonForm = shallow(<JsonForm active={true} error={'error here'}/>)
+  	const model = new BaseModel({})
+    const jsonForm = shallow(<JsonForm active={true} model={model} error={'error here'}/>)
     expect(jsonForm.find('Alert').length).toEqual(1)
   })
 })

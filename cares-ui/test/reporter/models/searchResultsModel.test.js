@@ -58,7 +58,9 @@ describe('SearchResultsModel', () => {
       const createReporterSuccess = jasmine.createSpy('createReporterSuccess')
       const props = { searchResults: [], createReporterSuccess }
       const model = new SearchResultsModel(props)
+      const isEmptySpy = jasmine.createSpy('isEmpty').and.returnValue(true)
       const result = {
+        getQuestionByName: jasmine.createSpy().and.returnValue({isEmpty: isEmptySpy}),
         data: {
           first_name: 'first',
           last_name: 'last',
@@ -79,7 +81,9 @@ describe('SearchResultsModel', () => {
       const props = { searchResults: [], updateSearchModel }
       mockAxios.onPost(createReporterRoute()).reply(200)
       const model = new SearchResultsModel(props)
+      const isEmptySpy = jasmine.createSpy('isEmpty').and.returnValue(true)
       const result = {
+        getQuestionByName: jasmine.createSpy().and.returnValue({isEmpty: isEmptySpy}),
         data: {
           first_name: 'first',
           last_name: 'last',
@@ -103,7 +107,9 @@ describe('SearchResultsModel', () => {
       const updateSearchModel = jasmine.createSpy('upadteSearchModel')
       const props = { searchResults: [], updateSearchModel }
       const model = new SearchResultsModel(props)
+      const isEmptySpy = jasmine.createSpy('isEmpty').and.returnValue(true)
       const result = {
+        getQuestionByName: jasmine.createSpy().and.returnValue({isEmpty: isEmptySpy}),
         data: {
           first_name: 'first',
           last_name: 'last',
