@@ -25,5 +25,6 @@ export default class BaseModel extends Model {
   }
   update () {
   }
+  loadJsonRules () {}
 }
 
