@@ -1,3 +1,6 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+
 rule "reporter-di-suffix-title-description"
 
   @doc_description("Suffix title description cannot be more than 4 characters")

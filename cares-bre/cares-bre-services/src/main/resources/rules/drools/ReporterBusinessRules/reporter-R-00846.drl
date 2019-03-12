@@ -14,7 +14,7 @@ rule "reporter-R-00846"
   @doc_rule_name("REPORTER-R-00846")
   @doc_rule_category(BusinessPolicy)
   
-  @doc_doctool_name("00846 Badge Number Specification")
+  @doc_doctool_name("R - 00846 Badge Number Specification")
   @doc_doctool_description("BADGE NUMBER may only be specified if the REPORTER is associated with LAW ENFORCEMENT")
   @doc_doctool_access_logic("If Law Enforcement is entered, then Badge Number is enabled, else disabled")
   

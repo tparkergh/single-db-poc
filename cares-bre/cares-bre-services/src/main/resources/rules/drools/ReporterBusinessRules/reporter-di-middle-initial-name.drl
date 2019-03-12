@@ -1,3 +1,6 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+
 rule "reporter-di-middle-initial-name"
 
   @doc_description("Middle initial cannot be more that one character")

@@ -1,6 +1,6 @@
 rule "reporter-di-message-phone-number"
 
-  @doc_description("Message phone number must be 0 or 10 digits")
+  @doc_description("Message phone number must be a 0 or consist of 10 digits")
   
   @doc_external_documentation("xTool Application")
   @doc_enforcement_location("BRE")

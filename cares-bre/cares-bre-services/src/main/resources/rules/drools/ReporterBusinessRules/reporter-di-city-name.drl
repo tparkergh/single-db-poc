@@ -1,3 +1,6 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+
 rule "reporter-di-city-name"
 
   @doc_description("City name cannot be more than 20 characters")

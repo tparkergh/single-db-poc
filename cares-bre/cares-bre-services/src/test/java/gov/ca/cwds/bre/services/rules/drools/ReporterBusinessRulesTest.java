@@ -41,6 +41,11 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
   }
 
   @Test
+  public void reporter_di_birth_date() {
+
+  }
+
+  @Test
   public void reporter_di_city_name() {
     ReporterData reporterData = createValidReporterData();
 
@@ -52,6 +57,20 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
 
   }
 
+  @Test
+  public void reporter_di_communication_method_type() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setCommunicationMethod(99);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setCommunicationMethod(408);
+    checkBusinessRulesExecution(reporterData, 0);
+
+    reporterData.setCommunicationMethod(409);
+    checkBusinessRulesExecution(reporterData, 0);
+
+  }
 
   @Test
   public void reporter_di_confidential_wavier_ind() {
@@ -318,6 +337,11 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
   }
 
   @Test
+  public void reporter_di_title_description() {
+
+  }
+
+  @Test
   public void reporter_di_suffix_title_description() {
     ReporterData reporterData = createValidReporterData();
 
@@ -354,6 +378,30 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
     checkBusinessRulesExecution(reporterData, 1);             
   }
   
+  @Test
+  public void reporter_R_03232() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setZipNumber(null);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setZipNumber(123);
+    checkBusinessRulesExecution(reporterData, 1);
+
+  }
+
+  @Test
+  public void reporter_R_03233() {
+    ReporterData reporterData = createValidReporterData();
+
+    reporterData.setZipSuffixNumber(11);
+    checkBusinessRulesExecution(reporterData, 1);
+
+    reporterData.setZipSuffixNumber(null);
+    checkBusinessRulesExecution(reporterData, 1);
+
+  }
+
   private ReporterData createValidReporterData() {
     ReporterData reporterData = new ReporterData();
 
@@ -393,6 +441,7 @@ public class ReporterBusinessRulesTest extends DroolsBusinessRulesTestBase {
   private void checkBusinessRulesExecution(ReporterData reporterData, int issuesExpected) {
     BreRequest breRequest = createBreRequest(ReporterBusinessRules.class.getSimpleName(), reporterData);    
     BreResponse breResponse = getDroolsBusinessRules().execute(breRequest);
+
     Assert.assertEquals(issuesExpected, breResponse.getIssues().size());
   }
 }
