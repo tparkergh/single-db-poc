@@ -1,4 +1,4 @@
-package gov.ca.cwds.data.persistence.cms;
+package gov.ca.cwds.cares.common.identifier;
 
 /**
  * Common base-62 algorithm. Varied flavors online. Customized for CMS legacy keys. Converts base-10

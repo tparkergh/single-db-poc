@@ -1,4 +1,4 @@
-package gov.ca.cwds.data.persistence.cms;
+package gov.ca.cwds.cares.common.identifier;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -12,7 +12,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 //import gov.ca.cwds.data.legacy.cms.CmsPersistentObject;
-import gov.ca.cwds.data.persistence.cms.CmsKeyIdGenerator.KeyDetail;
+import gov.ca.cwds.cares.common.identifier.CmsKeyIdGenerator;
+import gov.ca.cwds.cares.common.identifier.CmsKeyIdGenerator.KeyDetail;
 import gov.ca.cwds.rest.services.ServiceException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -35,9 +36,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.apache.commons.collections4.map.PassiveExpiringMap;
 import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,7 +120,7 @@ public final class CmsKeyIdGeneratorTest {
     for (int i = 0; i < 500; i++) {
       final String keyOne = CmsKeyIdGenerator.getNextValue("0yz");
       final String keySecond = CmsKeyIdGenerator.getNextValue("0yz");
-      assertFalse(keyOne.equals(keySecond));
+      Assert.assertFalse(keyOne.equals(keySecond));
     }
   }
 
@@ -133,21 +136,21 @@ public final class CmsKeyIdGeneratorTest {
       final String key = CmsKeyIdGenerator.getNextValue("0yz");
       final Date generatedDate = CmsKeyIdGenerator.getDateFromKey(key);
       System.out.println("generatedDate: " + generatedDate);
-      assertTrue("generated date in the future!", generatedDate.before(future));
+      Assert.assertTrue("generated date in the future!", generatedDate.before(future));
     }
   }
 
   @Test
   public void testGenKeyGood() {
     final String key = CmsKeyIdGenerator.getNextValue("0X5");
-    assertTrue("key not generated", key != null && key.length() == GOOD_KEY_LEN);
+    Assert.assertTrue("key not generated", key != null && key.length() == GOOD_KEY_LEN);
   }
 
   @Test
   public void testGenKeyGoodStaff2() {
     // Good staff id.
     final String key = CmsKeyIdGenerator.getNextValue("0yz");
-    assertTrue("key not generated", key != null && key.length() == GOOD_KEY_LEN);
+    Assert.assertTrue("key not generated", key != null && key.length() == GOOD_KEY_LEN);
   }
 
   @Test
@@ -245,20 +248,20 @@ public final class CmsKeyIdGeneratorTest {
 
   @Test
   public void type() throws Exception {
-    assertThat(CmsKeyIdGenerator.class, notNullValue());
+    Assert.assertThat(CmsKeyIdGenerator.class, CoreMatchers.notNullValue());
   }
 
   @Test
   public void createTimestampStr_Args__Date() throws Exception {
-    Date ts = mock(Date.class);
+    Date ts = Mockito.mock(Date.class);
     String actual = CmsKeyIdGenerator.createTimestampStr(ts);
-    assertTrue("bad generated timestamp", RGX_LEGACY_TIMESTAMP.matcher(actual).matches());
+    Assert.assertTrue("bad generated timestamp", RGX_LEGACY_TIMESTAMP.matcher(actual).matches());
   }
 
   @Test
   public void createTimestampStr_Args__() throws Exception {
     final String actual = CmsKeyIdGenerator.createTimestampStr();
-    assertTrue("bad generated timestamp", RGX_LEGACY_TIMESTAMP.matcher(actual).matches());
+    Assert.assertTrue("bad generated timestamp", RGX_LEGACY_TIMESTAMP.matcher(actual).matches());
   }
 
   @Test
@@ -269,29 +272,29 @@ public final class CmsKeyIdGeneratorTest {
     final long actual = CmsKeyIdGenerator.timestampToLong(cal);
     // final double expected = 5.922526581E9;
     // assertThat(actual, is(equalTo(expected)));
-    assertThat(actual, is(not(0)));
+    Assert.assertThat(actual, CoreMatchers.is(CoreMatchers.not(0)));
   }
 
   @Test(expected = ServiceException.class)
   public void makeKey_Args__String__Date__null_staff() throws Exception {
     final String staffId = null;
-    final Date ts = mock(Date.class);
+    final Date ts = Mockito.mock(Date.class);
     final String actual = CmsKeyIdGenerator.makeKey(staffId, ts);
     final String expected = null;
-    assertThat(actual, is(equalTo(expected)));
+    Assert.assertThat(actual, CoreMatchers.is(CoreMatchers.equalTo(expected)));
   }
 
   @Test
   public void generate_Args__String__null_staff() throws Exception {
     final String actual = CmsKeyIdGenerator.getNextValue(null);
-    assertTrue("bad generated key", RGX_LEGACY_KEY.matcher(actual).matches());
+    Assert.assertTrue("bad generated key", RGX_LEGACY_KEY.matcher(actual).matches());
   }
 
   @Test
   public void generate_Args__String__Date() throws Exception {
     final String staffId = "0X5";
     final String actual = CmsKeyIdGenerator.getNextValue(staffId);
-    assertThat(actual, is(not("")));
+    Assert.assertThat(actual, CoreMatchers.is(CoreMatchers.not("")));
   }
 
   @Test
@@ -301,7 +304,7 @@ public final class CmsKeyIdGeneratorTest {
     final String key = "5Y3vKVs0X5";
     final String actual = CmsKeyIdGenerator.getUIIdentifierFromKey(key);
     final String expected = "0315-2076-8676-8002051";
-    assertThat(actual, is(equalTo(expected)));
+    Assert.assertThat(actual, CoreMatchers.is(CoreMatchers.equalTo(expected)));
   }
 
   /**
@@ -327,7 +330,7 @@ public final class CmsKeyIdGeneratorTest {
 
     final Date localDate = CmsKeyIdGenerator.getDateFromKey(thirdIdFromXTools);
     System.out.println("localDate: " + sdf.format(localDate));
-    assertEquals(dateFromXtools.getTime(), localDate.getTime());
+    Assert.assertEquals(dateFromXtools.getTime(), localDate.getTime());
   }
 
   @Test
@@ -344,8 +347,8 @@ public final class CmsKeyIdGeneratorTest {
     System.out.println(
         "localDate: " + sdf.format(localDate) + ", dateFromXtools: " + sdf.format(dateFromXtools));
 
-    assertEquals(dateFromXtools.getTime(), localDate.getTime());
-    assertEquals(thirdId, thirdIdFromXTools);
+    Assert.assertEquals(dateFromXtools.getTime(), localDate.getTime());
+    Assert.assertEquals(thirdId, thirdIdFromXTools);
   }
 
   protected void iterateExpiringMap(Map<String, String> keepKey, Map<String, String> lastKey,
@@ -363,9 +366,9 @@ public final class CmsKeyIdGeneratorTest {
       LOGGER.info("staff id: {}, actual: {}", staffId, actual);
 
       if (expired) {
-        assertThat(actual, is(nullValue()));
+        Assert.assertThat(actual, CoreMatchers.is(CoreMatchers.nullValue()));
       } else {
-        assertThat(actual, is(equalTo(expected)));
+        Assert.assertThat(actual, CoreMatchers.is(CoreMatchers.equalTo(expected)));
       }
     }
   }
@@ -523,24 +526,24 @@ public final class CmsKeyIdGeneratorTest {
     LOGGER.info("Time (milis): {}, expected keys: {}, actual keys: {}",
         (System.currentTimeMillis() - start.getTime()), expectedCount, actual);
 
-    assertEquals("Number of unique IDs generated NOT equals to total number of IDs generated.",
+    Assert.assertEquals("Number of unique IDs generated NOT equals to total number of IDs generated.",
         expectedCount, actual);
   }
 
   @Test
   public void toBase62KeyTest_success() {
     Assert.assertThat(CmsKeyIdGenerator.getKeyFromUIIdentifier("0606-2209-3706-2001439"),
-        is(equalTo("AfiTGrO0ND")));
+        CoreMatchers.is(CoreMatchers.equalTo("AfiTGrO0ND")));
     Assert.assertThat(CmsKeyIdGenerator.getKeyFromUIIdentifier("0589-7630-0758-6027230"),
-        is(equalTo("ANkfTZy75C")));
+        CoreMatchers.is(CoreMatchers.equalTo("ANkfTZy75C")));
     Assert.assertThat(CmsKeyIdGenerator.getKeyFromUIIdentifier("0589-7630-0758-6027231"),
-        is(equalTo("ANkfTZy75D")));
+        CoreMatchers.is(CoreMatchers.equalTo("ANkfTZy75D")));
     Assert.assertThat(CmsKeyIdGenerator.getKeyFromUIIdentifier("0597-8741-7200-7238327"),
-        is(equalTo("AWbb5yZzzz")));
+        CoreMatchers.is(CoreMatchers.equalTo("AWbb5yZzzz")));
     Assert.assertThat(CmsKeyIdGenerator.getKeyFromUIIdentifier("0031-4206-2756-0001736"),
-        is(equalTo("0YIPkZU0S0")));
+        CoreMatchers.is(CoreMatchers.equalTo("0YIPkZU0S0")));
     Assert.assertThat(CmsKeyIdGenerator.getKeyFromUIIdentifier("0031-420-6275-60001736"),
-        is(equalTo("0YIPkZU0S0")));
+        CoreMatchers.is(CoreMatchers.equalTo("0YIPkZU0S0")));
   }
 
   @Test(expected = IllegalArgumentException.class)

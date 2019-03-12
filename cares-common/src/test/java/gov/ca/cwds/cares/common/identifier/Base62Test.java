@@ -1,4 +1,4 @@
-package gov.ca.cwds.data.persistence.cms;
+package gov.ca.cwds.cares.common.identifier;
 
 import static junit.framework.Assert.assertEquals;
 
