@@ -17,6 +17,10 @@ export default class SearchModel extends BaseModel {
     this.onCompleting.add(this.search.bind(this))
   }
 
+  update(props) {
+    this.props = props
+  }
+
   search(result, options) {
     const {
       setSearchResults,

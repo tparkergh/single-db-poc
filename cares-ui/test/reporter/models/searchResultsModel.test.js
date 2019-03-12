@@ -21,12 +21,46 @@ describe('SearchResultsModel', () => {
     expect(model.loadResults).toHaveBeenCalledWith(props)
   })
 
+  describe('loadResults', () => {
+    it('formats the result', () => {
+      const props = {
+        searchResults: [{
+          first_name: 'first',
+          last_name: 'last',
+          primary_phone_number: 1234567890
+        }]
+      }
+      const model = new SearchResultsModel(props)
+      spyOn(model, 'formatSearchResult')
+      model.loadResults(props)
+      expect(model.formatSearchResult).toHaveBeenCalled()
+    })
+  })
+
+  describe('formatSearchResult', () => {
+    it('displays first_name, last_name, and phone_number', () => {
+      const result = {
+        first_name: 'first',
+        last_name: 'last',
+        primary_phone_number: 1234567890
+      }
+      const props = {}
+      const model = new SearchResultsModel(props)
+      const formatedResult = model.formatSearchResult(result)
+      expect(formatedResult).toMatch(/first/)
+      expect(formatedResult).toMatch(/last/)
+      expect(formatedResult).toMatch(/1234567890/)
+    })
+  })
+
   describe('createReporter', () => {
     it('creates a reporter', (done) => {
       const createReporterSuccess = jasmine.createSpy('createReporterSuccess')
       const props = { searchResults: [], createReporterSuccess }
       const model = new SearchResultsModel(props)
+      const isEmptySpy = jasmine.createSpy('isEmpty').and.returnValue(true)
       const result = {
+        getQuestionByName: jasmine.createSpy().and.returnValue({isEmpty: isEmptySpy}),
         data: {
           first_name: 'first',
           last_name: 'last',
@@ -47,7 +81,9 @@ describe('SearchResultsModel', () => {
       const props = { searchResults: [], updateSearchModel }
       mockAxios.onPost(createReporterRoute()).reply(200)
       const model = new SearchResultsModel(props)
+      const isEmptySpy = jasmine.createSpy('isEmpty').and.returnValue(true)
       const result = {
+        getQuestionByName: jasmine.createSpy().and.returnValue({isEmpty: isEmptySpy}),
         data: {
           first_name: 'first',
           last_name: 'last',
@@ -71,7 +107,9 @@ describe('SearchResultsModel', () => {
       const updateSearchModel = jasmine.createSpy('upadteSearchModel')
       const props = { searchResults: [], updateSearchModel }
       const model = new SearchResultsModel(props)
+      const isEmptySpy = jasmine.createSpy('isEmpty').and.returnValue(true)
       const result = {
+        getQuestionByName: jasmine.createSpy().and.returnValue({isEmpty: isEmptySpy}),
         data: {
           first_name: 'first',
           last_name: 'last',

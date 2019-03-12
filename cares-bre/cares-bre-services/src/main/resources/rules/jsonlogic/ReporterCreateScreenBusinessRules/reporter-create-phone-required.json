@@ -3,7 +3,7 @@
   "logic": {
     "if": [
       {
-        "missing": "create.reporter.phone_number"
+        "missing": ["create.reporter.phone_number"]
       },
       "A phone number is required to create a reporter.",
       true

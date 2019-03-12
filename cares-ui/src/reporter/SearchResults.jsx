@@ -1,5 +1,3 @@
-import { Component, Fragment } from "react";
-import { Survey } from "survey-react";
 import { connect } from 'react-redux'
 import {
   setSearchResults,
@@ -15,39 +13,9 @@ import {
   selectSearchResultsModelActive,
   selectSearchModelData
 } from './selectors'
-import { Alert } from "@cwds/components";
+import JsonForm from './JsonForm'
 
-export class SearchResults extends Component {
-  constructor (props) {
-    super(props)
-    this.model = new SearchResultsModel(this.props)
-  }
-
-  componentDidMount() {
-    this.model.loadJsonRules()
-  }
-
-  componentDidUpdate() {
-    const { data } = this.props
-    this.model.update(this.props, data)
-  }
-
-  render () {
-    if (this.props.active) {
-      const errorMsg = this.props.error
-      return (
-        <Fragment>
-          {errorMsg && 
-            <Alert className="errorMessage-customizable" color="danger">
-              {errorMsg}
-            </Alert>
-          }
-          <Survey model={this.model} />
-       </Fragment>)
-    } 
-    return null
-  }
-}
+const model = new SearchResultsModel({})
 
 const mapStateToProps = (state, ownProps) => ({
   searchResults: selectReporterSearchResults(state),
@@ -65,4 +33,11 @@ const mapDispatchToProps = {
   createReporterError
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchResults)
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  model
+})
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(JsonForm)

@@ -60,8 +60,9 @@ export default class SearchResultsModel extends BaseModel {
     }
   }
 
-  update (props, data) {
-    this.data = data
+  update (props) {
+    this.props = props
+    this.data = props.data
     this.loadResults(props)
   }
 
@@ -74,10 +75,9 @@ export default class SearchResultsModel extends BaseModel {
       element.errors = []
       if (searchResults && searchResults.length > 0) {
         searchResults.map((result, index) => {
-          const { first_name: firstName, last_name: lastName } = result
           element.choices.push(new ItemValue({
             value: index,
-            text: `${firstName} ${lastName}`
+            text: this.formatSearchResult(result)
           }))
         })
       } else {
@@ -85,6 +85,15 @@ export default class SearchResultsModel extends BaseModel {
       }
     }
   }
+
+  formatSearchResult ({first_name, last_name, primary_phone_number: phone_number}) {
+    return [
+      `Name: ${first_name} ${last_name}`,
+      `Phone Number: ${phone_number}`
+    ].join("\n")
+  }
+
+
 
   setContinueText(sender, options) {
     if(options.name === "reporter") {
