@@ -6,5 +6,8 @@ import gov.ca.cwds.cares.interfaces.model.people.Reporter;
  * CWDS J Team
  */
 public interface ReporterService {
+  
   Reporter createReporter(Reporter reporter);
+  
+  Reporter getReporter(String identifier);
 }
