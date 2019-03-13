@@ -1,11 +1,8 @@
 package gov.ca.cwds.cares.interfaces.model.people;
 
+import gov.ca.cwds.cares.interfaces.model.BaseEntity;
 import java.io.Serializable;
 import java.time.LocalDate;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -18,11 +15,10 @@ import gov.ca.cwds.cares.interfaces.model.Address;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Reporter implements Serializable {
+public class Reporter extends BaseEntity implements Serializable {
 
   private static final long serialVersionUID = 653930568046236729L;
   
-  private String identifier;
   private String firstName;
   private String lastName;
   private Long phoneNumber;
@@ -35,14 +31,6 @@ public class Reporter implements Serializable {
 
   public Reporter() {
     super();
-  }
-
-  public String getIdentifier() {
-    return identifier;
-  }
-
-  public void setIdentifier(String identifier) {
-    this.identifier = identifier;
   }
 
   public String getFirstName() {
@@ -116,20 +104,4 @@ public class Reporter implements Serializable {
   public void setAddress(Address address) {
     this.address = address;
   }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-  }
-
 }

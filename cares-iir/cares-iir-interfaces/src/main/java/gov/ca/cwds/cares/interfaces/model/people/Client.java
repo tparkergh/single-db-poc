@@ -1,11 +1,8 @@
 package gov.ca.cwds.cares.interfaces.model.people;
 
+import gov.ca.cwds.cares.interfaces.model.BaseModel;
 import java.io.Serializable;
 import java.time.LocalDate;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -14,7 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Client implements Serializable {
+public class Client extends BaseModel implements Serializable {
   
   private static final long serialVersionUID = 8200582244872085377L;
   
@@ -188,20 +185,5 @@ public class Client implements Serializable {
 
   public void setSoUnableToDetermineCode(String soUnableToDetermineCode) {
     this.soUnableToDetermineCode = soUnableToDetermineCode;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }
