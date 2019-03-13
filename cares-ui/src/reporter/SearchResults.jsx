@@ -4,6 +4,7 @@ import {
   clearSearchResults,
   updateSearchModel,
   updateSearchResultsModel,
+  updateReporterModel,
   createReporterSuccess, 
   createReporterError
 } from './actions'
@@ -29,6 +30,8 @@ const mapDispatchToProps = {
   clearSearchResults,
   updateSearchModel,
   updateSearchResultsModel,
+  updateReporterModel,
+  selectSearchModelData,
   createReporterSuccess,
   createReporterError
 }

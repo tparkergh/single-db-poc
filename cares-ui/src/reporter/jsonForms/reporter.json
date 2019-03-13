@@ -1,0 +1,99 @@
+{
+  "title": "Reporter Template",
+  "name": "enterPerson",
+  "checkErrorsMode": "onValueChanged",
+  "completeText": "Continue",
+  "questionErrorLocation": "bottom",
+  "elements": [{
+    "type": "panel",
+    "name": "reporterInfo",
+    "elements": [
+      {
+        "type": "text",
+        "name": "first_name",
+        "title": "First Name",
+        "text": "Enter first name"
+      },
+      {
+        "type": "text",
+        "name": "last_name",
+        "title": "Last Name",
+        "startWithNewLine": false
+      },
+      {
+        "type": "text",
+        "name": "phone_number",
+        "title": "Call back phone number",
+        "width": "30%"
+      },
+      {
+        "type": "text",
+        "name": "extension",
+        "title": "Ext.",
+        "width": "20%",
+        "startWithNewLine": false
+      },
+      {
+        "type": "dropdown",
+        "name": "relationship",
+        "title": "Relationship to child",
+        "optionsCaption": "Reporter",
+        "defaultValue": "Reporter",
+        "startWithNewLine": false
+      },
+      {
+        "type": "text",
+        "name": "date_of_birth",
+        "title": "Date of Birth",
+        "startWithNewLine": false
+      }
+    ]},
+    {
+    "type": "panel",
+    "name": "reporterInfo",
+    "elements": [
+      {
+        "type": "text",
+        "name": "employer",
+        "title": "Employer",
+        "width": "50%",
+        "startWithNewLine": false
+      },
+      {
+        "type": "text",
+        "name": "title",
+        "title": "Title",
+        "width": "50%",
+        "startWithNewLine": false
+      },
+      {
+        "type": "text",
+        "name": "address",
+        "title": "Address",
+        "width": "50%",
+        "startWithNewLine": false
+      },
+      {
+        "type": "text",
+        "name": "city",
+        "title": "City",
+        "width": "50%",
+        "startWithNewLine": false
+      },
+      {
+        "type": "text",
+        "name": "zip_code",
+        "title": "Zip Code",
+        "width": "50%",
+        "startWithNewLine": false
+      },
+      {
+        "type": "text",
+        "name": "state",
+        "title": "State",
+        "width": "50%",
+        "startWithNewLine": false
+      }
+    ]}
+  ]
+}
