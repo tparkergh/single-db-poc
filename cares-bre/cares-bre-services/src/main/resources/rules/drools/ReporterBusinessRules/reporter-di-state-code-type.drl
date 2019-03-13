@@ -1,4 +1,7 @@
-rule "reporter-di-state-code-typ"
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+
+rule "reporter-di-state-code-type"
 
   @doc_description("State Code Type must be a space or valid")
   
@@ -25,7 +28,16 @@ rule "reporter-di-state-code-typ"
   agenda-group "ReporterBusinessRules-validation-agenda"
   
   when
-
+ 
+	$reporterData: ReporterData(state == null)
+	
   then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + $reporterData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.CONSTRAINT_VALIDATION);
+    details.setProperty("reporterData.state");
+    details.setInvalidValue($reporterData.state);
+    validationDetailsList.add(details);
 
 end

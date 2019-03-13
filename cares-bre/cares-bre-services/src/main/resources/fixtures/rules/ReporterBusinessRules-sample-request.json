@@ -11,6 +11,7 @@
 		"COL_RELC":0,
 		"CMM_MTHC":0,
 		"CNFWVR_IND":"N",
+		"CNTY_SPFCD":"99",
 		"FDBACK_DOC":"",
 		"RPTR_EMPNM":"",
 		"FEEDBCK_DT":"",
@@ -22,7 +23,7 @@
 		"MSG_TEL_NO":0,
 		"MID_INI_NM":"",
 		"NMPRFX_DSC":"",
-		"PRM_TEL_NO":123456790,
+		"PRM_TEL_NO":1234567890,
 		"PRM_EXT_NO":0,
 		"STATE_C":0,
 		"RPTR_ST_NM":"1234567890123456789012345678901234567890",
@@ -31,8 +32,7 @@
 		"RPTR_ZIPNO":0,
 		"FKREFERL_T":"",
 		"FKLAW_ENFT":"1234567ABC",
-		"ZIP_SFX_NO":0,
-		"CNTY_SPFCD ":"99"
+		"ZIP_SFX_NO":0
       }
     }
   ]
