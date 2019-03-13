@@ -1,5 +1,6 @@
 package gov.ca.cwds.cares.interfaces.model.search;
 
+import gov.ca.cwds.cares.interfaces.model.BaseModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +21,7 @@ import gov.ca.cwds.cares.interfaces.model.search.hit.SearchHit;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SearchResults implements Serializable, ExecutionTimeRecorder {
+public class SearchResults extends BaseModel implements Serializable, ExecutionTimeRecorder {
   
   private static final long serialVersionUID = 4356596417435911062L;
   
@@ -54,20 +55,5 @@ public class SearchResults implements Serializable, ExecutionTimeRecorder {
 
   public void setExecutionTimeMillis(Long executionTimeMillis) {
     this.executionTimeMillis = executionTimeMillis;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }
