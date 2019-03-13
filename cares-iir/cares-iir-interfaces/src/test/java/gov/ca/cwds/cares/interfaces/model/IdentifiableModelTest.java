@@ -7,17 +7,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BaseEntityTest {
+public class IdentifiableModelTest {
   private String base10_identifier;
   private String base62_identifier;
 
-  BaseEntity entity;
+  IdentifiableModel entity;
 
   @Before
   public void setup(){
     base10_identifier = "0YIPkZU0S0";
     base62_identifier = "0031-4206-2756-0001736";
-    entity = new BaseEntity();
+    entity = new IdentifiableModel();
   }
 
   @Test

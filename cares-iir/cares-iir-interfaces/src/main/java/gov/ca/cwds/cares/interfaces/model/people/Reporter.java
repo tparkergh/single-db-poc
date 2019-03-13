@@ -1,6 +1,6 @@
 package gov.ca.cwds.cares.interfaces.model.people;
 
-import gov.ca.cwds.cares.interfaces.model.BaseEntity;
+import gov.ca.cwds.cares.interfaces.model.IdentifiableModel;
 import java.io.Serializable;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -15,7 +15,7 @@ import gov.ca.cwds.cares.interfaces.model.Address;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Reporter extends BaseEntity implements Serializable {
+public class Reporter extends IdentifiableModel implements Serializable {
 
   private static final long serialVersionUID = 653930568046236729L;
   
