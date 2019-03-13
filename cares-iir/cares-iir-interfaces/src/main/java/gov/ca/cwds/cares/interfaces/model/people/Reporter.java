@@ -1,6 +1,7 @@
 package gov.ca.cwds.cares.interfaces.model.people;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import gov.ca.cwds.cares.interfaces.model.Address;
 
 /**
  * @author CWDS Team
@@ -26,6 +28,10 @@ public class Reporter implements Serializable {
   private Long phoneNumber;
   private Integer phoneExtension;
   private String relationToChild;
+  private LocalDate birthDate;
+  private String employerName;
+  private String title;
+  private Address address;  
 
   public Reporter() {
     super();
@@ -77,6 +83,38 @@ public class Reporter implements Serializable {
 
   public void setRelationToChild(String relationToChild) {
     this.relationToChild = relationToChild;
+  }
+
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
+
+  public void setBirthDate(LocalDate birthDate) {
+    this.birthDate = birthDate;
+  }
+
+  public String getEmployerName() {
+    return employerName;
+  }
+
+  public void setEmployerName(String employerName) {
+    this.employerName = employerName;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
   }
 
   @Override
