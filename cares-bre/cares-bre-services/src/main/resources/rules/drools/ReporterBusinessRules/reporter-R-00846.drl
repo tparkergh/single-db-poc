@@ -3,8 +3,6 @@ import gov.ca.cwds.rest.exception.IssueType;
 import gov.ca.cwds.cics.model.ReporterData;
 import org.drools.core.util.StringUtils;
 
-global java.util.Set validationDetailsList
-
 rule "reporter-R-00846"
   @doc_description("R - 00846 Badge Number Specification")
   @doc_external_documentation("docTools")

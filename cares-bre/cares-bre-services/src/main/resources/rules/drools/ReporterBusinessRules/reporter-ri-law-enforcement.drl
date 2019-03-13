@@ -3,7 +3,7 @@ rule "reporter-ri-law-enforcement"
   @doc_description("Optional foreign key that 'is employeed by' a LAW_ENFORCEMENT")
   
   @doc_external_documentation("xTool Application")
-  @doc_enforcement_location("BRE, ZOS")
+  @doc_enforcement_location("")
   @doc_rule_category("ReferentialIntegrity")
   @doc_rule_type("xTool")
   @doc_drools_file("reporter-ri-law-enforcement.drl")

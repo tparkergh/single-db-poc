@@ -1,6 +1,3 @@
-import gov.ca.cwds.rest.exception.IssueDetails;
-import gov.ca.cwds.rest.exception.IssueType;
-
 rule "reporter-di-birth-date"
 
   @doc_description("Birth date must be a valid date (YY/MM/DD) if entered"")

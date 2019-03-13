@@ -1,5 +1,6 @@
 import gov.ca.cwds.rest.exception.IssueDetails;
 import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.ReporterData;
 
 rule "reporter-di-last-name"
 
