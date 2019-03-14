@@ -1,6 +1,5 @@
 package gov.ca.cwds.cares.interfaces.model.people;
 
-import gov.ca.cwds.cares.interfaces.model.BaseModel;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,12 +7,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 import gov.ca.cwds.cares.interfaces.model.Address;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClientAddress extends BaseModel implements Serializable {
+public class ClientAddress extends ObjectBase implements Serializable {
   
   private static final long serialVersionUID = 5237768756638520258L;
   

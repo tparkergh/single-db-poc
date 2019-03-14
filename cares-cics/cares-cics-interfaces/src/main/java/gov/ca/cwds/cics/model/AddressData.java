@@ -3,17 +3,15 @@ package gov.ca.cwds.cics.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 import gov.ca.cwds.cics.binding.GeoLocationSerializer;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * CWDS J Team
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AddressData {
+public class AddressData extends ObjectBase {
+  
   @JsonProperty("TXN_HDR_STAFF_ID")
   private String txnHeaderStaffId;
   @JsonProperty("IDENTIFIER")
@@ -268,20 +266,5 @@ public class AddressData {
 
   public void setLongitude(Double longitude) {
     this.longitude = longitude;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

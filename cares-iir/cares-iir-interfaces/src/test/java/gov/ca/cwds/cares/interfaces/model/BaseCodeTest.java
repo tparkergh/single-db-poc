@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 public class BaseCodeTest {
   @Test
@@ -48,7 +49,7 @@ public class BaseCodeTest {
     assertNotEquals(child1.hashCode(), child2.hashCode());
   }
 
-  class ChildModel extends BaseModel{
+  class ChildModel extends ObjectBase{
     private String foo;
     private String bar;
 

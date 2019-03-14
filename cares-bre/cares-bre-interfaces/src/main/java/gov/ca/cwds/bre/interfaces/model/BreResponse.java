@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import gov.ca.cwds.cares.common.model.ExecutionTimeRecorder;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 import gov.ca.cwds.rest.exception.IssueDetails;
 
 /**
@@ -21,7 +18,7 @@ import gov.ca.cwds.rest.exception.IssueDetails;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class BreResponse implements ExecutionTimeRecorder {
+public final class BreResponse extends ObjectBase implements ExecutionTimeRecorder {
   
   private Long executionTimeMillis;
   private String businessRuleSetName;
@@ -68,20 +65,5 @@ public final class BreResponse implements ExecutionTimeRecorder {
   @Override
   public void setExecutionTimeMillis(Long executionTimeMillis) {
     this.executionTimeMillis = executionTimeMillis;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

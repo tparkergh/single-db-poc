@@ -1,16 +1,12 @@
 package gov.ca.cwds.cares.persistence.entity;
 
 import java.io.Serializable;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 /**
  * CWDS J Team
  */
-public class PersonCrossReferencePK implements Serializable {
+public class PersonCrossReferencePK extends ObjectBase implements Serializable {
   private static final long serialVersionUID = 4138049536599812353L;
 
   private String personId;
@@ -50,20 +46,5 @@ public class PersonCrossReferencePK implements Serializable {
 
   public void setXrefCode(XrefCode xrefCode) {
     this.xrefCode = xrefCode;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

@@ -10,15 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 @Entity
 @Table(name = "CL_ADDRT")
 @NamedQuery(name = "ClientAddressEntity.findByClientId", query = "SELECT ca FROM ClientAddressEntity ca WHERE ca.clientId = ?1")
-public class ClientAddressEntity implements Serializable {
+public class ClientAddressEntity extends ObjectBase implements Serializable {
   
   private static final long serialVersionUID = 9121958878607026060L;
 
@@ -158,20 +155,5 @@ public class ClientAddressEntity implements Serializable {
 
   public void setAddress(AddressEntity address) {
     this.address = address;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

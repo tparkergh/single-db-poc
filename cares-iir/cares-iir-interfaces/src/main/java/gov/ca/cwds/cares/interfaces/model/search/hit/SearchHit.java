@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import gov.ca.cwds.cares.interfaces.model.BaseModel;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 /**
  * @author CWDS J Team
@@ -20,7 +20,7 @@ import gov.ca.cwds.cares.interfaces.model.BaseModel;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class SearchHit extends BaseModel implements Serializable {
+public abstract class SearchHit extends ObjectBase implements Serializable {
 
   private static final long serialVersionUID = -3254906030686979013L;
   
