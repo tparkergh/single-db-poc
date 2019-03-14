@@ -2,9 +2,6 @@ import SearchResultsJSON from "../jsonForms/searchResults"
 import BaseModel from './baseModel'
 import { ItemValue, SurveyError } from "survey-react";
 import axios from 'axios'
-import {
-  getBreRuleSetRoute
-} from '../../routes'
 
 export default class SearchResultsModel extends BaseModel {
   constructor (props) {
@@ -74,22 +71,6 @@ export default class SearchResultsModel extends BaseModel {
         this.completeText = "Continue"
     }
     this.render()
-  }
-  loadJsonRules() {
-    const { createReporterError } = this.props
-    return axios({
-      url: getBreRuleSetRoute('ReporterCreateScreenBusinessRules'),
-      method: 'get',
-    }).then((result) => {
-      result.data.rules.map((rule) =>
-        this.engine.define({
-          identifier: rule.name,
-          definition: rule.logic
-        })
-      )
-    }).catch((error) => {
-      createReporterError && createReporterError(error)
-    })
   }
 }
 

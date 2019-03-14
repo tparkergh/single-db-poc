@@ -4,8 +4,13 @@ import axios from 'axios'
 import {
   createReporterRoute
 } from '../../routes'
+import {
+  getBreRuleSetRoute
+} from '../../routes'
 
 export default class ReporterModel extends BaseModel {
+  RULE_PREFIX="create.reporter."
+
   constructor(props) {
     super(ReporterJSON)
     this.props = props
@@ -58,6 +63,34 @@ export default class ReporterModel extends BaseModel {
       phone_number: parseInt(phone_number),
       relation_to_child: relationship
     }
+  }
+
+  validationData() {
+    return {
+      create: {
+        reporter: {
+          ...this.data
+        }
+      }
+    }
+  }
+
+
+  loadJsonRules() {
+    const { createReporterError } = this.props
+    return axios({
+      url: getBreRuleSetRoute('ReporterCreateScreenBusinessRules'),
+      method: 'get',
+    }).then((result) => {
+      result.data.rules.map((rule) =>
+        this.engine.define({
+          identifier: rule.name,
+          definition: rule.logic
+        })
+      )
+    }).catch((error) => {
+      createReporterError && createReporterError(error)
+    })
   }
 }
 
