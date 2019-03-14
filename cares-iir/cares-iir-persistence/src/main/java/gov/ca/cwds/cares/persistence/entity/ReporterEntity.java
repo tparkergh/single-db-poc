@@ -112,10 +112,10 @@ public class ReporterEntity implements Serializable {
   @Column(name = "ZIP_SFX_NO")
   private Integer zipSuffix;
 
-  @Column(name = "BIRTH_DATE")
+  @Column(name = "BIRTH_DT")
   private LocalDate birthDate;
 
-  @Column(name = "TITLE_DESCRIPTION")
+  @Column(name = "TITLE_DESC")
   private String titleDescription;
 
   public String getIdentifier() {
