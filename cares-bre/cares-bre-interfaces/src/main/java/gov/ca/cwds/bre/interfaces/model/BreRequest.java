@@ -14,7 +14,7 @@ import gov.ca.cwds.cares.common.model.ObjectBase;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class BreRequest extends ObjectBase {
+public class BreRequest extends ObjectBase {
   
   private String businessRuleSetName;  
   private List<BreRequestData> dataObjects = new ArrayList<>();

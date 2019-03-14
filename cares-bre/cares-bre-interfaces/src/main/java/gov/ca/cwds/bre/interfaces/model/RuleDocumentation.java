@@ -12,7 +12,7 @@ import gov.ca.cwds.cares.common.model.ObjectBase;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class RuleDocumentation extends ObjectBase implements Serializable {
+public class RuleDocumentation extends ObjectBase implements Serializable {
 
   private static final long serialVersionUID = 9124183648641028487L;
 
