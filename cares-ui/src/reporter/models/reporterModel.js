@@ -19,6 +19,11 @@ export default class ReporterModel extends BaseModel {
       this.update(this.props)
     })
     this.onCompleting.add(this.createReporter.bind(this))
+
+    // hook for demoing dynamically adding rules
+    window.rules = this.engine.rules
+    window.addRule = this.engine.define
+    window.removeRule = (id) => this.engine.destroy((rule) => rule.identifier === id)
   }
 
   update(props) {
