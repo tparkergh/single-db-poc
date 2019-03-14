@@ -5,6 +5,7 @@ import marked from 'marked'
 export default class BaseModel extends Model {
   constructor(json) {
     super(json)
+    this.showQuestionNumbers = "off"
     this.engine = new JsonBRE()
 
     this.onErrorCustomText.add((survey, options) => {
