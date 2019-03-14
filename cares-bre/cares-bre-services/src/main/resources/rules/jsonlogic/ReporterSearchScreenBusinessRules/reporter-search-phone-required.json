@@ -12,6 +12,8 @@
   "documentation": {
     "doc_description": "Primary phone number is required to search reporter",
     "doc_jsonlogic_file": "reporter-search-phone-required.json",
+    "doc_rule_category": "BusinessPolicy",
+    "doc_rule_type": "CARES",
     "doc_enforcement_location": "FE"
   }
 }

@@ -1,3 +1,7 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.ReporterData;
+
 rule "reporter-di-required-fields"
 
   @doc_description("First name, last name, and phone number are required")

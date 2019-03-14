@@ -1,6 +1,7 @@
 package gov.ca.cwds.bre.interfaces.model;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.TreeMap;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -19,7 +20,7 @@ public final class RuleDocumentation implements Serializable {
   private static final long serialVersionUID = 9124183648641028487L;
 
   private String name;
-  private TreeMap<String, String> documentation = new TreeMap<>();
+  private Map<String, String> documentation = new TreeMap<>();
 
   public RuleDocumentation() {
     // Default no-argument constructor.
@@ -33,11 +34,11 @@ public final class RuleDocumentation implements Serializable {
     this.name = name;
   }
 
-  public TreeMap<String, String> getDocumentation() {
+  public Map<String, String> getDocumentation() {
     return documentation;
   }
 
-  public void setDocumentation(TreeMap<String, String> documentation) {
+  public void setDocumentation(Map<String, String> documentation) {
     this.documentation = documentation;
   }
   

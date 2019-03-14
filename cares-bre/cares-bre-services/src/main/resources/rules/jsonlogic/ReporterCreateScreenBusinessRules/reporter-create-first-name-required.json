@@ -12,6 +12,8 @@
   "documentation": {
     "doc_description": "First name is required to create reporter",
     "doc_jsonlogic_file": "reporter-create-first-name-required.json",
+    "doc_rule_category": "BusinessPolicy",
+    "doc_rule_type": "CARES",
     "doc_enforcement_location": "FE"
   }
 }

@@ -3,8 +3,6 @@ import gov.ca.cwds.rest.exception.IssueType;
 import gov.ca.cwds.cics.model.ReporterData;
 import org.drools.core.util.StringUtils;
 
-global java.util.Set validationDetailsList
-
 rule "reporter-R-00846"
   @doc_description("R - 00846 Badge Number Specification")
   @doc_external_documentation("docTools")
@@ -14,7 +12,7 @@ rule "reporter-R-00846"
   @doc_rule_name("REPORTER-R-00846")
   @doc_rule_category(BusinessPolicy)
   
-  @doc_doctool_name("00846 Badge Number Specification")
+  @doc_doctool_name("R - 00846 Badge Number Specification")
   @doc_doctool_description("BADGE NUMBER may only be specified if the REPORTER is associated with LAW ENFORCEMENT")
   @doc_doctool_access_logic("If Law Enforcement is entered, then Badge Number is enabled, else disabled")
   

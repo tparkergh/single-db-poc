@@ -5,6 +5,7 @@ rule "template"
   @doc_description("")
   
   @doc_drools_file()
+  @doc_jsonlogic_file()
   @doc_external_documentation()
   @doc_enforcement_location()
   @doc_rule_category()

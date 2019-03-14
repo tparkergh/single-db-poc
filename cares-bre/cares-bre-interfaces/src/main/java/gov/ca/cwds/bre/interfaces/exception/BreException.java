@@ -57,6 +57,19 @@ public class BreException extends RuntimeException {
     this.breRequest = breRequest;
   }
 
+  /**
+   * Construct and control stack traces.
+   * 
+   * @param message Message
+   * @param cause Throwable to re-throw
+   * @param enableSuppression If the JVM can suppress this exception
+   * @param writableStackTrace If security permits, the JVM may log the stack trace
+   */
+  public BreException(String message, Throwable cause, boolean enableSuppression,
+      boolean writableStackTrace) {
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
+
   public BreRequest getBreRequest() {
     return breRequest;
   }
@@ -71,19 +84,6 @@ public class BreException extends RuntimeException {
 
   public void setBreResponse(BreResponse breResponse) {
     this.breResponse = breResponse;
-  }
-
-  /**
-   * Construct and control stack traces.
-   * 
-   * @param message Message
-   * @param cause Throwable to re-throw
-   * @param enableSuppression If the JVM can suppress this exception
-   * @param writableStackTrace If security permits, the JVM may log the stack trace
-   */
-  public BreException(String message, Throwable cause, boolean enableSuppression,
-      boolean writableStackTrace) {
-    super(message, cause, enableSuppression, writableStackTrace);
   }
 
   /**

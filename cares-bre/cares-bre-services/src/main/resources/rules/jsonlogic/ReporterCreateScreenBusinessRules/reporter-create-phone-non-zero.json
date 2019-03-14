@@ -23,6 +23,8 @@
   "documentation": {
     "doc_description": "A phone number cannot start with zero to create a reporter",
     "doc_jsonlogic_file": "reporter-create-phone-non-zero",
+    "doc_rule_category": "DataIntegrity",
+    "doc_rule_type": "CARES",
     "doc_enforcement_location": "FE"
   }
 }
