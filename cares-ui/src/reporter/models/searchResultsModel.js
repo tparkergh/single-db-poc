@@ -11,8 +11,6 @@ export default class SearchResultsModel extends BaseModel {
     super(SearchResultsJSON)
 
     this.completeText = "Create Reporter"
-    this.onValidatePanel.add(this.validate.bind(this))
-    this.onValidateQuestion.add(this.setContinueText.bind(this))
     this.onCompleting.add(this.continueNext.bind(this))
 
     this.props = props
@@ -77,28 +75,6 @@ export default class SearchResultsModel extends BaseModel {
     }
     this.render()
   }
-
-  validationData() {
-    return {
-      create: {
-        reporter: {
-          ...this.data
-        }
-      }
-    }
-  }
-
-  validate(sender, options) {
-    const panel = this.getPanelByName("existingReporter")
-    const question = panel.getElementByName("reporter")
-    if (question.isEmpty()) {
-      const rules = this.engine.find((rule) => rule.applies('create.reporter'))
-      const results = rules.map((rule) => this.engine.evaluate(rule, this.validationData()))
-      const errors = results.filter((result) => result !== true)
-      options.error = errors.join("\n") || undefined
-    }
-}
-
   loadJsonRules() {
     const { createReporterError } = this.props
     return axios({
