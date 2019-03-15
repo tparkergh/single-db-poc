@@ -1,6 +1,5 @@
 package gov.ca.cwds.cares.interfaces.model.search.query;
 
-import gov.ca.cwds.cares.interfaces.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
