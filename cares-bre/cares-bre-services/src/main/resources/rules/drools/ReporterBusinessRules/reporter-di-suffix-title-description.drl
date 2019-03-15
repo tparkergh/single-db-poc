@@ -1,0 +1,41 @@
+import gov.ca.cwds.rest.exception.IssueDetails;
+import gov.ca.cwds.rest.exception.IssueType;
+import gov.ca.cwds.cics.model.ReporterData;
+
+rule "reporter-di-suffix-title-description"
+
+  @doc_description("Suffix title description cannot be more than 4 characters")
+  
+  @doc_external_documentation("xTool Application")
+  @doc_enforcement_location("BRE, Z/OS")
+  @doc_rule_category("DataIntegrity")
+  @doc_rule_type("xTool")
+  @doc_drools_file("reporter-di-suffix-title-description.drl")
+  @doc_rule_name("REPORTER-DI-SUFFIX-TITLE-DESCRIPTION")
+
+  @doc_di_entity("REPORTER")
+  @doc_di_attribute("SUFFIX_TITLE_DESCRIPTION")
+  @doc_di_length("4")
+  @doc_di_type("string")
+  @doc_di_nullable("false")
+  @doc_di_mandatory("false")
+  @doc_di_default(" ")
+  @doc_di_validation_table("")
+  @doc_di_validation_category("")
+  @doc_di_validation_sub_category()
+  @doc_di_validation_values("")
+
+  dialect "mvel"
+  agenda-group "ReporterBusinessRules-validation-agenda"
+  
+  when
+	reporterData: ReporterData(String.valueOf(suffixTitleDescription).length > 4)
+  then
+    IssueDetails details = new IssueDetails();
+    details.setUserMessage(rule.getMetaData().get("doc_description") + " - Reporter: " + reporterData.identifier);
+    details.setCode(drools.getRule().getName());
+    details.setType(IssueType.CONSTRAINT_VALIDATION);
+    details.setProperty("reporterData.suffixTitleDescription");
+    details.setInvalidValue(reporterData.suffixTitleDescription);
+    validationDetailsList.add(details);
+end

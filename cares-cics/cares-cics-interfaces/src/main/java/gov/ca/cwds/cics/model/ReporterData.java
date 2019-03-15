@@ -1,22 +1,19 @@
 package gov.ca.cwds.cics.model;
 
+import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import java.time.LocalDate;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 /**
  * CWDS J Team
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ReporterData {
+public class ReporterData extends ObjectBase {
   @JsonProperty("TXN_HDR_STAFF_ID")
   private String txnHeaderStaffId;
   @JsonProperty("IDENTIFIER")
@@ -311,20 +308,5 @@ public class ReporterData {
 
   public void setZipSuffixNumber(Integer zipSuffixNumber) {
     this.zipSuffixNumber = zipSuffixNumber;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

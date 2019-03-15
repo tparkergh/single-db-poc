@@ -12,14 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 @Entity
 @Table(name = "REFERL_T")
-public class ReferralEntity implements Serializable {
+public class ReferralEntity extends ObjectBase implements Serializable {
 
   private static final long serialVersionUID = 1932421535948072459L;
 
@@ -185,20 +182,5 @@ public class ReferralEntity implements Serializable {
   
   public void addAllegation(AllegationEntity allegation) {
     this.allegations.add(allegation);
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

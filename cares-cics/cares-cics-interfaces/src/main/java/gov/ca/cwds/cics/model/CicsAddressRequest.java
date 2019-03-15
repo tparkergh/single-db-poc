@@ -3,17 +3,14 @@ package gov.ca.cwds.cics.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import gov.ca.cwds.cares.common.binding.SnakeUpperCaseStrategy;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 /**
  * CWDS J Team
  */
 @JsonNaming(SnakeUpperCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CicsAddressRequest implements CicsRequest {
+public class CicsAddressRequest extends ObjectBase implements CicsRequest {
   private AddressData addressData;
 
   public CicsAddressRequest() {
@@ -26,21 +23,4 @@ public class CicsAddressRequest implements CicsRequest {
   public void setAddressData(AddressData addressData) {
     this.addressData = addressData;
   }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-  }
-
-
 }

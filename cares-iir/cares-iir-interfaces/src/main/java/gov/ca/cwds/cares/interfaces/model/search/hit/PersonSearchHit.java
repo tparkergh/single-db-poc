@@ -1,12 +1,16 @@
 package gov.ca.cwds.cares.interfaces.model.search.hit;
 
 import java.io.Serializable;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import gov.ca.cwds.cares.common.binding.IdentifierSerializer;
 
 public class PersonSearchHit extends SearchHit implements Serializable {
 
   private static final long serialVersionUID = -971361222823606910L;
   
+  @JsonSerialize(using = IdentifierSerializer.class)
   private String identifier;
+  
   private String firstName;
   private String lastName;
   private Long primaryPhoneNumber;

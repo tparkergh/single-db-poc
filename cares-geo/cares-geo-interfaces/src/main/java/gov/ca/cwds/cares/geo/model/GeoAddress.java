@@ -6,10 +6,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import gov.ca.cwds.cares.common.binding.TrimmingSerializer;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 /**
  * CWDS J Team
@@ -17,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GeoAddress {
+public class GeoAddress extends ObjectBase {
   @JsonSerialize(using = TrimmingSerializer.class)
   private String streetAddress;
   @JsonSerialize(using = TrimmingSerializer.class)
@@ -94,20 +91,5 @@ public class GeoAddress {
 
   public void setDeliverable(boolean deliverable) {
     this.deliverable = deliverable;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

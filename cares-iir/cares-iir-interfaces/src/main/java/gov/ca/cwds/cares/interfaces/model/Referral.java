@@ -10,11 +10,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Referral extends BaseModel implements Serializable {
+public class Referral extends ObjectBase implements Serializable {
   
   private static final long serialVersionUID = 440890092508367802L;
   

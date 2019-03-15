@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 /**
  * @author CWDS J Team
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class SearchQuery  extends BaseModel {
+public abstract class SearchQuery  extends ObjectBase {
   
   public SearchQuery() {
     super();
