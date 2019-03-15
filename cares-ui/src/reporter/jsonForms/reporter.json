@@ -1,7 +1,6 @@
 {
   "title": "Reporter Template",
   "name": "enterPerson",
-  "checkErrorsMode": "onValueChanged",
   "completeText": "Continue",
   "questionErrorLocation": "bottom",
   "elements": [{
