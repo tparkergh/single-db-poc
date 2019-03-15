@@ -11,4 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonCrossReferenceRepository extends JpaRepository<PersonCrossReferenceEntity, PersonCrossReferencePK> {
 
+  PersonCrossReferenceEntity findByPersonId(String personId);
+
+  PersonCrossReferenceEntity findByXrefId(String xrefId);
 }
