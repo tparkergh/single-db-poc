@@ -1,5 +1,7 @@
 package gov.ca.cwds.cares.services;
 
+import java.time.LocalDateTime;
+
 import gov.ca.cwds.cics.model.CicsResponse;
 
 /**
@@ -7,4 +9,6 @@ import gov.ca.cwds.cics.model.CicsResponse;
  */
 public interface CicsServiceCallExecutor<Req> {
   CicsResponse executeServiceCall(Req request);
+
+  CicsResponse executeServiceCallForUpdate(Req request, LocalDateTime lastUpdateTimestamp);
 }
