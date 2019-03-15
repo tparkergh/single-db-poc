@@ -1,5 +1,6 @@
 package gov.ca.cwds.bre.interfaces.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -14,7 +15,9 @@ import gov.ca.cwds.cares.common.model.ObjectBase;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BreRequest extends ObjectBase {
+public class BreRequest extends ObjectBase implements Serializable {
+  
+  private static final long serialVersionUID = -7347748178274510292L;
   
   private String businessRuleSetName;  
   private List<BreRequestData> dataObjects = new ArrayList<>();

@@ -1,5 +1,6 @@
 package gov.ca.cwds.bre.interfaces.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,9 @@ import gov.ca.cwds.rest.exception.IssueDetails;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class BreResponse extends ObjectBase implements ExecutionTimeRecorder {
+public class BreResponse extends ObjectBase implements ExecutionTimeRecorder, Serializable {
+  
+  private static final long serialVersionUID = 4523538391835137411L;
   
   private Long executionTimeMillis;
   private String businessRuleSetName;
