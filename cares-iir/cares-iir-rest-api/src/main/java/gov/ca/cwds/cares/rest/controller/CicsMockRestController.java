@@ -61,7 +61,7 @@ public class CicsMockRestController {
           StandardCharsets.UTF_8);
       response = jacksonObjectMapprer.readValue(responseValue, CicsResponse.class);
     } catch (IOException e) {
-      LOGGER.debug("Exception Thrown while trying to map response. Sending back blank response. Response was :" + request);
+      LOGGER.debug("Exception Thrown while trying to map response. Sending back blank response. Response was :" + request.replaceAll("[\r\n]",""));
     }
 
     LOGGER.info("Sending back... {}", response);
