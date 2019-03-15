@@ -1,11 +1,16 @@
-package gov.ca.cwds.cares.interfaces.model;
+package gov.ca.cwds.cares.common.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class BaseModel {
+/**
+ * Common object functions.
+ * 
+ * @author CWDS Team J
+ */
+public abstract class ObjectBase {
 
   @Override
   public int hashCode() {

@@ -2,10 +2,6 @@ package gov.ca.cwds.cics.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -14,13 +10,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import gov.ca.cwds.cares.common.binding.SnakeUpperCaseStrategy;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 /**
  * CWDS J Team
  */
 @JsonNaming(SnakeUpperCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DfhCommArea implements Serializable {
+public class DfhCommArea extends ObjectBase implements Serializable {
 
   private static final long serialVersionUID = -5334090942331411606L;
   
@@ -120,20 +117,5 @@ public class DfhCommArea implements Serializable {
 
   public void setErrorMsgPart2(String errorMsgPart2) {
     this.errorMsgPart2 = errorMsgPart2;
-  }
-  
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

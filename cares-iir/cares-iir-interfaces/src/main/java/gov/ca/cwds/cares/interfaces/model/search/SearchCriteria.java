@@ -1,6 +1,5 @@
 package gov.ca.cwds.cares.interfaces.model.search;
 
-import gov.ca.cwds.cares.interfaces.model.BaseModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 import gov.ca.cwds.cares.interfaces.model.search.query.SearchQuery;
 
 /**
@@ -20,7 +20,7 @@ import gov.ca.cwds.cares.interfaces.model.search.query.SearchQuery;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SearchCriteria extends BaseModel implements Serializable {
+public class SearchCriteria extends ObjectBase implements Serializable {
   
   private static final long serialVersionUID = 8839424187694570310L;
   

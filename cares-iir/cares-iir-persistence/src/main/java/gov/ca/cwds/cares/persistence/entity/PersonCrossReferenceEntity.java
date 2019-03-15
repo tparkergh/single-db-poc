@@ -7,10 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 /**
  * CWDS J Team
@@ -18,7 +15,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Entity
 @Table(name = "PRS_XRFT")
 @IdClass(PersonCrossReferencePK.class)
-public class PersonCrossReferenceEntity implements Serializable {
+public class PersonCrossReferenceEntity extends ObjectBase implements Serializable {
   private static final long serialVersionUID = -8943502337788920742L;
 
   @Id
@@ -91,20 +88,5 @@ public class PersonCrossReferenceEntity implements Serializable {
 
   public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
     this.lastUpdateTimestamp = lastUpdateTimestamp;
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

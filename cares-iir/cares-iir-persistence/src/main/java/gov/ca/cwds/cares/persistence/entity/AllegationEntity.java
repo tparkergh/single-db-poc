@@ -6,14 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 @Entity
 @Table(name = "ALLGTN_T")
-public class AllegationEntity implements Serializable {
+public class AllegationEntity extends ObjectBase implements Serializable {
   
   private static final long serialVersionUID = 3149684314971127414L;
 
@@ -97,20 +94,5 @@ public class AllegationEntity implements Serializable {
 
   public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
     this.lastUpdateTimestamp = lastUpdateTimestamp;
-  }
-  
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

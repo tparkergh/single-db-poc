@@ -1,15 +1,12 @@
 package gov.ca.cwds.cics.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import gov.ca.cwds.cares.common.model.ExecutionTimeRecorder;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CicsResponse implements ExecutionTimeRecorder {
+public class CicsResponse extends ObjectBase implements ExecutionTimeRecorder {
 
   private Long executionTimeMillis;
   
@@ -38,20 +35,5 @@ public class CicsResponse implements ExecutionTimeRecorder {
   @Override
   public void setExecutionTimeMillis(Long executionTimeMillis) {
     this.executionTimeMillis = executionTimeMillis;
-  }
-  
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
-  }
-
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 }

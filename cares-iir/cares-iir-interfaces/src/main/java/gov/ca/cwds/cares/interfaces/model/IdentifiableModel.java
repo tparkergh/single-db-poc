@@ -2,8 +2,9 @@ package gov.ca.cwds.cares.interfaces.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import gov.ca.cwds.cares.common.binding.IdentifierSerializer;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 
-public class IdentifiableModel extends BaseModel {
+public class IdentifiableModel extends ObjectBase {
   /*
    * Entity 10 digit identifier
    */

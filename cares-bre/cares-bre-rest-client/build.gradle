@@ -8,6 +8,7 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.8
 
 dependencies {
+    implementation project(':cares-common')
 	implementation project(':cares-bre:cares-bre-interfaces')
 	
     implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion    
