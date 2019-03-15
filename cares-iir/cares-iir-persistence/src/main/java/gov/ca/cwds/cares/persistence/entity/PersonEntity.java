@@ -33,9 +33,6 @@ public class PersonEntity implements Serializable {
   @Column(name = "LST_UPD_TS")
   private LocalDateTime lastUpdateTimestamp;
 
-  public PersonEntity() {
-  }
-
   public String getIdentifier() {
     return identifier;
   }

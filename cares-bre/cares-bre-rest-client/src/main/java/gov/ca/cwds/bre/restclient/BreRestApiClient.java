@@ -26,10 +26,11 @@ import gov.ca.cwds.bre.interfaces.model.BusinessRuleSetDocumentation;
 @Lazy
 @Component("BreRestApiClient")
 public final class BreRestApiClient implements BusinessRuleService {
-  
-  private final static Logger LOGGER = LoggerFactory.getLogger(BreRestApiClient.class);
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(BreRestApiClient.class);
   
   public static final String BRE_EXEC_PATH = "/bre/exec";
+  public static final String NOT_IMPLEMENTED = "This function is not implemented yet.";
 
   @Value("${app.bre-service.base-url}")
   private String baseUrl;
@@ -63,17 +64,17 @@ public final class BreRestApiClient implements BusinessRuleService {
   
   @Override
   public BusinessRuleSetDocumentation getBusinessRuleSetDocumentation(String name) {
-    throw new UnsupportedOperationException("This function is not implemented yet.");
+    throw new UnsupportedOperationException(NOT_IMPLEMENTED);
   }
 
   @Override
   public Collection<String> getAllBusinessRuleSetNames() {
-    throw new UnsupportedOperationException("This function is not implemented yet.");
+    throw new UnsupportedOperationException(NOT_IMPLEMENTED);
   }
 
   @Override
   public BusinessRuleSetDefinition getBusinessRuleSetDefinition(String name) {
-    throw new UnsupportedOperationException("This function is not implemented yet.");
+    throw new UnsupportedOperationException(NOT_IMPLEMENTED);
   }
 
   public RestTemplate getRestTemplate() {

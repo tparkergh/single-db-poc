@@ -138,6 +138,16 @@ public class JdbcSearchServiceTest {
     executeSarchWithInvalidSearchCriteria(searchCriteria, 
         "One of first name or last name must be provided");           
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testSearchQueryIsNull() {
+    SearchCriteria searchCriteria = new SearchCriteria();
+    searchCriteria.setLimit(10);
+
+    searchCriteria.setQuery(null);
+
+    SearchResults actual = searchService.search(searchCriteria);
+  }
   
   private void executeSarchWithInvalidSearchCriteria(SearchCriteria searchCriteria, String expectedMessage) {
     try {

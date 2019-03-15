@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CicsMockRestController {
 
-  private final static Logger LOGGER = LoggerFactory.getLogger(CicsMockRestController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CicsMockRestController.class);
 
   @Autowired
   private ObjectMapper jacksonObjectMapprer;
@@ -61,7 +61,7 @@ public class CicsMockRestController {
           StandardCharsets.UTF_8);
       response = jacksonObjectMapprer.readValue(responseValue, CicsResponse.class);
     } catch (IOException e) {
-      //sending blank response
+      LOGGER.debug("Exception Thrown while trying to map response. Sending back blank response. Response was :" + request);
     }
 
     LOGGER.info("Sending back... {}", response);

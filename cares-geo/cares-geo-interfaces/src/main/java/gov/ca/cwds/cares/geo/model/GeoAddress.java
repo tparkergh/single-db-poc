@@ -32,9 +32,6 @@ public class GeoAddress {
   private double lattitude;
   private boolean deliverable;
 
-  public GeoAddress() {
-  }
-
   public String getStreetAddress() {
     return streetAddress;
   }
