@@ -61,7 +61,7 @@ public class GeoRestClient implements GeoService {
 
       response = exchange.getBody();
     } catch (Exception e) {
-      LOGGER.warn("Address is not deliverable");
+      LOGGER.warn("Address is not deliverable", e);
       response.add(request);
     }
     LOGGER.info("Geo address response: {}", response);

@@ -21,13 +21,13 @@ import gov.ca.cwds.bre.interfaces.exception.BreException;
 @ControllerAdvice
 public class CaresRestExceptionHandler {
   
-  private final static Logger LOGGER = LoggerFactory.getLogger(CaresRestExceptionHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CaresRestExceptionHandler.class);
 
   @ResponseBody
   @ExceptionHandler(CicsException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   Set<IssueDetails> cicsExceptionHandler(CicsException ex) {
-    LOGGER.error(ex.getMessage(), ex);
+    LOGGER.error("CICS encountered the following Exception:", ex);
     Set<IssueDetails> issueDetailsSet = new HashSet<>();
     IssueDetails issueDetails = new IssueDetails();
     issueDetails.setUserMessage(ex.getMessage());
@@ -40,7 +40,7 @@ public class CaresRestExceptionHandler {
   @ExceptionHandler(BreException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   Set<IssueDetails> breExceptionHandler(BreException ex) {
-    LOGGER.error(ex.getMessage(), ex);
+    LOGGER.error("The Business Rules encountered the following exception", ex);
     Set<IssueDetails> issueDetailsSet = new HashSet<>();
     BreResponse breResponse = ex.getBreResponse();
     if (breResponse != null) {

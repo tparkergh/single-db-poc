@@ -80,7 +80,7 @@ public class AddressServiceImpl implements AddressService {
       );
       geoAddress.setZip(String.valueOf(address.getZipCode()));
       List<GeoAddress> geoAddresses = geoService.validateAddress(geoAddress);
-      if (geoAddresses.size() != 0) {
+      if (geoAddresses.isEmpty()) {
         GeoAddress firstGeoAddress = geoAddresses.get(0);
         address.setLongitude(firstGeoAddress.getLongitude());
         address.setLatitude(firstGeoAddress.getLattitude());

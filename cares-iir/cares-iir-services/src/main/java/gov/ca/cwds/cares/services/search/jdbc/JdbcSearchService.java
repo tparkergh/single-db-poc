@@ -76,7 +76,7 @@ public class JdbcSearchService implements SearchService {
         "Sources must contain '" + SUPPORTED_SOURCE + "', provided: " + sources);
         
     SearchQuery query = searchCriteria.getQuery();
-    Preconditions.checkArgument(query != null && query instanceof PersonSearchQuery, 
+    Preconditions.checkArgument( query instanceof PersonSearchQuery,
         "Expected " + PersonSearchQuery.class + ", provided: " + query);
 
     PersonSearchQuery personSearchQuery = (PersonSearchQuery) query;

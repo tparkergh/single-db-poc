@@ -39,9 +39,6 @@ public class PersonCrossReferenceEntity extends ObjectBase implements Serializab
   @Column(name = "LST_UPD_TS")
   private LocalDateTime lastUpdateTimestamp;
 
-  public PersonCrossReferenceEntity() {
-  }
-
   public String getPersonId() {
     return personId;
   }

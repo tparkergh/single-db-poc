@@ -29,9 +29,6 @@ public class GeoAddress extends ObjectBase {
   private double lattitude;
   private boolean deliverable;
 
-  public GeoAddress() {
-  }
-
   public String getStreetAddress() {
     return streetAddress;
   }
