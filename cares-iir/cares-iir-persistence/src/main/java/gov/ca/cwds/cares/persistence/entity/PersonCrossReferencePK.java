@@ -13,15 +13,9 @@ public class PersonCrossReferencePK extends ObjectBase implements Serializable {
 
   private String xrefId;
 
-  private XrefCode xrefCode;
+  private String xrefCode;
 
   public PersonCrossReferencePK() {
-  }
-
-  public PersonCrossReferencePK(String personId, String xrefId, XrefCode xrefCode) {
-    this.personId = personId;
-    this.xrefId = xrefId;
-    this.xrefCode = xrefCode;
   }
 
   public String getPersonId() {
@@ -40,11 +34,11 @@ public class PersonCrossReferencePK extends ObjectBase implements Serializable {
     this.xrefId = xrefId;
   }
 
-  public XrefCode getXrefCode() {
+  public String getXrefCode() {
     return xrefCode;
   }
 
-  public void setXrefCode(XrefCode xrefCode) {
+  public void setXrefCode(String xrefCode) {
     this.xrefCode = xrefCode;
   }
 }
