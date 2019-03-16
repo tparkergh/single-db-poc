@@ -1,9 +1,7 @@
 package gov.ca.cwds.cares.services.search.jdbc;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +16,6 @@ import gov.ca.cwds.cares.interfaces.model.search.SearchResults;
 import gov.ca.cwds.cares.interfaces.model.search.hit.PersonSearchHit;
 import gov.ca.cwds.cares.interfaces.model.search.query.PersonSearchQuery;
 import gov.ca.cwds.cares.interfaces.model.search.query.SearchQuery;
-import gov.ca.cwds.cares.persistence.entity.PersonCrossReferenceEntity;
 import gov.ca.cwds.cares.persistence.entity.ReporterEntity;
 import gov.ca.cwds.cares.persistence.repository.ReporterRepository;
 import gov.ca.cwds.cares.services.mapping.search.PersonSearchHitMapper;
@@ -53,46 +50,14 @@ public class JdbcSearchService implements SearchService {
     Page<ReporterEntity> reporterEntityPage = reporterRepository.findAll(reporterSearchSpecs, pageable);
     
     List<ReporterEntity> reporterEntityList = reporterEntityPage.getContent();
-    Map<String, ReporterEntity> reporterEntityMap = getReporterEntityMapByReporterId(reporterEntityList);
     
-    Collection<PersonSearchHit> hits = PersonSearchHitMapper.INSTANCE.mapToPersonSearchHits(reporterEntityList);
-    
-    for (PersonSearchHit hit : hits) {
-      hit.setScore(0d);
-      hit.setSource(SUPPORTED_SOURCE);
-      
-      // Get person ID for reporter
-      String reporterId = hit.getIdentifier();
-      String personId = getPersonId(reporterId, reporterEntityMap);
-      hit.setIdentifier(personId);      
-    }
+    Collection<PersonSearchHit> hits = PersonSearchHitMapper.INSTANCE.mapReporterEntitiesToPersonSearchHits(reporterEntityList);
     
     SearchResults searchResults = new SearchResults();
     searchResults.setTotalHitCount(reporterEntityPage.getTotalElements());
     searchResults.setHits(hits);
     
     return searchResults;
-  }
-  
-  private Map<String, ReporterEntity> getReporterEntityMapByReporterId(List<ReporterEntity> reporterEntityList) {
-    Map<String, ReporterEntity> map = new HashMap<>();
-    
-    for (ReporterEntity reporterEntity : reporterEntityList) {
-      map.put(reporterEntity.getIdentifier(), reporterEntity);
-    }
-    return map;
-  }
-  
-  private String getPersonId(String reporterId, Map<String, ReporterEntity> reporterEntityMap) {
-    String personId = null;
-    ReporterEntity reporterEntity = reporterEntityMap.get(reporterId);
-    Collection<PersonCrossReferenceEntity> personCrossReferences = reporterEntity.getPersonCrossReferences();
-    
-    if (personCrossReferences != null && !personCrossReferences.isEmpty()) {
-      personId = personCrossReferences.iterator().next().getPersonId();
-    }
-    
-    return personId;
   }
   
   private void ensureValidSearchCriteria(SearchCriteria searchCriteria) {
