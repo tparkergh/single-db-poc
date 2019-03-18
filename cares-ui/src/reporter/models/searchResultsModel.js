@@ -59,8 +59,9 @@ export default class SearchResultsModel extends BaseModel {
     }
   }
 
-  formatSearchResult ({first_name, last_name, primary_phone_number: phone_number}) {
+  formatSearchResult ({expanded_identifier, first_name, last_name, primary_phone_number: phone_number}) {
     return [
+      `Person Id: ${expanded_identifier}`,
       `Name: ${first_name} ${last_name}`,
       `Phone Number: ${phone_number}`
     ].join("\n")

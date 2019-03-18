@@ -38,8 +38,9 @@ describe('SearchResultsModel', () => {
   })
 
   describe('formatSearchResult', () => {
-    it('displays first_name, last_name, and phone_number', () => {
+    it('displays expanded_identifier, first_name, last_name, and phone_number', () => {
       const result = {
+        expanded_identifier: 'exp-identifier',
         first_name: 'first',
         last_name: 'last',
         primary_phone_number: 1234567890
@@ -47,6 +48,7 @@ describe('SearchResultsModel', () => {
       const props = {}
       const model = new SearchResultsModel(props)
       const formatedResult = model.formatSearchResult(result)
+      expect(formatedResult).toMatch(/exp-identifier/)
       expect(formatedResult).toMatch(/first/)
       expect(formatedResult).toMatch(/last/)
       expect(formatedResult).toMatch(/1234567890/)
