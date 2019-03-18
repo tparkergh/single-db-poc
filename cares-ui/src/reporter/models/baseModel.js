@@ -3,6 +3,8 @@ import JsonBRE from 'JsonBRE'
 import marked from 'marked'
 
 export default class BaseModel extends Model {
+  RULE_PREFIX = ""
+
   constructor(json) {
     super(json)
     this.showQuestionNumbers = "off"
@@ -23,9 +25,25 @@ export default class BaseModel extends Model {
       })
       options.html = marked(options.text)
     })
+    this.onValidateQuestion.add(this.validateRules.bind(this))
   }
+
+  validateRules(sender, options) {
+    const ruleName = `${this.RULE_PREFIX}${options.name}`
+    const rules = this.engine.find((rule) => rule.applies(ruleName))
+    if (rules)
+    {
+      const results = rules.map((rule) => this.engine.evaluate(rule, this.validationData()))
+      const errors = results.filter((result) => result !== true)
+      options.error = errors.join("\n") || undefined
+    }
+  }
+
   update () {
   }
   loadJsonRules () {}
+  validationData() {
+    return {}
+  }
 }
 

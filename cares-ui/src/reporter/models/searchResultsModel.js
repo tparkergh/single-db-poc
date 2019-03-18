@@ -2,17 +2,12 @@ import SearchResultsJSON from "../jsonForms/searchResults"
 import BaseModel from './baseModel'
 import { ItemValue, SurveyError } from "survey-react";
 import axios from 'axios'
-import {
-  getBreRuleSetRoute
-} from '../../routes'
 
 export default class SearchResultsModel extends BaseModel {
   constructor (props) {
     super(SearchResultsJSON)
 
     this.completeText = "Create Reporter"
-    this.onValidatePanel.add(this.validate.bind(this))
-    this.onValidateQuestion.add(this.setContinueText.bind(this))
     this.onCompleting.add(this.continueNext.bind(this))
 
     this.props = props
@@ -59,8 +54,9 @@ export default class SearchResultsModel extends BaseModel {
     }
   }
 
-  formatSearchResult ({first_name, last_name, primary_phone_number: phone_number}) {
+  formatSearchResult ({expanded_identifier, first_name, last_name, primary_phone_number: phone_number}) {
     return [
+      `Person Id: ${expanded_identifier}`,
       `Name: ${first_name} ${last_name}`,
       `Phone Number: ${phone_number}`
     ].join("\n")
@@ -76,44 +72,6 @@ export default class SearchResultsModel extends BaseModel {
         this.completeText = "Continue"
     }
     this.render()
-  }
-
-  validationData() {
-    return {
-      create: {
-        reporter: {
-          ...this.data
-        }
-      }
-    }
-  }
-
-  validate(sender, options) {
-    const panel = this.getPanelByName("existingReporter")
-    const question = panel.getElementByName("reporter")
-    if (question.isEmpty()) {
-      const rules = this.engine.find((rule) => rule.applies('create.reporter'))
-      const results = rules.map((rule) => this.engine.evaluate(rule, this.validationData()))
-      const errors = results.filter((result) => result !== true)
-      options.error = errors.join("\n") || undefined
-    }
-}
-
-  loadJsonRules() {
-    const { createReporterError } = this.props
-    return axios({
-      url: getBreRuleSetRoute('ReporterCreateScreenBusinessRules'),
-      method: 'get',
-    }).then((result) => {
-      result.data.rules.map((rule) =>
-        this.engine.define({
-          identifier: rule.name,
-          definition: rule.logic
-        })
-      )
-    }).catch((error) => {
-      createReporterError && createReporterError(error)
-    })
   }
 }
 

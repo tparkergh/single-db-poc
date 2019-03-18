@@ -1,6 +1,5 @@
 {
   "title": "New Incident Report",
-  "checkErrorsMode": "onValueChanged",
   "questionErrorLocation": "bottom",
   "elements": [
     {

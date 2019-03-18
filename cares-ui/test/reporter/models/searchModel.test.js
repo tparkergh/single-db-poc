@@ -102,35 +102,6 @@ describe('SearchModel', () => {
     model.doComplete()
   })
 
-  describe('validateName', () => {
-    it('validates that the first name and last name pass all business rules', () => {
-      const model = new SearchModel()
-      const options = {
-        name: 'first_name'
-      }
-      model.data = {
-        first_name: 'first',
-        last_name: 'last'
-      }
-      model.validateName({}, options)
-      expect(options.error).toEqual(undefined)
-    })
-  })
-
-  describe('validatePhoneNumber', () => {
-    it('validates that the phone number passes all business rules', () => {
-      const model = new SearchModel()
-      const options = {
-        name: 'phone_number'
-      }
-      model.data = {
-        phone_number: '1234567890'
-      }
-      model.validatePhoneNumber({}, options)
-      expect(options.error).toEqual(undefined)
-    })
-  })
-
   describe('loadJsonRules', () => {
     it('loads the json rules from an api', (done) => {
       const rule = {
