@@ -1,7 +1,13 @@
 package gov.ca.cwds.cares.rest.controller;
 
-import gov.ca.cwds.cares.interfaces.api.ReporterService;
-import gov.ca.cwds.cares.interfaces.model.people.Reporter;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDateTime;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -11,16 +17,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import gov.ca.cwds.cares.interfaces.api.ReporterService;
+import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 
 /**
  * CWDS J Team
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ReporterControllerTest {
+  private LocalDateTime lastUpdateTimestamp;
   @Mock
   private ReporterService reporterService;
 
@@ -42,5 +47,14 @@ public class ReporterControllerTest {
 
     mockMvc.perform(post("/reporters").content("{}").contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isCreated());
+  }
+
+  @Test
+  public void testUpdateReporter() {
+    Reporter request = new Reporter();
+    Reporter response = new Reporter();
+    when(reporterService.updateReporter(request, lastUpdateTimestamp)).thenReturn(response);
+    assertEquals(response, reporterController.updateReporter(request, lastUpdateTimestamp));
+    verify(reporterService).updateReporter(request, lastUpdateTimestamp);
   }
 }
