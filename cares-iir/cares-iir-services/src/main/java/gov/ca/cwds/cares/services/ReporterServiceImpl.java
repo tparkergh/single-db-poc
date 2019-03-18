@@ -13,6 +13,7 @@ import gov.ca.cwds.cares.persistence.repository.PersonCrossReferenceRepository;
 import gov.ca.cwds.cares.persistence.repository.ReporterRepository;
 import gov.ca.cwds.cares.services.mapping.ReporterMapper;
 import gov.ca.cwds.cics.model.CicsReporterRequest;
+import gov.ca.cwds.cics.model.CicsResponse;
 import gov.ca.cwds.cics.model.ReporterData;
 import gov.ca.cwds.cics.restclient.CicsReporterRestApiClient;
 
@@ -46,8 +47,9 @@ public class ReporterServiceImpl implements ReporterService {
 
     CicsReporterRequest cicsReporterRequest = new CicsReporterRequest();
     cicsReporterRequest.setReporterData(reporterData);
-    cicsReporterRestApiClient.createReporter(cicsReporterRequest);
+    CicsResponse cicsResponse = cicsReporterRestApiClient.createReporter(cicsReporterRequest);
 
+    reporter.setLastUpdateTimestamp(cicsResponse.getDfhCommArea().getApiTimestamp());
     reporter.setIdentifier(reporterData.getIdentifier());
     return reporter;
   }
@@ -83,9 +85,9 @@ public class ReporterServiceImpl implements ReporterService {
 
     CicsReporterRequest cicsReporterRequest = new CicsReporterRequest();
     cicsReporterRequest.setReporterData(reporterData);
-    cicsReporterRestApiClient.updateReporter(cicsReporterRequest, reporter.getLastUpdateTimestamp());
-
-    reporter.setIdentifier(reporterData.getIdentifier());
+    CicsResponse cicsResponse = cicsReporterRestApiClient.updateReporter(cicsReporterRequest, 
+        reporter.getLastUpdateTimestamp());
+    reporter.setLastUpdateTimestamp(cicsResponse.getDfhCommArea().getApiTimestamp());
     return reporter;
   }
 }
