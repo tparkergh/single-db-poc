@@ -1,9 +1,7 @@
 package gov.ca.cwds.cares.services;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.cares.interfaces.api.ReporterService;
@@ -15,6 +13,7 @@ import gov.ca.cwds.cares.persistence.repository.ReporterRepository;
 import gov.ca.cwds.cares.services.mapping.ReporterMapper;
 import gov.ca.cwds.cics.model.CicsReporterRequest;
 import gov.ca.cwds.cics.model.ReporterData;
+import gov.ca.cwds.cics.restclient.CicsReporterRestApiClient;
 
 /**
  * CWDS J Team
@@ -32,18 +31,21 @@ public class ReporterServiceImpl implements ReporterService {
   private BusinessRulesExecutor<BreResponse, ReporterData> businessRuleExecutor;
 
   @Autowired
-  @Qualifier("CicsReporterServiceCallExecutor")
-  private CicsServiceCallExecutor<CicsReporterRequest> cicsServiceCallExecutor;
-
+  private CicsReporterRestApiClient cicsReporterRestApiClient;
+  
   @Override
   public Reporter createReporter(Reporter reporter) {
+    if (reporter == null) {
+      return null;
+    }
+    
     ReporterData reporterData = ReporterMapper.INSTANCE.mapReporterToReporterData(reporter);
 
     businessRuleExecutor.executeBusinessRules("ReporterBusinessRules", reporterData);
 
     CicsReporterRequest cicsReporterRequest = new CicsReporterRequest();
     cicsReporterRequest.setReporterData(reporterData);
-    cicsServiceCallExecutor.executeServiceCall(cicsReporterRequest);
+    cicsReporterRestApiClient.createReporter(cicsReporterRequest);
 
     reporter.setIdentifier(reporterData.getIdentifier());
     return reporter;
@@ -65,14 +67,18 @@ public class ReporterServiceImpl implements ReporterService {
   }
 
   @Override
-  public Reporter updateReporter(Reporter reporter, LocalDateTime lastUpdateTimestamp) {
+  public Reporter updateReporter(Reporter reporter) {
+    if (reporter == null) {
+      return null;
+    }
+    
     ReporterData reporterData = ReporterMapper.INSTANCE.mapReporterToReporterData(reporter);
 
     businessRuleExecutor.executeBusinessRules("ReporterBusinessRules", reporterData);
 
     CicsReporterRequest cicsReporterRequest = new CicsReporterRequest();
     cicsReporterRequest.setReporterData(reporterData);
-    cicsServiceCallExecutor.executeServiceCallForUpdate(cicsReporterRequest, lastUpdateTimestamp);
+    cicsReporterRestApiClient.updateReporter(cicsReporterRequest, reporter.getLastUpdateTimestamp());
 
     reporter.setIdentifier(reporterData.getIdentifier());
     return reporter;

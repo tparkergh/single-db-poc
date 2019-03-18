@@ -5,6 +5,7 @@ import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 import gov.ca.cwds.cics.model.CicsReporterRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
 import gov.ca.cwds.cics.model.ReporterData;
+import gov.ca.cwds.cics.restclient.CicsReporterRestApiClient;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class ReporterServiceImplTest {
   private BusinessRulesExecutor<BreResponse, ReporterData> businessRuleExecutor;
 
   @Mock
-  private CicsServiceCallExecutor<CicsReporterRequest> cicsServiceCallExecutor;
+  private CicsReporterRestApiClient cicsReporterRestApiClient;
 
   @InjectMocks
   private ReporterServiceImpl reporterService;
@@ -55,7 +56,7 @@ public class ReporterServiceImplTest {
         })
     )).thenReturn(new BreResponse());
 
-    when(cicsServiceCallExecutor.executeServiceCall(argThat(new ArgumentMatcher<CicsReporterRequest>() {
+    when(cicsReporterRestApiClient.createReporter(argThat(new ArgumentMatcher<CicsReporterRequest>() {
         @Override
         public boolean matches(CicsReporterRequest cicsReporterRequest) {
           ReporterData reporterData = cicsReporterRequest.getReporterData();
@@ -74,7 +75,7 @@ public class ReporterServiceImplTest {
     assertEquals(request.getPrimaryPhoneExtension(), response.getPrimaryPhoneExtension());
     assertEquals(request.getRelationToChild(), response.getRelationToChild());
     verify(businessRuleExecutor).executeBusinessRules(any(), any());
-    verify(cicsServiceCallExecutor).executeServiceCall(any());
+    verify(cicsReporterRestApiClient).createReporter(any());
   }
 
   private void assertReporterData(ReporterData reporterData) {

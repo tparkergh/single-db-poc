@@ -2,6 +2,7 @@ package gov.ca.cwds.cares.interfaces.model.people;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -32,6 +33,7 @@ public class Reporter extends ObjectBase implements Serializable {
   private LocalDate birthDate;
   private String employerName;
   private String titleDescription;
+  private LocalDateTime lastUpdateTimestamp;
   private Address address;  
 
   public Reporter() {
@@ -116,5 +118,13 @@ public class Reporter extends ObjectBase implements Serializable {
 
   public void setAddress(Address address) {
     this.address = address;
+  }
+
+  public LocalDateTime getLastUpdateTimestamp() {
+    return lastUpdateTimestamp;
+  }
+
+  public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
+    this.lastUpdateTimestamp = lastUpdateTimestamp;
   }
 }

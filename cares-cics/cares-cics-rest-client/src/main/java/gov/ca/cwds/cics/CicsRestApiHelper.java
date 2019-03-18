@@ -29,8 +29,10 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
+import gov.ca.cwds.cares.common.exception.CicsException;
 import gov.ca.cwds.cics.model.CicsRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
+import gov.ca.cwds.cics.model.DfhCommArea;
 
 /**
  * CWDS J Team
@@ -76,19 +78,34 @@ public class CicsRestApiHelper {
   public CicsResponse exchange(
       URI requestUri, 
       HttpMethod httpMethod, 
-      CicsRequest cicsRequest, 
-      Class cicsResponseType) {
-    HttpEntity<CicsRequest> request = new HttpEntity<>(cicsRequest, httpHeaders);
-        
-    LOGGER.info("CICS REQUEST URI: {}", requestUri);
-    LOGGER.info("CICS REQUEST: {}", cicsRequest);
-
-    ResponseEntity<CicsResponse> exchange =
-        restTemplate.exchange(requestUri, httpMethod, request, cicsResponseType);
-
-    CicsResponse cicsResponse = exchange.getBody();
+      CicsRequest cicsRequest) {
+    CicsResponse cicsResponse = null;
     
-    LOGGER.info("CICS RESPONSE: {}", cicsResponse);
+    try {
+      HttpEntity<CicsRequest> request = new HttpEntity<>(cicsRequest, httpHeaders);
+        
+      LOGGER.info("CICS REQUEST URI: {}", requestUri);
+      LOGGER.info("CICS REQUEST: {}", cicsRequest);
+
+      ResponseEntity<CicsResponse> exchange =
+          restTemplate.exchange(requestUri, httpMethod, request, CicsResponse.class);
+
+      cicsResponse = exchange.getBody();
+    
+      LOGGER.info("CICS RESPONSE: {}", cicsResponse);
+    } catch (Exception e) {
+      throw new CicsException("CICS service exception, request URI: " + requestUri, e);
+    }
+    
+    DfhCommArea dfhCommArea = cicsResponse.getDfhCommArea();
+    if (0 != dfhCommArea.getProgReturnCode()) {
+      String message = String.format("Received error program code from CICS URI %s. Error code %s. Message: %s%s ",
+          requestUri, 
+          dfhCommArea.getErrorMsgCode(), 
+          dfhCommArea.getErrorMsgPart1(),
+          dfhCommArea.getErrorMsgPart2());
+      throw new CicsException(message);
+    }
     
     return cicsResponse;
   }
