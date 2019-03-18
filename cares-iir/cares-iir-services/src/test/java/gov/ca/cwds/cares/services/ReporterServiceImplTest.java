@@ -1,11 +1,12 @@
 package gov.ca.cwds.cares.services;
 
-import gov.ca.cwds.bre.interfaces.model.BreResponse;
-import gov.ca.cwds.cares.interfaces.model.people.Reporter;
-import gov.ca.cwds.cics.model.CicsReporterRequest;
-import gov.ca.cwds.cics.model.CicsResponse;
-import gov.ca.cwds.cics.model.ReporterData;
-import gov.ca.cwds.cics.restclient.CicsReporterRestApiClient;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -14,9 +15,13 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import gov.ca.cwds.bre.interfaces.model.BreResponse;
+import gov.ca.cwds.cares.interfaces.model.people.Reporter;
+import gov.ca.cwds.cics.model.CicsReporterRequest;
+import gov.ca.cwds.cics.model.CicsResponse;
+import gov.ca.cwds.cics.model.DfhCommArea;
+import gov.ca.cwds.cics.model.ReporterData;
+import gov.ca.cwds.cics.restclient.CicsReporterRestApiClient;
 
 /**
  * CWDS J Team
@@ -56,6 +61,9 @@ public class ReporterServiceImplTest {
         })
     )).thenReturn(new BreResponse());
 
+    CicsResponse cicsResponse = new CicsResponse();    
+    cicsResponse.setDfhCommArea(new DfhCommArea());
+    
     when(cicsReporterRestApiClient.createReporter(argThat(new ArgumentMatcher<CicsReporterRequest>() {
         @Override
         public boolean matches(CicsReporterRequest cicsReporterRequest) {
@@ -63,7 +71,7 @@ public class ReporterServiceImplTest {
           assertReporterData(reporterData);
           return true;
         }
-      }))).thenReturn(new CicsResponse());
+      }))).thenReturn(cicsResponse);
 
     Reporter response = reporterService.createReporter(request);
 
