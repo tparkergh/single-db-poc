@@ -1,6 +1,5 @@
 package gov.ca.cwds.cares.services;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.cares.interfaces.api.ReporterService;
-import gov.ca.cwds.cares.interfaces.model.Address;
 import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 import gov.ca.cwds.cares.persistence.entity.PersonCrossReferenceEntity;
 import gov.ca.cwds.cares.persistence.entity.ReporterEntity;

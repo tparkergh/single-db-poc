@@ -1,0 +1,637 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "",
+    "version" : "1.0.0",
+    "title" : "reporters"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/reporters",
+  "schemes" : [ "https", "http" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/" : {
+      "post" : {
+        "operationId" : "postReporter-service",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "postReporter-service_request",
+          "description" : "request body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/postReporter-service_request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "normal response",
+            "schema" : {
+              "$ref" : "#/definitions/postReporter-service_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/{reporterID}/{lastUpdateTimeStamp}" : {
+      "put" : {
+        "operationId" : "putReporter-service",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "lastUpdateTimeStamp",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 26
+        }, {
+          "name" : "reporterID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 10
+        }, {
+          "in" : "body",
+          "name" : "putReporter-service_request",
+          "description" : "request body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/putReporter-service_request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "normal response",
+            "schema" : {
+              "$ref" : "#/definitions/putReporter-service_response_200"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "deleteReporter-service",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "lastUpdateTimeStamp",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 26
+        }, {
+          "name" : "reporterID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 10
+        }, {
+          "in" : "body",
+          "name" : "deleteReporter-service_request",
+          "description" : "request body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/deleteReporter-service_request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "normal response",
+            "schema" : {
+              "$ref" : "#/definitions/deleteReporter-service_response_200"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "postReporter-service_request" : {
+      "type" : "object",
+      "properties" : {
+        "REPORTER_DATA" : {
+          "type" : "object",
+          "properties" : {
+            "TXN_HDR_STAFF_ID" : {
+              "type" : "string",
+              "description" : "ID - A system generated sequential 3 digit base 62 number used to uniquely identify each STAFF PERSON.This is the ID which is triggering the Transaction.",
+              "maxLength" : 3
+            },
+            "RPTR_BDGNO" : {
+              "type" : "string",
+              "description" : "BADGE_NUMBER - The unique badge number assigned to each REPORTER who works for a Law Enforcement Agency.",
+              "maxLength" : 6
+            },
+            "RPTR_CTYNM" : {
+              "type" : "string",
+              "description" : "CITY_NAME - The name of the city where the REPORTER lives/works.",
+              "maxLength" : 20
+            },
+            "COL_RELC" : {
+              "type" : "integer",
+              "description" : "COLLTR_CLIENT_RPTR_RELTNSHP_TYPE - The system generated number assigned to each  relationship of the REPORTER to the situation being reported (REFERRAL) (e.g. neighbor, school nurse, teacher, etc.).",
+              "minimum" : -99999,
+              "maximum" : 99999
+            },
+            "CMM_MTHC" : {
+              "type" : "integer",
+              "description" : "COMMUNICATION_METHOD_TYPE - The system generated number assigned to each means of communication between the CWS OFFICE and the REPORTER (e.g., written, telephone, or in-person).",
+              "minimum" : -99999,
+              "maximum" : 99999
+            },
+            "CNFWVR_IND" : {
+              "type" : "string",
+              "description" : "CONFIDENTIAL_WAIVER_IND - Indicates whether the REPORTER waives  confidentiality.  Valid values for this indicator are \"Y\" for Waived Confidentiality and \"N\" for Requested Confidentiality.",
+              "maxLength" : 1,
+              "default" : "N"
+            },
+            "FDBACK_DOC" : {
+              "type" : "string",
+              "description" : "DRMS_MANDATED_RPRTR_FEEDBACK_DOC - The report sent back to a mandated REPORTER when the person requested feedback.    This is the ID from the DOCUMENT entity type which identifies a unique Document within DRMS.",
+              "maxLength" : 10
+            },
+            "RPTR_EMPNM" : {
+              "type" : "string",
+              "description" : "EMPLOYER_NAME - The name of the REPORTER's employer.  This is  mandatory if the individual is acting as a mandated REPORTER and the employer address is not already associated with an identified LAW ENFORCEMENT.",
+              "maxLength" : 35
+            },
+            "FEEDBCK_DT" : {
+              "type" : "string",
+              "description" : "FEEDBACK_DATE - The date that the county either mails or telephones a response to the REPORTER, if the REPORTER desired feedback.",
+              "maxLength" : 10
+            },
+            "FB_RQR_IND" : {
+              "type" : "string",
+              "description" : "FEEDBACK_REQUIRED_IND - Indicates whether the REPORTER desires feedback  regarding the report. (The county decides if the  feedback is written or phone.)",
+              "maxLength" : 1
+            },
+            "RPTR_FSTNM" : {
+              "type" : "string",
+              "description" : "FIRST_NAME - The first name of the REPORTER.",
+              "maxLength" : 20
+            },
+            "RPTR_LSTNM" : {
+              "type" : "string",
+              "description" : "LAST_NAME - The last name of the REPORTER.",
+              "maxLength" : 25
+            },
+            "MNRPTR_IND" : {
+              "type" : "string",
+              "description" : "MANDATED_REPORTER_IND - Indicates whether the REPORTER is mandated to report this specific report (REFERRAL).",
+              "maxLength" : 1,
+              "default" : "N"
+            },
+            "MSG_EXT_NO" : {
+              "type" : "integer",
+              "description" : "MESSAGE_PHONE_EXTENSION_NUMBER - An alternate or message phone extension number of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "MSG_TEL_NO" : {
+              "type" : "integer",
+              "description" : "MESSAGE_PHONE_NUMBER - An alternate or message phone number of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "MID_INI_NM" : {
+              "type" : "string",
+              "description" : "MIDDLE_INITIAL_NAME - The middle initial of the REPORTER.",
+              "maxLength" : 1
+            },
+            "NMPRFX_DSC" : {
+              "type" : "string",
+              "description" : "NAME_PREFIX_DESCRIPTION - The salutation form to be used in the mailing address of a REPORTER (e.g., Mr., Ms., Mrs., Dr., Miss, Rev., etc.).",
+              "maxLength" : 6
+            },
+            "PRM_TEL_NO" : {
+              "type" : "integer",
+              "description" : "PRIMARY_PHONE_NUMBER - The primary phone number including area code of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "PRM_EXT_NO" : {
+              "type" : "integer",
+              "description" : "PRIMARY_PHONE_EXTENSION_NUMBER - The primary phone extension number of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "STATE_C" : {
+              "type" : "integer",
+              "description" : "STATE_CODE_TYPE - The system generated number which identifies the  State for the REPORTER's mailing address (e.g.,  California, Texas, Nevada, etc.).",
+              "minimum" : -99999,
+              "maximum" : 99999
+            },
+            "RPTR_ST_NM" : {
+              "type" : "string",
+              "description" : "STREET_NAME - The actual name of the street associated with the REPORTER's address.  Do not abbreviate if at all possible for matching purposes.",
+              "maxLength" : 40
+            },
+            "RPTR_ST_NO" : {
+              "type" : "string",
+              "description" : "STREET_NUMBER - The street or house number associated with the street name as part of the REPORTER's address.  This may include the fractional or alphabetic modifier, e.g. A-17,  119-10, 39.2, 100 1/2, etc.",
+              "maxLength" : 10
+            },
+            "SUFX_TLDSC" : {
+              "type" : "string",
+              "description" : "SUFFIX_TITLE_DESCRIPTION - The suffix name of the REPORTER (e.g., Esq., M.D., Ph.D., D.D.S., etc.).",
+              "maxLength" : 4
+            },
+            "RPTR_ZIPNO" : {
+              "type" : "integer",
+              "description" : "ZIP_NUMBER - The first five digits of the zip code for the address of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "FKREFERL_T" : {
+              "type" : "string",
+              "description" : "FKREFERL_T - Optional Foreign key that REPORTS a REFERRAL.",
+              "maxLength" : 10
+            },
+            "FKLAW_ENFT" : {
+              "type" : "string",
+              "description" : "FKLAW_ENFT - Optional Foreign key that IS_EMPLOYED_BY a LAW_ENFORCEMENT.",
+              "maxLength" : 10
+            },
+            "ZIP_SFX_NO" : {
+              "type" : "integer",
+              "description" : "ZIP_SUFFIX_NUMBER - The last four digits of the zip code for a REPORTER's address.",
+              "minimum" : -99999,
+              "maximum" : 99999
+            },
+            "CNTY_SPFCD" : {
+              "type" : "string",
+              "description" : "COUNTY_SPECIFIC_CODE - A code, with values between '01' and '58' or '99' that indicates which county has primary assignment responsibility for the CASE or REFERRAL that this row belongs to. The value for each county is identical to the Logical ID value for the county in the Government_Entity_Type code table.",
+              "maxLength" : 2,
+              "default" : "19"
+            },
+            "IDENTIFIER" : {
+              "type" : "string",
+              "description" : "ID - A system generated number used to uniquely identify each REPORTER. This ID is composed of a base 62 Creation Timestamp and the STAFF_PERSON ID (a sequential 3 digit base 62 number generated by the system). This value eliminates the need for an additional set of Creation Timestamp and Creation User ID which is needed to satisfy the Audit Trail requirement.",
+              "maxLength" : 10
+            },
+            "BIRTH_DT" : {
+              "type" : "string",
+              "description" : "BIRTH_DATE - The date of birth of the REPORTER",
+              "maxLength" : 10
+            },
+            "TITLE_DESC" : {
+              "type" : "string",
+              "description" : "TITLE_DESCRIPTION - A short description of the job title held by a REPORTER.",
+              "maxLength" : 50
+            }
+          }
+        }
+      }
+    },
+    "postReporter-service_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "PROG_RETURN_CODE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "API_TIMESTAMP" : {
+              "type" : "string",
+              "maxLength" : 26
+            },
+            "ERROR_DPD_MSG_TYPE" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "ERROR_DPD_MSG_CODE" : {
+              "type" : "string",
+              "maxLength" : 4
+            },
+            "ERROR_DPD_RSN_CODE" : {
+              "type" : "string",
+              "maxLength" : 6
+            },
+            "ERROR_DPD_MSGPART1" : {
+              "type" : "string",
+              "maxLength" : 80
+            },
+            "ERROR_DPD_MSGPART2" : {
+              "type" : "string",
+              "maxLength" : 80
+            },
+            "ERROR_FOCUS_TABLE_NAME" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "ERROR_FIELD_TEXT" : {
+              "type" : "string",
+              "maxLength" : 254
+            },
+            "ADDITIONAL_DESC" : {
+              "type" : "string",
+              "maxLength" : 31400
+            }
+          }
+        }
+      }
+    },
+    "putReporter-service_request" : {
+      "type" : "object",
+      "properties" : {
+        "REPORTER_DATA" : {
+          "type" : "object",
+          "properties" : {
+            "TXN_HDR_STAFF_ID" : {
+              "type" : "string",
+              "description" : "ID - A system generated sequential 3 digit base 62 number used to uniquely identify each STAFF PERSON.This is the ID which is triggering the Transaction.",
+              "maxLength" : 3
+            },
+            "RPTR_BDGNO" : {
+              "type" : "string",
+              "description" : "BADGE_NUMBER - The unique badge number assigned to each REPORTER who works for a Law Enforcement Agency.",
+              "maxLength" : 6
+            },
+            "RPTR_CTYNM" : {
+              "type" : "string",
+              "description" : "CITY_NAME - The name of the city where the REPORTER lives/works.",
+              "maxLength" : 20
+            },
+            "COL_RELC" : {
+              "type" : "integer",
+              "description" : "COLLTR_CLIENT_RPTR_RELTNSHP_TYPE - The system generated number assigned to each  relationship of the REPORTER to the situation being reported (REFERRAL) (e.g. neighbor, school nurse, teacher, etc.).",
+              "minimum" : -99999,
+              "maximum" : 99999
+            },
+            "CMM_MTHC" : {
+              "type" : "integer",
+              "description" : "COMMUNICATION_METHOD_TYPE - The system generated number assigned to each means of communication between the CWS OFFICE and the REPORTER (e.g., written, telephone, or in-person).",
+              "minimum" : -99999,
+              "maximum" : 99999
+            },
+            "CNFWVR_IND" : {
+              "type" : "string",
+              "description" : "CONFIDENTIAL_WAIVER_IND - Indicates whether the REPORTER waives  confidentiality.  Valid values for this indicator are \"Y\" for Waived Confidentiality and \"N\" for Requested Confidentiality.",
+              "maxLength" : 1,
+              "default" : "N"
+            },
+            "FDBACK_DOC" : {
+              "type" : "string",
+              "description" : "DRMS_MANDATED_RPRTR_FEEDBACK_DOC - The report sent back to a mandated REPORTER when the person requested feedback.    This is the ID from the DOCUMENT entity type which identifies a unique Document within DRMS.",
+              "maxLength" : 10
+            },
+            "RPTR_EMPNM" : {
+              "type" : "string",
+              "description" : "EMPLOYER_NAME - The name of the REPORTER's employer.  This is  mandatory if the individual is acting as a mandated REPORTER and the employer address is not already associated with an identified LAW ENFORCEMENT.",
+              "maxLength" : 35
+            },
+            "FEEDBCK_DT" : {
+              "type" : "string",
+              "description" : "FEEDBACK_DATE - The date that the county either mails or telephones a response to the REPORTER, if the REPORTER desired feedback.",
+              "maxLength" : 10
+            },
+            "FB_RQR_IND" : {
+              "type" : "string",
+              "description" : "FEEDBACK_REQUIRED_IND - Indicates whether the REPORTER desires feedback  regarding the report. (The county decides if the  feedback is written or phone.)",
+              "maxLength" : 1
+            },
+            "RPTR_FSTNM" : {
+              "type" : "string",
+              "description" : "FIRST_NAME - The first name of the REPORTER.",
+              "maxLength" : 20
+            },
+            "RPTR_LSTNM" : {
+              "type" : "string",
+              "description" : "LAST_NAME - The last name of the REPORTER.",
+              "maxLength" : 25
+            },
+            "MNRPTR_IND" : {
+              "type" : "string",
+              "description" : "MANDATED_REPORTER_IND - Indicates whether the REPORTER is mandated to report this specific report (REFERRAL).",
+              "maxLength" : 1,
+              "default" : "N"
+            },
+            "MSG_EXT_NO" : {
+              "type" : "integer",
+              "description" : "MESSAGE_PHONE_EXTENSION_NUMBER - An alternate or message phone extension number of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "MSG_TEL_NO" : {
+              "type" : "integer",
+              "description" : "MESSAGE_PHONE_NUMBER - An alternate or message phone number of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "MID_INI_NM" : {
+              "type" : "string",
+              "description" : "MIDDLE_INITIAL_NAME - The middle initial of the REPORTER.",
+              "maxLength" : 1
+            },
+            "NMPRFX_DSC" : {
+              "type" : "string",
+              "description" : "NAME_PREFIX_DESCRIPTION - The salutation form to be used in the mailing address of a REPORTER (e.g., Mr., Ms., Mrs., Dr., Miss, Rev., etc.).",
+              "maxLength" : 6
+            },
+            "PRM_TEL_NO" : {
+              "type" : "integer",
+              "description" : "PRIMARY_PHONE_NUMBER - The primary phone number including area code of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "PRM_EXT_NO" : {
+              "type" : "integer",
+              "description" : "PRIMARY_PHONE_EXTENSION_NUMBER - The primary phone extension number of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "STATE_C" : {
+              "type" : "integer",
+              "description" : "STATE_CODE_TYPE - The system generated number which identifies the  State for the REPORTER's mailing address (e.g.,  California, Texas, Nevada, etc.).",
+              "minimum" : -99999,
+              "maximum" : 99999
+            },
+            "RPTR_ST_NM" : {
+              "type" : "string",
+              "description" : "STREET_NAME - The actual name of the street associated with the REPORTER's address.  Do not abbreviate if at all possible for matching purposes.",
+              "maxLength" : 40
+            },
+            "RPTR_ST_NO" : {
+              "type" : "string",
+              "description" : "STREET_NUMBER - The street or house number associated with the street name as part of the REPORTER's address.  This may include the fractional or alphabetic modifier, e.g. A-17,  119-10, 39.2, 100 1/2, etc.",
+              "maxLength" : 10
+            },
+            "SUFX_TLDSC" : {
+              "type" : "string",
+              "description" : "SUFFIX_TITLE_DESCRIPTION - The suffix name of the REPORTER (e.g., Esq., M.D., Ph.D., D.D.S., etc.).",
+              "maxLength" : 4
+            },
+            "RPTR_ZIPNO" : {
+              "type" : "integer",
+              "description" : "ZIP_NUMBER - The first five digits of the zip code for the address of the REPORTER.",
+              "minimum" : -9999999999,
+              "maximum" : 9999999999
+            },
+            "FKREFERL_T" : {
+              "type" : "string",
+              "description" : "FKREFERL_T - Optional Foreign key that REPORTS a REFERRAL.",
+              "maxLength" : 10
+            },
+            "FKLAW_ENFT" : {
+              "type" : "string",
+              "description" : "FKLAW_ENFT - Optional Foreign key that IS_EMPLOYED_BY a LAW_ENFORCEMENT.",
+              "maxLength" : 10
+            },
+            "ZIP_SFX_NO" : {
+              "type" : "integer",
+              "description" : "ZIP_SUFFIX_NUMBER - The last four digits of the zip code for a REPORTER's address.",
+              "minimum" : -99999,
+              "maximum" : 99999
+            },
+            "CNTY_SPFCD" : {
+              "type" : "string",
+              "description" : "COUNTY_SPECIFIC_CODE - A code, with values between '01' and '58' or '99' that indicates which county has primary assignment responsibility for the CASE or REFERRAL that this row belongs to. The value for each county is identical to the Logical ID value for the county in the Government_Entity_Type code table.",
+              "maxLength" : 2,
+              "default" : "19"
+            },
+            "BIRTH_DT" : {
+              "type" : "string",
+              "description" : "BIRTH_DATE - The date of birth of the REPORTER",
+              "maxLength" : 10
+            },
+            "TITLE_DESC" : {
+              "type" : "string",
+              "description" : "TITLE_DESCRIPTION - A short description of the job title held by a REPORTER.",
+              "maxLength" : 50
+            }
+          }
+        }
+      }
+    },
+    "putReporter-service_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "PROG_RETURN_CODE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "API_TIMESTAMP" : {
+              "type" : "string",
+              "maxLength" : 26
+            },
+            "ERROR_DPD_MSG_TYPE" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "ERROR_DPD_MSG_CODE" : {
+              "type" : "string",
+              "maxLength" : 4
+            },
+            "ERROR_DPD_RSN_CODE" : {
+              "type" : "string",
+              "maxLength" : 6
+            },
+            "ERROR_DPD_MSGPART1" : {
+              "type" : "string",
+              "maxLength" : 80
+            },
+            "ERROR_DPD_MSGPART2" : {
+              "type" : "string",
+              "maxLength" : 80
+            },
+            "ERROR_FOCUS_TABLE_NAME" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "ERROR_FIELD_TEXT" : {
+              "type" : "string",
+              "maxLength" : 254
+            },
+            "ADDITIONAL_DESC" : {
+              "type" : "string",
+              "maxLength" : 31400
+            }
+          }
+        }
+      }
+    },
+    "deleteReporter-service_request" : {
+      "type" : "object",
+      "properties" : {
+        "REPORTER_DATA" : {
+          "type" : "object",
+          "properties" : {
+            "TXN_HDR_STAFF_ID" : {
+              "type" : "string",
+              "description" : "ID - A system generated sequential 3 digit base 62 number used to uniquely identify each STAFF PERSON.This is the ID which is triggering the Transaction.",
+              "maxLength" : 3
+            }
+          }
+        }
+      }
+    },
+    "deleteReporter-service_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "PROG_RETURN_CODE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "API_TIMESTAMP" : {
+              "type" : "string",
+              "maxLength" : 26
+            },
+            "ERROR_DPD_MSG_TYPE" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "ERROR_DPD_MSG_CODE" : {
+              "type" : "string",
+              "maxLength" : 4
+            },
+            "ERROR_DPD_RSN_CODE" : {
+              "type" : "string",
+              "maxLength" : 6
+            },
+            "ERROR_DPD_MSGPART1" : {
+              "type" : "string",
+              "maxLength" : 80
+            },
+            "ERROR_DPD_MSGPART2" : {
+              "type" : "string",
+              "maxLength" : 80
+            },
+            "ERROR_FOCUS_TABLE_NAME" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "ERROR_FIELD_TEXT" : {
+              "type" : "string",
+              "maxLength" : 254
+            },
+            "ADDITIONAL_DESC" : {
+              "type" : "string",
+              "maxLength" : 31400
+            }
+          }
+        }
+      }
+    }
+  }
+}
