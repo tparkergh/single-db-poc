@@ -12,11 +12,9 @@ export default class ReporterModel extends BaseModel {
 
   constructor(props) {
     super(ReporterJSON)
+    this.completeText = "Create"
     this.props = props
 
-    this.onAfterRenderQuestion.add((sender, options) => {
-      this.update(this.props)
-    })
     this.onCompleting.add(this.createReporter.bind(this))
 
     this.loadStates()
@@ -30,6 +28,7 @@ export default class ReporterModel extends BaseModel {
   update(props) {
     this.data = props.data
     this.props = props
+    this.setContinueText()
   }
 
   loadStates () {
@@ -129,6 +128,15 @@ export default class ReporterModel extends BaseModel {
     }).catch((error) => {
       createReporterError && createReporterError(error)
     })
+  }
+
+  setContinueText() {
+    if(this.data.reporter) {
+      this.completeText = "Update"
+    } else {
+      this.completeText = "Create"
+    }
+    this.render()
   }
 }
 

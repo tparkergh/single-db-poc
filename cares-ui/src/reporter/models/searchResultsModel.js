@@ -7,9 +7,7 @@ export default class SearchResultsModel extends BaseModel {
   constructor (props) {
     super(SearchResultsJSON)
 
-    this.completeText = "Create Reporter"
     this.onCompleting.add(this.continueNext.bind(this))
-
     this.props = props
   }
 
@@ -60,18 +58,6 @@ export default class SearchResultsModel extends BaseModel {
       `Name: ${first_name} ${last_name}`,
       `Phone Number: ${phone_number}`
     ].join("\n")
-  }
-
-
-
-  setContinueText(sender, options) {
-    if(options.name === "reporter") {
-      if (options.question.isEmpty())
-        this.completeText = "Create Reporter"
-      else
-        this.completeText = "Continue"
-    }
-    this.render()
   }
 }
 
