@@ -1,15 +1,11 @@
 package gov.ca.cwds.cares.geo.restclient;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import gov.ca.cwds.cares.geo.api.GeoService;
-import gov.ca.cwds.cares.geo.model.GeoAddress;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -19,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import gov.ca.cwds.cares.geo.api.GeoService;
+import gov.ca.cwds.cares.geo.model.GeoAddress;
 
 /**
  * CWDS J Team
@@ -28,9 +26,6 @@ public class GeoRestClient implements GeoService {
   private static final Logger LOGGER = LoggerFactory.getLogger(GeoRestClient.class);
 
   public static final String ADDRESS_VALIDATION_PATH = "/address/validate";
-
-  @Autowired
-  private ObjectMapper jacksonObjectMapper;
 
   @Value("${app.geo-service.base-url}")
   private String baseUrl;

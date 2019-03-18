@@ -70,8 +70,8 @@ public class ReporterServiceImplTest {
     assertEquals(request.getFirstName(), response.getFirstName());
     assertEquals(request.getLastName(), response.getLastName());
     assertEquals(request.getLastName(), response.getLastName());
-    assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
-    assertEquals(request.getPhoneExtension(), response.getPhoneExtension());
+    assertEquals(request.getPrimaryPhoneNumber(), response.getPrimaryPhoneNumber());
+    assertEquals(request.getPrimaryPhoneExtension(), response.getPrimaryPhoneExtension());
     assertEquals(request.getRelationToChild(), response.getRelationToChild());
     verify(businessRuleExecutor).executeBusinessRules(any(), any());
     verify(cicsServiceCallExecutor).executeServiceCall(any());
@@ -115,8 +115,8 @@ public class ReporterServiceImplTest {
     Reporter reporter = new Reporter();
     reporter.setFirstName("test first name");
     reporter.setLastName("test last name");
-    reporter.setPhoneNumber(-1L);
-    reporter.setPhoneExtension(-2);
+    reporter.setPrimaryPhoneNumber(-1L);
+    reporter.setPrimaryPhoneExtension(-2);
     reporter.setRelationToChild("test relation to child");
     return reporter;
   }
