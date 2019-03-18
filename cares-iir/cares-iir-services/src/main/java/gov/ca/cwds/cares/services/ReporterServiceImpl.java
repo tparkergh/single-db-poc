@@ -1,6 +1,7 @@
 package gov.ca.cwds.cares.services;
 
 import java.util.Collection;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
@@ -58,9 +59,13 @@ public class ReporterServiceImpl implements ReporterService {
     
     if (personCrossReferenceEntities != null && 
         !personCrossReferenceEntities.isEmpty()) {
-      PersonCrossReferenceEntity personCrossReferenceEntity = personCrossReferenceEntities.iterator().next();    
-      ReporterEntity reporterEntity = reporterRepository.findById(personCrossReferenceEntity.getXrefId()).get();
-      reporter = ReporterMapper.INSTANCE.mapReporterEntityToReporter(reporterEntity);
+      PersonCrossReferenceEntity personCrossReferenceEntity = personCrossReferenceEntities.iterator().next();      
+      Optional<ReporterEntity> reporterEntityOptional = reporterRepository.findById(personCrossReferenceEntity.getXrefId());
+      
+      if (reporterEntityOptional.isPresent()) {
+        ReporterEntity reporterEntity = reporterEntityOptional.get();
+        reporter = ReporterMapper.INSTANCE.mapReporterEntityToReporter(reporterEntity);
+      }      
     }
     
     return reporter;    
