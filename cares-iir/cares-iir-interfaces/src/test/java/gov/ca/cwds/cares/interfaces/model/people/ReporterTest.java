@@ -24,11 +24,11 @@ public class ReporterTest {
     reporter.setIdentifier(identifier);
     reporter.setFirstName(firstName);
     reporter.setLastName(lastName);
-    reporter.setPhoneNumber(primaryPhone);
+    reporter.setPrimaryPhoneNumber(primaryPhone);
     assertEquals(reporter.getIdentifier(), identifier);
     assertEquals(reporter.getFirstName(), firstName);
     assertEquals(reporter.getLastName(), lastName);
-    assertEquals(reporter.getPhoneNumber(), primaryPhone);
+    assertEquals(reporter.getPrimaryPhoneNumber(), primaryPhone);
 
   }
 }

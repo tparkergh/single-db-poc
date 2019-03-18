@@ -54,8 +54,7 @@ public final class CicsClientRestApiClient {
     CicsResponse response = cicsRestApiHelper.exchange(
         requestUri, 
         HttpMethod.PUT, 
-        updatedClientRequest, 
-        CicsResponse.class);
+        updatedClientRequest);
 
     return response;
   }

@@ -4,7 +4,9 @@ import static io.restassured.RestAssured.given;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-
+import java.util.UUID;
+import org.junit.Before;
+import org.junit.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.ca.cwds.cares.interfaces.model.search.SearchCriteria;
 import gov.ca.cwds.cares.interfaces.model.search.SearchResults;
@@ -12,11 +14,7 @@ import gov.ca.cwds.cares.interfaces.model.search.query.PersonSearchQuery;
 import gov.ca.cwds.cares.rest.RestFunctionalTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import java.io.IOException;
-import java.util.UUID;
 import net.minidev.json.JSONObject;
-import org.junit.Before;
-import org.junit.Test;
 
 public class ReporterTest extends RestFunctionalTestBase {
   private static final String SEARCH_PATH = "/reporters";
