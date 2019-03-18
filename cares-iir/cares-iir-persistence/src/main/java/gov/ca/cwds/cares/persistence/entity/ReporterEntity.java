@@ -4,9 +4,13 @@ package gov.ca.cwds.cares.persistence.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import gov.ca.cwds.cares.common.model.ObjectBase;
 
@@ -112,6 +116,10 @@ public class ReporterEntity extends ObjectBase implements Serializable {
 
   @Column(name = "TITLE_DESC")
   private String titleDescription;
+  
+  @OneToMany
+  @JoinColumn(name = "CWS_XRF_ID", referencedColumnName = "IDENTIFIER", insertable = false, updatable = false)
+  private Collection<PersonCrossReferenceEntity> personCrossReferences = new ArrayList<>(); 
 
   public String getIdentifier() {
     return identifier;
@@ -367,5 +375,17 @@ public class ReporterEntity extends ObjectBase implements Serializable {
 
   public void setTitleDescription(String titleDescription) {
     this.titleDescription = titleDescription;
+  }
+
+  public Collection<PersonCrossReferenceEntity> getPersonCrossReferences() {
+    return personCrossReferences;
+  }
+
+  public void setPersonCrossReferences(Collection<PersonCrossReferenceEntity> personCrossReferences) {
+    this.personCrossReferences = personCrossReferences;
+  }
+  
+  public void addPersonCrossReferences(PersonCrossReferenceEntity personCrossReference) {
+    this.personCrossReferences.add(personCrossReference);
   }
 }

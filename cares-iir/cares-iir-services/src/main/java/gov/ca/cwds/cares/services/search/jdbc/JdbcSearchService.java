@@ -49,13 +49,9 @@ public class JdbcSearchService implements SearchService {
     @SuppressWarnings("unchecked")
     Page<ReporterEntity> reporterEntityPage = reporterRepository.findAll(reporterSearchSpecs, pageable);
     
-    List<ReporterEntity> reporterEntityList = reporterEntityPage.getContent();    
-    Collection<PersonSearchHit> hits = PersonSearchHitMapper.INSTANCE.mapToPersonSearchHits(reporterEntityList);
+    List<ReporterEntity> reporterEntityList = reporterEntityPage.getContent();
     
-    for (PersonSearchHit hit : hits) {
-      hit.setScore(0d);
-      hit.setSource(SUPPORTED_SOURCE);
-    }
+    Collection<PersonSearchHit> hits = PersonSearchHitMapper.INSTANCE.mapReporterEntitiesToPersonSearchHits(reporterEntityList);
     
     SearchResults searchResults = new SearchResults();
     searchResults.setTotalHitCount(reporterEntityPage.getTotalElements());

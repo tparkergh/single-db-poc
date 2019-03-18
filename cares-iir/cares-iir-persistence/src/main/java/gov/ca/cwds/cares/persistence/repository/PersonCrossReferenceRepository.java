@@ -1,9 +1,10 @@
 package gov.ca.cwds.cares.persistence.repository;
 
-import gov.ca.cwds.cares.persistence.entity.PersonCrossReferenceEntity;
-import gov.ca.cwds.cares.persistence.entity.PersonCrossReferencePK;
+import java.util.Collection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import gov.ca.cwds.cares.persistence.entity.PersonCrossReferenceEntity;
+import gov.ca.cwds.cares.persistence.entity.PersonCrossReferencePK;
 
 /**
  * CWDS J Team
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonCrossReferenceRepository extends JpaRepository<PersonCrossReferenceEntity, PersonCrossReferencePK> {
 
-  PersonCrossReferenceEntity findByPersonId(String personId);
+  Collection<PersonCrossReferenceEntity> findByPersonId(String personId);
 
-  PersonCrossReferenceEntity findByXrefId(String xrefId);
+  Collection<PersonCrossReferenceEntity> findByXrefId(String xrefId);
 }

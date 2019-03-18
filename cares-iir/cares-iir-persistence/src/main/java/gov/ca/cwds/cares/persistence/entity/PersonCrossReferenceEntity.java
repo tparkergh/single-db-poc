@@ -28,7 +28,7 @@ public class PersonCrossReferenceEntity extends ObjectBase implements Serializab
 
   @Id
   @Column(name = "CWS_XRF_CD")
-  private XrefCode xrefCode;
+  private String xrefCode;
 
   @Column(name = "CREATN_TS")
   private LocalDateTime creationTimestamp;
@@ -55,11 +55,11 @@ public class PersonCrossReferenceEntity extends ObjectBase implements Serializab
     this.xrefId = xrefId;
   }
 
-  public XrefCode getXrefCode() {
+  public String getXrefCode() {
     return xrefCode;
   }
 
-  public void setXrefCode(XrefCode xrefCode) {
+  public void setXrefCode(String xrefCode) {
     this.xrefCode = xrefCode;
   }
 

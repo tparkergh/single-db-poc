@@ -15,6 +15,7 @@ import gov.ca.cwds.cares.interfaces.model.search.SearchCriteria;
 import gov.ca.cwds.cares.interfaces.model.search.SearchResults;
 import gov.ca.cwds.cares.interfaces.model.search.hit.PersonSearchHit;
 import gov.ca.cwds.cares.interfaces.model.search.query.PersonSearchQuery;
+import gov.ca.cwds.cares.persistence.entity.PersonCrossReferenceEntity;
 import gov.ca.cwds.cares.persistence.entity.ReporterEntity;
 import gov.ca.cwds.cares.persistence.repository.ReporterRepository;
 
@@ -47,11 +48,19 @@ public class JdbcSearchServiceTest {
     reporterEntity_1.setIdentifier("reporter_1");
     reporterEntity_1.setFirstName("Shahid");
     reporterEntity_1.setLastName("Saleemi");
+    PersonCrossReferenceEntity personCrossReferenceEntity_1 = new PersonCrossReferenceEntity();
+    personCrossReferenceEntity_1.setXrefId("reporter_1");
+    personCrossReferenceEntity_1.setPersonId("person_id1");
+    reporterEntity_1.addPersonCrossReferences(personCrossReferenceEntity_1);
     
     ReporterEntity reporterEntity_2 = new ReporterEntity();
     reporterEntity_2.setIdentifier("reporter_2");
     reporterEntity_2.setFirstName("Bob");
     reporterEntity_2.setLastName("Smith");
+    PersonCrossReferenceEntity personCrossReferenceEntity_2 = new PersonCrossReferenceEntity();
+    personCrossReferenceEntity_2.setXrefId("reporter_2");
+    personCrossReferenceEntity_2.setPersonId("person_id2");
+    reporterEntity_2.addPersonCrossReferences(personCrossReferenceEntity_2);
     
     when(reporterRepository.findAll(any(ReporterSearchSpecification.class), any(Pageable.class)))
     .thenReturn(new PageImpl(Lists.newArrayList(reporterEntity_1, reporterEntity_2)));
@@ -63,14 +72,14 @@ public class JdbcSearchServiceTest {
     PersonSearchHit personSearchHit_1 = new PersonSearchHit();
     personSearchHit_1.setFirstName("Shahid");
     personSearchHit_1.setLastName("Saleemi");
-    personSearchHit_1.setIdentifier("reporter_1");
+    personSearchHit_1.setIdentifier("person_id1");
     personSearchHit_1.setScore(0d);
     personSearchHit_1.setSource("reporter");
     
     PersonSearchHit personSearchHit_2 = new PersonSearchHit();
     personSearchHit_2.setFirstName("Bob");
     personSearchHit_2.setLastName("Smith");
-    personSearchHit_2.setIdentifier("reporter_2");
+    personSearchHit_2.setIdentifier("person_id2");
     personSearchHit_2.setScore(0d);
     personSearchHit_2.setSource("reporter");
     
