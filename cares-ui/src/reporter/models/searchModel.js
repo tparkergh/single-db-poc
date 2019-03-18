@@ -7,13 +7,12 @@ import BaseModel from "./baseModel.js"
 import axios from 'axios'
 
 export default class SearchModel extends BaseModel {
+  RULE_PREFIX = "search.reporter."
 
   constructor(props) {
     super(SearchJSON)
     this.props = props
 
-    this.onValidatePanel.add(this.validateName.bind(this))
-    this.onValidateQuestion.add(this.validatePhoneNumber.bind(this))
     this.onCompleting.add(this.search.bind(this))
   }
 
@@ -54,25 +53,6 @@ export default class SearchModel extends BaseModel {
           ...this.data
         }
       }
-    }
-  }
-
-  validateName(sender, options) {
-    const firstNameRules = this.engine.find((rule) => rule.applies('search.reporter.first_name'))
-    const lastNameRules = this.engine.find((rule) => rule.applies('search.reporter.last_name'))
-    const rules = [...new Set([...firstNameRules, ...lastNameRules])]
-
-    const results = rules.map((rule) => this.engine.evaluate(rule, this.validationData()))
-    const errors = results.filter((result) => result !== true)
-    options.error = errors.join("\n") || undefined
-  }
-
-  validatePhoneNumber(sender, options) {
-    if(options.name === "phone_number") {
-      const rules = this.engine.find((rule) => rule.applies('search.reporter.phone_number'))
-      const results = rules.map((rule) => this.engine.evaluate(rule, this.validationData()))
-      const errors = results.filter((result) => result !== true)
-      options.error = errors.join("\n") || undefined
     }
   }
 

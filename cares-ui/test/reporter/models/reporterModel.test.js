@@ -80,4 +80,34 @@ describe('ReporterModel', () => {
     })
   })
 
+  describe('loadJsonRules', () => {
+    it('loads the json rules from an api', (done) => {
+      const rule = {
+        "and": [1,2]
+      }
+      mockAxios.onGet(getBreRuleSetRoute('ReporterCreateScreenBusinessRules')).reply(200, {
+        rules: [{
+          name: 'rule',
+          logic: rule
+        }]
+      })
+      const model = new ReporterModel({})
+      model.loadJsonRules().then(() => {
+        const rule = model.engine.find((rule) => rule.identifier === 'rule')
+        expect(rule).toEqual(rule)
+        done()
+      })
+    })
+
+    it('sets the create reporter error when there is a problem with BRE', (done) => {
+      mockAxios.onGet(getBreRuleSetRoute('ReporterCreateScreenBusinessRules')).reply(404)
+      const createReporterError = jasmine.createSpy('createReporterError')
+      const props =  { createReporterError }
+      const model = new ReporterModel(props)
+      model.loadJsonRules().then(() => {
+        expect(createReporterError).toHaveBeenCalled()
+        done()
+      })
+    })
+  })
 })
