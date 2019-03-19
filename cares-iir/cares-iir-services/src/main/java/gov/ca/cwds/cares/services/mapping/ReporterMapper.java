@@ -10,7 +10,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
-import gov.ca.cwds.cares.common.identifier.CmsKeyIdGenerator;
 import gov.ca.cwds.cares.interfaces.model.people.Reporter;
 import gov.ca.cwds.cares.persistence.entity.PersonCrossReferenceEntity;
 import gov.ca.cwds.cares.persistence.entity.ReporterEntity;
@@ -21,9 +20,10 @@ import gov.ca.cwds.cics.model.ReporterData;
  */
 @Mapper
 public abstract class ReporterMapper {
-  
+
   public final static ReporterMapper INSTANCE = Mappers.getMapper(ReporterMapper.class);
 
+  @Mapping(target = "identifier", ignore = true)
   @Mapping(target = "txnHeaderStaffId", constant = LOGGED_USER_STAFF_ID)
   @Mapping(target = "primaryPhoneExtensionNumber", source = "primaryPhoneExtension")
   @Mapping(target = "communicationMethod", constant = ZERO)
@@ -34,12 +34,7 @@ public abstract class ReporterMapper {
   @Mapping(target = "mandatedReporterIndicator", constant = NOT)
   @Mapping(target = "state", constant = ZERO)
   public abstract ReporterData mapReporterToReporterData(Reporter reporter);
-  
-  @AfterMapping
-  public void afterMappingReporterToReporterData(@MappingTarget ReporterData reporterData) {
-    reporterData.setIdentifier(CmsKeyIdGenerator.getNextValue(LOGGED_USER_STAFF_ID));
-  }
-  
+
   @Mapping(target = "address.city", source = "cityName")
   @Mapping(target = "address.stateCode", source = "stateCode")
   @Mapping(target = "address.streetName", source = "streetName")
