@@ -2,6 +2,8 @@ import gov.ca.cwds.rest.exception.IssueDetails;
 import gov.ca.cwds.rest.exception.IssueType;
 import gov.ca.cwds.cics.model.ReporterData;
 
+global java.util.Set validationDetailsList
+
 rule "reporter-di-communication-method-type"
 
   @doc_description("Communication Method must be 0 or valid")
