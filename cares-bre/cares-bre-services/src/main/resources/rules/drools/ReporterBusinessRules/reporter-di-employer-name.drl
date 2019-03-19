@@ -3,6 +3,8 @@ import gov.ca.cwds.rest.exception.IssueType;
 import gov.ca.cwds.cics.model.ReporterData;
 import org.drools.core.util.StringUtils;
 
+global java.util.Set validationDetailsList
+
 rule "reporter-di-employer-name"
 
   @doc_description("Employer name is mandatory if the individual is acting as a mandated REPORTER and the employer address is not already associated with an identified LAW_ENFORCEMENT")

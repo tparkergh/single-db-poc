@@ -3,6 +3,8 @@ import gov.ca.cwds.rest.exception.IssueType;
 import gov.ca.cwds.cics.model.ReporterData;
 import org.drools.core.util.StringUtils;
 
+global java.util.Set validationDetailsList
+
 rule "reporter-di-drms-mandated-reporter-feedback"
 
   @doc_description("Mandated Reporter feedback document key must be null or 10 characters")

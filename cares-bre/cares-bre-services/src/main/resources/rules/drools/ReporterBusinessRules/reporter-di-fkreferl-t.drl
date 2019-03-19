@@ -3,6 +3,8 @@ import gov.ca.cwds.rest.exception.IssueType;
 import gov.ca.cwds.cics.model.ReporterData;
 import org.drools.core.util.StringUtils;
 
+global java.util.Set validationDetailsList
+
 rule "reporter-di-fkreferl_t"
 
   @doc_description("FKREFERL_T must be null or 10 characters")
