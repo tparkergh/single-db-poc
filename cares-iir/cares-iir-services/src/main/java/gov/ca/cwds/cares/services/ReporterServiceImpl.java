@@ -65,7 +65,7 @@ public class ReporterServiceImpl implements ReporterService {
     Collection<PersonCrossReferenceEntity> references =
         filterReporterReferences(personCrossReferenceRepository.findByXrefId(reporterLegacyId));
     if (references.isEmpty()) {
-      LOGGER.error("No Person Cross Reference was found for Reporter Id " + reporterLegacyId);
+      LOGGER.error("No Person Cross Reference was found for Reporter Id '{}'", reporterLegacyId);
       throw new DataIntegrityException("No Person Cross Reference was found for given Reporter Id");
     }
 
@@ -108,7 +108,7 @@ public class ReporterServiceImpl implements ReporterService {
         filterReporterReferences(personCrossReferenceRepository.findByPersonId(personLegacyId));
 
     if (references.isEmpty()) {
-      LOGGER.error("No Person Cross Reference was found for Person Id " + personLegacyId);
+      LOGGER.error("No Person Cross Reference was found for Person Id '{}'" + personLegacyId);
       throw new DataIntegrityException("No Person Cross Reference was found for given Person Id");
     }
     String reporterLegacyId = references.iterator().next().getXrefId();
