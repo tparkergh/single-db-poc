@@ -43,7 +43,7 @@ public abstract class PersonSearchHitMapper {
   }
   
   private Map<String, ReporterEntity> getReporterEntityMapByReporterId(Collection<ReporterEntity> reporterEntityList) {
-    Map<String, ReporterEntity> map = new HashMap<>();
+    Map<String, ReporterEntity> map = new HashMap<>(reporterEntityList.size());
     
     for (ReporterEntity reporterEntity : reporterEntityList) {
       map.put(reporterEntity.getIdentifier(), reporterEntity);

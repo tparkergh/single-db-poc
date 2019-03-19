@@ -47,8 +47,7 @@ public class CicsAddressRestApiClient {
     CicsResponse response = cicsRestApiHelper.exchange(
         requestUri,
         HttpMethod.PUT,
-        request,
-        CicsResponse.class);
+        request);
 
     return response;
   }

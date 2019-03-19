@@ -1,7 +1,5 @@
 package gov.ca.cwds.cares.rest.controller;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import gov.ca.cwds.cares.common.aop.ExecutionTimer;
 import gov.ca.cwds.cares.interfaces.api.ReporterService;
 import gov.ca.cwds.cares.interfaces.model.people.Reporter;
@@ -55,8 +52,7 @@ public class ReporterController {
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Update Reporter")
   @ExecutionTimer
-  public @ResponseBody Reporter updateReporter(@RequestBody Reporter reporter,
-      LocalDateTime lastUpdateTimestamp) {
-    return reporterService.updateReporter(reporter, lastUpdateTimestamp);
+  public @ResponseBody Reporter updateReporter(@RequestBody Reporter reporter) {
+    return reporterService.updateReporter(reporter);
   }
 }

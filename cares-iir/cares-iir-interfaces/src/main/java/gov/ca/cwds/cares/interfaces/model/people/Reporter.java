@@ -1,12 +1,15 @@
 package gov.ca.cwds.cares.interfaces.model.people;
 
-import gov.ca.cwds.cares.interfaces.model.IdentifiableModel;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import gov.ca.cwds.cares.common.binding.IdentifierSerializer;
+import gov.ca.cwds.cares.common.model.ObjectBase;
 import gov.ca.cwds.cares.interfaces.model.Address;
 
 /**
@@ -15,22 +18,34 @@ import gov.ca.cwds.cares.interfaces.model.Address;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Reporter extends IdentifiableModel implements Serializable {
+public class Reporter extends ObjectBase implements Serializable {
 
   private static final long serialVersionUID = 653930568046236729L;
   
+  @JsonSerialize(using = IdentifierSerializer.class)
+  private String identifier;
+  
   private String firstName;
   private String lastName;
-  private Long phoneNumber;
-  private Integer phoneExtension;
+  private Long primaryPhoneNumber;
+  private Integer primaryPhoneExtension;
   private String relationToChild;
   private LocalDate birthDate;
   private String employerName;
-  private String title;
+  private String titleDescription;
+  private LocalDateTime lastUpdateTimestamp;
   private Address address;  
 
   public Reporter() {
     super();
+  }
+  
+  public String getIdentifier() {
+    return identifier;
+  }
+
+  public void setIdentifier(String identifier) {
+    this.identifier = identifier;
   }
 
   public String getFirstName() {
@@ -49,20 +64,20 @@ public class Reporter extends IdentifiableModel implements Serializable {
     this.lastName = lastName;
   }
 
-  public Long getPhoneNumber() {
-    return phoneNumber;
+  public Long getPrimaryPhoneNumber() {
+    return primaryPhoneNumber;
   }
 
-  public void setPhoneNumber(Long phoneNumber) {
-    this.phoneNumber = phoneNumber;
+  public void setPrimaryPhoneNumber(Long primaryPhoneNumber) {
+    this.primaryPhoneNumber = primaryPhoneNumber;
   }
 
-  public Integer getPhoneExtension() {
-    return phoneExtension;
+  public Integer getPrimaryPhoneExtension() {
+    return primaryPhoneExtension;
   }
 
-  public void setPhoneExtension(Integer phoneExtension) {
-    this.phoneExtension = phoneExtension;
+  public void setPrimaryPhoneExtension(Integer primaryPhoneExtension) {
+    this.primaryPhoneExtension = primaryPhoneExtension;
   }
 
   public String getRelationToChild() {
@@ -89,12 +104,12 @@ public class Reporter extends IdentifiableModel implements Serializable {
     this.employerName = employerName;
   }
 
-  public String getTitle() {
-    return title;
+  public String getTitleDescription() {
+    return titleDescription;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
+  public void setTitleDescription(String titleDescription) {
+    this.titleDescription = titleDescription;
   }
 
   public Address getAddress() {
@@ -103,5 +118,13 @@ public class Reporter extends IdentifiableModel implements Serializable {
 
   public void setAddress(Address address) {
     this.address = address;
+  }
+
+  public LocalDateTime getLastUpdateTimestamp() {
+    return lastUpdateTimestamp;
+  }
+
+  public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
+    this.lastUpdateTimestamp = lastUpdateTimestamp;
   }
 }

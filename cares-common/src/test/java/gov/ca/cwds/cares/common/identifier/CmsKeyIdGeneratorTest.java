@@ -1,20 +1,5 @@
 package gov.ca.cwds.cares.common.identifier;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-
-//import gov.ca.cwds.data.legacy.cms.CmsPersistentObject;
-import gov.ca.cwds.cares.common.identifier.CmsKeyIdGenerator;
-import gov.ca.cwds.cares.common.identifier.CmsKeyIdGenerator.KeyDetail;
-import gov.ca.cwds.rest.services.ServiceException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -43,6 +28,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import gov.ca.cwds.cares.common.identifier.CmsKeyIdGenerator.KeyDetail;
+import gov.ca.cwds.rest.services.ServiceException;
 
 /**
  * This JNI native library runs correctly on Linux Jenkins when libLZW.so and libstdc++.so.6 are
