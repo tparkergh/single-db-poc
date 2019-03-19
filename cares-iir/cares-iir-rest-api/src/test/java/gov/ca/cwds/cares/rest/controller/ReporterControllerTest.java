@@ -53,8 +53,8 @@ public class ReporterControllerTest {
   public void testUpdateReporter() {
     Reporter request = new Reporter();
     Reporter response = new Reporter();
-    when(reporterService.updateReporter(request, lastUpdateTimestamp)).thenReturn(response);
-    assertEquals(response, reporterController.updateReporter(request, lastUpdateTimestamp));
-    verify(reporterService).updateReporter(request, lastUpdateTimestamp);
+    when(reporterService.updateReporter(request)).thenReturn(response);
+    assertEquals(response, reporterController.updateReporter(request));
+    verify(reporterService).updateReporter(request);
   }
 }
