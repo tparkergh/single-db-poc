@@ -2,6 +2,8 @@ import gov.ca.cwds.rest.exception.IssueDetails;
 import gov.ca.cwds.rest.exception.IssueType;
 import gov.ca.cwds.cics.model.ReporterData;
 
+global java.util.Set validationDetailsList
+
 rule "reporter-di-state-code-type"
 
   @doc_description("State Code Type must be a valid")
