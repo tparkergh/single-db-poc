@@ -35,15 +35,23 @@ public class CicsReporterRestApiClient {
 
   @ExecutionTimer
   public CicsResponse createReporter(CicsReporterRequest request) {
-    URI requestUri = UriComponentsBuilder.fromHttpUrl(baseUrl).path(REPORTER_PATH).build().toUri();
+    URI requestUri = UriComponentsBuilder
+        .fromHttpUrl(baseUrl)
+        .path(REPORTER_PATH)
+        .build()
+        .toUri();
     return cicsRestApiHelper.exchange(requestUri, HttpMethod.POST, request);
   }
 
   @ExecutionTimer
   public CicsResponse updateReporter(CicsReporterRequest request,
       LocalDateTime lastUpdateTimestamp) {
-    URI requestUri = UriComponentsBuilder.fromHttpUrl(baseUrl).path(REPORTER_PATH)
-        .path("/" + lastUpdateTimestamp.format(Constants.CICS_TIMESTAMP_FORMATTER)).build().toUri();
+    URI requestUri = UriComponentsBuilder
+        .fromHttpUrl(baseUrl)
+        .path(REPORTER_PATH)
+        .path("/" + request.getReporterData().getIdentifier())
+        .path("/" + lastUpdateTimestamp.format(Constants.CICS_TIMESTAMP_FORMATTER))
+        .build().toUri();    
     return cicsRestApiHelper.exchange(requestUri, HttpMethod.POST, request);    
   }
 
