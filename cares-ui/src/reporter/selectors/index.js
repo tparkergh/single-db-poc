@@ -43,3 +43,8 @@ export const selectSearchResultsModelData = (rawState) => createSelector(
   (state) => state.getIn(['models', 'search_results', 'data']) || {},
   rawState
 )
+
+export const selectReporterModelData = (rawState) => createSelector(
+  (state) => state.getIn(['models', 'reporter', 'data']) || {},
+  rawState
+)
