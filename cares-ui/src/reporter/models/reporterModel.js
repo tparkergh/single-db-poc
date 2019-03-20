@@ -88,6 +88,9 @@ export default class ReporterModel extends BaseModel {
     var street_number = addressRegex[1] || ""
     var street_name = addressRegex[2] || ""
     return {
+      identifier: this.data.reporter,
+      last_update_id: this.data.last_update_id,
+      last_update_timestamp: this.data.last_update_timestamp,
       first_name,
       last_name,
       primary_phone_number: parseInt(phone_number),
@@ -95,6 +98,7 @@ export default class ReporterModel extends BaseModel {
       employer_name: employer,
       title_description: title,
       address: {
+        identifier: this.data.address_id,
         street_name,
         street_number,
         city,

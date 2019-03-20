@@ -81,7 +81,10 @@ export default class SearchResultsModel extends BaseModel {
     primary_phone_extension,
     employer_name,
     title_description,
+    last_update_id,
+    last_update_timestamp,
     address: {
+      identifier: address_id,
       state_code,
       zip_code,
       city,
@@ -99,7 +102,10 @@ export default class SearchResultsModel extends BaseModel {
       address: [ street_number, street_name ].join(' '),
       city,
       zip_code,
-      reporter: identifier
+      reporter: identifier,
+      last_update_id,
+      last_update_timestamp,
+      address_id
     }
   }
 }
