@@ -32,7 +32,12 @@ public abstract class ReporterMapper {
   @Mapping(target = "countySpecificCode", constant = STATE_OF_CALIFORNIA)
   @Mapping(target = "feedbackRequiredIndicator", constant = NOT)
   @Mapping(target = "mandatedReporterIndicator", constant = NOT)
-  @Mapping(target = "state", constant = ZERO)
+  @Mapping(target = "streetNumber", source = "address.streetNumber")
+  @Mapping(target = "streetName", source = "address.streetName")
+  @Mapping(target = "cityName", source = "address.city")
+  @Mapping(target = "state", source = "address.stateCode")
+  @Mapping(target = "zipNumber", source = "address.zipCode")
+  @Mapping(target = "zipSuffixNumber", source = "address.zipSuffix")
   public abstract ReporterData mapReporterToReporterData(Reporter reporter);
 
   @Mapping(target = "address.city", source = "cityName")

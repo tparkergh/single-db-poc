@@ -8,6 +8,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import gov.ca.cwds.cares.interfaces.model.Address;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
@@ -54,7 +55,7 @@ public class ReporterServiceImplTest {
 
     assertBreServiceCall();
 
-    assertCicsServiceCall();
+    assertCreateCicsServiceCall();
 
     Collection<PersonCrossReferenceEntity> referenceEntities = new HashSet<>();
     String personId = "1234567890";
@@ -124,7 +125,7 @@ public class ReporterServiceImplTest {
 
     assertBreServiceCall();
 
-    assertCicsServiceCall();
+    assertCreateCicsServiceCall();
 
     Collection<PersonCrossReferenceEntity> referenceEntities = new HashSet<>();
     String personId = "1234567890";
@@ -146,7 +147,7 @@ public class ReporterServiceImplTest {
   }
 
 
-  private void assertCicsServiceCall() {
+  private void assertCreateCicsServiceCall() {
     CicsResponse cicsResponse = new CicsResponse();
     cicsResponse.setDfhCommArea(new DfhCommArea());
 
@@ -212,7 +213,12 @@ public class ReporterServiceImplTest {
     assertEquals("99", reporterData.getCountySpecificCode());
     assertEquals("N", reporterData.getFeedbackRequiredIndicator());
     assertEquals("N", reporterData.getMandatedReporterIndicator());
-    assertEquals(new Integer(0), reporterData.getState());
+    assertEquals("test street number", reporterData.getStreetNumber());
+    assertEquals("test street name", reporterData.getStreetName());
+    assertEquals("test city", reporterData.getCityName());
+    assertEquals(new Integer(-3), reporterData.getState());
+    assertEquals(new Integer(-4), reporterData.getZipNumber());
+    assertEquals(new Integer(-5), reporterData.getZipSuffixNumber());
     assertNull(reporterData.getFeedbackDocument());
     assertNull(reporterData.getFeedbackDate());
     assertNull(reporterData.getFkLawEnforcement());
@@ -222,13 +228,8 @@ public class ReporterServiceImplTest {
     assertNull(reporterData.getMessagePhoneNumber());
     assertNull(reporterData.getNamePrefixDescription());
     assertNull(reporterData.getBadgeNumber());
-    assertNull(reporterData.getCityName());
     assertNull(reporterData.getEmployerName());
-    assertNull(reporterData.getStreetName());
-    assertNull(reporterData.getStreetNumber());
-    assertNull(reporterData.getZipNumber());
     assertNull(reporterData.getSuffixTitleDescription());
-    assertNull(reporterData.getZipSuffixNumber());
   }
 
   private Reporter createReporter() {
@@ -238,17 +239,24 @@ public class ReporterServiceImplTest {
     reporter.setPrimaryPhoneNumber(-1L);
     reporter.setPrimaryPhoneExtension(-2);
     reporter.setRelationToChild("test relation to child");
+    reporter.setAddress(createAddress());
     return reporter;
   }
 
+  private Address createAddress() {
+    Address address = new Address();
+    address.setStreetNumber("test street number");
+    address.setStreetName("test street name");
+    address.setCity("test city");
+    address.setStateCode(-3);
+    address.setZipCode(-4);
+    address.setZipSuffix(-5);
+    return address;
+  }
+
   private Reporter updateReporter() {
-    Reporter reporter = new Reporter();
+    Reporter reporter = createReporter();
     reporter.setIdentifier("1234567890");
-    reporter.setFirstName("test first name");
-    reporter.setLastName("test last name");
-    reporter.setPrimaryPhoneNumber(-1L);
-    reporter.setPrimaryPhoneExtension(-2);
-    reporter.setRelationToChild("test relation to child");
     reporter.setLastUpdateTimestamp(LocalDateTime.now());
     return reporter;
   }
