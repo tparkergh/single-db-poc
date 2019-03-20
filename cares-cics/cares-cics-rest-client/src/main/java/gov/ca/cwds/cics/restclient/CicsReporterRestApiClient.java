@@ -52,7 +52,7 @@ public class CicsReporterRestApiClient {
         .path("/" + request.getReporterData().getIdentifier())
         .path("/" + lastUpdateTimestamp.format(Constants.CICS_TIMESTAMP_FORMATTER))
         .build().toUri();    
-    return cicsRestApiHelper.exchange(requestUri, HttpMethod.POST, request);    
+    return cicsRestApiHelper.exchange(requestUri, HttpMethod.PUT, request);
   }
 
   void setBaseUrl(String baseUrl) {
