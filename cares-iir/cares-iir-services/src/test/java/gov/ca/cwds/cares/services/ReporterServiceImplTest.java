@@ -8,20 +8,22 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import gov.ca.cwds.cares.common.exception.DataIntegrityException;
-import gov.ca.cwds.cares.common.identifier.CmsKeyIdGenerator;
-import gov.ca.cwds.cares.persistence.entity.PersonCrossReferenceEntity;
-import gov.ca.cwds.cares.persistence.repository.PersonCrossReferenceRepository;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
+import gov.ca.cwds.cares.common.exception.DataIntegrityException;
 import gov.ca.cwds.cares.interfaces.model.people.Reporter;
+import gov.ca.cwds.cares.persistence.entity.PersonCrossReferenceEntity;
+import gov.ca.cwds.cares.persistence.repository.PersonCrossReferenceRepository;
 import gov.ca.cwds.cics.model.CicsReporterRequest;
 import gov.ca.cwds.cics.model.CicsResponse;
 import gov.ca.cwds.cics.model.DfhCommArea;
@@ -47,7 +49,7 @@ public class ReporterServiceImplTest {
   private ReporterServiceImpl reporterService;
 
   @Test
-  public void shouldSuccess() throws Exception {
+  public void shouldCreateSuccess() throws Exception {
     Reporter request = createReporter();
 
     assertBreServiceCall();
@@ -56,15 +58,16 @@ public class ReporterServiceImplTest {
 
     Collection<PersonCrossReferenceEntity> referenceEntities = new HashSet<>();
     String personId = "1234567890";
-    PersonCrossReferenceEntity referenceEntity = createPersonCrossReferenceEntity(personId, null, "R");
+    PersonCrossReferenceEntity referenceEntity =
+        createPersonCrossReferenceEntity(personId, null, "R");
     referenceEntities.add(referenceEntity);
 
     when(personCrossReferenceRepository.findByXrefId(argThat(new ArgumentMatcher<String>() {
-        @Override
-        public boolean matches(String reporterLegacyId) {
-          return reporterLegacyId.endsWith("0WM");
-        }
-      }))).thenReturn(referenceEntities);
+      @Override
+      public boolean matches(String reporterLegacyId) {
+        return reporterLegacyId.endsWith("0WM");
+      }
+    }))).thenReturn(referenceEntities);
 
     Reporter response = reporterService.createReporter(request);
 
@@ -80,6 +83,41 @@ public class ReporterServiceImplTest {
     verify(personCrossReferenceRepository).findByXrefId(any());
   }
 
+  @Test
+  public void shouldUpdateSuccess() throws Exception {
+    Reporter request = updateReporter();
+
+    assertBreServiceCall();
+
+    assertUpdateCicsServiceCall();
+
+    Collection<PersonCrossReferenceEntity> referenceEntities = new HashSet<>();
+    String personId = "1234567890";
+    PersonCrossReferenceEntity referenceEntity =
+        createPersonCrossReferenceEntity(personId, personId, "R");
+    referenceEntities.add(referenceEntity);
+
+    when(personCrossReferenceRepository.findByPersonId(argThat(new ArgumentMatcher<String>() {
+      @Override
+      public boolean matches(String personId) {
+        return personId.matches("1234567890");
+      }
+    }))).thenReturn(referenceEntities);
+
+    Reporter response = reporterService.updateReporter(request);
+
+    assertEquals(response.getIdentifier(), personId);
+    assertEquals(request.getFirstName(), response.getFirstName());
+    assertEquals(request.getLastName(), response.getLastName());
+    assertEquals(request.getLastName(), response.getLastName());
+    assertEquals(request.getPrimaryPhoneNumber(), response.getPrimaryPhoneNumber());
+    assertEquals(request.getPrimaryPhoneExtension(), response.getPrimaryPhoneExtension());
+    assertEquals(request.getRelationToChild(), response.getRelationToChild());
+    verify(businessRuleExecutor).executeBusinessRules(any(), any());
+    verify(cicsReporterRestApiClient).updateReporter(any(), any());
+    verify(personCrossReferenceRepository).findByPersonId(any());
+  }
+
   @Test(expected = DataIntegrityException.class)
   public void shouldThrowDataIntegrityExceptionOnMissingReporterReference() throws Exception {
     Reporter request = createReporter();
@@ -90,7 +128,8 @@ public class ReporterServiceImplTest {
 
     Collection<PersonCrossReferenceEntity> referenceEntities = new HashSet<>();
     String personId = "1234567890";
-    PersonCrossReferenceEntity referenceEntity = createPersonCrossReferenceEntity(personId, null, "Z");
+    PersonCrossReferenceEntity referenceEntity =
+        createPersonCrossReferenceEntity(personId, null, "Z");
     referenceEntities.add(referenceEntity);
 
     when(personCrossReferenceRepository.findByXrefId(argThat(new ArgumentMatcher<String>() {
@@ -111,33 +150,51 @@ public class ReporterServiceImplTest {
     CicsResponse cicsResponse = new CicsResponse();
     cicsResponse.setDfhCommArea(new DfhCommArea());
 
-    when(cicsReporterRestApiClient.createReporter(argThat(new ArgumentMatcher<CicsReporterRequest>() {
-        @Override
-        public boolean matches(CicsReporterRequest cicsReporterRequest) {
-          ReporterData reporterData = cicsReporterRequest.getReporterData();
-          assertReporterData(reporterData);
-          return true;
-        }
-      }))).thenReturn(cicsResponse);
-  }
-
-  private void assertBreServiceCall() {
-    when(businessRuleExecutor.executeBusinessRules(
-        argThat(new ArgumentMatcher<String>() {
+    when(cicsReporterRestApiClient
+        .createReporter(argThat(new ArgumentMatcher<CicsReporterRequest>() {
           @Override
-          public boolean matches(String ruleName) {
-            assertEquals("ReporterBusinessRules", ruleName);
-            return true;
-          }
-        }),
-        argThat(new ArgumentMatcher<ReporterData>() {
-          @Override
-          public boolean matches(ReporterData reporterData) {
+          public boolean matches(CicsReporterRequest cicsReporterRequest) {
+            ReporterData reporterData = cicsReporterRequest.getReporterData();
             assertReporterData(reporterData);
             return true;
           }
-        })
-    )).thenReturn(new BreResponse());
+        }))).thenReturn(cicsResponse);
+  }
+
+  private void assertUpdateCicsServiceCall() {
+    CicsResponse cicsResponse = new CicsResponse();
+    cicsResponse.setDfhCommArea(new DfhCommArea());
+
+    when(cicsReporterRestApiClient
+        .updateReporter(argThat(new ArgumentMatcher<CicsReporterRequest>() {
+          @Override
+          public boolean matches(CicsReporterRequest cicsReporterRequest) {
+            ReporterData reporterData = cicsReporterRequest.getReporterData();
+            assertReporterData(reporterData);
+            return true;
+          }
+        }), argThat(new ArgumentMatcher<LocalDateTime>() {
+          @Override
+          public boolean matches(LocalDateTime localDateTime) {
+            return localDateTime != null;
+          }
+        }))).thenReturn(cicsResponse);
+  }
+
+  private void assertBreServiceCall() {
+    when(businessRuleExecutor.executeBusinessRules(argThat(new ArgumentMatcher<String>() {
+      @Override
+      public boolean matches(String ruleName) {
+        assertEquals("ReporterBusinessRules", ruleName);
+        return true;
+      }
+    }), argThat(new ArgumentMatcher<ReporterData>() {
+      @Override
+      public boolean matches(ReporterData reporterData) {
+        assertReporterData(reporterData);
+        return true;
+      }
+    }))).thenReturn(new BreResponse());
   }
 
   private void assertReporterData(ReporterData reporterData) {
@@ -184,7 +241,20 @@ public class ReporterServiceImplTest {
     return reporter;
   }
 
-  private PersonCrossReferenceEntity createPersonCrossReferenceEntity(String personId, String xrefId, String xrefCode) {
+  private Reporter updateReporter() {
+    Reporter reporter = new Reporter();
+    reporter.setIdentifier("1234567890");
+    reporter.setFirstName("test first name");
+    reporter.setLastName("test last name");
+    reporter.setPrimaryPhoneNumber(-1L);
+    reporter.setPrimaryPhoneExtension(-2);
+    reporter.setRelationToChild("test relation to child");
+    reporter.setLastUpdateTimestamp(LocalDateTime.now());
+    return reporter;
+  }
+
+  private PersonCrossReferenceEntity createPersonCrossReferenceEntity(String personId,
+      String xrefId, String xrefCode) {
     PersonCrossReferenceEntity referenceEntity = new PersonCrossReferenceEntity();
     referenceEntity.setPersonId(personId);
     referenceEntity.setXrefId(xrefId);
