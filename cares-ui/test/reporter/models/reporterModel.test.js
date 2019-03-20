@@ -110,4 +110,36 @@ describe('ReporterModel', () => {
       })
     })
   })
+
+  describe('buildReporter', () => {
+    it('builds a reporter to send to an API', () => {
+      const props = {}
+      const model = new ReporterModel(props)
+      const data = {
+        first_name: 'first',
+        last_name: 'last',
+        phone_number: '1234567899',
+        relationship: "Reporter",
+        employer: "employer",
+        title: "title",
+        address: "1234 C Street",
+        city: "city",
+        zip_code: "12345"
+      }
+      expect(model.buildReporter(data)).toEqual({
+        first_name: 'first',
+        last_name: 'last',
+        primary_phone_number: 1234567899,
+        relation_to_child: "Reporter",
+        employer_name: "employer",
+        title_description: "title",
+        address: {
+          street_name: "C Street",
+          street_number: "1234",
+          city: "city",
+          zip_code: "12345"
+        }
+      })
+    })
+  })
 })
