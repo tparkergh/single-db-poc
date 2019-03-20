@@ -2,6 +2,7 @@ package gov.ca.cwds.cares.rest.controller.exception;
 
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.cares.common.exception.CicsException;
+import gov.ca.cwds.cares.common.exception.DataIntegrityException;
 import gov.ca.cwds.rest.exception.IssueDetails;
 import gov.ca.cwds.rest.exception.IssueType;
 import java.util.HashSet;
@@ -28,14 +29,17 @@ public class CaresRestExceptionHandler {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   Set<IssueDetails> cicsExceptionHandler(CicsException ex) {
     LOGGER.error("CICS encountered the following Exception:", ex);
-    Set<IssueDetails> issueDetailsSet = new HashSet<>();
-    IssueDetails issueDetails = new IssueDetails();
-    issueDetails.setUserMessage(ex.getMessage());
-    issueDetails.setType(IssueType.EXPECTED_EXCEPTION);
-    issueDetailsSet.add(issueDetails);
-    return issueDetailsSet;
+    return createSingleMessageException(ex);
   }
-  
+
+  @ResponseBody
+  @ExceptionHandler(DataIntegrityException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  Set<IssueDetails> databaseIntegrityExceptionHandler(DataIntegrityException ex) {
+    LOGGER.error("Data integrity issue is found", ex);
+    return createSingleMessageException(ex);
+  }
+
   @ResponseBody
   @ExceptionHandler(BreException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -55,6 +59,15 @@ public class CaresRestExceptionHandler {
       }
       issueDetailsSet.add(issueDetails);
     }
+    return issueDetailsSet;
+  }
+
+  private Set<IssueDetails> createSingleMessageException(Exception ex) {
+    Set<IssueDetails> issueDetailsSet = new HashSet<>();
+    IssueDetails issueDetails = new IssueDetails();
+    issueDetails.setUserMessage(ex.getMessage());
+    issueDetails.setType(IssueType.EXPECTED_EXCEPTION);
+    issueDetailsSet.add(issueDetails);
     return issueDetailsSet;
   }
 }
