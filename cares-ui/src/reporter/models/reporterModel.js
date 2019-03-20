@@ -12,12 +12,10 @@ export default class ReporterModel extends BaseModel {
 
   constructor(props) {
     super(ReporterJSON)
+    this.completeText = "Create"
     this.props = props
 
-    this.onAfterRenderQuestion.add((sender, options) => {
-      this.update(this.props)
-    })
-    this.onCompleting.add(this.createReporter.bind(this))
+    this.onCompleting.add(this.createOrUpdateReporter.bind(this))
 
     this.loadStates()
 
@@ -30,6 +28,7 @@ export default class ReporterModel extends BaseModel {
   update(props) {
     this.data = props.data
     this.props = props
+    this.setContinueText()
   }
 
   loadStates () {
@@ -47,7 +46,8 @@ export default class ReporterModel extends BaseModel {
     })
   }
 
-  createReporter (result, options) {
+  createOrUpdateReporter (result, options) {
+    const method = this.completeText === "Create" ? 'post' : 'put'
     const {
       updateSearchModel,
       updateReporterModel,
@@ -56,7 +56,7 @@ export default class ReporterModel extends BaseModel {
     } = this.props
     return axios({
       url: createReporterRoute(),
-      method: 'post',
+      method,
       data: this.buildReporter(result.data)
     })
       .then((result) => {
@@ -88,6 +88,9 @@ export default class ReporterModel extends BaseModel {
     var street_number = addressRegex[1] || ""
     var street_name = addressRegex[2] || ""
     return {
+      identifier: this.data.reporter,
+      last_update_id: this.data.last_update_id,
+      last_update_timestamp: this.data.last_update_timestamp,
       first_name,
       last_name,
       primary_phone_number: parseInt(phone_number),
@@ -95,6 +98,7 @@ export default class ReporterModel extends BaseModel {
       employer_name: employer,
       title_description: title,
       address: {
+        identifier: this.data.address_id,
         street_name,
         street_number,
         city,
@@ -129,6 +133,15 @@ export default class ReporterModel extends BaseModel {
     }).catch((error) => {
       createReporterError && createReporterError(error)
     })
+  }
+
+  setContinueText() {
+    if(this.data.reporter) {
+      this.completeText = "Update"
+    } else {
+      this.completeText = "Create"
+    }
+    this.render()
   }
 }
 

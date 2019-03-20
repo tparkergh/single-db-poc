@@ -2,14 +2,13 @@ import SearchResultsJSON from "../jsonForms/searchResults"
 import BaseModel from './baseModel'
 import { ItemValue, SurveyError } from "survey-react";
 import axios from 'axios'
+import { getReporterRoute } from "../../routes"
 
 export default class SearchResultsModel extends BaseModel {
   constructor (props) {
     super(SearchResultsJSON)
 
-    this.completeText = "Create Reporter"
     this.onCompleting.add(this.continueNext.bind(this))
-
     this.props = props
   }
 
@@ -22,10 +21,22 @@ export default class SearchResultsModel extends BaseModel {
       active: false,
       data: this.data
     })
-    updateReporterModel && updateReporterModel({
-      active: true,
-      data: this.data
-    })
+    if (this.data.reporter) {
+      return axios({
+        url: getReporterRoute(this.data.reporter[0]),
+        method: 'get'
+      }).then((result) => {
+        updateReporterModel && updateReporterModel({
+          active: true,
+          data: this.transformReporter(result.data)
+        })
+      })
+    } else {
+      updateReporterModel && updateReporterModel({
+        active: true,
+        data: this.data
+      })
+    }
   }
 
   update (props) {
@@ -42,9 +53,9 @@ export default class SearchResultsModel extends BaseModel {
       element.choices = []
       element.errors = []
       if (searchResults && searchResults.length > 0) {
-        searchResults.map((result, index) => {
+        searchResults.map((result) => {
           element.choices.push(new ItemValue({
-            value: index,
+            value: result.identifier,
             text: this.formatSearchResult(result)
           }))
         })
@@ -62,16 +73,40 @@ export default class SearchResultsModel extends BaseModel {
     ].join("\n")
   }
 
-
-
-  setContinueText(sender, options) {
-    if(options.name === "reporter") {
-      if (options.question.isEmpty())
-        this.completeText = "Create Reporter"
-      else
-        this.completeText = "Continue"
+  transformReporter({
+    identifier,
+    first_name,
+    last_name,
+    primary_phone_number,
+    primary_phone_extension,
+    employer_name,
+    title_description,
+    last_update_id,
+    last_update_timestamp,
+    address: {
+      identifier: address_id,
+      state_code,
+      zip_code,
+      city,
+      street_name,
+      street_number
     }
-    this.render()
+  }) {
+    return {
+      first_name,
+      last_name,
+      phone_number: primary_phone_number.toString(),
+      extension: primary_phone_extension.toString(),
+      employer: employer_name,
+      title: title_description,
+      address: [ street_number, street_name ].join(' '),
+      city,
+      zip_code,
+      reporter: identifier,
+      last_update_id,
+      last_update_timestamp,
+      address_id
+    }
   }
 }
 
