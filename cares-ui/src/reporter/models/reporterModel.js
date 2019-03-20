@@ -60,13 +60,30 @@ export default class ReporterModel extends BaseModel {
     first_name,
     last_name,
     phone_number,
-    relationship
+    relationship,
+    employer,
+    title,
+    address,
+    city,
+    zip_code,
+    state
   }) {
+    const addressRegex = address && address.match(/^\s*(\d+)\s*(.*)/) || []
+    var street_number = addressRegex[1] || ""
+    var street_name = addressRegex[2] || ""
     return {
       first_name,
       last_name,
-      phone_number: parseInt(phone_number),
-      relation_to_child: relationship
+      primary_phone_number: parseInt(phone_number),
+      relation_to_child: relationship,
+      employer_name: employer,
+      title_description: title,
+      address: {
+        street_name,
+        street_number,
+        city,
+        zip_code,
+      }
     }
   }
 
