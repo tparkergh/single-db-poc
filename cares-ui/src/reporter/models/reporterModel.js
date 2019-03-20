@@ -15,7 +15,7 @@ export default class ReporterModel extends BaseModel {
     this.completeText = "Create"
     this.props = props
 
-    this.onCompleting.add(this.createReporter.bind(this))
+    this.onCompleting.add(this.createOrUpdateReporter.bind(this))
 
     this.loadStates()
 
@@ -46,7 +46,8 @@ export default class ReporterModel extends BaseModel {
     })
   }
 
-  createReporter (result, options) {
+  createOrUpdateReporter (result, options) {
+    const method = this.completeText === "Create" ? 'post' : 'put'
     const {
       updateSearchModel,
       updateReporterModel,
@@ -55,7 +56,7 @@ export default class ReporterModel extends BaseModel {
     } = this.props
     return axios({
       url: createReporterRoute(),
-      method: 'post',
+      method,
       data: this.buildReporter(result.data)
     })
       .then((result) => {

@@ -9,7 +9,7 @@ import {
 const mockAxios = new MockAdapter(axios)
 
 describe('ReporterModel', () => {
-  describe('createReporter', () => {
+  describe('createOrUpdateReporter', () => {
     it('creates a reporter', (done) => {
       const createReporterSuccess = jasmine.createSpy('createReporterSuccess')
       const props = { searchResults: [], createReporterSuccess }
@@ -23,7 +23,7 @@ describe('ReporterModel', () => {
         }
       }
       mockAxios.onPost(createReporterRoute()).reply(200)
-      model.createReporter(result)
+      model.createOrUpdateReporter(result)
         .then(() => {
           expect(createReporterSuccess).toHaveBeenCalled()
           done()
@@ -43,7 +43,7 @@ describe('ReporterModel', () => {
           relationship_to_child: 'reporter'
         }
       }
-      model.createReporter(result)
+      model.createOrUpdateReporter(result)
         .then(() => {
           expect(mockAxios.history.post.length).toEqual(1)
           expect(updateSearchModel).toHaveBeenCalledWith({
@@ -70,7 +70,7 @@ describe('ReporterModel', () => {
         }
       }
       mockAxios.onPost(createReporterRoute()).reply(200)
-      model.createReporter(result)
+      model.createOrUpdateReporter(result)
         .then(() => {
           expect(updateSearchModel).toHaveBeenCalledWith({
             active: true
