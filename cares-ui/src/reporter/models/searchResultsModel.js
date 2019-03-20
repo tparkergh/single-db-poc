@@ -74,6 +74,7 @@ export default class SearchResultsModel extends BaseModel {
   }
 
   transformReporter({
+    identifier,
     first_name,
     last_name,
     primary_phone_number,
@@ -91,14 +92,14 @@ export default class SearchResultsModel extends BaseModel {
     return {
       first_name,
       last_name,
-      phone_number: parseInt(primary_phone_number),
-      extension: primary_phone_extension,
+      phone_number: primary_phone_number.toString(),
+      extension: primary_phone_extension.toString(),
       employer: employer_name,
       title: title_description,
       address: [ street_number, street_name ].join(' '),
       city,
       zip_code,
-
+      reporter: identifier
     }
   }
 }
