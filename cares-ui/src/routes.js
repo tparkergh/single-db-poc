@@ -24,6 +24,8 @@ export const searchRoute = () => caresApiRoute('/searches')
 
 export const createReporterRoute = () => caresApiRoute('/reporters')
 
+export const stateSystemCodesRoute = () => caresApiRoute('/system_codes/STATE_C')
+
 // business rules routes
 
 export const getBreRuleSetRoute = (ruleSet) => caresBreApiRoute(`/bre/defs/${ruleSet}`)

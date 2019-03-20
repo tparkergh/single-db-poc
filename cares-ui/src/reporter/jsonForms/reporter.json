@@ -87,7 +87,7 @@
         "startWithNewLine": false
       },
       {
-        "type": "text",
+        "type": "dropdown",
         "name": "state",
         "title": "State",
         "width": "50%",

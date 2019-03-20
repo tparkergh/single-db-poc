@@ -2,10 +2,9 @@ import BaseModel from './baseModel'
 import ReporterJSON from "../jsonForms/reporter"
 import axios from 'axios'
 import {
-  createReporterRoute
-} from '../../routes'
-import {
-  getBreRuleSetRoute
+  createReporterRoute,
+  getBreRuleSetRoute,
+  stateSystemCodesRoute
 } from '../../routes'
 
 export default class ReporterModel extends BaseModel {
@@ -20,6 +19,8 @@ export default class ReporterModel extends BaseModel {
     })
     this.onCompleting.add(this.createReporter.bind(this))
 
+    this.loadStates()
+
     // hook for demoing dynamically adding rules
     window.rules = this.engine.rules
     window.addRule = this.engine.define
@@ -29,6 +30,21 @@ export default class ReporterModel extends BaseModel {
   update(props) {
     this.data = props.data
     this.props = props
+  }
+
+  loadStates () {
+    let response 
+    axios({
+      url: stateSystemCodesRoute(),
+      method: 'get'
+    }).then((result) => {
+      response = result.data.map(r => ({
+          value: r.system_id,
+          text: r.short_description.trim()
+        })
+      )
+      this.getQuestionByName('state').choices = response 
+    })
   }
 
   createReporter (result, options) {
