@@ -94,7 +94,8 @@ public class CicsRestApiHelper {
     
       LOGGER.info("CICS RESPONSE: {}", cicsResponse);
     } catch (Exception e) {
-      throw new CicsException("CICS service exception, request URI: " + requestUri, e);
+      String message = "CICS service exception. " + e.getMessage() + ". Request URI: " + requestUri; 
+      throw new CicsException(message, e);
     }
     
     DfhCommArea dfhCommArea = cicsResponse.getDfhCommArea();
