@@ -3,7 +3,7 @@ import ReporterModel from './models/reporterModel'
 import JsonForm from './JsonForm'
 import {
   selectReporterActive,
-  selectSearchResultsModelData
+  selectReporterModelData
 } from './selectors'
 import {
   updateSearchModel,
@@ -16,7 +16,7 @@ const model = new ReporterModel({})
 
 const mapStateToProps = (state, ownProps) => ({
   active: selectReporterActive(state),
-  data: selectSearchResultsModelData(state)
+  data: selectReporterModelData(state)
 })
 const mapDispatchToProps = ({
   updateSearchModel,
