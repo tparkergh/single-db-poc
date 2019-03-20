@@ -68,7 +68,7 @@ public class ReporterServiceImplTest {
 
     Reporter response = reporterService.createReporter(request);
 
-    assertEquals(response.getIdentifier(), CmsKeyIdGenerator.getUIIdentifierFromKey(personId));
+    assertEquals(response.getIdentifier(), personId);
     assertEquals(request.getFirstName(), response.getFirstName());
     assertEquals(request.getLastName(), response.getLastName());
     assertEquals(request.getLastName(), response.getLastName());
