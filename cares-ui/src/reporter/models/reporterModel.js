@@ -55,7 +55,7 @@ export default class ReporterModel extends BaseModel {
       createReporterError
     } = this.props
     return axios({
-      url: createReporterRoute(),
+      url: '/b', //createReporterRoute(),
       method,
       data: this.buildReporter(result.data)
     })
@@ -84,6 +84,7 @@ export default class ReporterModel extends BaseModel {
     zip_code,
     state
   }) {
+    debugger
     const addressRegex = address && address.match(/^\s*(\d+)\s*(.*)/) || []
     var street_number = addressRegex[1] || ""
     var street_name = addressRegex[2] || ""
@@ -102,6 +103,7 @@ export default class ReporterModel extends BaseModel {
         street_name,
         street_number,
         city,
+        state,
         zip_code,
       }
     }
