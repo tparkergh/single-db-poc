@@ -96,8 +96,8 @@ public class ReporterSearchTest extends RestFunctionalTestBase {
             "hits.person[0].source", equalTo("reporter"),
             "hits.person[0].identifier", notNullValue(),
             "hits.person[0].expanded_identifier", notNullValue(),
-            "hits.person[0].first_name", equalToIgnoringCase("Bob                 "),
-            "hits.person[0].last_name", equalToIgnoringCase("Smith                    "),
+            "hits.person[0].first_name", equalToIgnoringWhiteSpace("bobby"),
+            "hits.person[0].last_name", equalToIgnoringWhiteSpace("Smith"),
             "hits.person[0].primary_phone_number", notNullValue()
         );
   }
