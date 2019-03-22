@@ -124,7 +124,8 @@ describe('ReporterModel', () => {
         title: "title",
         address: "1234 C Street",
         city: "city",
-        zip_code: "12345"
+        zip_code: "12345",
+        state: 12345,
       }
       expect(model.buildReporter(data)).toEqual({
         first_name: 'first',
@@ -137,7 +138,8 @@ describe('ReporterModel', () => {
           street_name: "C Street",
           street_number: "1234",
           city: "city",
-          zip_code: "12345"
+          zip_code: "12345",
+          state_code: 12345
         }
       })
     })

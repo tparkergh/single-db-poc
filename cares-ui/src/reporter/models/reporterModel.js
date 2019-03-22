@@ -104,6 +104,7 @@ export default class ReporterModel extends BaseModel {
         street_number,
         city,
         zip_code,
+        state_code: state
       }
     }
   }
