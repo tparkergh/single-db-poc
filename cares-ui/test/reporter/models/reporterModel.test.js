@@ -142,4 +142,24 @@ describe('ReporterModel', () => {
       })
     })
   })
+
+  describe('addCancelButton', () => {
+    it('adds a cancel button to options html element', () => {
+      const props = {}
+      const model = new ReporterModel(props)
+      const element = document.createElement("div")
+      const innerElement = document.createElement("div")
+      innerElement.className = 'sv_nav'
+      element.appendChild(innerElement)
+      const options = {
+        htmlElement: element
+      }
+      model.addCancelButton({}, options)
+      const cancelButton = options.htmlElement.querySelector('.sv_nav button.cancel')
+      expect(cancelButton).toBeDefined()
+      expect(cancelButton.className).toEqual("btn btn-info btn-xs cancel")
+      expect(cancelButton.innerHTML).toEqual("Cancel")
+      expect(cancelButton.onclick).toBeDefined()
+    })
+  })
 })
