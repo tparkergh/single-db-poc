@@ -105,7 +105,8 @@ export default class SearchResultsModel extends BaseModel {
       reporter: identifier,
       last_update_id,
       last_update_timestamp,
-      address_id
+      address_id,
+      state: state_code
     }
   }
 }
