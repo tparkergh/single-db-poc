@@ -3,6 +3,7 @@ package gov.ca.cwds.cares.rest.controller.exception;
 import gov.ca.cwds.bre.interfaces.exception.BreException;
 import gov.ca.cwds.bre.interfaces.model.BreResponse;
 import gov.ca.cwds.cares.common.exception.CicsException;
+import gov.ca.cwds.cares.common.exception.DataIntegrityException;
 import gov.ca.cwds.rest.exception.IssueDetails;
 import gov.ca.cwds.rest.exception.IssueType;
 import java.util.HashSet;
@@ -29,6 +30,17 @@ public class CaresRestExceptionHandlerTest {
     CicsException ex = new CicsException(message);
 
     Set<IssueDetails> detailsSet = exceptionHandler.cicsExceptionHandler(ex);
+    IssueDetails issueDetails = detailsSet.iterator().next();
+    assertEquals(message, issueDetails.getUserMessage());
+    assertEquals(IssueType.EXPECTED_EXCEPTION, issueDetails.getType());
+  }
+
+  @Test
+  public void shouldHaveUserMessageWhenDataIntegrityException() throws Exception {
+    String message = "test message";
+    DataIntegrityException ex = new DataIntegrityException(message);
+
+    Set<IssueDetails> detailsSet = exceptionHandler.databaseIntegrityExceptionHandler(ex);
     IssueDetails issueDetails = detailsSet.iterator().next();
     assertEquals(message, issueDetails.getUserMessage());
     assertEquals(IssueType.EXPECTED_EXCEPTION, issueDetails.getType());

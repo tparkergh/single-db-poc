@@ -62,14 +62,14 @@ public class ReporterServiceImpl implements ReporterService {
 
     reporter.setLastUpdateTimestamp(cicsResponse.getDfhCommArea().getApiTimestamp());
     String xrefId = reporterData.getIdentifier();
-    Collection<PersonCrossReferenceEntity> references =
+    Collection<PersonCrossReferenceEntity> referenceEntities =
         filterReporterReferences(personCrossReferenceRepository.findByXrefId(xrefId));
-    if (references.isEmpty()) {
+    if (referenceEntities.isEmpty()) {
       LOGGER.error("No Person Cross Reference was found for Reporter Id '{}'", xrefId);
       throw new DataIntegrityException("No Person Cross Reference was found for given Reporter Id");
     }
 
-    String personId = references.iterator().next().getPersonId();
+    String personId = referenceEntities.iterator().next().getPersonId();
     reporter.setIdentifier(personId);
     return reporter;
   }
@@ -77,19 +77,21 @@ public class ReporterServiceImpl implements ReporterService {
   @Override
   public Reporter getReporter(String identifier) {
     Reporter reporter = null;    
-    Collection<PersonCrossReferenceEntity> personCrossReferenceEntities = personCrossReferenceRepository.findByPersonId(identifier);
-    
-    if (personCrossReferenceEntities != null && 
-        !personCrossReferenceEntities.isEmpty()) {
-      PersonCrossReferenceEntity personCrossReferenceEntity = personCrossReferenceEntities.iterator().next();      
-      Optional<ReporterEntity> reporterEntityOptional = reporterRepository.findById(personCrossReferenceEntity.getXrefId());
-      
-      if (reporterEntityOptional.isPresent()) {
-        ReporterEntity reporterEntity = reporterEntityOptional.get();
-        reporter = ReporterMapper.INSTANCE.mapReporterEntityToReporter(reporterEntity);
-      }      
+    Collection<PersonCrossReferenceEntity> referenceEntities =
+        filterReporterReferences(personCrossReferenceRepository.findByPersonId(identifier));
+
+    if (referenceEntities.isEmpty()) {
+      LOGGER.error("No Person Cross Reference was found for Person Id '{}'", identifier);
+      throw new DataIntegrityException("No Person Cross Reference was found for given Person Id");
     }
-    
+    PersonCrossReferenceEntity personCrossReferenceEntity = referenceEntities.iterator().next();
+    Optional<ReporterEntity> reporterEntityOptional = reporterRepository.findById(personCrossReferenceEntity.getXrefId());
+
+    if (reporterEntityOptional.isPresent()) {
+      ReporterEntity reporterEntity = reporterEntityOptional.get();
+      reporter = ReporterMapper.INSTANCE.mapReporterEntityToReporter(reporterEntity);
+    }
+
     return reporter;    
   }
 
@@ -101,14 +103,14 @@ public class ReporterServiceImpl implements ReporterService {
     
     ReporterData reporterData = ReporterMapper.INSTANCE.mapReporterToReporterData(reporter);
     String personId = reporter.getIdentifier();
-    Collection<PersonCrossReferenceEntity> references =
+    Collection<PersonCrossReferenceEntity> referenceEntities =
         filterReporterReferences(personCrossReferenceRepository.findByPersonId(personId));
 
-    if (references.isEmpty()) {
+    if (referenceEntities.isEmpty()) {
       LOGGER.error("No Person Cross Reference was found for Person Id '{}'" + personId);
       throw new DataIntegrityException("No Person Cross Reference was found for given Person Id");
     }
-    String xrefId = references.iterator().next().getXrefId();
+    String xrefId = referenceEntities.iterator().next().getXrefId();
     reporterData.setIdentifier(xrefId);
 
     businessRuleExecutor.executeBusinessRules("ReporterBusinessRules", reporterData);
