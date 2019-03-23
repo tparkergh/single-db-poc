@@ -57,4 +57,13 @@ public class ReporterControllerTest {
     assertEquals(response, reporterController.updateReporter(request));
     verify(reporterService).updateReporter(request);
   }
+
+  @Test
+  public void testGetReporter() {
+    String id = "test id";
+    Reporter response = new Reporter();
+    when(reporterService.getReporter(id)).thenReturn(response);
+    assertEquals(response, reporterController.getReporter(id));
+    verify(reporterService).getReporter(id);
+  }
 }
