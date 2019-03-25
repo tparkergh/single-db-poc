@@ -48,10 +48,10 @@ public class ReporterServiceImpl implements ReporterService {
   
   @Override
   public Reporter createReporter(Reporter reporter) {
+    reporter = ObjectUtils.clone(reporter);
     if (reporter == null) {
       return null;
     }
-    reporter = ObjectUtils.clone(reporter);
 
     ReporterData reporterData = ReporterMapper.INSTANCE.mapReporterToReporterData(reporter);
     reporterData.setIdentifier(CmsKeyIdGenerator.getNextValue(LOGGED_USER_STAFF_ID));
@@ -99,10 +99,11 @@ public class ReporterServiceImpl implements ReporterService {
 
   @Override
   public Reporter updateReporter(Reporter reporter) {
+    reporter = ObjectUtils.clone(reporter);
     if (reporter == null) {
       return null;
     }
-    
+
     ReporterData reporterData = ReporterMapper.INSTANCE.mapReporterToReporterData(reporter);
     String personId = reporter.getIdentifier();
     Collection<PersonCrossReferenceEntity> referenceEntities =
