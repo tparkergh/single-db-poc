@@ -107,7 +107,7 @@ public class ReporterServiceImpl implements ReporterService {
         filterReporterReferences(personCrossReferenceRepository.findByPersonId(personId));
 
     if (referenceEntities.isEmpty()) {
-      LOGGER.error("No Person Cross Reference was found for Person Id '{}'" + personId);
+      LOGGER.error("No Person Cross Reference was found for Person Id '{}'", personId);
       throw new DataIntegrityException("No Person Cross Reference was found for given Person Id");
     }
     String xrefId = referenceEntities.iterator().next().getXrefId();
