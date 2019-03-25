@@ -6,6 +6,7 @@ import gov.ca.cwds.cares.persistence.entity.XrefCode;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,8 @@ public class ReporterServiceImpl implements ReporterService {
     if (reporter == null) {
       return null;
     }
-    
+    reporter = ObjectUtils.clone(reporter);
+
     ReporterData reporterData = ReporterMapper.INSTANCE.mapReporterToReporterData(reporter);
     reporterData.setIdentifier(CmsKeyIdGenerator.getNextValue(LOGGED_USER_STAFF_ID));
 

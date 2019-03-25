@@ -18,7 +18,7 @@ import gov.ca.cwds.cares.interfaces.model.Address;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Reporter extends ObjectBase implements Serializable {
+public class Reporter extends ObjectBase implements Serializable, Cloneable {
 
   private static final long serialVersionUID = 653930568046236729L;
   
