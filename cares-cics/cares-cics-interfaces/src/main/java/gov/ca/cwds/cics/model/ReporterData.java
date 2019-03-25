@@ -72,8 +72,14 @@ public class ReporterData extends ObjectBase {
   private Integer state;
   @JsonProperty("SUFX_TLDSC")
   private String suffixTitleDescription;
+  @JsonProperty("TITLE_DESC")
+  private String titleDescription;
   @JsonProperty("ZIP_SFX_NO")
   private Integer zipSuffixNumber;
+  @JsonProperty("BIRTH_DT")
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
+  private LocalDate birthDate;
 
   public ReporterData() {
   }
@@ -308,5 +314,21 @@ public class ReporterData extends ObjectBase {
 
   public void setZipSuffixNumber(Integer zipSuffixNumber) {
     this.zipSuffixNumber = zipSuffixNumber;
+  }
+
+  public String getTitleDescription() {
+    return titleDescription;
+  }
+
+  public void setTitleDescription(String titleDescription) {
+    this.titleDescription = titleDescription;
+  }
+
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
+
+  public void setBirthDate(LocalDate birthDate) {
+    this.birthDate = birthDate;
   }
 }
