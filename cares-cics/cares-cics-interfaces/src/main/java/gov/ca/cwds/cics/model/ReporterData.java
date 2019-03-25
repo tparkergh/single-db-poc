@@ -72,6 +72,8 @@ public class ReporterData extends ObjectBase {
   private Integer state;
   @JsonProperty("SUFX_TLDSC")
   private String suffixTitleDescription;
+  @JsonProperty("TITLE_DESC")
+  private String titleDescription;
   @JsonProperty("ZIP_SFX_NO")
   private Integer zipSuffixNumber;
 
@@ -308,5 +310,13 @@ public class ReporterData extends ObjectBase {
 
   public void setZipSuffixNumber(Integer zipSuffixNumber) {
     this.zipSuffixNumber = zipSuffixNumber;
+  }
+
+  public String getTitleDescription() {
+    return titleDescription;
+  }
+
+  public void setTitleDescription(String titleDescription) {
+    this.titleDescription = titleDescription;
   }
 }
