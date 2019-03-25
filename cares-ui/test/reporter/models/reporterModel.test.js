@@ -124,7 +124,8 @@ describe('ReporterModel', () => {
         title: "title",
         address: "1234 C Street",
         city: "city",
-        zip_code: "12345"
+        zip_code: "12345",
+        state: 12345,
       }
       expect(model.buildReporter(data)).toEqual({
         first_name: 'first',
@@ -137,9 +138,30 @@ describe('ReporterModel', () => {
           street_name: "C Street",
           street_number: "1234",
           city: "city",
-          zip_code: "12345"
+          zip_code: "12345",
+          state_code: 12345
         }
       })
+    })
+  })
+
+  describe('addCancelButton', () => {
+    it('adds a cancel button to options html element', () => {
+      const props = {}
+      const model = new ReporterModel(props)
+      const element = document.createElement("div")
+      const innerElement = document.createElement("div")
+      innerElement.className = 'sv_nav'
+      element.appendChild(innerElement)
+      const options = {
+        htmlElement: element
+      }
+      model.addCancelButton({}, options)
+      const cancelButton = options.htmlElement.querySelector('.sv_nav button.cancel')
+      expect(cancelButton).toBeDefined()
+      expect(cancelButton.className).toEqual("btn btn-info btn-xs cancel")
+      expect(cancelButton.innerHTML).toEqual("Cancel")
+      expect(cancelButton.onclick).toBeDefined()
     })
   })
 })

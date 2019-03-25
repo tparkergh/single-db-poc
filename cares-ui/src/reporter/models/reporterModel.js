@@ -16,6 +16,7 @@ export default class ReporterModel extends BaseModel {
     this.props = props
 
     this.onCompleting.add(this.createOrUpdateReporter.bind(this))
+    this.onAfterRenderSurvey.add(this.addCancelButton.bind(this))
 
     this.loadStates()
 
@@ -103,6 +104,7 @@ export default class ReporterModel extends BaseModel {
         street_number,
         city,
         zip_code,
+        state_code: state
       }
     }
   }
@@ -142,6 +144,25 @@ export default class ReporterModel extends BaseModel {
       this.completeText = "Create"
     }
     this.render()
+  }
+
+  addCancelButton(survey, options) {
+    const {
+      updateSearchModel,
+      updateReporterModel,
+    } = this.props
+    const cancelButton = document.createElement("button")
+    cancelButton.type = "button"
+    cancelButton.className = "btn btn-info btn-xs cancel"
+    cancelButton.innerHTML = "Cancel"
+    cancelButton.onclick = () => {
+      updateReporterModel && updateReporterModel({
+        active: false,
+        data: this.data
+      })
+      updateSearchModel && updateSearchModel({ active: true })
+    }
+    options.htmlElement.querySelector('.sv_nav').appendChild(cancelButton)
   }
 }
 
