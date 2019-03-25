@@ -26,6 +26,9 @@ public class BusinessRulesExecutorImpl implements BusinessRulesExecutor<BreRespo
   @Qualifier("BreRestApiClient")
   private BusinessRuleService businessRuleService;
 
+
+  //We have exception handler umbrella that is tuned to catch BreException
+  @SuppressWarnings("fb-contrib:EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS")
   @Override
   public BreResponse executeBusinessRules(String ruleName, ReporterData fact) {
     BreRequestData breRequestData = new BreRequestData();
