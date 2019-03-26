@@ -40,6 +40,13 @@
         "optionsCaption": "Reporter",
         "defaultValue": "Reporter",
         "startWithNewLine": false
+      },
+      {
+        "type": "boolean",
+        "name": "decline_to_state",
+        "label": "Decline to disclose contact information",
+        "defaultValue": "false",
+        "isRequired": false
       }
     ],
   "completeSurveyText": "Save"
