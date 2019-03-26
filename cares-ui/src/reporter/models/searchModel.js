@@ -27,23 +27,31 @@ export default class SearchModel extends BaseModel {
       updateSearchResultsModel,
       errorSearchResults
     } = this.props
-    return axios({
-      url: searchRoute(), 
-      method: 'post',
-      data: this.buildSearchQuery(result.data)})
-      .then((result) => {
-        this.onCompleting.error = false
-        setSearchResults && setSearchResults(result.data)
-        updateSearchModel && updateSearchModel({
-          active: false,
-          data: this.data
+
+    if( result.data.decline_to_state ) {
+      updateSearchModel && updateSearchModel({
+        active: false,
+        data: this.data
+      })
+    } else {
+      return axios({
+        url: searchRoute(),
+        method: 'post',
+        data: this.buildSearchQuery(result.data)})
+        .then((result) => {
+          this.onCompleting.error = false
+          setSearchResults && setSearchResults(result.data)
+          updateSearchModel && updateSearchModel({
+            active: false,
+            data: this.data
+          })
+          updateSearchResultsModel && updateSearchResultsModel({active: true})
         })
-        updateSearchResultsModel && updateSearchResultsModel({active: true})
-      })
-      .catch((error) => {
-        this.onCompleting.error = true
-        errorSearchResults && errorSearchResults(error)
-      })
+        .catch((error) => {
+          this.onCompleting.error = true
+          errorSearchResults && errorSearchResults(error)
+        })
+    }
   }
 
   validationData() {
