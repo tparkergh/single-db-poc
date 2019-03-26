@@ -8,6 +8,7 @@ dependencies {
 	implementation project(':cares-common')
 	implementation project(':cares-cics:cares-cics-interfaces')
 
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:' + jacksonDatatypeJsr310Version
 	implementation 'org.springframework.boot:spring-boot:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion
