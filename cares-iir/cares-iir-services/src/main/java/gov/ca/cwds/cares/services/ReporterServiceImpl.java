@@ -6,7 +6,7 @@ import gov.ca.cwds.cares.persistence.entity.XrefCode;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.SerializationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class ReporterServiceImpl implements ReporterService {
   
   @Override
   public Reporter createReporter(Reporter reporter) {
-    reporter = ObjectUtils.clone(reporter);
+    reporter = SerializationUtils.clone(reporter);
     if (reporter == null) {
       return null;
     }
@@ -99,7 +99,7 @@ public class ReporterServiceImpl implements ReporterService {
 
   @Override
   public Reporter updateReporter(Reporter reporter) {
-    reporter = ObjectUtils.clone(reporter);
+    reporter = SerializationUtils.clone(reporter);
     if (reporter == null) {
       return null;
     }
