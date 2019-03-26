@@ -6,6 +6,7 @@ import gov.ca.cwds.cares.persistence.entity.XrefCode;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.SerializationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +48,11 @@ public class ReporterServiceImpl implements ReporterService {
   
   @Override
   public Reporter createReporter(Reporter reporter) {
+    reporter = SerializationUtils.clone(reporter);
     if (reporter == null) {
       return null;
     }
-    
+
     ReporterData reporterData = ReporterMapper.INSTANCE.mapReporterToReporterData(reporter);
     reporterData.setIdentifier(CmsKeyIdGenerator.getNextValue(LOGGED_USER_STAFF_ID));
 
@@ -97,17 +99,18 @@ public class ReporterServiceImpl implements ReporterService {
 
   @Override
   public Reporter updateReporter(Reporter reporter) {
+    reporter = SerializationUtils.clone(reporter);
     if (reporter == null) {
       return null;
     }
-    
+
     ReporterData reporterData = ReporterMapper.INSTANCE.mapReporterToReporterData(reporter);
     String personId = reporter.getIdentifier();
     Collection<PersonCrossReferenceEntity> referenceEntities =
         filterReporterReferences(personCrossReferenceRepository.findByPersonId(personId));
 
     if (referenceEntities.isEmpty()) {
-      LOGGER.error("No Person Cross Reference was found for Person Id '{}'" + personId);
+      LOGGER.error("No Person Cross Reference was found for Person Id '{}'", personId);
       throw new DataIntegrityException("No Person Cross Reference was found for given Person Id");
     }
     String xrefId = referenceEntities.iterator().next().getXrefId();
