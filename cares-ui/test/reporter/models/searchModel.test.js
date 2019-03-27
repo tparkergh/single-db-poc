@@ -26,7 +26,8 @@ describe('SearchModel', () => {
         data: {
           first_name: 'first',
           last_name: 'last',
-          number: 123
+          number: 123,
+          decline_to_state: false
         }
       }
       const model = new SearchModel(props)
@@ -50,7 +51,8 @@ describe('SearchModel', () => {
         data: {
           first_name: 'first',
           last_name: 'last',
-          number: 123
+          number: 123,
+          decline_to_state: false
         }
       }
       model.search(result)
@@ -61,6 +63,26 @@ describe('SearchModel', () => {
           })
           done()
         })
+    })
+
+    it('sets the search results model to inactive when decline to disclouse', (done) => {
+      mockAxios.onPost(searchRoute()).reply(200, {})
+      const updateSearchModel = jasmine.createSpy('updateSearchModel')
+      const props = {
+        updateSearchModel
+      }
+      const result = {
+        data: {
+          decline_to_state: true
+        }
+      }
+      const model = new SearchModel(props)
+      model.search(result)
+      expect(updateSearchModel).toHaveBeenCalledWith({
+        active: false,
+        data: jasmine.anything()
+      })
+      done()  
     })
 
     it('sets the search result data', (done) => {
