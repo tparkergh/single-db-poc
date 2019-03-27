@@ -80,6 +80,7 @@ export default class ReporterModel extends BaseModel {
     relationship,
     employer,
     title,
+    birth_date,
     address,
     city,
     zip_code,
@@ -98,6 +99,7 @@ export default class ReporterModel extends BaseModel {
       relation_to_child: relationship,
       employer_name: employer,
       title_description: title,
+      birth_date,
       address: {
         identifier: this.data.address_id,
         street_name,
