@@ -96,6 +96,8 @@ public class ReporterMapperTest {
     assertEquals(reporter.getPrimaryPhoneNumber(), data.getPrimaryPhoneNumber());
     assertEquals(reporter.getPrimaryPhoneExtension(), data.getPrimaryPhoneExtensionNumber());
     assertEquals(reporter.getEmployerName(), data.getEmployerName());
+    assertEquals(reporter.getTitleDescription(), data.getTitleDescription());
+    assertEquals(reporter.getBirthDate(), data.getBirthDate());
   }
 
   @Test
