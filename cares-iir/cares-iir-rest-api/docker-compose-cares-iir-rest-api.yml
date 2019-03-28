@@ -8,5 +8,5 @@ services:
     environment:
       DB_CMS_JDBC_URL: jdbc:db2://db-1a.nonprod-gateway.cwds.io:4016/DBN1SOC
       DB_CMS_USER: CWDSNS6
-      DB_CMS_PASSWORD: Apr2019A
+      DB_CMS_PASSWORD: Cms2019A
       DB_CMS_SCHEMA: CWSNS4
