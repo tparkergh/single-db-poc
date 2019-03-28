@@ -1,7 +1,5 @@
 package gov.ca.cwds.cares.interfaces.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import gov.ca.cwds.cares.common.binding.TrimmingSerializer;
 import gov.ca.cwds.cares.common.model.ObjectBase;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,12 +19,9 @@ public class Address extends ObjectBase implements Serializable {
   private Integer stateCode;
   private Integer zipCode;
   private Integer zipSuffix;
-  @JsonSerialize(using = TrimmingSerializer.class)
   private String city;
-  @JsonSerialize(using = TrimmingSerializer.class)
   private String streetName;
   private Integer streetType;
-  @JsonSerialize(using = TrimmingSerializer.class)
   private String streetNumber;
   private String unitNumber;
   private Integer unitType;
