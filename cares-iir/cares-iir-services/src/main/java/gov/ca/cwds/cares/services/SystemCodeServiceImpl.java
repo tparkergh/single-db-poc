@@ -40,7 +40,7 @@ public class SystemCodeServiceImpl implements SystemCodeService {
   @Override
   @ExecutionTimer
   public Collection<SystemCode> getSystemCodes(String metaName) {
-    Collection<SystemCodeEntity> systemCodeEntities = systemCodeRepository.findByMetaName(metaName);
+    Collection<SystemCodeEntity> systemCodeEntities = systemCodeRepository.findByMetaNameOrderByShortDescriptionAsc(metaName);
     return SystemCodeMapper.INSTANCE.mapToSystemCodes(systemCodeEntities);
   }
 

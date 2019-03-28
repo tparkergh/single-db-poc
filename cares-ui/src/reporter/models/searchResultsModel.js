@@ -81,6 +81,7 @@ export default class SearchResultsModel extends BaseModel {
     primary_phone_extension,
     employer_name,
     title_description,
+    birth_date,
     last_update_id,
     last_update_timestamp,
     address: {
@@ -99,6 +100,7 @@ export default class SearchResultsModel extends BaseModel {
       extension: primary_phone_extension.toString(),
       employer: employer_name,
       title: title_description,
+      birth_date,
       address: [ street_number, street_name ].join(' '),
       city,
       zip_code,
