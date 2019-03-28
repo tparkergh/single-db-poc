@@ -3,14 +3,21 @@
   "logic": {
     "if": [
       {
-        "missing": ["search.reporter.phone_number"]
+        "and": [
+          {
+            "missing": ["search.reporter.phone_number"]
+          },
+           {
+            "===": [{ "var": "search.reporter.decline_to_state" }, false]
+          }
+        ]
       },
       "A phone number is required to search for a reporter.",
       true
     ]
   },
   "documentation": {
-    "doc_description": "Primary phone number is required to search reporter",
+    "doc_description": "Primary phone number is required to search reporter if not declined to disclose",
     "doc_jsonlogic_file": "reporter-search-phone-required.json",
     "doc_rule_category": "BusinessPolicy",
     "doc_rule_type": "CARES",

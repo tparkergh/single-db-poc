@@ -3,14 +3,21 @@
   "logic": {
     "if": [
       {
-        "missing_some": [1, ["search.reporter.first_name", "search.reporter.last_name"]]
+        "and": [
+          {
+            "missing_some": [1, ["search.reporter.first_name", "search.reporter.last_name"]]
+          },
+          {
+            "===": [{ "var": "search.reporter.decline_to_state" }, false]
+          }
+        ]
       },
       "Last name or first name is required to search for a reporter.",
       true
     ]
   },
   "documentation": {
-    "doc_description": "One of first name or last name is required to search reporter",
+    "doc_description": "One of first name or last name is required to search reporter if not declined to disclose",
     "doc_jsonlogic_file": "reporter-search-name-required.json",
     "doc_rule_category": "BusinessPolicy",
     "doc_rule_type": "CARES",
