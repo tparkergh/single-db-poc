@@ -15,12 +15,14 @@ export default class SearchResultsModel extends BaseModel {
   continueNext (result, options) {
     const {
       updateSearchResultsModel,
-      updateReporterModel
+      updateReporterModel,
+      clearSearchResults
     } = this.props
     updateSearchResultsModel && updateSearchResultsModel({
       active: false,
       data: this.data
     })
+    clearSearchResults && clearSearchResults()
     if (this.data.reporter) {
       return axios({
         url: getReporterRoute(this.data.reporter[0]),
