@@ -1,1 +1,1 @@
-export const length = (entity) => entity.length
+export const length = (entity) => entity && entity.length
