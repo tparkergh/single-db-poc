@@ -1,7 +1,8 @@
 import SearchJSON from "../jsonForms/search"
 import {
   searchRoute,
-  getBreRuleSetRoute
+  getBreRuleSetRoute,
+  getSystemCodesRoute
 } from '../../routes'
 import BaseModel from "./baseModel.js"
 import axios from 'axios'
@@ -14,6 +15,7 @@ export default class SearchModel extends BaseModel {
     this.props = props
 
     this.onCompleting.add(this.search.bind(this))
+    this.loadReporterTypes()
   }
 
   update(props) {
@@ -78,6 +80,32 @@ export default class SearchModel extends BaseModel {
       )
     }).catch((error) => {
       errorSearchResults && errorSearchResults(error)
+    })
+  }
+
+  loadReporterTypes () {
+    axios({
+      url: getSystemCodesRoute('COL_RELC'),
+      method: 'get'
+    }).then((result) => {
+      const response = result.data
+        .sort((a, b) => {
+          if (a.other_code && b.other_code) {
+            return a.other_code - b.other_code
+          }
+          if (a.other_code) {
+            return -1
+          }
+          if (b.other_code) {
+            return -1
+          }
+          return 0
+        })
+        .map(r => ({
+          value: r.system_id,
+          text: r.short_description.trim()
+        }))
+      this.getQuestionByName('relationship').choices = response
     })
   }
 

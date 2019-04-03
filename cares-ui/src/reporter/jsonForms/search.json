@@ -37,8 +37,7 @@
         "type": "dropdown",
         "name": "relationship",
         "title": "Relationship to child",
-        "optionsCaption": "Reporter",
-        "defaultValue": "Reporter",
+        "optionsCaption": "Select Reporter Type ...",
         "startWithNewLine": false
       },
       {
